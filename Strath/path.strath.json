@@ -1,0 +1,184 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        3393.3,
+        -3392.0,
+        143.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "NPCs",
+      "value": [
+        3392.8,
+        -3378.5,
+        142.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Portcullas Pack",
+      "value": [
+        3429.1,
+        -3378.3,
+        141.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Big Street Entrance",
+      "value": [
+        3469.8,
+        -3376.5,
+        136.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Big Street Middle",
+      "value": [
+        3491.2,
+        -3382.0,
+        135.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Big Street End",
+      "value": [
+        3514.6,
+        -3386.7,
+        133.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Big Street T Junction",
+      "value": [
+        3530.1,
+        -3388.6,
+        132.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Kings Square Gate",
+      "value": [
+        3544.7,
+        -3423.3,
+        135.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Turning Left",
+      "value": [
+        3539.0,
+        -3374.0,
+        132.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": " Junction Corner",
+      "value": [
+        3564.8,
+        -3346.1,
+        129.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle of Junction",
+      "value": [
+        3551.7,
+        -3321.0,
+        129.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Again",
+      "value": [
+        3526.9,
+        -3321.7,
+        130.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Fountain Pack",
+      "value": [
+        3505.0,
+        -3309.4,
+        130.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To the courier",
+      "value": [
+        3475.5,
+        -3293.3,
+        132.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back to Junction",
+      "value": [
+        3527.4,
+        -3315.4,
+        130.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Before Rat Trap",
+      "value": [
+        3597.8,
+        -3337.8,
+        126.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "In Rat Trap",
+      "value": [
+        3613.4,
+        -3335.1,
+        123.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2  -  Far side of trap",
+      "value": [
+        3626.0,
+        -3336.0,
+        123.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hearthsinger Junction",
+      "value": [
+        3656.3,
+        -3328.7,
+        123.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Turning Right",
+      "value": [
+        3680.3,
+        -3364.8,
+        128.1
+      ]
+    }
+  ]
+}

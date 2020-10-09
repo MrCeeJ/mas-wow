@@ -98,53 +98,52 @@
             diseases = env:evaluate_variable("get_diseases")
             poisons = env:evaluate_variable("get_poisons")
 
-            -- function dispell(spell, debuff_1, debuff_2, debuff_3)
-            --     local _, dispell_cd_duration, _, _ = GetSpellCooldown(spell)
-            --     local party_members = GetHomePartyInfo()
-            --     local dispelling = false
-            --     if (party_members ~= nil and dispell_cd_duration == 0) then
-            --         for i, player_name in ipairs(party_members) do
-            --             if (debuff_1) then
-            --                 for id, name in pairs(debuff_1) do
-            --                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-            --                     if (dispelling == false) then
-            --                         if (debuff_duration > 0) then
-            --                             RunMacroText("/p Dispelling Whoop Whoop!")
-            --                             RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
-            --                             RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
-            --                             dispelling = true
-            --                         end
-            --                     end
-            --                 end
-            --             end
-            --             if (debuff_2) then
-            --                 for id, name in pairs(debuff_2) do
-            --                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-            --                     if (dispelling == false) then
-            --                         if (debuff_duration > 0) then
-            --                             RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
-            --                             RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
-            --                             dispelling = true
-            --                         end
-            --                     end
-            --                 end
-            --             end
-            --             if (debuff_3) then
-            --                 for id, name in pairs(debuff_3) do
-            --                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-            --                     if (dispelling == false) then
-            --                         if (debuff_duration > 0) then
-            --                             RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
-            --                             RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
-            --                             dispelling = true
-            --                         end
-            --                     end
-            --                 end
-            --             end
-            --         end
-            --     end
-            --     return dispelling
-            -- end
+            function dispell(spell, debuff_1, debuff_2, debuff_3)
+                local _, dispell_cd_duration, _, _ = GetSpellCooldown(spell)
+                local party_members = GetHomePartyInfo()
+                local dispelling = false
+                if (party_members ~= nil and dispell_cd_duration == 0) then
+                    for i, player_name in ipairs(party_members) do
+                        if (debuff_1 ~= nil) then
+                            for id, name in pairs(debuff_1) do
+                                if (dispelling == false) then
+                                    local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
+                                    if (debuff_duration > 0) then
+                                        RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
+                                        RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
+                                        dispelling = true
+                                    end
+                                end
+                            end
+                        end
+                        if (debuff_2 ~= nil) then
+                            for id, name in pairs(debuff_2) do
+                                if (dispelling == false) then
+                                    local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
+                                    if (debuff_duration > 0) then
+                                        RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
+                                        RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
+                                        dispelling = true
+                                    end
+                                end
+                            end
+                        end
+                        if (debuff_3 ~= nil) then
+                            for id, name in pairs(debuff_3) do
+                                if (dispelling == false) then
+                                    local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
+                                    if (debuff_duration > 0) then
+                                        RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
+                                        RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
+                                        dispelling = true
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                return dispelling
+            end
 
             local _, global_cd_duration, _, _ = GetSpellCooldown("61304")
             local main_tank = "Ceejpaladin"
@@ -177,35 +176,9 @@
                         RunMacroText("/targetenemy [noexists][noharm]")
                     end
 
-                    -- Sort everyone out twice
-                    local dispell = "Cleanse Toxins"
-                    local _, dispell_cd_duration, _, _ = GetSpellCooldown(dispell)
-                    local party_members = GetHomePartyInfo()
-                    local dispelling = false
-                    if (party_members ~= nil and dispell_cd_duration == 0) then
-                        for i, player_name in ipairs(party_members) do
-                            for id, name in pairs(diseases) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of disease: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                            for id, name in pairs(poisons) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of poison: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                    end
+                    -- Sort everyone out 
+                    local dispelling = dispell("Cleanse Toxins", diseases, posions)
+                   
                     -- defensives
                     if (hoj_cd == 0 and life < 0.4) then
                         RunMacroText("/cast Hammer of Justice")
@@ -277,36 +250,8 @@
                             end
                         end
                     end
-                    -- Sort everyone out twice
-                    -- dispell("Purify", magics, diseases)
-                    local dispell = "Purify"
-                    local _, dispell_cd_duration, _, _ = GetSpellCooldown(dispell)
-                    local party_members = GetHomePartyInfo()
-                    local dispelling = false
-                    if (party_members ~= nil and dispell_cd_duration == 0) then
-                        for i, player_name in ipairs(party_members) do
-                            for id, name in pairs(magics) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of magic: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                            for id, name in pairs(diseases) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of disease: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                    end
+                    -- Sort everyone out
+                    dispell("Purify", magics, diseases)           
 
                     -- Heal yourself
                     if (hp < emergency_health and weakened_soul_duration == -1) then
@@ -399,35 +344,8 @@
                 if player_class == "DRUID" then
                     local lunar_power = UnitPower("player", 8)
 
-                    -- Sort everyone out twice
-                    local dispell = "Remove Corruption"
-                    local _, dispell_cd_duration, _, _ = GetSpellCooldown(dispell)
-                    local party_members = GetHomePartyInfo()
-                    local dispelling = false
-                    if (party_members ~= nil and dispell_cd_duration == 0) then
-                        for i, player_name in ipairs(party_members) do
-                            for id, name in pairs(curses) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of curse: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                            for id, name in pairs(poisons) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of poison: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                    end
+                    -- -- Sort everyone out 
+                    local dispelling = dispell("Remove Corruption", curses, poisons)
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             local target_hp = env:evaluate_variable("unit.target.health")
@@ -461,24 +379,7 @@
                 -- ** MAGE ** --
                 if player_class == "MAGE" then
                     -- Sort everyone out
-                    local dispell = "Remove Curse"
-                    local _, dispell_cd_duration, _, _ = GetSpellCooldown(dispell)
-                    local party_members = GetHomePartyInfo()
-                    local dispelling = false
-                    if (party_members ~= nil and dispell_cd_duration == 0) then
-                        for i, player_name in ipairs(party_members) do
-                            for id, name in pairs(curses) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of curse: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                    end
+                    local dispelling = dispell("Remove Curse", curses)
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
@@ -512,24 +413,7 @@
                 -- ** SHAMAN ** --
                 if player_class == "SHAMAN" then
                     -- Sort everyone out
-                    local dispell = "Cleanse Spirit"
-                    local _, dispell_cd_duration, _, _ = GetSpellCooldown(dispell)
-                    local party_members = GetHomePartyInfo()
-                    local dispelling = false
-                    if (party_members ~= nil and dispell_cd_duration == 0) then
-                        for i, player_name in ipairs(party_members) do
-                            for id, name in pairs(curses) do
-                                local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
-                                if (dispelling == false) then
-                                    if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of  curse: " .. name .. " of duration: " .. debuff_duration .. " cd : " .. dispell_cd_duration)
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. dispell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                    end
+                    local dispelling = dispell("Cleanse Spirit", curses)
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             local target_hp = env:evaluate_variable("unit.target.health")

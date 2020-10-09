@@ -232,11 +232,38 @@
     {
       "actions": [],
       "name": "3  To the courtyard",
-      "pve": false,
       "value": [
         -209.4,
         2208.3,
         79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of Ramp",
+      "value": [
+        -165.1,
+        2219.4,
+        81.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Clear Ramp Patrol",
+      "value": [
+        -160.9,
+        2243.1,
+        86.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back to bottom - Off",
+      "pve": false,
+      "value": [
+        -165.1,
+        2219.4,
+        81.5
       ]
     },
     {
@@ -254,16 +281,16 @@
         ]
       },
       "value": [
-        -176.5,
-        2220.4,
-        79.8
+        -177.8,
+        2225.0,
+        78.8
       ]
     },
     {
       "actions": [],
       "name": "Ghosts",
       "value": [
-        -182.1,
+        -177.3,
         2234.4,
         76.2
       ]
@@ -837,7 +864,7 @@
             "value": []
           },
           "type": "wait",
-          "value": 40
+          "value": 20
         }
       ],
       "name": "Pause for RP",

@@ -1,0 +1,49 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Exit Stage Right",
+      "value": [
+        -231.0,
+        206.9,
+        -24.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -254.4,
+        207.8,
+        -20.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit Patrol Start",
+      "value": [
+        -296.0,
+        216.5,
+        -25.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit Patrol End",
+      "value": [
+        -323.0,
+        223.2,
+        -21.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lava Guard Gordoth",
+      "value": [
+        -363.4,
+        203.5,
+        -22.1
+      ]
+    }
+  ]
+}

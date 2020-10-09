@@ -1,0 +1,926 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -227.5,
+        2111.8,
+        76.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stables",
+      "value": [
+        -202.6,
+        2099.3,
+        76.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "pve": false,
+      "value": [
+        -200.4,
+        2105.8,
+        78.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Zombie Ledge",
+      "pve": false,
+      "value": [
+        -211.1,
+        2109.6,
+        81.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Chargeeeee",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        -197.5,
+        2123.0,
+        81.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Platform Zombie",
+      "value": [
+        -198.0,
+        2145.3,
+        86.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs madmen",
+      "value": [
+        -210.8,
+        2142.5,
+        90.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -228.7,
+        2148.1,
+        90.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mezanine",
+      "value": [
+        -234.4,
+        2125.2,
+        87.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -235.2,
+        2139.2,
+        87.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Halfway down",
+      "value": [
+        -249.8,
+        2144.1,
+        87.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stables",
+      "value": [
+        -253.5,
+        2128.6,
+        81.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Baron Ashbury",
+      "value": [
+        -256.1,
+        2117.2,
+        81.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs again",
+      "value": [
+        -249.8,
+        2143.7,
+        87.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mezanine again",
+      "value": [
+        -237.3,
+        2140.3,
+        87.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 11
+        }
+      ],
+      "name": "Hallway with RP",
+      "value": [
+        -236.4,
+        2150.6,
+        90.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Courtyard Stairs",
+      "value": [
+        -238.3,
+        2166.1,
+        89.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Into the Courtyard",
+      "value": [
+        -227.0,
+        2187.3,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bonus Horror",
+      "value": [
+        -222.7,
+        2171.2,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Big Horror",
+      "value": [
+        -215.0,
+        2212.0,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And another",
+      "value": [
+        -193.0,
+        2216.8,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Line up with doors",
+      "value": [
+        -203.1,
+        2213.8,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Poor zombie horses",
+      "value": [
+        -223.6,
+        2245.7,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "3  To the courtyard",
+      "pve": false,
+      "value": [
+        -209.4,
+        2208.3,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Servants Entrance",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        -176.5,
+        2220.4,
+        79.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ghosts",
+      "value": [
+        -182.1,
+        2234.4,
+        76.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ghostly Corridor",
+      "value": [
+        -184.8,
+        2247.7,
+        76.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Kitchen cleanup",
+      "value": [
+        -204.8,
+        2263.6,
+        76.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Dining Room Doorway",
+      "value": [
+        -238.0,
+        2275.0,
+        75.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Baron Silverlaine",
+      "value": [
+        -260.4,
+        2291.5,
+        75.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Stairs",
+      "value": [
+        -266.2,
+        2285.2,
+        75.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Curvey Stairs",
+      "value": [
+        -285.8,
+        2293.1,
+        85.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "4   Landing",
+      "value": [
+        -294.3,
+        2306.6,
+        90.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Side First",
+      "value": [
+        -305.5,
+        2284.2,
+        95.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor",
+      "value": [
+        -293.0,
+        2281.2,
+        95.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Kind of a ramp really",
+      "pve": false,
+      "value": [
+        -259.2,
+        2269.6,
+        99.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "In the Room",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        -248.9,
+        2261.6,
+        100.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Audacious charge",
+      "value": [
+        -249.5,
+        2240.3,
+        100.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -249.5,
+        2251.0,
+        100.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Commander Springvale",
+      "value": [
+        -224.3,
+        2263.8,
+        102.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit Stage Right",
+      "value": [
+        -255.3,
+        2244.9,
+        100.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Battlements entrance",
+      "value": [
+        -232.5,
+        2228.0,
+        93.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Near battlements",
+      "value": [
+        -235.1,
+        2211.0,
+        97.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far battlements",
+      "value": [
+        -247.6,
+        2171.5,
+        93.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Annoying corner",
+      "value": [
+        -258.2,
+        2147.4,
+        92.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Weird tower",
+      "value": [
+        -270.6,
+        2143.5,
+        95.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bring it on",
+      "value": [
+        -246.7,
+        2135.0,
+        100.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -246.6,
+        2146.6,
+        100.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Trash",
+      "value": [
+        -259.1,
+        2117.4,
+        100.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Battlements",
+      "value": [
+        -237.9,
+        2107.4,
+        97.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -211.1,
+        2097.8,
+        97.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Another ambush",
+      "value": [
+        -196.4,
+        2117.3,
+        97.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tower Entrance",
+      "value": [
+        -181.1,
+        2171.5,
+        97.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "5   Spiral Exit",
+      "value": [
+        -173.0,
+        2172.5,
+        94.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Zombie Hall",
+      "value": [
+        -143.4,
+        2161.3,
+        94.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More stables",
+      "value": [
+        -132.9,
+        2161.0,
+        94.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mini landing",
+      "value": [
+        -147.4,
+        2172.4,
+        99.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Stairs",
+      "value": [
+        -154.3,
+        2175.5,
+        101.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -158.8,
+        2176.9,
+        102.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner Stairs",
+      "value": [
+        -154.1,
+        2188.1,
+        105.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Archway",
+      "value": [
+        -140.4,
+        2182.6,
+        110.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs landing",
+      "value": [
+        -131.6,
+        2179.7,
+        112.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And more",
+      "value": [
+        -122.6,
+        2175.7,
+        112.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down Again",
+      "value": [
+        -103.4,
+        2167.8,
+        105.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To the bottom",
+      "value": [
+        -108.3,
+        2148.8,
+        101.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of the overpass",
+      "value": [
+        -126.6,
+        2156.5,
+        101.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of the ramp",
+      "value": [
+        -153.1,
+        2166.8,
+        109.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tower entrance",
+      "value": [
+        -172.8,
+        2174.4,
+        109.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Spirals going up",
+      "value": [
+        -186.6,
+        2184.3,
+        115.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And more up",
+      "value": [
+        -185.2,
+        2179.2,
+        126.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        -170.7,
+        2182.5,
+        129.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lord Walden",
+      "value": [
+        -142.5,
+        2178.8,
+        128.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -131.3,
+        2167.0,
+        128.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Into Curve",
+      "value": [
+        -118.8,
+        2171.1,
+        129.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Around curve",
+      "value": [
+        -153.9,
+        2202.0,
+        136.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Curve exit",
+      "value": [
+        -165.9,
+        2180.5,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "DB1",
+      "value": [
+        -160.9,
+        2178.9,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "DB2",
+      "value": [
+        -161.6,
+        2169.2,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "DB3",
+      "value": [
+        -156.7,
+        2161.6,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "DB4",
+      "value": [
+        -144.1,
+        2158.4,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "DB5",
+      "value": [
+        -133.3,
+        2168.2,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs entrance",
+      "value": [
+        -133.3,
+        2168.2,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of stairs",
+      "value": [
+        -121.3,
+        2163.6,
+        138.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Up the Stairs",
+      "value": [
+        -120.5,
+        2187.8,
+        142.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Further up",
+      "value": [
+        -152.7,
+        2202.8,
+        149.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "The top",
+      "value": [
+        -171.1,
+        2181.8,
+        151.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Flayer room",
+      "value": [
+        -139.5,
+        2166.9,
+        155.7
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 40
+        }
+      ],
+      "name": "Pause for RP",
+      "value": [
+        -119.9,
+        2163.0,
+        155.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Through the door - Off",
+      "pve": false,
+      "value": [
+        -110.0,
+        2159.0,
+        155.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "The floor - On",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        -117.5,
+        2136.9,
+        144.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downstairs trash",
+      "value": [
+        -94.7,
+        2128.8,
+        144.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Trash",
+      "value": [
+        -95.6,
+        2147.1,
+        144.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lord Godfrey",
+      "value": [
+        -82.7,
+        2157.4,
+        155.7
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 20
+        }
+      ],
+      "name": "GG",
+      "value": [
+        -75.3,
+        2156.9,
+        155.7
+      ]
+    }
+  ]
+}

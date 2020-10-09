@@ -1,0 +1,207 @@
+{
+  "path_groups": [
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 40.0
+      },
+      "name": "Adarogg",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Dark Shaman Koranthal"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Instance Entrance",
+        "value": [
+          -4.0,
+          -39.5,
+          -21.9
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "1stBoss"
+      ]
+    },
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 40.0
+      },
+      "name": "Dark Shaman Koranthal",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Slagmaw"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "After Boss 1 rdv",
+        "value": [
+          -289.7,
+          -58.6,
+          -60.5
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "2ndBoss"
+      ]
+    },
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 40.0
+      },
+      "name": "Slagmaw",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Lava Guard Gordoth"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ],
+        "distance_min": {
+          "default": 5.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "After Boss 2 rdv",
+        "value": [
+          -134.2,
+          81.4,
+          -21.1
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "3rdBoss"
+      ]
+    },
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 40.0
+      },
+      "name": "Lava Guard Gordoth",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Reset"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "After 3rd Boss Rendevous",
+        "value": [
+          -237.7,
+          155.0,
+          -18.8
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "4thBoss"
+      ]
+    },
+    {
+      "name": "Reset",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Adarogg"
+        }
+      ],
+      "rendezvous": {
+        "actions": [],
+        "name": "Boss",
+        "value": [
+          -363.4,
+          203.5,
+          -22.1
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "Reset"
+      ]
+    }
+  ],
+  "scripts": [
+    "rfc"
+  ]
+}

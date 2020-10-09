@@ -1,0 +1,57 @@
+{
+  "path_groups": [
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "name": "path_group_1",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "path_group_1"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance to Instance",
+        "value": [
+          -227.5,
+          2111.8,
+          76.9
+        ]
+      },
+      "skin": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "sfk_1"
+      ]
+    }
+  ],
+  "scripts": [
+    "SFK"
+  ]
+}

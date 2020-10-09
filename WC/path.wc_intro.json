@@ -1,0 +1,83 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -158.4,
+        131.6,
+        -74.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -137.1,
+        129.6,
+        -77.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -121.0,
+        142.5,
+        -78.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -115.2,
+        154.3,
+        -79.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "First Raptor",
+      "value": [
+        -102.6,
+        185.0,
+        -78.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Second Raptor",
+      "value": [
+        -110.2,
+        229.7,
+        -90.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -95.5,
+        231.7,
+        -90.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Third Raptor",
+      "value": [
+        -74.3,
+        215.9,
+        -93.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Fourth Raptor",
+      "value": [
+        -35.1,
+        200.3,
+        -96.8
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -35.6,
+        200.6,
+        -96.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -32.6,
+        226.8,
+        -95.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -32.3,
+        238.8,
+        -93.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Raptor",
+      "value": [
+        -50.0,
+        255.5,
+        -92.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lady Anacondra",
+      "value": [
+        -55.3,
+        274.7,
+        -92.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Way Back",
+      "value": [
+        -34.7,
+        249.6,
+        -93.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of the Slope",
+      "value": [
+        -29.4,
+        204.1,
+        -96.9
+      ]
+    }
+  ]
+}

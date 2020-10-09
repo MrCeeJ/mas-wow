@@ -1,0 +1,267 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -134.2,
+        81.4,
+        -21.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -175.4,
+        76.6,
+        -21.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -203.4,
+        93.2,
+        -25.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Path",
+      "value": [
+        -228.6,
+        90.4,
+        -23.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Group",
+      "value": [
+        -265.4,
+        99.2,
+        -25.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Left",
+      "value": [
+        -286.3,
+        94.1,
+        -25.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Further Back Left",
+      "value": [
+        -309.5,
+        119.4,
+        -25.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Group",
+      "value": [
+        -296.5,
+        146.7,
+        -25.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Returning Back Left",
+      "value": [
+        -309.5,
+        119.4,
+        -25.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Returning Back Left 2",
+      "value": [
+        -287.8,
+        95.9,
+        -25.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Returning Back Left 3",
+      "value": [
+        -247.2,
+        90.2,
+        -23.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Returning Back Left 4",
+      "value": [
+        -203.4,
+        93.2,
+        -25.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle Path",
+      "value": [
+        -197.3,
+        117.2,
+        -22.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle Group",
+      "value": [
+        -191.7,
+        146.2,
+        -25.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Path",
+      "value": [
+        -177.9,
+        166.7,
+        -24.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Path 2",
+      "value": [
+        -183.9,
+        199.5,
+        -25.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Path 3",
+      "value": [
+        -202.5,
+        213.0,
+        -23.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Group",
+      "value": [
+        -231.0,
+        206.9,
+        -24.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Return Right",
+      "value": [
+        -183.9,
+        199.5,
+        -25.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Return Right 2",
+      "value": [
+        -183.9,
+        199.5,
+        -25.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Return Right 3",
+      "value": [
+        -177.9,
+        166.7,
+        -24.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle Again",
+      "value": [
+        -187.9,
+        157.2,
+        -25.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp to boss",
+      "value": [
+        -207.7,
+        154.5,
+        -23.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Slagmaw platform",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "value": [
+        -226.5,
+        151.7,
+        -18.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Slagmaw Platform Centre",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "value": [
+        -242.3,
+        151.8,
+        -18.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Slagmaw melee",
+      "value": [
+        -248.4,
+        158.9,
+        -18.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Adter 3rd Boss Rendevous",
+      "value": [
+        -237.7,
+        155.0,
+        -18.8
+      ]
+    }
+  ]
+}

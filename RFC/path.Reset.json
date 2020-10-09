@@ -1,0 +1,130 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Boss Glyph",
+      "value": [
+        -363.1,
+        203.7,
+        -22.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -315.1,
+        222.2,
+        -22.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -255.9,
+        209.5,
+        -20.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Wall",
+      "value": [
+        -206.1,
+        214.3,
+        -24.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More wall",
+      "value": [
+        -179.4,
+        193.8,
+        -25.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Platform",
+      "value": [
+        -182.2,
+        154.6,
+        -25.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing area",
+      "value": [
+        -203.9,
+        93.4,
+        -25.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor",
+      "value": [
+        -159.5,
+        74.3,
+        -21.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2nd boss room",
+      "value": [
+        -113.0,
+        71.6,
+        -20.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tunnel down",
+      "value": [
+        -115.2,
+        9.8,
+        -18.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of Tunnel",
+      "value": [
+        -302.5,
+        7.2,
+        -48.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "After 1st Boss",
+      "value": [
+        -299.5,
+        -42.9,
+        -60.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Up the hill",
+      "value": [
+        -155.1,
+        -30.2,
+        -37.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back at the start",
+      "value": [
+        -8.6,
+        -45.7,
+        -21.9
+      ]
+    }
+  ]
+}

@@ -145,7 +145,21 @@
       ]
     },
     {
-      "actions": [],
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 10,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "aoe"
+        }
+      ],
       "name": "In Rat Trap",
       "value": [
         3613.4,
@@ -178,6 +192,600 @@
         3680.3,
         -3364.8,
         128.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "East Road",
+      "value": [
+        3695.8,
+        -3401.4,
+        132.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Archway",
+      "value": [
+        3714.1,
+        -3434.3,
+        130.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round the corner",
+      "value": [
+        3722.3,
+        -3461.6,
+        129.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Heading Back",
+      "value": [
+        3696.6,
+        -3390.4,
+        131.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Junction again",
+      "value": [
+        3671.1,
+        -3349.5,
+        125.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Crossing Junction",
+      "value": [
+        3665.6,
+        -3322.6,
+        123.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Heading Left",
+      "value": [
+        3681.5,
+        -3298.6,
+        127.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Clearing Trash",
+      "value": [
+        3681.5,
+        -3271.4,
+        127.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Towards Timmy",
+      "value": [
+        3730.2,
+        -3258.5,
+        128.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ominous Portculas",
+      "value": [
+        3694.5,
+        -3253.1,
+        127.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Kamikaze Entrance",
+      "value": [
+        3680.7,
+        -3208.0,
+        127.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Charge the Guards",
+      "value": [
+        3673.9,
+        -3182.6,
+        126.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Initiate Combat",
+      "value": [
+        3658.9,
+        -3159.6,
+        128.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of the Stairs",
+      "value": [
+        3654.9,
+        -3151.1,
+        134.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 5
+        }
+      ],
+      "name": "Open the door",
+      "value": [
+        3647.4,
+        -3139.8,
+        134.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Though Door",
+      "value": [
+        3640.3,
+        -3128.4,
+        134.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Entrance Corner",
+      "value": [
+        3652.1,
+        -3119.5,
+        134.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "First Hallway",
+      "value": [
+        3642.2,
+        -3107.1,
+        134.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Scarlet Guards",
+      "value": [
+        3655.1,
+        -3098.8,
+        134.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hall Right Side",
+      "value": [
+        3646.5,
+        -3076.8,
+        134.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle of Hall",
+      "value": [
+        3616.1,
+        -3091.5,
+        134.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hall Corner",
+      "value": [
+        3605.4,
+        -3105.6,
+        134.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Commander Malor",
+      "value": [
+        3621.1,
+        -3126.8,
+        135.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        3599.1,
+        -3094.1,
+        135.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Inside",
+      "value": [
+        3593.7,
+        -3088.4,
+        135.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Side",
+      "value": [
+        3584.5,
+        -3090.7,
+        136.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Side",
+      "value": [
+        3600.9,
+        -3078.7,
+        136.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        3581.3,
+        -3069.7,
+        135.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor",
+      "value": [
+        3571.2,
+        -3058.6,
+        135.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "name": "Open the door",
+      "value": [
+        3569.0,
+        -3053.3,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Through the door",
+      "value": [
+        3564.9,
+        -3046.7,
+        135.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of Stairs",
+      "value": [
+        3556.5,
+        -3035.1,
+        127.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Charge",
+      "value": [
+        3545.8,
+        -3017.5,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down armory",
+      "value": [
+        3557.9,
+        -3013.4,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Defenders",
+      "value": [
+        3581.6,
+        -2996.5,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round Corner",
+      "value": [
+        3566.2,
+        -2972.6,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Again",
+      "value": [
+        3549.4,
+        -2987.3,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Another Corner",
+      "value": [
+        3529.6,
+        -2960.4,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Willey",
+      "value": [
+        3573.6,
+        -2937.3,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Blacksmith",
+      "value": [
+        3581.9,
+        -2991.7,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Way Back Up",
+      "value": [
+        3546.2,
+        -3020.5,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor Again",
+      "value": [
+        3572.2,
+        -3057.7,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Guards",
+      "value": [
+        3541.8,
+        -3080.6,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Another Door",
+      "value": [
+        3544.7,
+        -3071.5,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Another Corridor",
+      "value": [
+        3533.1,
+        -3052.4,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Junction",
+      "value": [
+        3494.4,
+        -3079.8,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Guards",
+      "value": [
+        3506.8,
+        -3093.6,
+        135.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Fancy Hall",
+      "value": [
+        3481.0,
+        -3061.0,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Guards",
+      "value": [
+        3465.9,
+        -3073.2,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bonus Guards",
+      "value": [
+        3473.1,
+        -3093.8,
+        136.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End Guards",
+      "value": [
+        3464.4,
+        -3078.5,
+        135.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        3457.7,
+        -3102.6,
+        136.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End Boss",
+      "value": [
+        3415.8,
+        -3044.5,
+        136.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Picalo Route",
+      "value": [
+        3696.6,
+        -3390.4,
+        131.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down Festival Lane",
+      "value": [
+        3710.6,
+        -3485.7,
+        129.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End of road",
+      "value": [
+        3679.8,
+        -3492.1,
+        134.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Courtyard",
+      "value": [
+        3664.7,
+        -3497.5,
+        136.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round the fountain",
+      "value": [
+        3638.1,
+        -3521.7,
+        136.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Clear the back",
+      "value": [
+        3605.8,
+        -3515.0,
+        138.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To the Side",
+      "value": [
+        3623.4,
+        -3490.5,
+        137.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down the path",
+      "value": [
+        3590.9,
+        -3484.7,
+        135.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Gate",
+      "value": [
+        3584.9,
+        -3466.2,
+        135.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Open Gate",
+      "value": [
+        3573.6,
+        -3454.0,
+        135.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Open Second Gate",
+      "value": [
+        3556.9,
+        -3436.3,
+        136.2
       ]
     }
   ]

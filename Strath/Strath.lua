@@ -1,4 +1,39 @@
 ﻿return {
+    --Custom Actions
+    actions = {
+        aoe = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "PALADIN" then
+                local _, consecration_cd = GetSpellCooldown("Consecration")
+                if (consecration_cd == 0) then
+                    RunMacroText("/cast Consecration")
+                end
+            elseif player_class == "PRIEST" then
+                RunMacroText("/cast Holy Nova")
+            elseif player_class == "DRUID" then
+                local lunar_power = UnitPower("player", 8)
+                if (lunar_power >= 50) then
+                    RunMacroText("/cast [@player]Starfall")
+                end
+            elseif player_class == "MAGE" then
+                local _, blast_wave_cd = GetSpellCooldown("Consecration")
+                if (blast_wave_cd == 0) then
+                    RunMacroText("/cast Blast Wave")
+                else
+                    RunMacroText("/cast [@player]Flame Strike")
+                end
+            elseif player_class == "SHAMAN" then
+                local _, totem_cd = GetSpellCooldown("Capacitor Totem")
+                local _, thunderstorm_cd = GetSpellCooldown("Thunderstorm")
+                if (totem_cd == 0) then
+                    RunMacroText("/cast [@player]Capacitor Totem")
+                elseif (thunderstorm_cd == 0) then
+                    RunMacroText("/cast Thunderstorm")
+                end
+            end
+            return false
+        end
+    },
     -- Define custom variables.
     variables = {
         ["get_singleton_event_frame"] = function(env)
@@ -10,6 +45,21 @@
             end
             return event_frame
         end,
+        ["get_party"] = function(env)
+            if (party == nil) then
+                print("creating party...")
+                party = {}
+                party_info = GetHomePartyInfo()
+                for id, name in pairs(party_info) do
+                    print("Welcome to :", name)
+                    table.insert(party, name)
+                end
+                local me, r = UnitName("player")
+                print(".. and welcome to :", me)
+                table.insert(party, me)
+            end
+            return party
+        end,
         ["get_known_buffs"] = function(env)
             if (known_buffs == nil) then
                 print("creating known buff list...")
@@ -19,7 +69,8 @@
                     ["194384"] = "Attonement",
                     ["26297"] = "Power Word: Shield",
                     ["193065"] = "Masochism",
-                    ["167152"] = "Replensihment"
+                    ["167152"] = "Replensihment",
+                    ["225080"] = "Reincarnation"
                 }
             end
             return known_buffs
@@ -31,19 +82,36 @@
                     -- Undispellable
                     [1604] = "Dazed",
                     [13444] = "Sunder Armor",
+                    [17455] = "Bone Smelt",
                     [13730] = "Demoralizing Shout",
+                    [9080] = "Hamstring",
+                    [13737] = "Mortal Strike",
+                    [6713] = "Disarm",
+                    [15655] = "Shield Slam",
                     [6788] = "Weakened Soul",
                     [187464] = "Shadow Mend",
                     --Unavoidable
                     --Ignore
                     [9672] = "Frostbolt",
+                    [15043] = "Frostbolt",
+                    [15063] = "Frost Nova",
+                    [6136] = "Chilled",
+                    [17145] = "Blastwave",
+                    [17165] = "Mind Flay",
                     -- Dispellable
                     [16458] = "Ghoul Plague",
                     [16143] = "Cadaver Worms",
                     [7068] = "Vale of Shadows",
                     [16336] = "Haunting Phantoms",
-                    [5137] = "Call of the Grave",
-                    [16333] = "Dibilitating Touch"
+                   -- [5137] = "Call of the Grave",
+                    [16333] = "Dibilitating Touch",
+                    [15654] = "Shadow Word: Pain",
+                    [13323] = "Polymorph",
+                    [15732] = "Immolate",
+                 [66290] = "Sleep",
+                    [13704] = "Psychic Scream",   
+                    [17141] = "Holy Fire",
+                    [7713] = "Wailing Dead"
                 }
             end
             return known_debuffs
@@ -54,7 +122,8 @@
                 curses = {
                     [7068] = "Vale of Shadow",
                     [16336] = "Haunting Phantoms",
-                    [5137] = "Call of the Grave"
+                    [5137] = "Call of the Grave",
+                    [7713] = "Wailing Dead"
                 }
             end
             return curses
@@ -63,7 +132,13 @@
             if (magics == nil) then
                 print("creating known magics list...")
                 magics = {
-                    [16333] = "Dibilitating Touch"
+                    [16333] = "Dibilitating Touch",
+                    [15654] = "Shadow Word: Pain",
+                    [13323] = "Polymorph",
+                    [15732] = "Immolate",
+                    [17141] = "Holy Fire",
+                    [66290] = "Sleep",
+                    [13704] = "Psychic Scream", 
                 }
             end
             return magics
@@ -97,13 +172,13 @@
             magics = env:evaluate_variable("get_magics")
             diseases = env:evaluate_variable("get_diseases")
             poisons = env:evaluate_variable("get_poisons")
+            party = env:evaluate_variable("get_party")
 
             function dispell(spell, debuff_1, debuff_2, debuff_3)
                 local _, dispell_cd_duration, _, _ = GetSpellCooldown(spell)
-                local party_members = GetHomePartyInfo()
                 local dispelling = false
-                if (party_members ~= nil and dispell_cd_duration == 0) then
-                    for i, player_name in ipairs(party_members) do
+                if (dispell_cd_duration == 0) then
+                    for i, player_name in ipairs(party) do
                         if (debuff_1 ~= nil) then
                             for id, name in pairs(debuff_1) do
                                 if (dispelling == false) then
@@ -158,11 +233,6 @@
             if (global_cd_duration == 0) then
                 -- local enemies = env:evaluate_variable("npcs.all.is_attacking_me")
                 -- print ("Enemies attacking :", player_class, " : ", enemies)
-                -- Check for Toxic Coagulant 93617
-                -- local player_coagulating = env:evaluate_variable("myself.debuff.93617") -- Toxic Coagulant
-                -- if (player_coagulating > 0) then
-                --     print("I should probably move")
-                -- end
 
                 -- ** PALADIN ** --
                 if player_class == "PALADIN" then
@@ -176,14 +246,15 @@
                         RunMacroText("/targetenemy [noexists][noharm]")
                     end
 
-                    -- Sort everyone out 
+                    -- Sort everyone out
                     local dispelling = dispell("Cleanse Toxins", diseases, posions)
-                   
+
                     -- defensives
                     if (hoj_cd == 0 and life < 0.4) then
                         RunMacroText("/cast Hammer of Justice")
                     else
                         -- tank rotation
+
                         local _, avengers_shield_cd = GetSpellCooldown("Avenger's Shield")
                         local _, hammer_of_the_rightrous_cd = GetSpellCooldown("Hammer of the Righteous")
                         local _, judgment_cd = GetSpellCooldown("Judgment")
@@ -235,10 +306,9 @@
                     local _, desperate_cd_duration, _, _ = GetSpellCooldown("Desperate Prayer")
                     local _, purify_cd_duration, _, _ = GetSpellCooldown("Purify")
                     local _, fiend_cd_duration, _, _ = GetSpellCooldown("Shadowfiend")
-                    local party_members = GetHomePartyInfo()
 
                     -- Check for new debuffs
-                    for i, player_name in ipairs(party_members) do
+                    for i, player_name in ipairs(party) do
                         for b = 1, 5 do
                             local name, _, count, type, duration, etime, source, isStealable, _, spellId = UnitDebuff(player_name, b) --, "CANCELABLE"
                             if (name) then
@@ -251,24 +321,23 @@
                         end
                     end
                     -- Sort everyone out
-                    dispell("Purify", magics, diseases)           
+                    local dispelling = dispell("Purify", magics, diseases)
+                    if (dispelling == false) then
+                        -- Heal yourself
+                        if (hp < emergency_health and weakened_soul_duration == -1) then
+                            healing = true
+                            RunMacroText("/cast [@player] Power Word: Shield")
+                        elseif (hp < emergency_health and desperate_cd_duration == 0) then
+                            healing = true
+                            RunMacroText("/cast [@player] Desperate Prayer")
+                        elseif (hp < good_health) then
+                            healing = true
+                            RunMacroText("/cast [@player] Flash Heal") -- Note: Flash Heal also casts Shadow Mend if you are disc.
+                        else
+                            -- Heal the party
 
-                    -- Heal yourself
-                    if (hp < emergency_health and weakened_soul_duration == -1) then
-                        healing = true
-                        RunMacroText("/cast [@player] Power Word: Shield")
-                    elseif (hp < emergency_health and desperate_cd_duration == 0) then
-                        healing = true
-                        RunMacroText("/cast [@player] Desperate Prayer")
-                    elseif (hp < good_health) then
-                        healing = true
-                        RunMacroText("/cast [@player] Flash Heal") -- Note: Flash Heal also casts Shadow Mend if you are disc.
-                    else
-                        -- Heal the party
-                        local party_members = GetHomePartyInfo()
-                        if (party_members ~= nil) then
                             -- emergency healing
-                            for i, player_name in ipairs(party_members) do
+                            for i, player_name in ipairs(party) do
                                 local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
                                 -- print(i, player_name, target_hp, "Checking for healing already done? :", healing)
                                 if (healing == false) then
@@ -289,7 +358,7 @@
                                 end
                             end
                             -- top everyone else off
-                            for i, player_name in ipairs(party_members) do
+                            for i, player_name in ipairs(party) do
                                 local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
                                 -- print(i, player_name, target_hp, "Checking for healing already done? :", healing)
                                 if (healing == false) then
@@ -310,41 +379,40 @@
                                 end
                             end
                         end
-                    end
-                    -- Do Damage
-                    if (healing == false) then
-                        if (UnitExists("target")) then -- check LOS and Move?
-                            local swpain_duration = env:evaluate_variable("unit.target.debuff.589") -- TODO: Check all in combat targets
-                            local target_health = env:evaluate_variable("unit.target.health")
-                            local _, schism_cd_duration, _, _ = GetSpellCooldown("Schism")
-                            local _, solace_cd_duration, _, _ = GetSpellCooldown("Power Word: Solace")
-                            local mana = UnitPower("player", 0)
-                            local max_mana = UnitPowerMax("player", 0)
-                            local mp = 100 * mana / max_mana
+                        -- Do Damage
+                        if (healing == false) then
+                            if (UnitExists("target")) then -- check LOS and Move?
+                                local swpain_duration = env:evaluate_variable("unit.target.debuff.589") -- TODO: Check all in combat targets
+                                local target_health = env:evaluate_variable("unit.target.health")
+                                local _, schism_cd_duration, _, _ = GetSpellCooldown("Schism")
+                                local _, solace_cd_duration, _, _ = GetSpellCooldown("Power Word: Solace")
+                                local mana = UnitPower("player", 0)
+                                local max_mana = UnitPowerMax("player", 0)
+                                local mp = 100 * mana / max_mana
 
-                            if (target_health > min_dot_hp and swpain_duration == -1) then
-                                RunMacroText("/cast Shadow Word: Pain")
-                            elseif (fiend_cd_duration == 0 and mp < fiend_mp) then
-                                RunMacroText("/cast Shadowfiend")
-                            elseif (schism_cd_duration == 0) then
-                                RunMacroText("/cast Schism")
-                            elseif (solace_cd_duration == 0) then
-                                RunMacroText("/cast Power Word: Solace")
-                            elseif (penance_cd_duration == 0) then
-                                RunMacroText("/cast Penance") -- ID 47540
+                                if (target_health > min_dot_hp and swpain_duration == -1) then
+                                    RunMacroText("/cast Shadow Word: Pain")
+                                elseif (fiend_cd_duration == 0 and mp < fiend_mp) then
+                                    RunMacroText("/cast Shadowfiend")
+                                elseif (schism_cd_duration == 0) then
+                                    RunMacroText("/cast Schism")
+                                elseif (solace_cd_duration == 0) then
+                                    RunMacroText("/cast Power Word: Solace")
+                                elseif (penance_cd_duration == 0) then
+                                    RunMacroText("/cast Penance") -- ID 47540
+                                else
+                                    RunMacroText("/cast Smite")
+                                end
                             else
-                                RunMacroText("/cast Smite")
+                                RunMacroText("/assist " .. main_tank)
                             end
-                        else
-                            RunMacroText("/assist " .. main_tank)
                         end
                     end
                 end
                 -- ** DRUID ** --
                 if player_class == "DRUID" then
                     local lunar_power = UnitPower("player", 8)
-
-                    -- -- Sort everyone out 
+                    -- -- Sort everyone out
                     local dispelling = dispell("Remove Corruption", curses, poisons)
                     if (dispelling == false) then
                         if (UnitExists("target")) then
@@ -418,11 +486,14 @@
                         if (UnitExists("target")) then
                             local target_hp = env:evaluate_variable("unit.target.health")
                             local _, flame_shock_cd_duration, _, _ = GetSpellCooldown("188389")
+                            local _, earth_elemental_cd_duration, _, _ = GetSpellCooldown("Earth Elemental")
                             local flame_shock_duration = env:evaluate_variable("unit.target.debuff.188389")
                             local maelstrom = UnitPower("player", 11)
                             local lb_charges, _, _, lb_cooldownDuration, _ = GetSpellCharges("Lava Burst")
                             local _, berserking_cd_duration, _, _ = GetSpellCooldown("Berserking")
-                            if (berserking_cd_duration == 0) then
+                            if (earth_elemental_cd_duration == 0) then
+                                RunMacroText("/cast Earth Elemental")
+                            elseif (berserking_cd_duration == 0) then
                                 RunMacroText("/cast Berserking")
                             elseif (target_hp > min_dot_hp and flame_shock_duration == -1 and flame_shock_cd_duration == 0) then
                                 RunMacroText("/cast Flame Shock")
@@ -441,21 +512,37 @@
             end
         end,
         prepare = function(env)
+            party = env:evaluate_variable("get_party")
             res_party = function(env, spell)
-                local party_members = GetHomePartyInfo()
                 local reviving = false
-                for i, player_name in ipairs(party_members) do
+                for i, player_name in ipairs(party) do
                     local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
-                    if (target_hp == 0 and reviving == false) then
+                    local distance = env:evaluate_variable("unit." .. player_name .. ".distance")
+                    if (target_hp == 0 and reviving == false and distance <= 40) then
                         reviving = true
                         needs_more_time = true
-                        RunMacroText("/target " .. player_name)
-                        RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
+                        if (spell) then
+                            RunMacroText("/target " .. player_name)
+                            RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
+                        end
                     end
                 end
                 return reviving
             end
-
+            check_res = function(env, spell)
+                local casting = UnitCastingInfo("player")
+                local target = UnitName("target")
+                if (casting ~= nil and target ~= nil) then -- If we are busy casting, we are clearly not ready
+                    local target_hp = env:evaluate_variable("unit." .. target .. ".health")
+                    if (casting == spell and target_hp ~= 0) then
+                        print("Aborting uncecessary :", spell, " on target :", target)
+                        RunMacroText("/stopcasting")
+                        return false
+                    else
+                        return true
+                    end
+                end
+            end
             local in_combat = env:evaluate_variable("myself.is_in_combat") -- UnitAffectingCombat("player")
             local needs_more_time = false
             local healer_name = "Ceejpriest"
@@ -464,23 +551,12 @@
             if (env:evaluate_variable("myself.life") == 2) then
                 -- print("I seem to be dead")
                 AcceptResurrect()
+            -- Wait(0.1)
             end
 
             if (in_combat) then
                 needs_more_time = false -- If we are in combat, no need to worry about preparations
             else
-                local spell = UnitCastingInfo("player")
-                if (spell ~= null) then -- If we are busy casting, we are clearly not ready
-                    local target = UnitName("target")
-                    local target_hp = env:evaluate_variable("unit." .. target .. ".health")
-                    if (spell == "Resurrection" and target_hp ~= 0) then
-                        print("Aborting uncecessary :", spell, " on target :", target)
-                        RunMacroText("/stopcasting")
-                    else
-                        return true
-                    end
-                end
-
                 local healer_mana = UnitPower(healer_name, 0)
                 local healer_max_mana = UnitPowerMax(healer_name, 0)
                 local healer_mp = 100 * healer_mana / healer_max_mana
@@ -490,6 +566,10 @@
                 local player_class = env:evaluate_variable("myself.class")
                 if player_class == "PRIEST" then
                     -- ** PRIEST ** --
+                    if (check_res(env, "Resurrection")) then
+                        return true
+                    end
+
                     local mana = UnitPower("player", 0)
                     local max_mana = UnitPowerMax("player", 0)
                     local mp = 100 * mana / max_mana
@@ -517,23 +597,35 @@
                     end
                 elseif player_class == "PALADIN" then
                     -- ** PALADIN ** --
+                    if (check_res(env, "Redemption")) then
+                        return true
+                    end
+                    needs_more_time = res_party(env, "Ancestral Spirit")
                     local hp = env:evaluate_variable("myself.health")
-                    if (hp < 90) then
+                    if (hp < 90 and needs_more_time ~= false) then
                         needs_more_time = true
                         RunMacroText("/cast [@Player]Flash Of Light")
                     end
                 elseif player_class == "MAGE" then
                     -- ** MAGE ** --
+                    if (check_res(env)) then
+                        return true
+                    end
                     -- RunMacroText("/cast [nopet][@pet, dead] Summon Water Elemental")
                     local barrier_duration = env:evaluate_variable("myself.buff.235313")
                     local _, barrier_cd_duration, _, _ = GetSpellCooldown("Blazing Barrier")
+
                     if (barrier_cd_duration == 0 and barrier_duration == -1) then
                         RunMacroText("/cast Blazing Barrier")
                     end
                 elseif player_class == "DRUID" then
                     -- ** DRUID ** --
+                    if (check_res(env, "Revive")) then
+                        return true
+                    end
+                    needs_more_time = res_party(env, "Revive")
                     local hp = env:evaluate_variable("myself.health")
-                    if (hp < 90) then
+                    if (hp < 90 and needs_more_time ~= false) then
                         needs_more_time = true
                         RunMacroText("/cast [@Player]Regrowth")
                     else
@@ -541,14 +633,20 @@
                     end
                 elseif player_class == "SHAMAN" then
                     -- ** SHAMAN ** --
+                    if (check_res(env, "Ancestral Spirit")) then
+                        return true
+                    end
+                    needs_more_time = res_party(env, "Ancestral Spirit")
                     local earth_shield_duration = env:evaluate_variable("unit." .. tank_name .. ".buff.Earth Shield")
-                    if (earth_shield_duration == -1) then
+                    local distance = env:evaluate_variable("unit." .. tank_name .. ".distance")
+                    local target_hp = env:evaluate_variable("unit." .. tank_name .. ".health") -- todo: sight
+                    if (earth_shield_duration == -1 and target_hp > 0 and distance < 20 and needs_more_time ~= false) then
                         needs_more_time = true
                         RunMacroText("/cast [@" .. tank_name .. "]Earth Shield")
                     end
 
                     local hp = env:evaluate_variable("myself.health")
-                    if (hp < 90) then
+                    if (hp < 90 and needs_more_time ~= false) then
                         needs_more_time = true
                         RunMacroText("/cast [@Player]Healing Surge")
                     end

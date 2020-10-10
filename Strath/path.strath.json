@@ -83,11 +83,47 @@
     },
     {
       "actions": [],
-      "name": " Junction Corner",
+      "name": "Junction",
       "value": [
-        3564.8,
-        -3346.1,
-        129.8
+        3548.6,
+        -3349.9,
+        129.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Post Box Path",
+      "value": [
+        3563.2,
+        -3350.9,
+        130.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 176352,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Kings Square Post Box",
+      "value": [
+        3563.2,
+        -3350.9,
+        130.1
       ]
     },
     {
@@ -119,7 +155,43 @@
     },
     {
       "actions": [],
-      "name": "To the courier",
+      "name": "End Pack",
+      "value": [
+        3488.5,
+        -3301.3,
+        130.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Fras Siabi's Postbox",
+      "value": [
+        3475.5,
+        -3293.3,
+        132.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 176353,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open Post Box",
       "value": [
         3475.5,
         -3293.3,
@@ -177,6 +249,78 @@
       ]
     },
     {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 1
+        }
+      ],
+      "name": "Regroup",
+      "value": [
+        3626.0,
+        -3336.0,
+        123.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 1
+        }
+      ],
+      "name": "Regroup 2",
+      "value": [
+        3626.0,
+        -3336.0,
+        123.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 1
+        }
+      ],
+      "name": "Regroup 3",
+      "value": [
+        3626.0,
+        -3336.0,
+        123.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 1
+        }
+      ],
+      "name": "Regroup 4",
+      "value": [
+        3626.0,
+        -3336.0,
+        123.1
+      ]
+    },
+    {
       "actions": [],
       "name": "Hearthsinger Junction",
       "value": [
@@ -201,6 +345,33 @@
         3695.8,
         -3401.4,
         132.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 176346,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Market Row Postbox 3",
+      "value": [
+        3691.3,
+        -3403.0,
+        132.4
       ]
     },
     {
@@ -286,11 +457,38 @@
     },
     {
       "actions": [],
-      "name": "Kamikaze Entrance",
+      "name": "Subtle Entrance",
       "value": [
-        3680.7,
-        -3208.0,
+        3680.0,
+        -3216.0,
         127.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Side Detour",
+      "value": [
+        3674.8,
+        -3205.8,
+        126.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And round the edge",
+      "value": [
+        3689.1,
+        -3163.5,
+        126.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Cautious Advance",
+      "value": [
+        3674.8,
+        -3205.8,
+        126.6
       ]
     },
     {
@@ -321,20 +519,38 @@
       ]
     },
     {
+      "actions": [],
+      "name": "Move to door",
+      "value": [
+        3647.2,
+        -3139.2,
+        134.8
+      ]
+    },
+    {
       "actions": [
         {
           "conditions": {
             "type": "and",
-            "value": []
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
           },
-          "type": "wait",
-          "value": 5
+          "type": "interact",
+          "value": {
+            "id": 175967,
+            "range": 5
+          }
         }
       ],
-      "name": "Open the door",
+      "name": "Open The Bastion Door",
       "value": [
-        3647.4,
-        -3139.8,
+        3646.1,
+        -3137.5,
         134.8
       ]
     },
@@ -465,17 +681,35 @@
       ]
     },
     {
+      "actions": [],
+      "name": "Get to Door",
+      "value": [
+        3569.1,
+        -3053.6,
+        135.0
+      ]
+    },
+    {
       "actions": [
         {
           "conditions": {
             "type": "and",
-            "value": []
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
           },
-          "type": "wait",
-          "value": 2
+          "type": "interact",
+          "value": {
+            "id": 175968,
+            "range": 5
+          }
         }
       ],
-      "name": "Open the door",
+      "name": "Open Armory Door",
       "value": [
         3569.0,
         -3053.3,
@@ -520,7 +754,7 @@
     },
     {
       "actions": [],
-      "name": "Defenders",
+      "name": "Defenders - plans",
       "value": [
         3581.6,
         -2996.5,
@@ -547,10 +781,40 @@
     },
     {
       "actions": [],
-      "name": "Another Corner",
+      "name": "Last Armory Corner",
       "value": [
-        3529.6,
-        -2960.4,
+        3535.8,
+        -2966.4,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stealth Mode",
+      "pve": false,
+      "value": [
+        3539.9,
+        -2964.5,
+        125.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Attack from here",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        3573.6,
+        -2937.3,
         125.0
       ]
     },
@@ -564,7 +828,25 @@
       ]
     },
     {
-      "actions": [],
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 176325,
+            "range": 5
+          }
+        }
+      ],
       "name": "Blacksmith",
       "value": [
         3581.9,
@@ -600,8 +882,26 @@
       ]
     },
     {
-      "actions": [],
-      "name": "Another Door",
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 176194,
+            "range": 10
+          }
+        }
+      ],
+      "name": "Door to Hall of the High Command",
       "value": [
         3544.7,
         -3071.5,
@@ -771,8 +1071,26 @@
       ]
     },
     {
-      "actions": [],
-      "name": "Open Gate",
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 175352,
+            "range": 10
+          }
+        }
+      ],
+      "name": "Open Kings Square Gate",
       "value": [
         3573.6,
         -3454.0,
@@ -781,11 +1099,76 @@
     },
     {
       "actions": [],
+      "name": "Get to Second Gate",
+      "value": [
+        3559.0,
+        -3439.0,
+        136.5
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 175353,
+            "range": 10
+          }
+        }
+      ],
       "name": "Open Second Gate",
       "value": [
         3556.9,
         -3436.3,
         136.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Moving Back home",
+      "value": [
+        3545.0,
+        -3423.0,
+        135.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Starting Street",
+      "value": [
+        3510.5,
+        -3387.7,
+        133.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "run_macro",
+          "value": {
+            "text": "/use Piccolo of the Flaming Fire"
+          }
+        }
+      ],
+      "name": "Back At the Entrance",
+      "value": [
+        3394.1,
+        -3380.0,
+        142.7
       ]
     }
   ]

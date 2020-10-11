@@ -99,10 +99,12 @@
                     [30621] = "Kidney Shot",
                     [6713] = "Disarm",
                     [13523] = "Mortal Strike",
+                    [16856] = "Mortal Strike",
+                    [30641] = "Mortal Wound",
+                    [30639] = "Mortal Wound",
                     -- [22427] = "Concussion Blow",
                     -- [30923] = "Domination",
                     [30695] = "Treacherous Aura",
-
                     -- Dispellable
                     [30615] = "Fear"
                     -- [6726] = "Silence",
@@ -160,6 +162,41 @@
             poisons = env:evaluate_variable("get_poisons")
             party = env:evaluate_variable("get_party")
             main_tank = env:evaluate_variable("get_tank_name")
+            --enemies = get_enemies()
+
+            function get_enemies()
+                enemies = {}
+                for i = 1, 20 do
+                    local unit = "nameplate" .. i
+                    if (env:evaluate_variable("unit." .. unit)) then
+                        if (UnitAffectingCombat(unit)) then
+                            local unit_health = UnitHealth(unit)
+                            if (unit_health) then
+                                enemies[unit] = unit_health
+                            end
+                        end
+                    end
+                end
+                return enemies
+            end
+
+            function thow_more_dots(spell, debuff)
+                local more_dots = false
+                local min_dot_hp = 1000
+                for name, hp in pairs(enemies) do
+                    --   print(name, " needs a dot [" .. n .. "]")
+                    if (more_dots == false and hp > min_dot_hp) then
+                        local dot_duration = env:evaluate_variable("unit.target.debuff." .. debuff)
+                        if (dot_duration < 1) then
+                            more_dots = true
+                            n, r = UnitName(name)
+                            print(name, " needs a dot [" .. n .. "]")
+                        -- RunMacroText("/cast [" .. name .. "] " .. spell)
+                        end
+                    end
+                end
+                return more_dots
+            end
 
             function dispell(spell, debuff_1, debuff_2, debuff_3)
                 local _, dispell_cd, _, _ = GetSpellCooldown(spell)
@@ -206,6 +243,7 @@
                 end
                 return dispelling
             end
+
             function check_for_new_debuffs(env)
                 -- Check for new debuffs
                 for _, player_name in ipairs(party) do
@@ -226,10 +264,13 @@
                     end
                 end
             end
+
             local _, global_cd, _, _ = GetSpellCooldown("61304")
             local player_class = env:evaluate_variable("myself.class")
             local min_dot_hp = 10
-
+            --local enemies = get_enemies()
+            -- for name, hp in pairs(enemies) do
+            -- end
             --get all targets
             --env:evaluate_variable("npcs.attackable.range_10")>=2  -- more than 2 targets in 10 yards
             -- if not in LoS, move to tank
@@ -349,7 +390,7 @@
                                         RunMacroText("/cast Power Word: Radiance")
                                     end
                                 end
-
+                                -- ** Loop party members before deciding heal **
                                 if (healing == false) then
                                     -- If people have less than 40% hp, panic
                                     health_check = 40
@@ -373,74 +414,79 @@
                                         end
                                     end
                                 end
-                            end
 
-                            -- If people have 40-70% hp, help them out
-                            health_check = 70
-                            for _, player_name in ipairs(party) do
-                                if (healing == false) then
-                                    local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
-                                    if (target_hp > 0 and target_hp < health_check) then
-                                        local weakened_soul_duration = env:evaluate_variable("unit." .. player_name .. ".debuff.6788")
-                                        local shield_duration = env:evaluate_variable("unit." .. player_name .. ".buff.Power Word: Shield")
-                                        if (shield_duration == -1 and (weakened_soul_duration == -1 or rapture_duration > 0)) then
-                                            -- Chuck them a shield
-                                            healing = true
-                                            RunMacroText("/cast [target=" .. player_name .. "] Power Word: Shield")
-                                        else
-                                            if (penance_cd == 0) then
-                                                -- They have had a shield, can we top them off with Penance?
+                                -- If people have 40-70% hp, help them out
+                                health_check = 70
+                                for _, player_name in ipairs(party) do
+                                    if (healing == false) then
+                                        local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
+                                        if (target_hp > 0 and target_hp < health_check) then
+                                            local weakened_soul_duration = env:evaluate_variable("unit." .. player_name .. ".debuff.6788")
+                                            local shield_duration = env:evaluate_variable("unit." .. player_name .. ".buff.Power Word: Shield")
+                                            if (shield_duration == -1 and (weakened_soul_duration == -1 or rapture_duration > 0)) then
+                                                -- Chuck them a shield
                                                 healing = true
-                                                RunMacroText("/cast [target=" .. player_name .. "] Penance")
+                                                RunMacroText("/cast [target=" .. player_name .. "] Power Word: Shield")
                                             else
-                                                -- They have had a shield, and they are still below 80, give them a mend
-                                                healing = true
-                                                RunMacroText("/cast [target=" .. player_name .. "]Shadow Mend")
+                                                if (penance_cd == 0) then
+                                                    -- They have had a shield, can we top them off with Penance?
+                                                    healing = true
+                                                    RunMacroText("/cast [target=" .. player_name .. "] Penance")
+                                                else
+                                                    -- They have had a shield, and they are still below 80, give them a mend
+                                                    healing = true
+                                                    RunMacroText("/cast [target=" .. player_name .. "]Shadow Mend")
+                                                end
                                             end
                                         end
                                     end
                                 end
-                            end
 
-                            -- If people have over 70% hp, just use Atonement
-                            health_check = 100
-                            for _, player_name in ipairs(party) do
-                                if (healing == false) then
-                                    local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
-                                    if (target_hp > 0 and target_hp < health_check) then
-                                        local atonement_duration = env:evaluate_variable("unit." .. player_name .. ".buff.Atonement")
-                                        if (atonement_duration > 0) then
-                                            -- Do nothing, they are have atonement
-                                        else
-                                            -- Chuck them a shield, they will be fine (If you have weakened soul you also have atonement, so always use a shieled)
-                                            healing = true
-                                            RunMacroText("/cast [target=" .. player_name .. "] Power Word: Shield")
+                                -- If people have over 70% hp, just use Atonement
+                                health_check = 100
+                                for _, player_name in ipairs(party) do
+                                    if (healing == false) then
+                                        local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
+                                        if (target_hp > 0 and target_hp < health_check) then
+                                            local atonement_duration = env:evaluate_variable("unit." .. player_name .. ".buff.Atonement")
+                                            if (atonement_duration > 0) then
+                                                -- Do nothing, they are have atonement
+                                            else
+                                                -- Chuck them a shield, they will be fine (If you have weakened soul you also have atonement, so always use a shieled)
+                                                healing = true
+                                                RunMacroText("/cast [target=" .. player_name .. "] Power Word: Shield")
+                                            end
                                         end
                                     end
                                 end
-                            end
 
-                            -- Do Damage
-                            if (healing == false) then
-                                -- Need to check LOS and possibly Move?
-                                local swpain_duration = env:evaluate_variable("unit.target.debuff.589") -- TODO: Check all in combat targets
-                                local target_health = env:evaluate_variable("unit.target.health")
-                                local _, schism_cd, _, _ = GetSpellCooldown("Schism")
-                                local _, solace_cd, _, _ = GetSpellCooldown("Power Word: Solace")
-                                local _, fiend_cd, _, _ = GetSpellCooldown("Shadowfiend")
+                                -- Do Damage
+                                if (healing == false) then
+                                    -- check
+                                    -- if (thow_more_dots("Shadow Word: Pain", "589")) then
+                                    --     print(" .. I should probably get on that")
+                                    -- end
 
-                                if (target_health > min_dot_hp and swpain_duration == -1) then
-                                    RunMacroText("/cast Shadow Word: Pain")
-                                elseif (schism_cd == 0) then
-                                    RunMacroText("/cast Schism")
-                                elseif (fiend_cd == 0) then
-                                    RunMacroText("/cast Shadowfiend")
-                                elseif (solace_cd == 0) then
-                                    RunMacroText("/cast Power Word: Solace")
-                                elseif (penance_cd == 0) then
-                                    RunMacroText("/cast Penance")
-                                else
-                                    RunMacroText("/cast Smite")
+                                    -- Need to check LOS and possibly Move?
+                                    local swpain_duration = env:evaluate_variable("unit.target.debuff.589") -- TODO: Check all in combat targets
+                                    local target_health = env:evaluate_variable("unit.target.health")
+                                    local _, schism_cd, _, _ = GetSpellCooldown("Schism")
+                                    local _, solace_cd, _, _ = GetSpellCooldown("Power Word: Solace")
+                                    local _, fiend_cd, _, _ = GetSpellCooldown("Shadowfiend")
+
+                                    if (target_health > min_dot_hp and swpain_duration == -1) then
+                                        RunMacroText("/cast Shadow Word: Pain")
+                                    elseif (schism_cd == 0) then
+                                        RunMacroText("/cast Schism")
+                                    elseif (fiend_cd == 0) then
+                                        RunMacroText("/cast Shadowfiend")
+                                    elseif (solace_cd == 0) then
+                                        RunMacroText("/cast Power Word: Solace")
+                                    elseif (penance_cd == 0) then
+                                        RunMacroText("/cast Penance")
+                                    else
+                                        RunMacroText("/cast Smite")
+                                    end
                                 end
                             end
                         end
@@ -578,7 +624,7 @@
                         reviving = true
                         RunMacroText("/target " .. player_name)
                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
-                        print("Can't start, " .. player_name .. " still needs resing")
+                    -- print("Can't start, " .. player_name .. " still needs resing")
                     end
                 end
                 if (reviving) then
@@ -707,9 +753,6 @@
                         local is_drinking = env:evaluate_variable("myself.buff." .. food_buff)
                         if (is_drinking == -1) then
                             RunMacroText("/use " .. food_name)
-                            print("Can't start, I need a drink")
-                        else
-                            -- print("Can't start, I am drinking")
                         end
                     end
                 end

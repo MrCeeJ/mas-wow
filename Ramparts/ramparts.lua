@@ -94,16 +94,17 @@
                     [225080] = "Reincarnation",
                     [1604] = "Dazed",
                     -- Undispellable
-                    [1] = "Kidney Shot",
-                    [15655] = "Shield Slam",
-                    [22427] = "Concussion Blow",
-                    [30923] = "Domination",
+                    -- [1] = "Kidney Shot",
+                    -- [15655] = "Shield Slam",
+                    -- [22427] = "Concussion Blow",
+                    -- [30923] = "Domination",
                     -- Dispellable
-                    [6726] = "Silence",
-                    [13338] = "Curse of Tongues",
-                    [30937] = "Mark of Shadow",
-                    [34969] = "Poison",
-                    [30917] = "Poison Bolt"
+                    [30615] = "Fear"
+                    -- [6726] = "Silence",
+                    -- [13338] = "Curse of Tongues",
+                    -- [30937] = "Mark of Shadow",
+                    -- [34969] = "Poison",
+                    -- [30917] = "Poison Bolt"
                 }
             end
             return known_debuffs
@@ -121,9 +122,7 @@
             if (magics == nil) then
                 print("creating known magics list...")
                 magics = {
-                    [6726] = "Silence",
-                    [32197] = "Corruption",
-                    [30937] = "Mark of Shadow"
+                    [30615] = "Fear"
                 }
             end
             return magics
@@ -138,10 +137,7 @@
         ["get_poisons"] = function(env)
             if (poisons == nil) then
                 print("creating known poisons list...")
-                poisons = {
-                    [34969] = "Poison",
-                    [30917] = "Poison Bolt"
-                }
+                poisons = {}
             end
             return poisons
         end
@@ -150,7 +146,7 @@
     rotations = {
         combat = function(env, is_pulling)
             -- Set up static data
-            event_frame = env:evaluate_variable("get_singleton_event_frame")
+            -- event_frame = env:evaluate_variable("get_singleton_event_frame")
             known_debuffs = env:evaluate_variable("get_known_debuffs")
             known_buffs = env:evaluate_variable("get_known_buffs")
             curses = env:evaluate_variable("get_curses")
@@ -461,11 +457,10 @@
                             local lunar_empduration = env:evaluate_variable("myself.buff.164547") -- lunar
                             local lunar_power = UnitPower("player", 8)
 
-
                             --Gets the count of the flying missiles.
-                            count = GetMissileCount()                        
+                            --count = GetMissileCount()
                             --Gets the info of a specific missile.
-                            --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)                            
+                            --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)
 
                             if (alignment_cd == 0) then
                                 RunMacroText("/cast Celestial Alignment")

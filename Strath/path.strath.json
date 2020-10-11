@@ -49,27 +49,49 @@
       "actions": [],
       "name": "Big Street End",
       "value": [
-        3514.6,
-        -3386.7,
-        133.0
+        3503.0,
+        -3382.0,
+        134.6
       ]
     },
     {
       "actions": [],
-      "name": "Big Street T Junction",
+      "name": "Sneak Right",
+      "pve": false,
       "value": [
-        3530.1,
-        -3388.6,
-        132.4
+        3514.8,
+        -3394.9,
+        133.7
       ]
     },
     {
       "actions": [],
-      "name": "Kings Square Gate",
+      "name": "Sneak to the Back",
+      "pve": false,
       "value": [
-        3544.7,
-        -3423.3,
+        3537.3,
+        -3423.1,
         135.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And Fight",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        3541.9,
+        -3419.3,
+        135.0
       ]
     },
     {
@@ -85,9 +107,27 @@
       "actions": [],
       "name": "Junction",
       "value": [
-        3548.6,
-        -3349.9,
-        129.6
+        3536.2,
+        -3351.7,
+        131.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle of Junction",
+      "value": [
+        3551.7,
+        -3321.0,
+        129.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back for the post",
+      "value": [
+        3569.1,
+        -3333.2,
+        129.0
       ]
     },
     {
@@ -128,15 +168,6 @@
     },
     {
       "actions": [],
-      "name": "Middle of Junction",
-      "value": [
-        3551.7,
-        -3321.0,
-        129.7
-      ]
-    },
-    {
-      "actions": [],
       "name": "Left Again",
       "value": [
         3526.9,
@@ -148,18 +179,27 @@
       "actions": [],
       "name": "Fountain Pack",
       "value": [
-        3505.0,
-        -3309.4,
-        130.4
+        3509.0,
+        -3324.5,
+        131.3
       ]
     },
     {
       "actions": [],
       "name": "End Pack",
       "value": [
-        3488.5,
-        -3301.3,
-        130.4
+        3482.5,
+        -3324.3,
+        131.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "For the Post",
+      "value": [
+        3481.6,
+        -3301.9,
+        130.5
       ]
     },
     {
@@ -209,6 +249,15 @@
     },
     {
       "actions": [],
+      "name": "Junction Again",
+      "value": [
+        3559.2,
+        -3335.2,
+        129.3
+      ]
+    },
+    {
+      "actions": [],
       "name": "Before Rat Trap",
       "value": [
         3597.8,
@@ -249,93 +298,39 @@
       ]
     },
     {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "type": "wait",
-          "value": 1
-        }
-      ],
-      "name": "Regroup",
+      "actions": [],
+      "name": "Hearthsinger Junction",
       "value": [
-        3626.0,
-        -3336.0,
-        123.1
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "type": "wait",
-          "value": 1
-        }
-      ],
-      "name": "Regroup 2",
-      "value": [
-        3626.0,
-        -3336.0,
-        123.1
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "type": "wait",
-          "value": 1
-        }
-      ],
-      "name": "Regroup 3",
-      "value": [
-        3626.0,
-        -3336.0,
-        123.1
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "type": "wait",
-          "value": 1
-        }
-      ],
-      "name": "Regroup 4",
-      "value": [
-        3626.0,
-        -3336.0,
-        123.1
+        3638.6,
+        -3344.4,
+        125.5
       ]
     },
     {
       "actions": [],
-      "name": "Hearthsinger Junction",
+      "name": "Left Pack First",
       "value": [
-        3656.3,
-        -3328.7,
-        123.6
+        3658.1,
+        -3337.9,
+        124.0
       ]
     },
     {
       "actions": [],
       "name": "Turning Right",
       "value": [
-        3680.3,
-        -3364.8,
-        128.1
+        3661.1,
+        -3356.0,
+        126.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Keep Right",
+      "value": [
+        3676.3,
+        -3377.5,
+        129.1
       ]
     },
     {
@@ -394,11 +389,119 @@
     },
     {
       "actions": [],
+      "name": "Down Festival Lane",
+      "value": [
+        3719.0,
+        -3468.5,
+        129.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End of the Road",
+      "value": [
+        3690.4,
+        -3483.1,
+        133.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Courtyard",
+      "value": [
+        3664.3,
+        -3485.7,
+        136.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round The Fountain",
+      "value": [
+        3643.2,
+        -3485.8,
+        137.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down to the gate",
+      "value": [
+        3615.9,
+        -3485.5,
+        137.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "At the Gate",
+      "value": [
+        3588.3,
+        -3465.2,
+        135.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back up Right side",
+      "value": [
+        3601.2,
+        -3498.0,
+        136.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round the Fountain",
+      "value": [
+        3635.0,
+        -3527.9,
+        137.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Leaving Courtyard",
+      "value": [
+        3662.7,
+        -3510.3,
+        137.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lurning Onto Market Row",
+      "value": [
+        3724.2,
+        -3474.6,
+        129.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "On Market Row again",
+      "value": [
+        3702.4,
+        -3400.8,
+        132.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back at the Junction",
+      "value": [
+        3703.6,
+        -3392.2,
+        132.1
+      ]
+    },
+    {
+      "actions": [],
       "name": "Heading Back",
       "value": [
-        3696.6,
-        -3390.4,
-        131.9
+        3695.5,
+        -3380.9,
+        131.2
       ]
     },
     {
@@ -480,15 +583,6 @@
         3689.1,
         -3163.5,
         126.9
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Cautious Advance",
-      "value": [
-        3674.8,
-        -3205.8,
-        126.6
       ]
     },
     {
@@ -762,6 +856,33 @@
       ]
     },
     {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 176325,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Loot Plans",
+      "value": [
+        3585.1,
+        -2998.0,
+        125.0
+      ]
+    },
+    {
       "actions": [],
       "name": "Round Corner",
       "value": [
@@ -824,33 +945,6 @@
       "value": [
         3573.6,
         -2937.3,
-        125.0
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 3,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "interact",
-          "value": {
-            "id": 176325,
-            "range": 5
-          }
-        }
-      ],
-      "name": "Blacksmith",
-      "value": [
-        3581.9,
-        -2991.7,
         125.0
       ]
     },
@@ -990,168 +1084,6 @@
       ]
     },
     {
-      "actions": [],
-      "name": "Picalo Route",
-      "value": [
-        3696.6,
-        -3390.4,
-        131.9
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Down Festival Lane",
-      "value": [
-        3710.6,
-        -3485.7,
-        129.7
-      ]
-    },
-    {
-      "actions": [],
-      "name": "End of road",
-      "value": [
-        3679.8,
-        -3492.1,
-        134.7
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Courtyard",
-      "value": [
-        3664.7,
-        -3497.5,
-        136.6
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Round the fountain",
-      "value": [
-        3638.1,
-        -3521.7,
-        136.7
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Clear the back",
-      "value": [
-        3605.8,
-        -3515.0,
-        138.0
-      ]
-    },
-    {
-      "actions": [],
-      "name": "To the Side",
-      "value": [
-        3623.4,
-        -3490.5,
-        137.3
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Down the path",
-      "value": [
-        3590.9,
-        -3484.7,
-        135.1
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Back Gate",
-      "value": [
-        3584.9,
-        -3466.2,
-        135.3
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 1,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "interact",
-          "value": {
-            "id": 175352,
-            "range": 10
-          }
-        }
-      ],
-      "name": "Open Kings Square Gate",
-      "value": [
-        3573.6,
-        -3454.0,
-        135.8
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Get to Second Gate",
-      "value": [
-        3559.0,
-        -3439.0,
-        136.5
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 1,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "interact",
-          "value": {
-            "id": 175353,
-            "range": 10
-          }
-        }
-      ],
-      "name": "Open Second Gate",
-      "value": [
-        3556.9,
-        -3436.3,
-        136.2
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Moving Back home",
-      "value": [
-        3545.0,
-        -3423.0,
-        135.5
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Starting Street",
-      "value": [
-        3510.5,
-        -3387.7,
-        133.8
-      ]
-    },
-    {
       "actions": [
         {
           "conditions": {
@@ -1164,11 +1096,11 @@
           }
         }
       ],
-      "name": "Back At the Entrance",
+      "name": "GG",
       "value": [
-        3394.1,
-        -3380.0,
-        142.7
+        3415.8,
+        -3044.5,
+        136.5
       ]
     }
   ]

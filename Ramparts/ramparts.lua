@@ -94,10 +94,15 @@
                     [225080] = "Reincarnation",
                     [1604] = "Dazed",
                     -- Undispellable
-                    -- [1] = "Kidney Shot",
                     -- [15655] = "Shield Slam",
+                    [16244] = "Demo Shout",
+                    [30621] = "Kidney Shot",
+                    [6713] = "Disarm",
+                    [13523] = "Mortal Strike",
                     -- [22427] = "Concussion Blow",
                     -- [30923] = "Domination",
+                    [30695] = "Treacherous Aura",
+
                     -- Dispellable
                     [30615] = "Fear"
                     -- [6726] = "Silence",
@@ -209,17 +214,17 @@
                         if (name) then
                             local debuff_present = known_debuffs[spellId]
                             if (debuff_present == nil) then
-                                RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId .. " type: " .. type)
-                                --  .. " id :" .. spellId .. " duration :" .. duration)
                                 known_debuffs[spellId] = name
+                                if (type) then
+                                    RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId .. " type: " .. type .. " duration :" .. duration)
+                                else
+                                    --  .. " id :" .. spellId )
+                                    RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
+                                end
                             end
                         end
                     end
                 end
-            end
-            function cannons(env)
-                -- 176215 ammo
-                -- 176217 ammo
             end
             local _, global_cd, _, _ = GetSpellCooldown("61304")
             local player_class = env:evaluate_variable("myself.class")
@@ -227,8 +232,8 @@
 
             --get all targets
             --env:evaluate_variable("npcs.attackable.range_10")>=2  -- more than 2 targets in 10 yards
-
             -- if not in LoS, move to tank
+
             -- NOTE: Off gcd abilities won't be used until the next free gcd, but they won't trigger gcd so the next ability will happen at the same time
             if (global_cd == 0) then
                 -- local enemies = env:evaluate_variable("npcs.all.is_attacking_me")
@@ -558,13 +563,13 @@
             food_buff = "167152" -- Replenishment
 
             -- Support Functions - return true if there is work to do
-            check_hybrid = function(env, res_spell, self_heal)
+            function check_hybrid(env, res_spell, self_heal)
                 --return does_healer_need_mana(env) or need_to_eat(env) or is_anyone_dead(env)
                 --need_self_heal(env, self_heal)
                 return anyone_need_resing(env, res_spell) or still_resing(env, res_spell) or need_to_eat(env) or does_healer_need_mana(env)
                 --or need_mage_food(env)
             end
-            anyone_need_resing = function(env, spell)
+            function anyone_need_resing(env, spell)
                 local reviving = false
                 for _, player_name in ipairs(party) do
                     local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
@@ -581,7 +586,7 @@
                 return reviving
             end
 
-            still_resing = function(env, spell)
+            function still_resing(env, spell)
                 local casting = UnitCastingInfo("player")
                 local target = UnitName("target")
                 local still_resing = false
@@ -597,7 +602,7 @@
                 return still_resing
             end
 
-            is_anyone_dead = function(env)
+            function is_anyone_dead(env)
                 local dead = false
                 for _, player_name in ipairs(party) do
                     local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
@@ -609,7 +614,7 @@
                 return dead
             end
 
-            anyone_need_buffing = function(env, buff, spell)
+            function anyone_need_buffing(env, buff, spell)
                 local needs_buff = false
                 for _, player_name in ipairs(party) do
                     local buff_duration = env:evaluate_variable("unit." .. player_name .. ".buff." .. buff)
@@ -624,7 +629,7 @@
                 return needs_buff
             end
 
-            do_i_need_buffing = function(env, spell)
+            function do_i_need_buffing(env, spell)
                 local needs_buff = false
                 local buff_duration = env:evaluate_variable("myself.buff." .. spell)
                 local _, buff_cd, _, _ = GetSpellCooldown(spell)
@@ -636,7 +641,7 @@
                 return needs_buff
             end
 
-            tank_needs_buff = function(env, spell, charges)
+            function tank_needs_buff(env, spell, charges)
                 local needs_buff = false
                 -- local name, _, count, type, duration, _, _, _, _, spellId = UnitBuff(tank_name, 1, "PLAYER" ) --, "CANCELABLE"
                 -- print("You have ".. count .. " charges of " .. name)
@@ -651,7 +656,7 @@
                 return needs_buff
             end
 
-            does_healer_need_mana = function(env)
+            function does_healer_need_mana(env)
                 local needs_mana = false
                 local healer_mana = UnitPower(healer_name, 0)
                 local healer_max_mana = UnitPowerMax(healer_name, 0)
@@ -666,7 +671,7 @@
                 return needs_mana
             end
 
-            am_i_dead = function(env)
+            function am_i_dead(env)
                 local dead = env:evaluate_variable("myself.life") == 2
                 if (dead) then
                     -- Check for mass release
@@ -675,11 +680,11 @@
                 return dead
             end
 
-            am_in_combat = function(env)
+            function am_in_combat(env)
                 return env:evaluate_variable("myself.is_in_combat")
             end
 
-            need_self_heal = function(env, spell)
+            function need_self_heal(env, spell)
                 local hp = env:evaluate_variable("myself.health")
                 local healing = false
                 if (hp < 90) then
@@ -690,7 +695,7 @@
                 return healing
             end
 
-            need_to_eat = function(env)
+            function need_to_eat(env)
                 -- return false
                 local mana = UnitPower("player", 0)
                 local max_mana = UnitPowerMax("player", 0)
@@ -712,7 +717,7 @@
             end
 
             --TODO:
-            need_mage_food = function(env, food)
+            function need_mage_food(env, food)
                 return false
             end
 

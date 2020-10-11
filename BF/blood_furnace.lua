@@ -87,49 +87,55 @@
                 print("creating known debuff list...")
                 known_debuffs = {
                     -- Undispellable
-                    [1604] = "Dazed",
-                    [13444] = "Sunder Armor",
-                    [17455] = "Bone Smelt",
-                    [13730] = "Demoralizing Shout",
-                    [9080] = "Hamstring",
-                    [13737] = "Mortal Strike",
-                    [16244] = "Demo Shout",
-                    [6253] = "Backhand",
-                    [6713] = "Disarm",
+                    -- [1604] = "Dazed",
+                    -- [13444] = "Sunder Armor",
+                    -- [17455] = "Bone Smelt",
+                    -- [13730] = "Demoralizing Shout",
+                    -- [9080] = "Hamstring",
+                    -- [13737] = "Mortal Strike",
+                    -- [16244] = "Demo Shout",
+                    [1] = "Kidney Shot",
                     [15655] = "Shield Slam",
+                    [22427] = "Concussion Blow",
+                    -- [6253] = "Backhand",
+                    -- [6713] = "Disarm",
+                    -- [15655] = "Shield Slam",
+                    -- Our own
                     [6788] = "Weakened Soul",
                     [187464] = "Shadow Mend",
                     [87024] = "Cauterized",
                     [225080] = "Reincarnation",
-                    --Unavoidable
-                    --Ignore
-                    [9672] = "Frostbolt",
-                    [15043] = "Frostbolt",
-                    [6136] = "Chilled",
-                    [17145] = "Blastwave",
-                    [17165] = "Mind Flay",
-                    [122832] = "Unrelenting Anguish",
-                    -- Dispellable
-                    [16458] = "Ghoul Plague",
-                    [16143] = "Cadaver Worms",
-                    [7068] = "Vale of Shadows",
-                    [16336] = "Haunting Phantoms",
-                    [5137] = "Call of the Grave",
-                    [16333] = "Dibilitating Touch",
-                    [15654] = "Shadow Word: Pain",
-                    [13323] = "Polymorph",
-                    [33975] = "Pyroblast",
-                    [15063] = "Frost Nova",
-                    [15732] = "Immolate",
-                    [66290] = "Sleep",
-                    [12542] = "Fear",
-                    [16798] = "Enchanting Lulaby",
-                    [12741] = "Curse of Weakness",
-                    [13704] = "Psychic Scream",
-                    [17141] = "Holy Fire",
+                    -- --Unavoidable
+                    -- --Ignore
+                    -- [9672] = "Frostbolt",
+                    -- [15043] = "Frostbolt",
+                    -- [6136] = "Chilled",
+                    -- [17145] = "Blastwave",
+                    -- [17165] = "Mind Flay",
+                    -- [122832] = "Unrelenting Anguish",
+                    -- -- Dispellable
+                    -- [16458] = "Ghoul Plague",
+                    -- [16143] = "Cadaver Worms",
+                    -- [7068] = "Vale of Shadows",
+                    -- [16336] = "Haunting Phantoms",
+                    -- [5137] = "Call of the Grave",
+                    -- [16333] = "Dibilitating Touch",
+                    -- [15654] = "Shadow Word: Pain",
+                    -- [13323] = "Polymorph",
+                    -- [33975] = "Pyroblast",
+                    -- [15063] = "Frost Nova",
+                    -- [15732] = "Immolate",
+                    -- [6290] = "Sleep",
+                    [6726] = "Silence",
+                    -- [12542] = "Fear",
+                    -- [16798] = "Enchanting Lulaby",
+                    -- [12741] = "Curse of Weakness",
+                    -- [13704] = "Psychic Scream",
+                    -- [17141] = "Holy Fire",
                     [13338] = "Curse of Tongues",
-                    [7713] = "Wailing Dead",
-                    [16432] = "Plague Mist"
+                    [30937] = "Mark of Shadow"
+                    -- [7713] = "Wailing Dead",
+                    -- [16432] = "Plague Mist"
                 }
             end
             return known_debuffs
@@ -138,11 +144,11 @@
             if (curses == nil) then
                 print("creating known curse list...")
                 curses = {
-                    [7068] = "Vale of Shadows",
-                    [16336] = "Haunting Phantoms",
-                    [5137] = "Call of the Grave",
-                    -- [7713] = "Wailing Dead",
-                    [12741] = "Curse of Weakness",
+                    -- [7068] = "Vale of Shadows",
+                    -- [16336] = "Haunting Phantoms",
+                    -- [5137] = "Call of the Grave",
+                    -- -- [7713] = "Wailing Dead",
+                    -- [12741] = "Curse of Weakness",
                     [13338] = "Curse of Tongues"
                 }
             end
@@ -152,15 +158,9 @@
             if (magics == nil) then
                 print("creating known magics list...")
                 magics = {
-                    [16333] = "Dibilitating Touch",
-                    [15654] = "Shadow Word: Pain",
-                    [13323] = "Polymorph",
-                    [15732] = "Immolate",
-                    [17141] = "Holy Fire",
-                    [15063] = "Frost Nova",
-                    [66290] = "Sleep",
-                    [12542] = "Fear",
-                    [13704] = "Psychic Scream"
+                    [6726] = "Silence",
+                    [32197] = "Corruption",
+                    [30937] = "Mark of Shadow"
                 }
             end
             return magics
@@ -168,18 +168,16 @@
         ["get_diseases"] = function(env)
             if (diseases == nil) then
                 print("creating known diseases list...")
-                diseases = {
-                    [16458] = "Ghoul Plague",
-                    [16432] = "Plague Mist",
-                    [16143] = "Cadaver Worms"
-                }
+                diseases = {}
             end
             return diseases
         end,
         ["get_poisons"] = function(env)
             if (poisons == nil) then
                 print("creating known poisons list...")
-                poisons = {}
+                poisons = {
+                    [34969] = "Poison"
+                }
             end
             return poisons
         end
@@ -205,7 +203,7 @@
                     for i, player_name in ipairs(party) do
                         if (debuff_1 ~= nil) then
                             for id, name in pairs(debuff_1) do
-                                if (dispelling == false) then
+                                if (name and dispelling == false) then
                                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
                                     if (debuff_duration > 0) then
                                         RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
@@ -217,7 +215,7 @@
                         end
                         if (debuff_2 ~= nil) then
                             for id, name in pairs(debuff_2) do
-                                if (dispelling == false) then
+                                if (name and dispelling == false) then
                                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
                                     if (debuff_duration > 0) then
                                         RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
@@ -229,7 +227,7 @@
                         end
                         if (debuff_3 ~= nil) then
                             for id, name in pairs(debuff_3) do
-                                if (dispelling == false) then
+                                if name and (dispelling == false) then
                                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
                                     if (debuff_duration > 0) then
                                         RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
@@ -245,13 +243,14 @@
             end
             function check_for_new_debuffs(env)
                 -- Check for new debuffs
-                for p, player_name in ipairs(party) do
+                for _, player_name in ipairs(party) do
                     for i = 1, 5 do
                         local name, _, _, type, duration, _, _, _, _, spellId = UnitDebuff(player_name, i) --, "CANCELABLE"
                         if (name) then
                             local debuff_present = known_debuffs[spellId]
                             if (debuff_present == nil) then
-                                RunMacroText("/p New debuff found - Name :" .. name .. " type: " .. type .. " id :" .. spellId .. " duration :" .. duration)
+                                RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
+                                 -- .. " type: " .. type .. " id :" .. spellId .. " duration :" .. duration)
                                 known_debuffs[spellId] = name
                             end
                         end
@@ -274,14 +273,14 @@
             if (global_cd == 0) then
                 -- local enemies = env:evaluate_variable("npcs.all.is_attacking_me")
                 -- print ("Enemies attacking :", player_class, " : ", enemies)
-                -- ** PALADIN ** --
                 if player_class == "PALADIN" then -- and player_spec = 66 (prot)
+                    -- ** PALADIN ** --
+
                     -- A fix for no target spam
-                    RunMacroText("/cleartarget [dead][noharm]")
+                    RunMacroText("/cleartarget [dead][noexists]")
                     if (UnitExists("target") == false) then
-                        RunMacroText("/targetenemy [nodead][noharm]")
+                        RunMacroText("/targetenemy [nodead][exists]")
                     else
-                        -- Sort everyone out
                         local dispelling = dispell("Cleanse Toxins", diseases, posions)
 
                         -- local current_health = UnitHealth("player")
@@ -334,9 +333,8 @@
                             end
                         end
                     end
-                end
-                -- ** PRIEST ** --
-                if player_class == "PRIEST" then -- and player_spec = 256 (disc)
+                elseif player_class == "PRIEST" then -- and player_spec = 256 (disc)
+                    -- ** PRIEST ** --
                     if (UnitExists("target")) then
                         local healing = false
                         local _, penance_cd, _, _ = GetSpellCooldown("Penance")
@@ -344,6 +342,7 @@
 
                         -- log out any exiting new debuffs
                         check_for_new_debuffs(env)
+
                         -- Do Healing
 
                         -- Dispell everyone
@@ -353,6 +352,7 @@
                             local health_check = 60
                             local my_hp = env:evaluate_variable("myself.health")
                             local _, desperate_cd, _, _ = GetSpellCooldown("Desperate Prayer")
+
                             if (my_hp < health_check and desperate_cd == 0) then
                                 healing = true
                                 RunMacroText("/cast [@player] Desperate Prayer")
@@ -385,6 +385,7 @@
                                         RunMacroText("/cast Power Word: Radiance")
                                     end
                                 end
+
                                 if (healing == false) then
                                     -- If people have less than 40% hp, panic
                                     health_check = 40
@@ -456,7 +457,7 @@
                             end
 
                             -- Do Damage
-                            if (healing == false) then
+                            if (false and healing == false) then
                                 -- Need to check LOS and possibly Move?
                                 local swpain_duration = env:evaluate_variable("unit.target.debuff.589") -- TODO: Check all in combat targets
                                 local target_health = env:evaluate_variable("unit.target.health")
@@ -482,110 +483,107 @@
                     else
                         RunMacroText("/assist " .. main_tank)
                     end
-                end
-            end
-            -- ** DRUID ** --
-            if player_class == "DRUID" then -- and player_spec = 102 (balance)
-                -- -- Sort everyone out
-                local dispelling = dispell("Remove Corruption", curses, poisons)
+                elseif player_class == "DRUID" then -- and player_spec = 102 (balance)
+                    -- ** DRUID ** --
 
-                if (dispelling == false) then
-                    if (UnitExists("target")) then
-                        local target_hp = env:evaluate_variable("unit.target.health")
-                        local moonfire_duration = env:evaluate_variable("unit.target.debuff.Moonfire")
-                        local sunfire_duration = env:evaluate_variable("unit.target.debuff.Sunfire")
-                        local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
-                        local _, alignment_cd, _, _ = GetSpellCooldown("Celestial Alignment")
-                        local solar_emp_duration = env:evaluate_variable("myself.buff.164545") -- solar
-                        local lunar_empduration = env:evaluate_variable("myself.buff.164547") -- lunar
-                        local lunar_power = UnitPower("player", 8)
+                    local dispelling = dispell("Remove Corruption", curses, poisons)
 
-                        if (alignment_cd == 0) then
-                            RunMacroText("/cast Celestial Alignment")
-                        elseif (berserking_cd == 0) then
-                            RunMacroText("/cast Berserking")
-                        elseif (target_hp > min_dot_hp and moonfire_duration == -1) then
-                            RunMacroText("/cast Moonfire")
-                        elseif (target_hp > min_dot_hp and sunfire_duration == -1) then
-                            RunMacroText("/cast Sunfire")
-                        elseif (solar_emp_duration ~= -1) then -- will recast as buff isn't removed until spell lands
-                            RunMacroText("/cast Solar Wrath")
-                        elseif (lunar_power >= 40) then
-                            RunMacroText("/cast Starsurge")
-                        elseif (lunar_empduration ~= -1) then -- will recast as buff isn't removed until spell lands
-                            RunMacroText("/cast Lunar Strike")
-                        else
-                            RunMacroText("/cast Solar Wrath")
-                        end
-                    else
-                        RunMacroText("/assist " .. main_tank)
-                    end
-                end
-            end
-            -- ** MAGE ** --
-            if player_class == "MAGE" then -- and player_spec = 63 (fire)
-                -- Sort everyone out
-                local dispelling = dispell("Remove Curse", curses)
-                if (dispelling == false) then
-                    if (UnitExists("target")) then
-                        local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
-                        local heating_up_duration = env:evaluate_variable("myself.buff.48107")
-                        local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
+                    if (dispelling == false) then
+                        if (UnitExists("target")) then
+                            local target_hp = env:evaluate_variable("unit.target.health")
+                            local moonfire_duration = env:evaluate_variable("unit.target.debuff.Moonfire")
+                            local sunfire_duration = env:evaluate_variable("unit.target.debuff.Sunfire")
+                            local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
+                            local _, alignment_cd, _, _ = GetSpellCooldown("Celestial Alignment")
+                            local solar_emp_duration = env:evaluate_variable("myself.buff.164545") -- solar
+                            local lunar_empduration = env:evaluate_variable("myself.buff.164547") -- lunar
+                            local lunar_power = UnitPower("player", 8)
 
-                        local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
-                        local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
-                        local _, combustion_cd, _, _ = GetSpellCooldown("Combustion")
-
-                        if (berserking_cd == 0) then
-                            RunMacroText("/cast Berserking")
-                        elseif (combustion_cd == 0) then
-                            RunMacroText("/cast Combustion")
-                        elseif (hotstreak_duration > 0) then
-                            RunMacroText("/cast Pyroblast")
-                        elseif (fireblast_cd == 0 and heating_up_duration > 0) then
-                            RunMacroText("/cast Fire Blast")
-                        else
-                            if (combustion_duration > 0) then
-                                RunMacroText("/cast Scorch")
+                            if (alignment_cd == 0) then
+                                RunMacroText("/cast Celestial Alignment")
+                            elseif (berserking_cd == 0) then
+                                RunMacroText("/cast Berserking")
+                            elseif (target_hp > min_dot_hp and moonfire_duration == -1) then
+                                RunMacroText("/cast Moonfire")
+                            elseif (target_hp > min_dot_hp and sunfire_duration == -1) then
+                                RunMacroText("/cast Sunfire")
+                            elseif (solar_emp_duration ~= -1) then -- will recast as buff isn't removed until spell lands
+                                RunMacroText("/cast Solar Wrath")
+                            elseif (lunar_power >= 40) then
+                                RunMacroText("/cast Starsurge")
+                            elseif (lunar_empduration ~= -1) then -- will recast as buff isn't removed until spell lands
+                                RunMacroText("/cast Lunar Strike")
                             else
-                                RunMacroText("/cast Fireball")
+                                RunMacroText("/cast Solar Wrath")
                             end
-                        end
-                    else
-                        RunMacroText("/assist " .. main_tank) -- perhaps an oops
-                    end
-                end
-            end
-            -- ** SHAMAN ** --
-            if player_class == "SHAMAN" then -- and player_spec = 262 (elemental)
-                -- Sort everyone out
-                local dispelling = dispell("Cleanse Spirit", curses)
-                if (dispelling == false) then
-                    if (UnitExists("target")) then
-                        local target_hp = env:evaluate_variable("unit.target.health")
-                        local _, flame_shock_cd, _, _ = GetSpellCooldown("188389")
-                        local _, earth_elemental_cd, _, _ = GetSpellCooldown("Earth Elemental")
-                        local flame_shock_duration = env:evaluate_variable("unit.target.debuff.188389")
-                        local maelstrom = UnitPower("player", 11)
-                        local lb_charges, _, _, lb_cooldownDuration, _ = GetSpellCharges("Lava Burst")
-                        local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
-
-                        -- Check Earth Shield
-                        if (earth_elemental_cd == 0) then
-                            RunMacroText("/cast Earth Elemental")
-                        elseif (berserking_cd == 0) then
-                            RunMacroText("/cast Berserking")
-                        elseif (target_hp > min_dot_hp and flame_shock_duration == -1 and flame_shock_cd == 0) then
-                            RunMacroText("/cast Flame Shock")
-                        elseif (maelstrom ~= nil and maelstrom >= 90) then
-                            RunMacroText("/cast Earth Shock")
-                        elseif (lb_charges > 0) then --"Lava Burst" not 51505
-                            RunMacroText("/cast Lava Burst")
                         else
-                            RunMacroText("/cast Lightning Bolt")
+                            RunMacroText("/assist " .. main_tank)
                         end
-                    else
-                        RunMacroText("/assist " .. main_tank)
+                    end
+                elseif player_class == "MAGE" then -- and player_spec = 63 (fire)
+                    -- ** MAGE ** --
+                    local dispelling = dispell("Remove Curse", curses)
+                    if (dispelling == false) then
+                        if (UnitExists("target")) then
+                            local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
+                            local heating_up_duration = env:evaluate_variable("myself.buff.48107")
+                            local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
+
+                            local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
+                            local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
+                            local _, combustion_cd, _, _ = GetSpellCooldown("Combustion")
+
+                            if (berserking_cd == 0) then
+                                RunMacroText("/cast Berserking")
+                            elseif (combustion_cd == 0) then
+                                RunMacroText("/cast Combustion")
+                            elseif (hotstreak_duration > 0) then
+                                RunMacroText("/cast Pyroblast")
+                            elseif (fireblast_cd == 0 and heating_up_duration > 0) then
+                                RunMacroText("/cast Fire Blast")
+                            else
+                                if (combustion_duration > 0) then
+                                    RunMacroText("/cast Scorch")
+                                else
+                                    RunMacroText("/cast Fireball")
+                                end
+                            end
+                        else
+                            RunMacroText("/assist " .. main_tank) -- perhaps an oops
+                        end
+                    end
+                elseif player_class == "SHAMAN" then -- and player_spec = 262 (elemental)
+                    -- ** SHAMAN ** --
+
+                    -- Sort everyone out
+                    local dispelling = dispell("Cleanse Spirit", curses)
+                    if (dispelling == false) then
+                        if (UnitExists("target")) then
+                            local target_hp = env:evaluate_variable("unit.target.health")
+                            local _, flame_shock_cd, _, _ = GetSpellCooldown("188389")
+                            local _, earth_elemental_cd, _, _ = GetSpellCooldown("Earth Elemental")
+                            local flame_shock_duration = env:evaluate_variable("unit.target.debuff.188389")
+                            local maelstrom = UnitPower("player", 11)
+                            local lb_charges, _, _, lb_cooldownDuration, _ = GetSpellCharges("Lava Burst")
+                            local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
+
+                            -- Check Earth Shield
+                            if (earth_elemental_cd == 0) then
+                                RunMacroText("/cast Earth Elemental")
+                            elseif (berserking_cd == 0) then
+                                RunMacroText("/cast Berserking")
+                            elseif (target_hp > min_dot_hp and flame_shock_duration == -1 and flame_shock_cd == 0) then
+                                RunMacroText("/cast Flame Shock")
+                            elseif (maelstrom ~= nil and maelstrom >= 90) then
+                                RunMacroText("/cast Earth Shock")
+                            elseif (lb_charges > 0) then --"Lava Burst" not 51505
+                                RunMacroText("/cast Lava Burst")
+                            else
+                                RunMacroText("/cast Lightning Bolt")
+                            end
+                        else
+                            RunMacroText("/assist " .. main_tank)
+                        end
                     end
                 end
             end
@@ -601,7 +599,8 @@
             -- Support Functions - return true if there is work to do
             check_hybrid = function(env, res_spell, self_heal)
                 --return does_healer_need_mana(env) or need_to_eat(env) or is_anyone_dead(env)
-                return anyone_need_resing(env, res_spell) or still_resing(env, res_spell) or need_self_heal(env, self_heal) or need_to_eat(env) or does_healer_need_mana(env)
+                --need_self_heal(env, self_heal)
+                return anyone_need_resing(env, res_spell) or still_resing(env, res_spell) or need_to_eat(env) or does_healer_need_mana(env)
                 --or need_mage_food(env)
             end
             anyone_need_resing = function(env, spell)

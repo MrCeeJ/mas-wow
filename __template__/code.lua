@@ -36,13 +36,13 @@
         murmor_positions = function(env)
             local player_class = env:evaluate_variable("myself.class")
             if player_class == "PALADIN" then
-                env:execute_action("move",{-157.9, -497.3, 15.8})
+                env:execute_action("move", {-157.9, -497.3, 15.8})
             elseif player_class == "PRIEST" then
-                env:execute_action("move",{-157.9, -476.1, 15.8})
+                env:execute_action("move", {-157.9, -476.1, 15.8})
             elseif player_class == "DRUID" then
                 env:execute_action("move", {-156.6, -451.4, 17.1})
             elseif player_class == "SHAMAN" then
-                env:execute_action("move",{-178.0, -474.9, 18.2})
+                env:execute_action("move", {-178.0, -474.9, 18.2})
             elseif player_class == "MAGE" then
                 env:execute_action("move", {-135.7, -478.8, 18.2})
             end
@@ -152,31 +152,10 @@
                     [87024] = "Cauterized",
                     [225080] = "Reincarnation",
                     [57724] = "Sated",
-                    [1604] = "Dazed",
-                    -- Undispellable
-                    -- [15655] = "Shield Slam",
-                    [16244] = "Demo Shout",
-                    [30621] = "Kidney Shot",
-                    [6713] = "Disarm",
-                    [13523] = "Mortal Strike",
-                    [16856] = "Mortal Strike",
-                    [30641] = "Mortal Wound",
-                    [30639] = "Mortal Wound",
-                    [33480] = "Black Cleave",
-                    [11428] = "Knockdown",
-                    [15497] = "Forst Bolt",
-                    -- [22427] = "Concussion Blow",
-                    -- [30923] = "Domination",
-                    [30695] = "Treacherous Aura",
-                    -- Dispellable
-                    [14032] = "Shadow Word: Pain",
-                    [32863] = "Seed of Corruption",
-                    [51514] = "Hex",
-                    [9574] = "Flame Buffet",
-                    [33502] = "Brain Wash",
-                    [17165] = "Mind Flay",
-                    [33487] = "Addle Humanoid"
+                    [1604] = "Dazed"
+                    -- Ignore
 
+                    -- Dispell
                 }
             end
             return known_debuffs
@@ -184,23 +163,14 @@
         ["get_curses"] = function(env)
             if (curses == nil) then
                 print("creating known curse list...")
-                curses = {
-                    [51514] = "Hex",
-                    [13338] = "Curse of Tongues"
-                }
+                curses = {}
             end
             return curses
         end,
         ["get_magics"] = function(env)
             if (magics == nil) then
                 print("creating known magics list...")
-                magics = {
-                    [14032] = "Shadow Word: Pain",
-                    [32863] = "Seed of Corruption",
-                    [9574] = "Flame Buffet",
-                    [33487] = "Addle Humanoid"
-                    --  [33502] = "Brain Wash"
-                }
+                magics = {}
             end
             return magics
         end,
@@ -650,7 +620,7 @@
                             local heating_up_duration = env:evaluate_variable("myself.buff.48107")
                             local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
                             local enemy_count = get_enemy_count()
-                           -- print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
+                            -- print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
 
                             local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")

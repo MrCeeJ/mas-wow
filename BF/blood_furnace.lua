@@ -463,7 +463,7 @@
 
 
                             --Gets the count of the flying missiles.
-                            count = GetMissileCount()                        
+                           -- count = GetMissileCount()                        
                             --Gets the info of a specific missile.
                             --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)                            
 

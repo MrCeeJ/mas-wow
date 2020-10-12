@@ -36,13 +36,13 @@
         murmor_positions = function(env)
             local player_class = env:evaluate_variable("myself.class")
             if player_class == "PALADIN" then
-                env:execute_action("move",{-157.9, -497.3, 15.8})
+                env:execute_action("move", {-157.9, -497.3, 15.8})
             elseif player_class == "PRIEST" then
-                env:execute_action("move",{-157.9, -476.1, 15.8})
+                env:execute_action("move", {-157.9, -476.1, 15.8})
             elseif player_class == "DRUID" then
                 env:execute_action("move", {-156.6, -451.4, 17.1})
             elseif player_class == "SHAMAN" then
-                env:execute_action("move",{-178.0, -474.9, 18.2})
+                env:execute_action("move", {-178.0, -474.9, 18.2})
             elseif player_class == "MAGE" then
                 env:execute_action("move", {-135.7, -478.8, 18.2})
             end
@@ -153,30 +153,13 @@
                     [225080] = "Reincarnation",
                     [57724] = "Sated",
                     [1604] = "Dazed",
-                    -- Undispellable
-                    -- [15655] = "Shield Slam",
-                    [16244] = "Demo Shout",
-                    [30621] = "Kidney Shot",
-                    [6713] = "Disarm",
-                    [13523] = "Mortal Strike",
-                    [16856] = "Mortal Strike",
-                    [30641] = "Mortal Wound",
-                    [30639] = "Mortal Wound",
-                    [33480] = "Black Cleave",
-                    [11428] = "Knockdown",
-                    [15497] = "Forst Bolt",
-                    -- [22427] = "Concussion Blow",
-                    -- [30923] = "Domination",
-                    [30695] = "Treacherous Aura",
-                    -- Dispellable
-                    [14032] = "Shadow Word: Pain",
-                    [32863] = "Seed of Corruption",
-                    [51514] = "Hex",
-                    [9574] = "Flame Buffet",
-                    [33502] = "Brain Wash",
-                    [17165] = "Mind Flay",
-                    [33487] = "Addle Humanoid"
+                    -- Ignore
+                    [12675] = "Frost Bolt",
+                    [15063] = "Frost Nova",
+                    --   [35016] = "Arcane Flair",
 
+                    -- Dispell
+                    [38660] = "Fear"
                 }
             end
             return known_debuffs
@@ -184,23 +167,14 @@
         ["get_curses"] = function(env)
             if (curses == nil) then
                 print("creating known curse list...")
-                curses = {
-                    [51514] = "Hex",
-                    [13338] = "Curse of Tongues"
-                }
+                curses = {}
             end
             return curses
         end,
         ["get_magics"] = function(env)
             if (magics == nil) then
                 print("creating known magics list...")
-                magics = {
-                    [14032] = "Shadow Word: Pain",
-                    [32863] = "Seed of Corruption",
-                    [9574] = "Flame Buffet",
-                    [33487] = "Addle Humanoid"
-                    --  [33502] = "Brain Wash"
-                }
+                magics = {}
             end
             return magics
         end,
@@ -217,6 +191,15 @@
                 poisons = {}
             end
             return poisons
+        end,
+        ["get_tremors"] = function(env)
+            if (tremors == nil) then
+                print("creating known tremor totem list...")
+                tremors = {
+                    [38660] = "Fear"
+                }
+            end
+            return tremors
         end,
         ["enemy_count"] = function(env, set_count)
             if (set_count) then
@@ -238,16 +221,24 @@
             magics = env:evaluate_variable("get_magics")
             diseases = env:evaluate_variable("get_diseases")
             poisons = env:evaluate_variable("get_poisons")
+            tremors = env:evaluate_variable("get_tremors")
             party = env:evaluate_variable("get_party")
             main_tank = env:evaluate_variable("get_tank_name")
             eecc = 0
             --enemies = get_enemies()
 
             function get_enemy_count()
+                --env:execute_action("move", {-157.9, -497.3, 15.8}) --this works fine
                 local count
                 local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
-                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") --[tank_x, tank_y, tank_z]
-                local enemies = env:evaluate_variable("npcs.attackable.range_8.centre_" .. tank_x .. ".centre_" .. tank_y .. ".centre_" .. tank_z)
+                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") -- this also works fine
+
+                -- Which of these methods should I use?
+                local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
+                -- local position = "[" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "]"
+                -- local position = ""..tank_x..","..tank_y..","..tank_z..""
+                -- local position = ""..tank_x..".center_"..tank_y..".center_"..tank_z..""
+                local enemies = env:evaluate_variable("npcs.attackable.range_8.center_" .. position) -- Find everyone within 8 yards of tank
                 if (enemies == nil) then
                     count = 0
                 else
@@ -298,6 +289,29 @@
                     end
                 end
                 return more_dots
+            end
+            function tremor()
+                local _, tremor_cd, _, _ = GetSpellCooldown("Tremor Totem")
+                local dispelling = false
+                if (dispell_cd == 0) then
+                    for i, player_name in ipairs(party) do
+                        if (tremors ~= nil) then
+                            for id, name in pairs(tremors) do
+                                if (name) then
+                                    local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
+                                    if (debuff_duration > 0) then
+                                        RunMacroText("/s Dispelling " .. player_name .. " of " .. name)
+                                        dispelling = true
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if (dispelling) then
+                    RunMacroText("/cast Tremor Totem")
+                end
+                return dispelling
             end
 
             function dispell(spell, debuff_1, debuff_2, debuff_3)
@@ -643,14 +657,15 @@
                     end
                 elseif player_class == "MAGE" then -- and player_spec = 63 (fire)
                     -- ** MAGE ** --
-                    local dispelling = dispell("Remove Curse", curses)
+                    local dispelling = dispell("Remove Curse", curses) or tremor()
+
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
                             local heating_up_duration = env:evaluate_variable("myself.buff.48107")
                             local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
                             local enemy_count = get_enemy_count()
-                           -- print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
+                            -- print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
 
                             local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")

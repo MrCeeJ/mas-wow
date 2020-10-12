@@ -533,6 +533,15 @@
     },
     {
       "actions": [],
+      "name": "Back Left",
+      "value": [
+        324.7,
+        -191.3,
+        -25.5
+      ]
+    },
+    {
+      "actions": [],
       "name": "Exit",
       "value": [
         315.5,

@@ -32,31 +32,46 @@
                 end
             end
             return false
+        end,
+        murmor_positions = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "PALADIN" then
+                env:execute_action("move",{-157.9, -497.3, 15.8})
+            elseif player_class == "PRIEST" then
+                env:execute_action("move",{-157.9, -476.1, 15.8})
+            elseif player_class == "DRUID" then
+                env:execute_action("move", {-156.6, -451.4, 17.1})
+            elseif player_class == "SHAMAN" then
+                env:execute_action("move",{-178.0, -474.9, 18.2})
+            elseif player_class == "MAGE" then
+                env:execute_action("move", {-135.7, -478.8, 18.2})
+            end
         end
     },
     -- Define custom settings.
-  settings = {
-    ["battle_timeout"] = {
-      -- The name displayed on panel.
-      display_name = "Battle Timeout",
-      -- The mouseover tooltip.
-      description = "Configure the timeout of each battle, in seconds. After the duration of a battleground exceeds the value, quit the battleground.",
-      -- Whether the setting has a toggle switch.
-      can_enable_disable = true,
-      -- The default state of the toggle switch.
-      is_enabled_by_default = true,
-      -- The type of the setting, can be "number" or "string".
-      type = "number",
-      -- The optional values for dropdown (table). nil for textbox.
-      options = nil,
-      -- The width of the input box, in pixels.
-      width = 100,
-      -- The default value of the setting.
-      default = 7200,
-      -- The constraint for the input box, can be "percentage", "non_negative_number", "non_negative_integer", "positive_number" or "positive_integer"
-      constraint = "non_negative_integer",
-    }
-  },
+    settings = {
+        ["battle_timeout"] = {
+            -- The name displayed on panel.
+            display_name = "Battle Timeout",
+            -- The mouseover tooltip.
+            description = "Configure the timeout of each battle, in seconds. After the duration of a battleground exceeds the value, quit the battleground.",
+            -- Whether the setting has a toggle switch.
+            can_enable_disable = true,
+            -- The default state of the toggle switch.
+            is_enabled_by_default = true,
+            -- The type of the setting, can be "number" or "string".
+            type = "number",
+            -- The optional values for dropdown (table). nil for textbox.
+            options = nil,
+            -- The width of the input box, in pixels.
+            width = 100,
+            -- The default value of the setting.
+            default = 7200,
+            -- The constraint for the input box, can be "percentage", "non_negative_number", "non_negative_integer", "positive_number" or "positive_integer"
+            constraint = "non_negative_integer"
+        }
+        -- UI controls
+    },
     -- Define custom variables.
     variables = {
         ["get_singleton_event_frame"] = function(env)
@@ -67,6 +82,12 @@
                 event_frame:SetScript("OnEvent", print)
             end
             return event_frame
+            -- local map = WorldMapFrame:GetMapID();
+            -- local pois = C_AreaPoiInfo.GetAreaPOIForMap(map);
+            -- for i = 1, #pois do
+            --     local poi = C_AreaPoiInfo.GetAreaPOIInfo(map, pois[i]);
+            --     print(poi.name, poi.textureIndex)
+            -- end
         end,
         ["get_healer_name"] = function(env)
             local healer_name = "Ceejpriest"
@@ -90,6 +111,20 @@
                 table.insert(party, me)
             end
             return party
+        end,
+        ["get_boss_positions"] = function()
+            if (boss_positions == nil) then
+                boss_positions = {
+                    ["Murmur"] = {
+                        ["PALADIN"] = {-157.9, -497.3, 15.8},
+                        ["PRIEST"] = {-157.9, -476.1, 15.8},
+                        ["SHAMAN"] = {-178.0, -474.9, 18.2},
+                        ["DRUID"] = {-156.6, -451.4, 17.1},
+                        ["MAGE"] = {-135.7, -478.8, 18.2}
+                    }
+                }
+            end
+            return boss_positions
         end,
         ["get_known_buffs"] = function(env)
             if (known_buffs == nil) then
@@ -116,6 +151,7 @@
                     [87023] = "Cauterize",
                     [87024] = "Cauterized",
                     [225080] = "Reincarnation",
+                    [57724] = "Sated",
                     [1604] = "Dazed",
                     -- Undispellable
                     -- [15655] = "Shield Slam",
@@ -128,7 +164,7 @@
                     [30639] = "Mortal Wound",
                     [33480] = "Black Cleave",
                     [11428] = "Knockdown",
-
+                    [15497] = "Forst Bolt",
                     -- [22427] = "Concussion Blow",
                     -- [30923] = "Domination",
                     [30695] = "Treacherous Aura",
@@ -138,7 +174,8 @@
                     [51514] = "Hex",
                     [9574] = "Flame Buffet",
                     [33502] = "Brain Wash",
-                    [17165] = "Mind Flay"
+                    [17165] = "Mind Flay",
+                    [33487] = "Addle Humanoid"
 
                 }
             end
@@ -161,7 +198,8 @@
                     [14032] = "Shadow Word: Pain",
                     [32863] = "Seed of Corruption",
                     [9574] = "Flame Buffet",
-                  --  [33502] = "Brain Wash"
+                    [33487] = "Addle Humanoid"
+                    --  [33502] = "Brain Wash"
                 }
             end
             return magics
@@ -179,6 +217,14 @@
                 poisons = {}
             end
             return poisons
+        end,
+        ["enemy_count"] = function(env, set_count)
+            if (set_count) then
+                enemy_count = set_count
+            elseif (enemy_count == nil) then
+                enemy_count = 0
+            end
+            return enemy_count
         end
     },
     -- Define rotation
@@ -194,7 +240,22 @@
             poisons = env:evaluate_variable("get_poisons")
             party = env:evaluate_variable("get_party")
             main_tank = env:evaluate_variable("get_tank_name")
+            eecc = 0
             --enemies = get_enemies()
+
+            function get_enemy_count()
+                local count
+                local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") --[tank_x, tank_y, tank_z]
+                local enemies = env:evaluate_variable("npcs.attackable.range_8.centre_" .. tank_x .. ".centre_" .. tank_y .. ".centre_" .. tank_z)
+                if (enemies == nil) then
+                    count = 0
+                else
+                    -- print(enemies)
+                    count = tonumber(enemies)
+                end
+                return count
+            end
 
             function get_enemies()
                 enemies = {}
@@ -210,6 +271,15 @@
                     end
                 end
                 return enemies
+            end
+            function cast_at_target_position(spell, target)
+                local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(target)
+                print("Target position :[", tank_x, ",", tank_y, ",", tank_z, "]") --[tank_x, tank_y, tank_z]
+                local args = {tonumber(tank_x), tonumber(tank_y), tonumber(tank_z)}
+
+                env:execute_action("cast_ground", {["spell"] = spell, ["position"] = args})
+                --env:execute_action("mail", {["recipient"] = mailname,["subject"] = subject1,["body"] = "",["item"] = item1});
+                print("Flaming!")
             end
 
             function thow_more_dots(spell, debuff)
@@ -240,7 +310,7 @@
                                 if (name and dispelling == false) then
                                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
                                     if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
+                                        RunMacroText("/s Dispelling " .. player_name .. " of " .. name)
                                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
                                         dispelling = true
                                     end
@@ -252,7 +322,7 @@
                                 if (name and dispelling == false) then
                                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
                                     if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
+                                        RunMacroText("/s Dispelling " .. player_name .. " of " .. name)
                                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
                                         dispelling = true
                                     end
@@ -264,7 +334,7 @@
                                 if name and (dispelling == false) then
                                     local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
                                     if (debuff_duration > 0) then
-                                        RunMacroText("/p Dispelling " .. player_name .. " of " .. name)
+                                        RunMacroText("/s Dispelling " .. player_name .. " of " .. name)
                                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
                                         dispelling = true
                                     end
@@ -276,7 +346,7 @@
                 return dispelling
             end
 
-            function check_for_new_debuffs(env)
+            function check_for_new_debuffs()
                 -- Check for new debuffs
                 for _, player_name in ipairs(party) do
                     for i = 1, 5 do
@@ -314,6 +384,7 @@
                 if player_class == "PALADIN" then -- and player_spec = 66 (prot)
                     -- ** PALADIN ** --
 
+                    eecc = env:evaluate_variable("npcs.attackable.range_8")
                     -- A fix for no target spam
                     RunMacroText("/cleartarget [dead][noexists]")
                     if (UnitExists("target") == false) then
@@ -329,19 +400,22 @@
                         local _, lotp_cd = GetSpellCooldown("Light Of The Protector")
                         local _, ardent_cd = GetSpellCooldown("Ardent Defender")
                         local _, hands_cd = GetSpellCooldown("Lay on Hands")
+                        local _, guardian_cd = GetSpellCooldown("Guardian Of Ancient Kings")
                         local life = env:evaluate_variable("myself.health")
 
                         -- defensives
                         if (hands_cd == 0 and life < 10) then
                             RunMacroText("/cast [@player] Lay on Hands")
-                        elseif (ardent_cd == 0 and life < 50) then
+                        elseif (guardian_cd == 0 and life < 40) then
+                            RunMacroText("/cast Guardian Of Ancient Kings")
+                        elseif (ardent_cd == 0 and life < 60) then
                             RunMacroText("/cast Ardent Defender")
                         elseif (lotp_cd == 0 and life < 70) then
                             RunMacroText("/cast Light Of The Protector")
-                        elseif (hoj_cd == 0 and life < 50) then
-                            RunMacroText("/cast Hammer of Justice")
                         else
                             -- tank rotation
+                            print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
+
                             local _, avengers_shield_cd = GetSpellCooldown("Avenger's Shield")
                             local _, hammer_of_the_rightrous_cd = GetSpellCooldown("Hammer of the Righteous")
                             local _, judgment_cd = GetSpellCooldown("Judgment")
@@ -536,23 +610,24 @@
                             local sunfire_duration = env:evaluate_variable("unit.target.debuff.Sunfire")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
                             local _, alignment_cd, _, _ = GetSpellCooldown("Celestial Alignment")
+                            local _, incarnation_cd, _, _ = GetSpellCooldown("Incarnation: Chosen of Elune")
                             local solar_emp_duration = env:evaluate_variable("myself.buff.164545") -- solar
                             local lunar_empduration = env:evaluate_variable("myself.buff.164547") -- lunar
                             local lunar_power = UnitPower("player", 8)
-
                             --Gets the count of the flying missiles.
                             --count = GetMissileCount()
                             --Gets the info of a specific missile.
                             --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)
-
-                            if (alignment_cd == 0) then
+                            if (target_hp > min_dot_hp and sunfire_duration == -1) then
+                                RunMacroText("/cast Sunfire")
+                            elseif (target_hp > min_dot_hp and moonfire_duration == -1) then
+                                RunMacroText("/cast Moonfire")
+                            elseif (alignment_cd == 0) then
                                 RunMacroText("/cast Celestial Alignment")
                             elseif (berserking_cd == 0) then
                                 RunMacroText("/cast Berserking")
-                            elseif (target_hp > min_dot_hp and moonfire_duration == -1) then
-                                RunMacroText("/cast Moonfire")
-                            elseif (target_hp > min_dot_hp and sunfire_duration == -1) then
-                                RunMacroText("/cast Sunfire")
+                            elseif (incarnation_cd == 0) then
+                                RunMacroText("/cast Incarnation: Chosen of Elune")
                             elseif (solar_emp_duration ~= -1) then -- will recast as buff isn't removed until spell lands
                                 RunMacroText("/cast Solar Wrath")
                             elseif (lunar_power >= 40) then
@@ -574,6 +649,8 @@
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
                             local heating_up_duration = env:evaluate_variable("myself.buff.48107")
                             local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
+                            local enemy_count = get_enemy_count()
+                            print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
 
                             local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
@@ -584,7 +661,11 @@
                             elseif (combustion_cd == 0) then
                                 RunMacroText("/cast Combustion")
                             elseif (hotstreak_duration > 0) then
-                                RunMacroText("/cast Pyroblast")
+                                if (enemy_count > 5) then -- temp haxck
+                                    cast_at_target_position("Flamestrke", main_tank)
+                                else
+                                    RunMacroText("/cast Pyroblast")
+                                end
                             elseif (fireblast_cd == 0 and heating_up_duration > 0) then
                                 RunMacroText("/cast Fire Blast")
                             else
@@ -606,14 +687,27 @@
                             local target_hp = env:evaluate_variable("unit.target.health")
                             local _, flame_shock_cd, _, _ = GetSpellCooldown("188389")
                             local _, earth_elemental_cd, _, _ = GetSpellCooldown("Earth Elemental")
+                            local _, fire_elemental_cd, _, _ = GetSpellCooldown("Fire Elemental")
                             local flame_shock_duration = env:evaluate_variable("unit.target.debuff.188389")
                             local maelstrom = UnitPower("player", 11)
                             local lb_charges, _, _, lb_cooldownDuration, _ = GetSpellCharges("Lava Burst")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
-
-                            -- Check Earth Shield
+                            local _, guidance_cd, _, _ = GetSpellCooldown("Ancestral Guidance")
+                            local _, bloodlust_cd, _, _ = GetSpellCooldown("Bloodlust")
+                            -- TODO:
+                            -- Check for rebuffing Earth Shield
+                            -- Check for defensive Astral Shift
+                            -- Check for defensive Thunderstorm
+                            -- Check Aoe Chain Lightning
+                            -- Check Aoe Earthquake
+                            -- Check AoE Capacitor Totem
+                            -- Check Tremor Totem (Fear, Charm, Sleep)
+                            -- Check Interrupts (Wind Shear)
+                            -- Check Dispells (Purge - Magic)
                             if (earth_elemental_cd == 0) then
                                 RunMacroText("/cast Earth Elemental")
+                            elseif (fire_elemental_cd == 0) then
+                                RunMacroText("/cast Fire Elemental")
                             elseif (berserking_cd == 0) then
                                 RunMacroText("/cast Berserking")
                             elseif (target_hp > min_dot_hp and flame_shock_duration == -1 and flame_shock_cd == 0) then
@@ -622,6 +716,10 @@
                                 RunMacroText("/cast Earth Shock")
                             elseif (lb_charges > 0) then --"Lava Burst" not 51505
                                 RunMacroText("/cast Lava Burst")
+                            elseif (bloodlust_cd == 0) then
+                                RunMacroText("/cast Bloodlust") -- probably shouldn't use on CD :/
+                            elseif (guidance_cd == 0) then
+                                RunMacroText("/cast Ancestral Guidance") -- probably shouldn't use on CD :/
                             else
                                 RunMacroText("/cast Lightning Bolt")
                             end
@@ -639,6 +737,21 @@
             tank_name = env:evaluate_variable("get_tank_name")
             food_name = "Conjured Mana Pie" -- Mage foods
             food_buff = "167152" -- Replenishment
+
+            -- sad times
+            function release_on_wipe()
+                local wipe = true
+                for _, player_name in ipairs(party) do
+                    local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
+                    if (target_hp > 0) then
+                        wipe = false
+                    end
+                end
+                if (wipe) then
+                    --release (might need to pause to let others catchup)
+                    env:execute_action("release_spirit")
+                end
+            end
 
             -- Support Functions - return true if there is work to do
             function check_hybrid(env, res_spell, self_heal)
@@ -795,8 +908,9 @@
             function need_mage_food(env, food)
                 return false
             end
-
             -- General Preparation Code
+            -- oh dear
+            release_on_wipe()
             -- Nothing to do if you are dead except accept a res
             if (am_i_dead(env)) then
                 return true

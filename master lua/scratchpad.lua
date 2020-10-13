@@ -1,3 +1,7 @@
+action.duration < 3
+interact({"id":64250,"range":5})
+
+
 --env:execute_action("mail", {["recipient"] = mailname,["subject"] = subject1,["body"] = "",["item"] = item1});
 
 -- for name, hp in pairs(enemies) do
@@ -10,6 +14,8 @@
 -- print ("Enemies attacking :", player_class, " : ", enemies)
 
                         -- RunMacroText("/targetenemy [nodead][exists]")
+
+-- "/use Piccolo of the Flaming Fire"
 
 
 function get_enemy_count()

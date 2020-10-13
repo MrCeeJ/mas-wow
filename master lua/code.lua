@@ -59,16 +59,9 @@ return {
                     [225080] = "Reincarnation",
                     [1604] = "Dazed",
                     -- Undispellable
-                    [1] = "Kidney Shot",
-                    [15655] = "Shield Slam",
-                    [22427] = "Concussion Blow",
-                    [30923] = "Domination",
+                    
                     -- Dispellable
-                    [6726] = "Silence",
-                    [13338] = "Curse of Tongues",
-                    [30937] = "Mark of Shadow",
-                    [34969] = "Poison",
-                    [30917] = "Poison Bolt"
+                   
                 }
             end
             return known_debuffs
@@ -77,7 +70,6 @@ return {
             if (curses == nil) then
                 print("creating known curse list...")
                 curses = {
-                    [13338] = "Curse of Tongues"
                 }
             end
             return curses
@@ -86,9 +78,7 @@ return {
             if (magics == nil) then
                 print("creating known magics list...")
                 magics = {
-                    [6726] = "Silence",
-                    [32197] = "Corruption",
-                    [30937] = "Mark of Shadow"
+                   
                 }
             end
             return magics
@@ -104,11 +94,18 @@ return {
             if (poisons == nil) then
                 print("creating known poisons list...")
                 poisons = {
-                    [34969] = "Poison",
-                    [30917] = "Poison Bolt"
+                   
                 }
             end
             return poisons
+        end,
+        ["get_tremors"] = function(env)
+            if (tremors == nil) then
+                print("creating known tremors list...")
+                tremors = {
+                }
+            end
+            return tremors
         end
     },
     --Custom Actions
@@ -235,7 +232,7 @@ return {
                     end
                 end
                 if (dispelling) then
-                    cast("Tremor Totem", "player") -- might not need player
+                    RunMacroText("/cast Tremor Totem") -- might not need player
                 end
                 return dispelling
             end
@@ -288,7 +285,12 @@ return {
 
             function cast(spell, target)
                 if (target == nil) then
-                    target = "target"
+                    if (UnitExists("target") == nil) then
+                        target = "target"
+                    else
+                        print("oops, no target")
+                        return faslse
+                    end
                 end
                 -- check spell exists or return false
                 local result = env:execute_action("cast", spell)
@@ -348,7 +350,8 @@ return {
                     -- A fix for no target spam
                     RunMacroText("/cleartarget [dead][noexists]")
                     if (UnitExists("target") == false) then
-                        env:execute_action("target_nearest_enemy")
+                        RunMacroText("/targetenemy [nodead][exists]")
+                      --  env:execute_action("target_nearest_enemy")
                     else
                         local dispelling = dispell("Cleanse Toxins", diseases, posions)
                         if (dispelling == false) then
@@ -363,11 +366,11 @@ return {
                             if (hands_cd == 0 and life < 10) then
                                 RunMacroText("/cast [@player] Lay on Hands")
                             elseif (guardian_cd == 0 and life < 40) then
-                                cast("Guardian Of Ancient Kings")
+                                RunMacroText("/cast Guardian Of Ancient Kings")
                             elseif (ardent_cd == 0 and life < 60) then
-                                cast("Ardent Defender")
+                                RunMacroText("/cast Ardent Defender")
                             elseif (lotp_cd == 0 and life < 70) then
-                                cast("Light Of The Protector")
+                                RunMacroText("/cast Light Of The Protector")
                             else
                                 print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count()) -- temporay debugging
                                 -- tank rotation
@@ -382,21 +385,21 @@ return {
 
                                 -- Use shield if we have taken damage and don't have it up
                                 if (life < 100 and shield_duration == -1 and shield_charges > 0 and env:evaluate_variable("npcs.attackable.range_8") >= 1) then
-                                    cast("Shield of the Righteous")
+                                    RunMacroText("/cast Shield of the Righteous")
                                 elseif (avengers_shield_cd == 0) then
-                                    cast("Avenger's Shield")
+                                    RunMacroText("/cast Avenger's Shield")
                                 elseif (consecration_duration == -1 and consecration_cd == 0 and env:evaluate_variable("npcs.attackable.range_8") >= 1) then
-                                    cast("Consecration")
+                                    RunMacroText("/cast Consecration")
                                 elseif (hammer_of_the_rightrous_cd == 0) then
-                                    cast("Hammer of the Righteous")
+                                    RunMacroText("/cast Hammer of the Righteous")
                                 elseif (judgment_cd == 0) then
-                                    cast("Judgment")
+                                    RunMacroText("/cast Judgment")
                                 elseif (crusader_strike_cd == 0) then
-                                    cast("Crusader Strike")
+                                    RunMacroText("/cast Crusader Strike")
                                 elseif (consecration_cd == 0 and env:evaluate_variable("npcs.attackable.range_8") >= 1) then
-                                    cast("Consecration")
+                                    RunMacroText("/cast Consecration")
                                 elseif (hoj_cd == 0) then
-                                    cast("Hammer of Justice")
+                                    RunMacroText("/cast Hammer of Justice")
                                 end
                             end
                         end
@@ -410,7 +413,7 @@ return {
 
                         -- log out any exiting new buffs and debuffs
                         check_for_new_debuffs(env)
-                        check_for_new_buffs(env)
+                        -- check_for_new_buffs(env)
 
                         -- Dispell everyone
                         local dispelling = dispell("Purify", magics, diseases)
@@ -431,13 +434,13 @@ return {
                                 local _, fiend_cd, _, _ = GetSpellCooldown("Shadowfiend")
                                 if (schism_cd == 0) then
                                     --cast("Schism")
-                                    cast("Schism")
+                                    RunMacroText("/cast Schism")
                                 elseif (fiend_cd == 0) then
-                                    --cast("Shadowfiend")
-                                    cast("Shadowfiend")
+                                    --RunMacroText("/cast Shadowfiend")
+                                    RunMacroText("/cast Shadowfiend")
                                 elseif (solace_cd == 0) then
-                                    --cast("Shadowfiend")
-                                    cast("Power Word: Solace")
+                                    --RunMacroText("/cast Shadowfiend")
+                                    RunMacroText("/cast Power Word: Solace")
                                 end
 
                                 -- If 3 or more people have taken damage and don't have Atonement cast Radiance (currently seems to double cast, same as druid empowerment)
@@ -453,7 +456,7 @@ return {
                                     end
                                     if (sinners > 2) then
                                         healing = true
-                                        cast("Power Word: Radiance")
+                                        RunMacroText("/cast Power Word: Radiance")
                                     end
                                 end
                                 -- ** Loop party members before deciding heal **
@@ -472,7 +475,7 @@ return {
                                                 -- happy days, already on it
                                             elseif (rapture_cd == 0) then
                                                 healing = true
-                                                cast("Rapture")
+                                                RunMacroText("/cast Rapture")
                                             elseif (rapture_duration == -1 and pain_suppression_cd == 0) then -- Chuck them a super shield
                                                 healing = true
                                                 RunMacroText("/cast [target=" .. player_name .. "] Pain Suppression")
@@ -535,17 +538,17 @@ return {
                                     local _, fiend_cd, _, _ = GetSpellCooldown("Shadowfiend")
 
                                     if (target_health > min_dot_hp and swpain_duration == -1) then
-                                        cast("Shadow Word: Pain")
+                                        RunMacroText("/cast Shadow Word: Pain")
                                     elseif (schism_cd == 0) then
-                                        cast("Schism")
+                                        RunMacroText("/cast Schism")
                                     elseif (fiend_cd == 0) then
-                                        cast("Shadowfiend")
+                                        RunMacroText("/cast Shadowfiend")
                                     elseif (solace_cd == 0) then
-                                        cast("Power Word: Solace")
+                                        RunMacroText("/cast Power Word: Solace")
                                     elseif (penance_cd == 0) then
-                                        cast("Penance")
+                                        RunMacroText("/cast Penance")
                                     else
-                                        cast("Smite")
+                                        RunMacroText("/cast Smite")
                                     end
                                 end
                             end
@@ -573,23 +576,23 @@ return {
                             --Gets the info of a specific missile.
                             --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)
                             if (target_hp > min_dot_hp and sunfire_duration == -1) then
-                                cast("Sunfire")
+                                RunMacroText("/cast Sunfire")
                             elseif (target_hp > min_dot_hp and moonfire_duration == -1) then
-                                cast("Moonfire")
+                                RunMacroText("/cast Moonfire")
                             elseif (alignment_cd == 0) then
-                                cast("Celestial Alignment")
+                                RunMacroText("/cast Celestial Alignment")
                             elseif (berserking_cd == 0) then
-                                cast("Berserking")
+                                RunMacroText("/cast Berserking")
                             elseif (incarnation_cd == 0) then
-                                cast("Incarnation: Chosen of Elune")
+                                RunMacroText("/cast Incarnation: Chosen of Elune")
                             elseif (solar_emp_duration ~= -1) then -- will recast as buff isn't removed until spell lands
-                                cast("Solar Wrath")
+                                RunMacroText("/cast Solar Wrath")
                             elseif (lunar_power >= 40) then
-                                cast("Starsurge")
+                                RunMacroText("/cast Starsurge")
                             elseif (lunar_empduration ~= -1) then -- will recast as buff isn't removed until spell lands
-                                cast("Lunar Strike")
+                                RunMacroText("/cast Lunar Strike")
                             else
-                                cast("Solar Wrath")
+                                RunMacroText("/cast Solar Wrath")
                             end
                         else
                             RunMacroText("/assist " .. main_tank)
@@ -612,22 +615,22 @@ return {
                             local _, combustion_cd, _, _ = GetSpellCooldown("Combustion")
 
                             if (berserking_cd == 0) then
-                                cast("Berserking")
+                                RunMacroText("/cast Berserking")
                             elseif (combustion_cd == 0) then
-                                cast("Combustion")
+                                RunMacroText("/cast Combustion")
                             elseif (hotstreak_duration > 0) then
                                 if (enemy_count > 5) then
                                     cast_at_target_position("Flamestrke", main_tank)
                                 else
-                                    cast("Pyroblast")
+                                    RunMacroText("/cast Pyroblast")
                                 end
                             elseif (fireblast_cd == 0 and heating_up_duration > 0) then
-                                cast("Fire Blast")
+                                RunMacroText("/cast Fire Blast")
                             else
                                 if (combustion_duration > 0) then
-                                    cast("Scorch")
+                                    RunMacroText("/cast Scorch")
                                 else
-                                    cast("Fireball")
+                                    RunMacroText("/cast Fireball")
                                 end
                             end
                         else
@@ -660,23 +663,23 @@ return {
                             -- Check Interrupts (Wind Shear)
                             -- Check Dispells (Purge - Magic)
                             if (earth_elemental_cd == 0) then
-                                cast("Earth Elemental")
+                                RunMacroText("/cast Earth Elemental")
                             elseif (fire_elemental_cd == 0) then
-                                cast("Fire Elemental")
+                                RunMacroText("/cast Fire Elemental")
                             elseif (berserking_cd == 0) then
-                                cast("Berserking")
+                                RunMacroText("/cast Berserking")
                             elseif (target_hp > min_dot_hp and flame_shock_duration == -1 and flame_shock_cd == 0) then
-                                cast("Flame Shock")
+                                RunMacroText("/cast Flame Shock")
                             elseif (maelstrom ~= nil and maelstrom >= 90) then
-                                cast("Earth Shock")
+                                RunMacroText("/cast Earth Shock")
                             elseif (lb_charges > 0) then
-                                cast("Lava Burst")
+                                RunMacroText("/cast Lava Burst")
                             elseif (bloodlust_cd == 0) then
-                                cast("Bloodlust") -- probably shouldn't use on CD :/
+                                RunMacroText("/cast Bloodlust") -- probably shouldn't use on CD :/
                             elseif (guidance_cd == 0) then
-                                cast("Ancestral Guidance") -- probably shouldn't use on CD :/
+                                RunMacroText("/cast Ancestral Guidance") -- probably shouldn't use on CD :/
                             else
-                                cast("Lightning Bolt")
+                                RunMacroText("/cast Lightning Bolt")
                             end
                         else
                             RunMacroText("/assist " .. main_tank)

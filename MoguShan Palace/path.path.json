@@ -1,0 +1,409 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -3970.5,
+        -2539.4,
+        26.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "First pack",
+      "value": [
+        -3945.3,
+        -2594.2,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "1",
+      "value": [
+        -3997.0,
+        -2608.5,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2",
+      "value": [
+        -3948.9,
+        -2628.9,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Door",
+      "value": [
+        -3986.2,
+        -2647.5,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Hand Path",
+      "value": [
+        -3995.3,
+        -2613.3,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Next Room",
+      "value": [
+        -4056.0,
+        -2612.3,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -4075.6,
+        -2613.8,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2nd Boss",
+      "value": [
+        -4131.4,
+        -2608.7,
+        22.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "name": "1",
+      "value": [
+        -4218.4,
+        -2618.5,
+        16.5
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "name": "2",
+      "value": [
+        -4257.6,
+        -2613.6,
+        17.6
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "name": "1",
+      "value": [
+        -4218.4,
+        -2618.5,
+        16.5
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "value": [
+        -4257.6,
+        -2613.6,
+        17.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "1",
+      "value": [
+        -4218.4,
+        -2618.5,
+        16.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Beacon",
+      "value": [
+        -4214.6,
+        -2665.0,
+        17.6
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 64250,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open Beacon",
+      "value": [
+        -4214.6,
+        -2665.0,
+        17.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of stairs",
+      "value": [
+        -4238.1,
+        -2671.9,
+        17.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Spiral Down",
+      "value": [
+        -4216.5,
+        -2686.7,
+        12.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And Down",
+      "value": [
+        -4193.6,
+        -2667.5,
+        3.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom Arch",
+      "value": [
+        -4192.5,
+        -2607.2,
+        -9.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Long Tunnel",
+      "value": [
+        -4192.5,
+        -2607.2,
+        -9.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Stairs",
+      "value": [
+        -4192.1,
+        -2567.7,
+        -9.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -4198.4,
+        -2520.6,
+        -28.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Warning",
+      "pve": false,
+      "value": [
+        -4254.5,
+        -2519.8,
+        -34.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Fight",
+      "pve": false,
+      "value": [
+        -4302.6,
+        -2519.6,
+        -39.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Get Out",
+      "value": [
+        -4331.9,
+        -2520.8,
+        -27.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -4388.6,
+        -2517.0,
+        -28.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Guards",
+      "value": [
+        -4395.0,
+        -2562.3,
+        -28.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2",
+      "value": [
+        -4352.7,
+        -2577.6,
+        -28.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "3",
+      "value": [
+        -4343.1,
+        -2608.9,
+        -28.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "4",
+      "value": [
+        -4410.7,
+        -2677.7,
+        -43.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -4390.1,
+        -2597.1,
+        -54.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Loot",
+      "value": [
+        -4397.5,
+        -2567.6,
+        -54.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -4397.9,
+        -2664.7,
+        -43.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lift",
+      "value": [
+        -4398.5,
+        -2750.2,
+        -40.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -4399.1,
+        -2738.3,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "After the lift",
+      "value": [
+        -4399.1,
+        -2738.3,
+        22.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "___First Room Again",
+      "value": [
+        -3962.7,
+        -2676.0,
+        26.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Door",
+      "value": [
+        -3966.5,
+        -2704.5,
+        26.8
+      ]
+    }
+  ]
+}

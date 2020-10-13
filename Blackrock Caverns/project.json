@@ -1,0 +1,59 @@
+{
+  "path_groups": [
+    {
+      "death": {
+        "retrieve_corpse": false,
+        "revive_on_spot": true
+      },
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "name": "path_group_1",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "path_group_1"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          210.7,
+          1128.0,
+          205.6
+        ]
+      },
+      "start_distance": 20,
+      "treasure": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "value": []
+    }
+  ],
+  "scripts": [
+    "code"
+  ]
+}

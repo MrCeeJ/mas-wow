@@ -1,72 +1,23 @@
 ﻿return {
-    --Custom Actions
-    actions = {
-        aoe = function(env)
-            local player_class = env:evaluate_variable("myself.class")
-            if player_class == "PALADIN" then
-                local _, consecration_cd = GetSpellCooldown("Consecration")
-                if (consecration_cd == 0) then
-                    RunMacroText("/cast Consecration")
-                end
-            elseif player_class == "PRIEST" then
-                RunMacroText("/cast Holy Nova")
-            elseif player_class == "DRUID" then
-                local lunar_power = UnitPower("player", 8)
-                if (lunar_power >= 50) then
-                    RunMacroText("/cast [@player]Starfall")
-                end
-            elseif player_class == "MAGE" then
-                local _, blast_wave_cd = GetSpellCooldown("Consecration")
-                if (blast_wave_cd == 0) then
-                    RunMacroText("/cast Blast Wave")
-                else
-                    RunMacroText("/cast [@player]Flame Strike")
-                end
-            elseif player_class == "SHAMAN" then
-                local _, totem_cd = GetSpellCooldown("Capacitor Totem")
-                local _, thunderstorm_cd = GetSpellCooldown("Thunderstorm")
-                if (totem_cd == 0) then
-                    RunMacroText("/cast [@player]Capacitor Totem")
-                elseif (thunderstorm_cd == 0) then
-                    RunMacroText("/cast Thunderstorm")
-                end
-            end
-            return false
-        end,
-        murmor_positions = function(env)
-            local player_class = env:evaluate_variable("myself.class")
-            if player_class == "PALADIN" then
-                env:execute_action("move",{-157.9, -497.3, 15.8})
-            elseif player_class == "PRIEST" then
-                env:execute_action("move",{-157.9, -476.1, 15.8})
-            elseif player_class == "DRUID" then
-                env:execute_action("move", {-156.6, -451.4, 17.1})
-            elseif player_class == "SHAMAN" then
-                env:execute_action("move",{-178.0, -474.9, 18.2})
-            elseif player_class == "MAGE" then
-                env:execute_action("move", {-135.7, -478.8, 18.2})
-            end
-        end
-    },
     -- Define custom settings.
     settings = {
-        ["battle_timeout"] = {
+        ["location"] = {
             -- The name displayed on panel.
-            display_name = "Battle Timeout",
+            display_name = "Current Location",
             -- The mouseover tooltip.
-            description = "Configure the timeout of each battle, in seconds. After the duration of a battleground exceeds the value, quit the battleground.",
+            description = "Displays where you are in the world for debuging",
             -- Whether the setting has a toggle switch.
-            can_enable_disable = true,
+            can_enable_disable = false,
             -- The default state of the toggle switch.
             is_enabled_by_default = true,
             -- The type of the setting, can be "number" or "string".
-            type = "number",
+            type = "string",
             -- The optional values for dropdown (table). nil for textbox.
             options = nil,
             -- The width of the input box, in pixels.
             width = 100,
             -- The default value of the setting.
-            default = 7200,
+            default = "{0,0,0}",
             -- The constraint for the input box, can be "percentage", "non_negative_number", "non_negative_integer", "positive_number" or "positive_integer"
             constraint = "non_negative_integer"
         }
@@ -176,7 +127,6 @@
                     [33502] = "Brain Wash",
                     [17165] = "Mind Flay",
                     [33487] = "Addle Humanoid"
-
                 }
             end
             return known_debuffs
@@ -227,6 +177,77 @@
             return enemy_count
         end
     },
+    --Custom Actions
+    actions = {
+        aoe = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "PALADIN" then
+                local _, consecration_cd = GetSpellCooldown("Consecration")
+                if (consecration_cd == 0) then
+                    RunMacroText("/cast Consecration")
+                end
+            elseif player_class == "PRIEST" then
+                RunMacroText("/cast Holy Nova")
+            elseif player_class == "DRUID" then
+                local lunar_power = UnitPower("player", 8)
+                if (lunar_power >= 50) then
+                    RunMacroText("/cast [@player]Starfall")
+                end
+            elseif player_class == "MAGE" then
+                local _, blast_wave_cd = GetSpellCooldown("Consecration")
+                if (blast_wave_cd == 0) then
+                    RunMacroText("/cast Blast Wave")
+                else
+                    RunMacroText("/cast [@player]Flame Strike")
+                end
+            elseif player_class == "SHAMAN" then
+                local _, totem_cd = GetSpellCooldown("Capacitor Totem")
+                local _, thunderstorm_cd = GetSpellCooldown("Thunderstorm")
+                if (totem_cd == 0) then
+                    RunMacroText("/cast [@player]Capacitor Totem")
+                elseif (thunderstorm_cd == 0) then
+                    RunMacroText("/cast Thunderstorm")
+                end
+            end
+            return false
+        end,
+        murmor_positions = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "PALADIN" then
+                env:execute_action("move", {-157.9, -497.3, 15.8})
+            elseif player_class == "PRIEST" then
+                env:execute_action("move", {-157.9, -476.1, 15.8})
+            elseif player_class == "DRUID" then
+                env:execute_action("move", {-156.6, -451.4, 17.1})
+            elseif player_class == "SHAMAN" then
+                env:execute_action("move", {-178.0, -474.9, 18.2})
+            elseif player_class == "MAGE" then
+                env:execute_action("move", {-135.7, -478.8, 18.2})
+            end
+        end,
+        test_flamestrike = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "MAGE" then
+                local main_tank = "ceejpaladin"
+                local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                local x = tonumber(tank_x)
+                local y = tonumber(tank_y)
+                local z = tonumber(tank_z)
+                -- local pos = {x,y,z}
+                local pos = {tank_x,tank_y,tank_z}
+
+                local spell = "Flamestrike"
+                local position = "{" .. x .. "," .. y .. "," .. z .. "}"
+                -- local position = "[" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "]"
+                -- local position = ""..tank_x..","..tank_y..","..tank_z..""
+                -- local position = ""..tank_x..".center_"..tank_y..".center_"..tank_z..""
+                -- local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
+                local args ={["spell"]=spell, ["position"]=pos, ["devoaton"]=2}
+                
+                env:execute_action("cast_ground", args)
+            end
+        end
+    },
     -- Define rotation
     rotations = {
         combat = function(env, is_pulling)
@@ -238,22 +259,39 @@
             magics = env:evaluate_variable("get_magics")
             diseases = env:evaluate_variable("get_diseases")
             poisons = env:evaluate_variable("get_poisons")
+            tremors = env:evaluate_variable("get_tremors")
             party = env:evaluate_variable("get_party")
             main_tank = env:evaluate_variable("get_tank_name")
             eecc = 0
             --enemies = get_enemies()
 
             function get_enemy_count()
+                --env:execute_action("move", {-157.9, -497.3, 15.8}) --this works fine
                 local count
                 local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
-                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") --[tank_x, tank_y, tank_z]
-                local enemies = env:evaluate_variable("npcs.attackable.range_8.centre_" .. tank_x .. ".centre_" .. tank_y .. ".centre_" .. tank_z)
+                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") -- this also works fine
+                local position = {tank_x,tank_y,tank_z}
+
+                -- Which of these methods should I use?
+                -- local position = {tank_x,tank_y,tank_z} -- Flamestrike code
+                local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
+
+                -- local position = "[" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "]"
+                -- local position = ""..tank_x..","..tank_y..","..tank_z..""
+                -- local position = ""..tank_x..".center_"..tank_y..".center_"..tank_z..""
+                --            --print(env.myself:get_distance({2604.52,-543.39,89}));
+
+                local enemies = env:evaluate_variable("npcs.attackable.range_8.center_" .. position) -- Find everyone within 8 yards of tank
                 if (enemies == nil) then
                     count = 0
                 else
                     -- print(enemies)
                     count = tonumber(enemies)
                 end
+              --  env.npcs.attackable.center(position)
+                -- if(env.myself:get_distance({2604.52,-543.39,89}) >10) then
+                -- print("Env calc :", env.npcs.center(position));                    
+                -- end
                 return count
             end
 
@@ -298,6 +336,29 @@
                     end
                 end
                 return more_dots
+            end
+            function tremor()
+                local _, tremor_cd, _, _ = GetSpellCooldown("Tremor Totem")
+                local dispelling = false
+                if (dispell_cd == 0) then
+                    for i, player_name in ipairs(party) do
+                        if (tremors ~= nil) then
+                            for id, name in pairs(tremors) do
+                                if (name) then
+                                    local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
+                                    if (debuff_duration > 0) then
+                                        RunMacroText("/s Dispelling " .. player_name .. " of " .. name)
+                                        dispelling = true
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if (dispelling) then
+                    RunMacroText("/cast Tremor Totem")
+                end
+                return dispelling
             end
 
             function dispell(spell, debuff_1, debuff_2, debuff_3)
@@ -643,14 +704,15 @@
                     end
                 elseif player_class == "MAGE" then -- and player_spec = 63 (fire)
                     -- ** MAGE ** --
-                    local dispelling = dispell("Remove Curse", curses)
+                    local dispelling = dispell("Remove Curse", curses) or tremor()
+
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
                             local heating_up_duration = env:evaluate_variable("myself.buff.48107")
                             local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
                             local enemy_count = get_enemy_count()
-                           -- print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
+                            print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
 
                             local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")

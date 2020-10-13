@@ -152,10 +152,14 @@
                     [87024] = "Cauterized",
                     [225080] = "Reincarnation",
                     [57724] = "Sated",
-                    [1604] = "Dazed"
+                    [1604] = "Dazed",
                     -- Ignore
+                    [12675] = "Frost Bolt",
+                    [15063] = "Frost Nova",
+                    --   [35016] = "Arcane Flair",
 
                     -- Dispell
+                    [38660] = "Fear"
                 }
             end
             return known_debuffs
@@ -188,6 +192,15 @@
             end
             return poisons
         end,
+        ["get_tremors"] = function(env)
+            if (tremors == nil) then
+                print("creating known tremor totem list...")
+                tremors = {
+                    [38660] = "Fear"
+                }
+            end
+            return tremors
+        end,
         ["enemy_count"] = function(env, set_count)
             if (set_count) then
                 enemy_count = set_count
@@ -208,16 +221,24 @@
             magics = env:evaluate_variable("get_magics")
             diseases = env:evaluate_variable("get_diseases")
             poisons = env:evaluate_variable("get_poisons")
+            tremors = env:evaluate_variable("get_tremors")
             party = env:evaluate_variable("get_party")
             main_tank = env:evaluate_variable("get_tank_name")
             eecc = 0
             --enemies = get_enemies()
 
             function get_enemy_count()
+                --env:execute_action("move", {-157.9, -497.3, 15.8}) --this works fine
                 local count
                 local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
-                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") --[tank_x, tank_y, tank_z]
-                local enemies = env:evaluate_variable("npcs.attackable.range_8.centre_" .. tank_x .. ".centre_" .. tank_y .. ".centre_" .. tank_z)
+                --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") -- this also works fine
+
+                -- Which of these methods should I use?
+                local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
+                -- local position = "[" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "]"
+                -- local position = ""..tank_x..","..tank_y..","..tank_z..""
+                -- local position = ""..tank_x..".center_"..tank_y..".center_"..tank_z..""
+                local enemies = env:evaluate_variable("npcs.attackable.range_8.center_" .. position) -- Find everyone within 8 yards of tank
                 if (enemies == nil) then
                     count = 0
                 else
@@ -268,6 +289,29 @@
                     end
                 end
                 return more_dots
+            end
+            function tremor()
+                local _, tremor_cd, _, _ = GetSpellCooldown("Tremor Totem")
+                local dispelling = false
+                if (dispell_cd == 0) then
+                    for i, player_name in ipairs(party) do
+                        if (tremors ~= nil) then
+                            for id, name in pairs(tremors) do
+                                if (name) then
+                                    local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff." .. id)
+                                    if (debuff_duration > 0) then
+                                        RunMacroText("/s Dispelling " .. player_name .. " of " .. name)
+                                        dispelling = true
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                if (dispelling) then
+                    RunMacroText("/cast Tremor Totem")
+                end
+                return dispelling
             end
 
             function dispell(spell, debuff_1, debuff_2, debuff_3)
@@ -613,7 +657,8 @@
                     end
                 elseif player_class == "MAGE" then -- and player_spec = 63 (fire)
                     -- ** MAGE ** --
-                    local dispelling = dispell("Remove Curse", curses)
+                    local dispelling = dispell("Remove Curse", curses) or tremor()
+
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")

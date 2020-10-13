@@ -1,166 +1,4 @@
 ﻿return {
-        -- Define custom settings.
-        settings = {
-            ["battle_timeout"] = {
-                -- The name displayed on panel.
-                display_name = "Battle Timeout",
-                -- The mouseover tooltip.
-                description = "Configure the timeout of each battle, in seconds. After the duration of a battleground exceeds the value, quit the battleground.",
-                -- Whether the setting has a toggle switch.
-                can_enable_disable = true,
-                -- The default state of the toggle switch.
-                is_enabled_by_default = true,
-                -- The type of the setting, can be "number" or "string".
-                type = "number",
-                -- The optional values for dropdown (table). nil for textbox.
-                options = nil,
-                -- The width of the input box, in pixels.
-                width = 100,
-                -- The default value of the setting.
-                default = 7200,
-                -- The constraint for the input box, can be "percentage", "non_negative_number", "non_negative_integer", "positive_number" or "positive_integer"
-                constraint = "non_negative_integer"
-            }
-            -- UI controls
-        },
-        -- Define custom variables.
-        variables = {
-            ["get_singleton_event_frame"] = function(env)
-                if (event_frame == nil) then
-                    print("creating frame...")
-                    event_frame = CreateFrame("Frame", "event_frame", UIParent)
-                    event_frame:RegisterEvent("UNIT_COMBAT")
-                    event_frame:SetScript("OnEvent", print)
-                end
-                return event_frame
-                -- local map = WorldMapFrame:GetMapID();
-                -- local pois = C_AreaPoiInfo.GetAreaPOIForMap(map);
-                -- for i = 1, #pois do
-                --     local poi = C_AreaPoiInfo.GetAreaPOIInfo(map, pois[i]);
-                --     print(poi.name, poi.textureIndex)
-                -- end
-            end,
-            ["get_healer_name"] = function(env)
-                local healer_name = "Ceejpriest"
-                return healer_name
-            end,
-            ["get_tank_name"] = function(env)
-                local tank_name = "Ceejpaladin"
-                return tank_name
-            end,
-            ["get_party"] = function(env)
-                if (party == nil) then
-                    print("creating party...")
-                    party = {}
-                    party_info = GetHomePartyInfo()
-                    for id, name in pairs(party_info) do
-                        print("Welcome to :", name)
-                        table.insert(party, name)
-                    end
-                    local me, _ = UnitName("player")
-                    print(".. and welcome to :", me, " playing spec :", env:evaluate_variable("myself.spec"))
-                    table.insert(party, me)
-                end
-                return party
-            end,
-            ["get_boss_positions"] = function()
-                if (boss_positions == nil) then
-                    boss_positions = {
-                        ["Murmur"] = {
-                            ["PALADIN"] = {-157.9, -497.3, 15.8},
-                            ["PRIEST"] = {-157.9, -476.1, 15.8},
-                            ["SHAMAN"] = {-178.0, -474.9, 18.2},
-                            ["DRUID"] = {-156.6, -451.4, 17.1},
-                            ["MAGE"] = {-135.7, -478.8, 18.2}
-                        }
-                    }
-                end
-                return boss_positions
-            end,
-            ["get_known_buffs"] = function(env)
-                if (known_buffs == nil) then
-                    print("creating known buff list...")
-                    known_buffs = {
-                        [326419] = "Winds of Wisdom",
-                        [21562] = "Fortitude",
-                        [194384] = "Attonement",
-                        [26297] = "Power Word: Shield",
-                        [193065] = "Masochism",
-                        [167152] = "Replensihment"
-                    }
-                end
-                return known_buffs
-            end,
-            ["get_known_debuffs"] = function(env)
-                if (known_debuffs == nil) then
-                    print("creating known debuff list...")
-                    known_debuffs = {
-                        -- Our own / generic
-                        [6788] = "Weakened Soul",
-                        [25771] = "Forbearance",
-                        [187464] = "Shadow Mend",
-                        [87023] = "Cauterize",
-                        [87024] = "Cauterized",
-                        [225080] = "Reincarnation",
-                        [57724] = "Sated",
-                        [1604] = "Dazed",
-                        -- Ignore
-                        [12675] = "Frost Bolt",
-                        [15063] = "Frost Nova",
-                        --   [35016] = "Arcane Flair",
-    
-                        -- Dispell
-                        [38660] = "Fear"
-                    }
-                end
-                return known_debuffs
-            end,
-            ["get_curses"] = function(env)
-                if (curses == nil) then
-                    print("creating known curse list...")
-                    curses = {}
-                end
-                return curses
-            end,
-            ["get_magics"] = function(env)
-                if (magics == nil) then
-                    print("creating known magics list...")
-                    magics = {}
-                end
-                return magics
-            end,
-            ["get_diseases"] = function(env)
-                if (diseases == nil) then
-                    print("creating known diseases list...")
-                    diseases = {}
-                end
-                return diseases
-            end,
-            ["get_poisons"] = function(env)
-                if (poisons == nil) then
-                    print("creating known poisons list...")
-                    poisons = {}
-                end
-                return poisons
-            end,
-            ["get_tremors"] = function(env)
-                if (tremors == nil) then
-                    print("creating known tremor totem list...")
-                    tremors = {
-                        [38660] = "Fear"
-                    }
-                end
-                return tremors
-            end,
-            ["enemy_count"] = function(env, set_count)
-                if (set_count) then
-                    enemy_count = set_count
-                elseif (enemy_count == nil) then
-                    enemy_count = 0
-                end
-                return enemy_count
-            end
-        },
     --Custom Actions
     actions = {
         aoe = function(env)
@@ -209,9 +47,191 @@
                 env:execute_action("move", {-135.7, -478.8, 18.2})
             end
         end,
+        test_flamestrike = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "MAGE" then
+                local main_tank = "ceejpaladin"
+                local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                local x = tonumber(tank_x)
+                local y = tonumber(tank_y)
+                local z = tonumber(tank_z)
+                -- local pos = {x,y,z}
+                local pos = {tank_x,tank_y,tank_z}
+
+                local spell = "Flamestrike"
+                local position = "{" .. x .. "," .. y .. "," .. z .. "}"
+                -- local position = "[" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "]"
+                -- local position = ""..tank_x..","..tank_y..","..tank_z..""
+                -- local position = ""..tank_x..".center_"..tank_y..".center_"..tank_z..""
+                -- local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
+                local args ={["spell"]=spell, ["position"]=pos, ["devoaton"]=2}
+                
+                env:execute_action("cast_ground", args)
+            end
+        end
     },
+    -- Define custom settings.
+    settings = {
+        ["battle_timeout"] = {
+            -- The name displayed on panel.
+            display_name = "Battle Timeout",
+            -- The mouseover tooltip.
+            description = "Configure the timeout of each battle, in seconds. After the duration of a battleground exceeds the value, quit the battleground.",
+            -- Whether the setting has a toggle switch.
+            can_enable_disable = true,
+            -- The default state of the toggle switch.
+            is_enabled_by_default = true,
+            -- The type of the setting, can be "number" or "string".
+            type = "number",
+            -- The optional values for dropdown (table). nil for textbox.
+            options = nil,
+            -- The width of the input box, in pixels.
+            width = 100,
+            -- The default value of the setting.
+            default = 7200,
+            -- The constraint for the input box, can be "percentage", "non_negative_number", "non_negative_integer", "positive_number" or "positive_integer"
+            constraint = "non_negative_integer"
+        }
+        -- UI controls
+    },
+    -- Define custom variables.
+    variables = {
+        ["get_singleton_event_frame"] = function(env)
+            if (event_frame == nil) then
+                print("creating frame...")
+                event_frame = CreateFrame("Frame", "event_frame", UIParent)
+                event_frame:RegisterEvent("UNIT_COMBAT")
+                event_frame:SetScript("OnEvent", print)
+            end
+            return event_frame
+            -- local map = WorldMapFrame:GetMapID();
+            -- local pois = C_AreaPoiInfo.GetAreaPOIForMap(map);
+            -- for i = 1, #pois do
+            --     local poi = C_AreaPoiInfo.GetAreaPOIInfo(map, pois[i]);
+            --     print(poi.name, poi.textureIndex)
+            -- end
+        end,
+        ["get_healer_name"] = function(env)
+            local healer_name = "Ceejpriest"
+            return healer_name
+        end,
+        ["get_tank_name"] = function(env)
+            local tank_name = "Ceejpaladin"
+            return tank_name
+        end,
+        ["get_party"] = function(env)
+            if (party == nil) then
+                print("creating party...")
+                party = {}
+                party_info = GetHomePartyInfo()
+                for id, name in pairs(party_info) do
+                    print("Welcome to :", name)
+                    table.insert(party, name)
+                end
+                local me, _ = UnitName("player")
+                print(".. and welcome to :", me, " playing spec :", env:evaluate_variable("myself.spec"))
+                table.insert(party, me)
+            end
+            return party
+        end,
+        ["get_boss_positions"] = function()
+            if (boss_positions == nil) then
+                boss_positions = {
+                    ["Murmur"] = {
+                        ["PALADIN"] = {-157.9, -497.3, 15.8},
+                        ["PRIEST"] = {-157.9, -476.1, 15.8},
+                        ["SHAMAN"] = {-178.0, -474.9, 18.2},
+                        ["DRUID"] = {-156.6, -451.4, 17.1},
+                        ["MAGE"] = {-135.7, -478.8, 18.2}
+                    }
+                }
+            end
+            return boss_positions
+        end,
+        ["get_known_buffs"] = function(env)
+            if (known_buffs == nil) then
+                print("creating known buff list...")
+                known_buffs = {
+                    [326419] = "Winds of Wisdom",
+                    [21562] = "Fortitude",
+                    [194384] = "Attonement",
+                    [26297] = "Power Word: Shield",
+                    [193065] = "Masochism",
+                    [167152] = "Replensihment"
+                }
+            end
+            return known_buffs
+        end,
+        ["get_known_debuffs"] = function(env)
+            if (known_debuffs == nil) then
+                print("creating known debuff list...")
+                known_debuffs = {
+                    -- Our own / generic
+                    [6788] = "Weakened Soul",
+                    [25771] = "Forbearance",
+                    [187464] = "Shadow Mend",
+                    [87023] = "Cauterize",
+                    [87024] = "Cauterized",
+                    [225080] = "Reincarnation",
+                    [57724] = "Sated",
+                    [1604] = "Dazed",
+                    -- Ignore
+                    [12675] = "Frost Bolt",
+                    [15063] = "Frost Nova",
+                    --   [35016] = "Arcane Flair",
 
-
+                    -- Dispell
+                    [38660] = "Fear"
+                }
+            end
+            return known_debuffs
+        end,
+        ["get_curses"] = function(env)
+            if (curses == nil) then
+                print("creating known curse list...")
+                curses = {}
+            end
+            return curses
+        end,
+        ["get_magics"] = function(env)
+            if (magics == nil) then
+                print("creating known magics list...")
+                magics = {}
+            end
+            return magics
+        end,
+        ["get_diseases"] = function(env)
+            if (diseases == nil) then
+                print("creating known diseases list...")
+                diseases = {}
+            end
+            return diseases
+        end,
+        ["get_poisons"] = function(env)
+            if (poisons == nil) then
+                print("creating known poisons list...")
+                poisons = {}
+            end
+            return poisons
+        end,
+        ["get_tremors"] = function(env)
+            if (tremors == nil) then
+                print("creating known tremor totem list...")
+                tremors = {
+                    [38660] = "Fear"
+                }
+            end
+            return tremors
+        end,
+        ["enemy_count"] = function(env, set_count)
+            if (set_count) then
+                enemy_count = set_count
+            elseif (enemy_count == nil) then
+                enemy_count = 0
+            end
+            return enemy_count
+        end
+    },
     -- Define rotation
     rotations = {
         combat = function(env, is_pulling)
@@ -236,7 +256,9 @@
                 --print("Tank at position :[", tank_x, ",", tank_y, ",", tank_z, "]") -- this also works fine
 
                 -- Which of these methods should I use?
-                local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
+                local position = {tank_x,tank_y,tank_z}
+
+                -- local position = "{" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "}"
                 -- local position = "[" .. tank_x .. "," .. tank_y .. "," .. tank_z .. "]"
                 -- local position = ""..tank_x..","..tank_y..","..tank_z..""
                 -- local position = ""..tank_x..".center_"..tank_y..".center_"..tank_z..""

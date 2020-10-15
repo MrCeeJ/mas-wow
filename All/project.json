@@ -1,0 +1,255 @@
+{
+  "path_groups": [
+    {
+      "name": "Rage Fire Chasm",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Wailing Chasms"
+        }
+      ],
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": []
+    },
+    {
+      "name": "Wailing Chasms",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Rage Fire Chasm"
+        }
+      ],
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": []
+    },
+    {
+      "name": "Shadow Fang Keep",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "loot": false,
+        "name": "Entrance to Instance",
+        "pve": {
+          "attacks": [
+            {
+              "conditions": {
+                "type": "and",
+                "value": []
+              },
+              "range": 20.0
+            }
+          ]
+        },
+        "value": [
+          -227.5,
+          2111.8,
+          76.9
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "sfk"
+      ]
+    },
+    {
+      "name": "Stratholme Living",
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "shl"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Hellfire Ramparts",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -1355.3,
+          1641.6,
+          68.3
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "hr"
+      ]
+    },
+    {
+      "name": "Blood Furnace",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Blood Furnace"
+        }
+      ],
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "bf"
+      ]
+    },
+    {
+      "name": "Shadow Labyrinth",
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": []
+    },
+    {
+      "name": "Steamvault",
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "sv"
+      ]
+    },
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "name": "Blackrock Caverns",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          210.7,
+          1128.0,
+          205.6
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "bc"
+      ]
+    },
+    {
+      "name": "Training",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Training"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Next to dummies",
+        "value": [
+          1895.2,
+          -4624.0,
+          66.4
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "training"
+      ]
+    }
+  ],
+  "scripts": [
+    "code"
+  ]
+}

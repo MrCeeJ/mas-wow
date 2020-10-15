@@ -1,0 +1,173 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        210.7,
+        1128.0,
+        205.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        210.2,
+        1103.1,
+        208.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ambitious",
+      "value": [
+        191.2,
+        945.3,
+        190.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More",
+      "value": [
+        213.2,
+        919.3,
+        190.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        249.5,
+        910.3,
+        191.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Chains Boss",
+      "value": [
+        292.0,
+        943.9,
+        190.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Long Run",
+      "value": [
+        441.5,
+        950.8,
+        195.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Into Tunnel",
+      "value": [
+        475.9,
+        953.2,
+        187.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down Ramp",
+      "value": [
+        483.9,
+        924.7,
+        182.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Around Corner",
+      "value": [
+        507.0,
+        903.1,
+        179.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Junction",
+      "value": [
+        547.8,
+        905.1,
+        169.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        550.6,
+        859.7,
+        175.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Over",
+      "value": [
+        571.7,
+        855.1,
+        175.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round",
+      "value": [
+        599.0,
+        873.3,
+        174.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        598.0,
+        952.3,
+        157.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        573.4,
+        987.7,
+        155.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Afgter",
+      "value": [
+        559.6,
+        902.4,
+        155.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        583.8,
+        857.4,
+        155.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__ end",
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

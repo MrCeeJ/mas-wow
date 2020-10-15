@@ -1,0 +1,483 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -10.5,
+        -0.4,
+        -1.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -19.9,
+        0.2,
+        -1.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Sneaky",
+      "value": [
+        -44.6,
+        -34.6,
+        -1.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -50.3,
+        -86.6,
+        -1.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Archway",
+      "value": [
+        -61.8,
+        -101.9,
+        -1.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "First Corner",
+      "value": [
+        -87.6,
+        -143.8,
+        3.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Second Half",
+      "value": [
+        -141.2,
+        -138.1,
+        5.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Second Archway",
+      "value": [
+        -156.4,
+        -101.9,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Pack",
+      "value": [
+        -174.7,
+        -84.0,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Pack",
+      "value": [
+        -144.8,
+        -77.9,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle Pack",
+      "value": [
+        -157.2,
+        -64.4,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Left",
+      "value": [
+        -174.7,
+        -5.7,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Right",
+      "value": [
+        -138.5,
+        -6.2,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss Patrol Route",
+      "value": [
+        -157.4,
+        26.1,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Patrol",
+      "value": [
+        -153.2,
+        47.9,
+        6.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Patrol",
+      "value": [
+        -119.3,
+        62.1,
+        3.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Patrol",
+      "value": [
+        -73.1,
+        51.9,
+        1.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End of Patrol",
+      "value": [
+        -158.0,
+        14.0,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -176.7,
+        -40.1,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -215.8,
+        -42.0,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Centre RIght",
+      "value": [
+        -255.8,
+        -27.6,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right",
+      "value": [
+        -265.8,
+        0.1,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Right",
+      "value": [
+        -276.7,
+        22.5,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Left",
+      "value": [
+        -286.7,
+        -99.5,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -326.4,
+        -34.8,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Loot",
+      "value": [
+        -280.7,
+        -39.2,
+        8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -376.5,
+        -38.8,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -431.5,
+        -38.8,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End of Corridor",
+      "value": [
+        -431.3,
+        -94.1,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Side",
+      "value": [
+        -420.7,
+        -138.8,
+        13.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right pack",
+      "value": [
+        -446.5,
+        -192.1,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -430.6,
+        -189.7,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -431.5,
+        -262.4,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "bIG rOOM",
+      "value": [
+        -431.5,
+        -262.4,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back of Room",
+      "value": [
+        -271.4,
+        -265.8,
+        12.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Kamikaze",
+      "value": [
+        -244.2,
+        -250.0,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Loot Boss",
+      "value": [
+        -254.5,
+        -263.6,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -222.5,
+        -263.7,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "RP Corner",
+      "value": [
+        -157.7,
+        -266.2,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Last Room",
+      "value": [
+        -152.8,
+        -325.8,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Side",
+      "value": [
+        -149.6,
+        -356.0,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Murmur Room",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ],
+        "distance_max": {
+          "default": 40.0
+        }
+      },
+      "value": [
+        -156.7,
+        -446.7,
+        17.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "murmor_positions"
+        }
+      ],
+      "name": "Murmor Positions Action",
+      "pve": false,
+      "value": [
+        -156.3,
+        -464.1,
+        17.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Murmor Boss",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ],
+        "distance_max": {
+          "default": 40.0
+        }
+      },
+      "value": [
+        -157.9,
+        -497.3,
+        15.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 5
+        }
+      ],
+      "name": "Loot RP",
+      "value": [
+        -158.6,
+        -512.9,
+        15.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "run_macro",
+          "value": "/use Piccolo of the Flaming Fire"
+        }
+      ],
+      "name": "__ GG __",
+      "value": [
+        -157.0,
+        -472.7,
+        17.0
+      ]
+    }
+  ]
+}

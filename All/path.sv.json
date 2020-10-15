@@ -1,0 +1,412 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -9.7,
+        6.1,
+        -4.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -5.3,
+        -15.9,
+        -5.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2.7,
+        -66.1,
+        -19.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -11.3,
+        -73.9,
+        -19.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        20.3,
+        -103.8,
+        -20.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        55.3,
+        -98.2,
+        -22.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        69.4,
+        -149.9,
+        -19.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        55.0,
+        -199.3,
+        -22.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        31.3,
+        -233.5,
+        -22.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        20.2,
+        -257.0,
+        -22.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        38.1,
+        -302.4,
+        -9.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hydromancer",
+      "value": [
+        88.4,
+        -316.1,
+        -7.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Console",
+      "value": [
+        95.3,
+        -317.2,
+        -7.9
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 184125,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Click Console",
+      "value": [
+        95.7,
+        -317.4,
+        -7.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        41.9,
+        -303.3,
+        -9.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -40.9,
+        -207.9,
+        -18.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp",
+      "value": [
+        -82.3,
+        -240.4,
+        -17.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top",
+      "value": [
+        -89.9,
+        -279.4,
+        -7.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -106.0,
+        -330.8,
+        -7.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -169.2,
+        -250.7,
+        -7.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -216.0,
+        -260.6,
+        -8.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -238.0,
+        -193.1,
+        -7.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -266.1,
+        -165.5,
+        -5.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -330.1,
+        -121.5,
+        -8.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Panel",
+      "value": [
+        -327.6,
+        -118.5,
+        -8.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 2,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 184126,
+            "range": 10
+          }
+        }
+      ],
+      "name": "Click Panel",
+      "value": [
+        -327.6,
+        -118.5,
+        -8.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Way Back",
+      "value": [
+        -234.8,
+        -201.9,
+        -8.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -166.3,
+        -286.6,
+        -8.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Accross to last boss",
+      "value": [
+        -102.7,
+        -342.2,
+        -7.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Further Accross",
+      "value": [
+        -103.6,
+        -376.7,
+        -7.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Through Door",
+      "value": [
+        -98.1,
+        -445.5,
+        6.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "too far",
+      "value": [
+        -87.0,
+        -471.1,
+        8.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "L",
+      "value": [
+        -82.8,
+        -500.0,
+        8.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "R",
+      "value": [
+        -106.8,
+        -505.8,
+        8.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -95.4,
+        -552.0,
+        8.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        -95.6,
+        -435.2,
+        2.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top",
+      "value": [
+        -95.6,
+        -435.2,
+        2.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -40.9,
+        -207.9,
+        -18.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "10",
+      "value": [
+        20.2,
+        -257.0,
+        -22.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "8",
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Annoying bushes",
+      "value": [
+        43.7,
+        -160.5,
+        -22.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "6",
+      "value": [
+        55.3,
+        -98.2,
+        -22.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__ the end __",
+      "value": [
+        -9.7,
+        6.1,
+        -4.3
+      ]
+    }
+  ]
+}

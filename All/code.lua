@@ -59,10 +59,16 @@ return {
                     [187464] = "Shadow Mend",
                     [87024] = "Cauterized",
                     [225080] = "Reincarnation",
-                    [1604] = "Dazed"
+                    [1604] = "Dazed",
                     -- Undispellable
 
                     -- Dispellable
+                    -- Blood Furnace
+                    [6726] = "Silence",
+                    [13338] = "Curse of Tongues",
+                    [30937] = "Mark of Shadow",
+                    [34969] = "Poison",
+                    [30917] = "Poison Bolt"
                 }
             end
             return known_debuffs
@@ -70,14 +76,20 @@ return {
         ["get_curses"] = function(env)
             if (curses == nil) then
                 print("creating known curse list...")
-                curses = {}
+                curses = {
+                    [13338] = "Curse of Tongues"
+                }
             end
             return curses
         end,
         ["get_magics"] = function(env)
             if (magics == nil) then
                 print("creating known magics list...")
-                magics = {}
+                magics = {
+                    [6726] = "Silence",
+                    [32197] = "Corruption",
+                    [30937] = "Mark of Shadow"
+                }
             end
             return magics
         end,
@@ -91,7 +103,10 @@ return {
         ["get_poisons"] = function(env)
             if (poisons == nil) then
                 print("creating known poisons list...")
-                poisons = {}
+                poisons = {
+                    [34969] = "Poison",
+                    [30917] = "Poison Bolt"
+                }
             end
             return poisons
         end,
@@ -200,19 +215,40 @@ return {
             if (debug) then
                 print("Data loaded, defining functions")
             end
+            debug_msg = function(message, override)
+                if (debug or override) then
+                    print(message)
+                end
+            end
+            debug_spell = function(message, override)
+                if (debug_spells or override) then
+                    print(message)
+                end
+            end
 
-            eecc = 0
-            function get_enemy_count()
-                return 0
+            function get_aoe_count()
+                local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                local x = math.floor(tank_x)
+                local y = math.floor(tank_y)
+                local z = math.floor(tank_z)                
+                local args = "npcs.attackable.range_8.center_" .. x .. "," .. y .. "," .. z
+                local enemies = env:evaluate_variable(args)
+                if (enemies) then
+                    return enemies
+                else
+                    return 0
+                end
             end
 
             function cast_at_target_position(spell, target)
                 local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(target)
-                print("Target position :[", tank_x, ",", tank_y, ",", tank_z, "]")
-                local args = {tank_x, tank_y, tank_z}
-
-                env:execute_action("cast_ground", {["spell"] = spell, ["position"] = args})
-                print("Flaming!")
+                local x = math.floor(tank_x)
+                local y = math.floor(tank_y)
+                local z = math.floor(tank_z)
+                debug_msg("Target position :[" .. x ..  "," .. y .. "," .. z .. "]")
+                local pos = {tank_x, tank_y, tank_z}
+                local args = {["spell"] = spell, ["position"] = pos}
+                env:execute_action("cast_ground", args)
             end
 
             function thow_more_dots(spell, debuff)
@@ -330,7 +366,7 @@ return {
                             message = "Warning, cast aborted as spell is currently on cooldown :" .. spell
                         else
                             --
-                            result = env:execute_action("cast", spellId)
+                            result = env:execute_action("cast", spellId) --cast_target
                             if (debug_spells) then
                                 print("Spell cast :", spellId)
                             end
@@ -769,15 +805,28 @@ return {
                     ------------------------------------------------------------------------------------------------------------
                     ---------------                                      Mage                                    ---------------
                     ------------------------------------------------------------------------------------------------------------
+                    if (debug) then
+                        print(".. Mage Code checking curses")
+                    end
                     local dispelling = dispell("Remove Curse", curses)
                     --  RunMacroText("/tar Chains Of Woe")
+                    if (debug) then
+                        print(".. done with curses")
+                    end
                     if (dispelling == false) then
                         if (UnitExists("target")) then
+                            if (debug) then
+                                print(".. dps rotation setup")
+                            end
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
                             local heating_up_duration = env:evaluate_variable("myself.buff.48107")
                             local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
-                            local enemy_count = get_enemy_count()
-                            --        print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count())
+                            if (debug) then
+                                print(".. counting enemies")
+                            end
+                            local enemy_count = get_aoe_count()
+                            debug_msg("Enemy aoe count : " .. enemy_count)
+ 
 
                             local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
@@ -788,7 +837,7 @@ return {
                             elseif (combustion_cd == 0) then
                                 check_cast("Combustion")
                             elseif (hotstreak_duration > 0) then
-                                if (enemy_count > 5) then
+                                if (enemy_count > 2) then
                                     cast_at_target_position("Flamestrke", main_tank)
                                 else
                                     check_cast("Pyroblast")
@@ -881,14 +930,13 @@ return {
             tank_name = env:evaluate_variable("get_tank_name")
             -- food_name = "Conjured Mana Strudel" -- Mage foods
             food_name = "Conjured Mana Pie" -- Mage foods
-
             food_buff = "167152" -- Replenishment
             debug = false
             debug_spells = false
             -- Support Functions - return true if there is work to do
             function release_on_wipe()
                 local wipe = true
-                for player_name in pairs(party) do
+                for _, player_name in ipairs(party) do
                     local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
                     if (target_hp > 0) then
                         wipe = false
@@ -896,6 +944,7 @@ return {
                 end
                 if (wipe) then
                     --release (might need to pause to let others catchup)
+                    env:execute_action("set_next_waypoint", {1})
                     env:execute_action("release_spirit")
                 end
             end
@@ -916,7 +965,9 @@ return {
                         reviving = true
                         RunMacroText("/target " .. player_name)
                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
-                    -- print("Can't start, " .. player_name .. " still needs resing")
+                        if (debug) then
+                            print("Can't start, " .. player_name .. " still needs resing")
+                        end
                     end
                 end
                 if (reviving) then
@@ -1034,11 +1085,20 @@ return {
             end
 
             function need_to_eat(env)
+                local hp = env:evaluate_variable("myself.health")
+                local hungry = false
                 local mana = UnitPower("player", 0)
                 local max_mana = UnitPowerMax("player", 0)
                 local mp = 100 * mana / max_mana
                 local thirsty = false
-                if (max_mana > 0) then
+                if (hp < 90) then
+                    hungry = true
+                    local is_drinking = env:evaluate_variable("myself.buff." .. food_buff)
+                    if (is_drinking == -1) then
+                        RunMacroText("/use " .. food_name)
+                    end
+               
+                elseif (max_mana > 0) then
                     if (mp < 90) then
                         thirsty = true
                         local is_drinking = env:evaluate_variable("myself.buff." .. food_buff)
@@ -1047,7 +1107,7 @@ return {
                         end
                     end
                 end
-                return thirsty
+                return thirsty or hungry
             end
 
             --TODO:
@@ -1072,7 +1132,8 @@ return {
 
             if player_class == "PRIEST" then
                 -- ** PRIEST ** --
-                local res_spell = "Mass Resurrection"
+                local res_spell = "Mass Resurrection" -- 37
+                local res_spell = "Resurrection"
                 local buff = "21562"
                 local buff_spell = "Power Word: Fortitude"
                 local self_heal = "Shadow Mend"

@@ -407,6 +407,15 @@
     },
     {
       "actions": [],
+      "name": "Quick Detour",
+      "value": [
+        479.7,
+        113.8,
+        9.6
+      ]
+    },
+    {
+      "actions": [],
       "name": "Boss",
       "value": [
         446.8,

@@ -1,7 +1,8 @@
-action.duration < 3
-interact({"id":64250,"range":5})
-underBots2
-
+--[[
+	action.duration < 3
+	interact({"id":64250,"range":5})
+	underBots2
+]]
 --env:execute_action("mail", {["recipient"] = mailname,["subject"] = subject1,["body"] = "",["item"] = item1});
 
 -- for name, hp in pairs(enemies) do
@@ -319,12 +320,12 @@ function SellItemByKeepID(aSellKeepIDList)--除保留ID以外其他售卖   1.�
 				if alotID ~= "0" then
 					for x = 1, #a do
 						if alotID == a[x] then
-							goto NotSell;
+						--	goto NotSell;
 						end;
 					end;
 					ExeLua("UseContainerItem("..bag..", "..slot..")");
 					Sleep(100);
-					::NotSell::
+				--	::NotSell::
 				end;
 			end;
 		end;
@@ -343,13 +344,13 @@ function DeleteItemByKeepID(aDeleteKeepIDList)--除保留ID以外其他删除  1
 				if alotID ~= "0" then 
 					for x = 1, #a do
 						if alotID == a[x] then
-							goto NotDelete;
+					--		goto NotDelete;
 						end;
 					end;
 					ExeLua("PickupContainerItem("..bag..", "..slot..")");
 					ExeLua("DeleteCursorItem()");   
 					Sleep(100);
-					::NotDelete::
+			--		::NotDelete::
 				end;
 			end;
 		end;
@@ -670,25 +671,25 @@ function DPSTarget_20LR(target,DPSF_HP)
 	  if BuffExists(13163,"player") == 0 then
 		  CastSpell(13163);
 			Print("灵猴守护");	 --Guardian of the Monkey
-            Líng hóu shǒuhù
-            4/5000
-		  goto RepeatLast 
+   --         Líng hóu shǒuhù
+         --   4/5000
+		--  goto RepeatLast 
 		end;---灵猴守护
 	  if DeBuffExists(1978,"target") == 0 then
 		  CastSpell(1978);
 			Print("毒蛇钉刺");	
-		  goto RepeatLast 
+	--	  goto RepeatLast 
 		end;---毒蛇钉刺存在debuff		 Viper Sting exists debuff
 		--CallPet(PetIndex);
 		--CastMacro('/petattack');--bb攻击
 		if CastSpell(2973) then		    --猛禽一击 Raptor Strike
-            Měngqín yī jī
-            4/5000
+  --          Měngqín yī jī
+    --       4/5000
 			Print("猛禽一击");	
 		elseif CastSpell(3044) then		--奥术射击 Arcane Shot
 			Print("奥术射击");		
 		end;                            
-		::RepeatLast::
+	--	::RepeatLast::
 		Sleep(500)
 	until false
 end;
@@ -699,7 +700,9 @@ function DPSTarget_DH(target,DPSF_HP) --浩劫
 	repeat
 		if DPS_Exit(target,DPSF_HP) then break end;
 		SetFace(GetFaceByTarget());
-		if IsCasting('player') then goto RepeatLast end	--在读条中
+		if IsCasting('player') then 
+		--	goto RepeatLast 
+		end	--在读条中
 		if HasAOE() then  --检测手上有AOE技能 或用ExeLua('IsCurrentSpell(189110)') == 'true'要用冷却ID
 			Ptr = GuidToPtr(target);
 			TX,TY,TZ = GetPtrXYZ(Ptr);
@@ -716,7 +719,7 @@ function DPSTarget_DH(target,DPSF_HP) --浩劫
 		elseif CastSpell(203782) then         --技能ID和冷却ID一样时只要写一个就行了 --If the skill ID is the same as the cooldown ID, just write one.
 			Print('裂魂');                          --Soul Split
 		end;                         
-		::RepeatLast::
+	--	::RepeatLast::
 		Sleep(500)
 	until false
 end;

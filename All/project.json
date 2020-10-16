@@ -8,28 +8,6 @@
             "type": "and",
             "value": []
           },
-          "name": "Wailing Chasms"
-        }
-      ],
-      "rendezvous": {
-        "actions": [],
-        "value": [
-          0.0,
-          0.0,
-          0.0
-        ]
-      },
-      "start_distance": 20,
-      "value": []
-    },
-    {
-      "name": "Wailing Chasms",
-      "next_groups": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
           "name": "Rage Fire Chasm"
         }
       ],
@@ -42,10 +20,45 @@
         ]
       },
       "start_distance": 20,
-      "value": []
+      "value": [
+        "training"
+      ]
+    },
+    {
+      "name": "Wailing Chasms",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Wailing Chasms"
+        }
+      ],
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "training"
+      ]
     },
     {
       "name": "Shadow Fang Keep",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Shadow Fang Keep"
+        }
+      ],
       "pve": {
         "attacks": [
           {
@@ -85,6 +98,15 @@
     },
     {
       "name": "Stratholme Living",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Stratholme Living"
+        }
+      ],
       "rendezvous": {
         "actions": [],
         "value": [
@@ -101,6 +123,15 @@
     {
       "loot": true,
       "name": "Hellfire Ramparts",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Hellfire Ramparts"
+        }
+      ],
       "pve": {
         "attacks": [
           {
@@ -127,6 +158,7 @@
       ]
     },
     {
+      "loot": true,
       "name": "Blood Furnace",
       "next_groups": [
         {
@@ -137,6 +169,24 @@
           "name": "Blood Furnace"
         }
       ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
       "rendezvous": {
         "actions": [],
         "value": [
@@ -152,6 +202,15 @@
     },
     {
       "name": "Shadow Labyrinth",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Shadow Labyrinth"
+        }
+      ],
       "rendezvous": {
         "actions": [],
         "value": [
@@ -161,16 +220,40 @@
         ]
       },
       "start_distance": 20,
-      "value": []
+      "value": [
+        "sl"
+      ]
     },
     {
+      "loot": true,
       "name": "Steamvault",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Steamvault"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
       "rendezvous": {
         "actions": [],
+        "name": "Entrance",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          -9.7,
+          6.1,
+          -4.3
         ]
       },
       "start_distance": 20,
@@ -187,6 +270,15 @@
         "range": 20.0
       },
       "name": "Blackrock Caverns",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Blackrock Caverns"
+        }
+      ],
       "pve": {
         "attacks": [
           {

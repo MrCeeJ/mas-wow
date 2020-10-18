@@ -189,10 +189,11 @@
       },
       "rendezvous": {
         "actions": [],
+        "name": "Entrance",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          -2.7,
+          19.8,
+          -44.8
         ]
       },
       "start_distance": 20,
@@ -201,6 +202,7 @@
       ]
     },
     {
+      "loot": true,
       "name": "Shadow Labyrinth",
       "next_groups": [
         {
@@ -211,12 +213,31 @@
           "name": "Shadow Labyrinth"
         }
       ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
       "rendezvous": {
         "actions": [],
+        "name": "Entrance",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          -10.5,
+          -0.4,
+          -1.1
         ]
       },
       "start_distance": 20,
@@ -225,6 +246,8 @@
       ]
     },
     {
+      "arrival_tolerance": 5.0,
+      "arrival_tolerance_for_path_finding": 1.0,
       "loot": true,
       "name": "Steamvault",
       "next_groups": [
@@ -243,7 +266,7 @@
               "type": "and",
               "value": []
             },
-            "range": 40.0
+            "range": 20.0
           }
         ]
       },

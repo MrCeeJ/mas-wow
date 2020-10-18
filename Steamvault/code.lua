@@ -630,10 +630,7 @@
                             local solar_emp_duration = env:evaluate_variable("myself.buff.164545") -- solar
                             local lunar_empduration = env:evaluate_variable("myself.buff.164547") -- lunar
                             local lunar_power = UnitPower("player", 8)
-                            --Gets the count of the flying missiles.
-                            --count = GetMissileCount()
-                            --Gets the info of a specific missile.
-                            --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)
+
                             if (target_hp > min_dot_hp and sunfire_duration == -1) then
                                 RunMacroText("/cast Sunfire")
                             elseif (target_hp > min_dot_hp and moonfire_duration == -1) then

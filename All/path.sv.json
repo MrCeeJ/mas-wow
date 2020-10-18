@@ -46,36 +46,36 @@
       "actions": [],
       "name": "Round Corner",
       "value": [
-        11.9,
-        -122.0,
-        -22.0
+        8.0,
+        -130.0,
+        -21.0
       ]
     },
     {
       "actions": [],
       "name": "Crates",
       "value": [
-        9.5,
-        -150.6,
-        -22.1
+        14.4,
+        -152.9,
+        -22.5
       ]
     },
     {
       "actions": [],
       "name": "Round Corner",
       "value": [
-        -16.0,
-        -186.1,
-        -22.5
+        -11.9,
+        -193.8,
+        -21.7
       ]
     },
     {
       "actions": [],
       "name": "Door Guards",
       "value": [
-        -36.6,
-        -216.9,
-        -18.3
+        -29.4,
+        -212.3,
+        -18.6
       ]
     },
     {
@@ -97,10 +97,43 @@
     },
     {
       "actions": [],
+      "name": "Run up",
       "value": [
-        38.1,
-        -302.4,
-        -9.7
+        22.2,
+        -296.0,
+        -13.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Line Up",
+      "pve": false,
+      "value": [
+        43.1,
+        -309.4,
+        -8.4
+      ]
+    },
+    {
+      "actions": [],
+      "arrival_deviation": 0.4,
+      "arrival_tolerance_for_path_finding": 0.4,
+      "name": "Boss Start",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        51.6,
+        -314.5,
+        -7.9
       ]
     },
     {
@@ -155,6 +188,15 @@
         41.9,
         -303.3,
         -9.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -1.1,
+        -235.7,
+        -21.4
       ]
     },
     {

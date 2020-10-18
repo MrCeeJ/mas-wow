@@ -452,6 +452,15 @@
     },
     {
       "actions": [],
+      "name": "Side",
+      "value": [
+        478.3,
+        -27.7,
+        9.5
+      ]
+    },
+    {
+      "actions": [],
       "name": "Left",
       "value": [
         494.7,

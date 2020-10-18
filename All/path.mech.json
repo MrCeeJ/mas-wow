@@ -1,0 +1,324 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -26.5,
+        0.3,
+        -1.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Wall",
+      "value": [
+        -8.3,
+        -12.1,
+        -1.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Pack",
+      "value": [
+        23.1,
+        -21.3,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Robot",
+      "value": [
+        42.3,
+        -26.3,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Doorway",
+      "value": [
+        33.0,
+        -58.2,
+        0.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Arch",
+      "value": [
+        77.9,
+        -52.0,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mechanics",
+      "value": [
+        109.6,
+        -55.3,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp",
+      "value": [
+        120.4,
+        -82.3,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of Ramp",
+      "value": [
+        165.8,
+        -73.7,
+        1.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        216.2,
+        -95.2,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        199.1,
+        -82.1,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Trash",
+      "value": [
+        223.7,
+        -63.0,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Other Boss",
+      "value": [
+        220.9,
+        -25.8,
+        -2.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bonus Pack",
+      "value": [
+        174.1,
+        -17.5,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        139.2,
+        13.7,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        142.6,
+        44.5,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Quest mob",
+      "value": [
+        229.1,
+        52.6,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs Pack",
+      "value": [
+        165.4,
+        78.0,
+        1.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "First Flight",
+      "value": [
+        119.3,
+        85.9,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs Boss",
+      "value": [
+        85.5,
+        20.2,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back to the Stairs",
+      "value": [
+        117.8,
+        79.6,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Outside Lift",
+      "value": [
+        219.6,
+        51.8,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "By Chest",
+      "value": [
+        221.3,
+        68.6,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Loot Chest",
+      "value": [
+        221.3,
+        68.6,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back to lift",
+      "value": [
+        216.8,
+        52.3,
+        0.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "NExt to Lift",
+      "value": [
+        247.9,
+        52.6,
+        0.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Inside Lift",
+      "value": [
+        256.4,
+        52.4,
+        -1.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Jumping",
+      "value": [
+        256.4,
+        52.4,
+        -1.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Get off lift (z 25.6)",
+      "value": [
+        269.5,
+        52.4,
+        25.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Giant",
+      "value": [
+        282.2,
+        46.5,
+        25.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        290.6,
+        29.1,
+        25.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right SIde",
+      "value": [
+        277.9,
+        20.8,
+        25.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Last Giant",
+      "value": [
+        294.3,
+        -12.9,
+        25.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Last trash",
+      "value": [
+        309.5,
+        20.3,
+        25.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        326.5,
+        13.2,
+        27.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "____ end",
+      "value": [
+        -26.5,
+        0.3,
+        -1.8
+      ]
+    }
+  ]
+}

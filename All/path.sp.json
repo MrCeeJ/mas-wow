@@ -1,0 +1,390 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        122.5,
+        -123.1,
+        -0.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        126.6,
+        -114.5,
+        -1.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        113.2,
+        -97.7,
+        -1.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Patrol Corner",
+      "value": [
+        97.5,
+        -76.9,
+        -2.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Pacl",
+      "value": [
+        -47.7,
+        0.4,
+        -1.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -110.7,
+        -12.7,
+        -9.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Patrol",
+      "value": [
+        -117.6,
+        -27.0,
+        -6.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Pack",
+      "value": [
+        -121.8,
+        -147.4,
+        -2.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Room",
+      "value": [
+        -29.5,
+        -179.9,
+        -2.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Crabs",
+      "value": [
+        5.6,
+        -194.6,
+        -1.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Crabs",
+      "value": [
+        16.7,
+        -234.2,
+        -0.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door Guards",
+      "value": [
+        -6.5,
+        -296.8,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tunnel",
+      "value": [
+        101.3,
+        -345.8,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Pack",
+      "value": [
+        119.6,
+        -303.1,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp",
+      "value": [
+        49.7,
+        -369.6,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "On Ramp",
+      "value": [
+        69.3,
+        -380.2,
+        6.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of Ramp",
+      "value": [
+        124.7,
+        -382.1,
+        30.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Long Ramp",
+      "value": [
+        29.4,
+        -414.9,
+        51.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -58.2,
+        -378.7,
+        81.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -113.5,
+        -378.4,
+        81.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Side",
+      "value": [
+        -119.8,
+        -396.6,
+        80.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp",
+      "value": [
+        -180.0,
+        -411.6,
+        59.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Float Down",
+      "value": [
+        -221.7,
+        -365.0,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Edge",
+      "value": [
+        -235.2,
+        -400.6,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -256.4,
+        -429.5,
+        3.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -152.6,
+        -458.5,
+        2.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Crabs again",
+      "value": [
+        -95.5,
+        -466.9,
+        -1.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Crab Boss",
+      "value": [
+        -31.2,
+        -454.6,
+        -1.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Way back",
+      "value": [
+        -104.1,
+        -480.5,
+        -0.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Big Room",
+      "value": [
+        -71.8,
+        -537.6,
+        -1.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -79.1,
+        -584.7,
+        1.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -114.5,
+        -592.1,
+        6.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Up Tunnel",
+      "value": [
+        -85.2,
+        -740.2,
+        36.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round Corner",
+      "value": [
+        -123.5,
+        -752.5,
+        37.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right",
+      "value": [
+        -143.9,
+        -732.0,
+        37.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -149.2,
+        -735.5,
+        37.9
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "quagmire_positions"
+        }
+      ],
+      "name": "Boss Positions",
+      "value": [
+        -149.2,
+        -735.5,
+        37.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -199.5,
+        -705.6,
+        37.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -205.9,
+        -718.7,
+        37.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -196.3,
+        -697.0,
+        37.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Quest Trash",
+      "value": [
+        -188.6,
+        -762.7,
+        41.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "___ ending",
+      "value": [
+        122.5,
+        -123.1,
+        -0.3
+      ]
+    }
+  ]
+}

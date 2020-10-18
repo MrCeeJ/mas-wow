@@ -57,6 +57,7 @@ return {
                     [25771] = "Forbearance",
                     [187464] = "Shadow Mend",
                     [87024] = "Cauterized",
+                    [87023] = "Cauterize",
                     [225080] = "Reincarnation",
                     [1604] = "Dazed",
                     -- Undispellable
@@ -80,7 +81,21 @@ return {
                     [33502] = "Brain Wash",
                     [17165] = "Mind Flay",
                     [33487] = "Addle Humanoid",
-                    [30615] = "Fear"
+                    [30615] = "Fear",
+                    -- Slave Pens
+                    [35760] = "Decayed Strength",
+                    [32192] = "Frost Nova",
+                    [34984] = "Psychic Horror",
+                    [17883] = "Immolate",
+                    [32173] = "Engtangling Roots",
+                    [36872] = "Deadly Poison",
+                    [34780] = "Engtangling Roots",
+                    [34780] = "Poison Bolt Volley",
+                    [164815] = "Sunfire",
+                    [164815] = "Sunfire",
+                    [33787] = "Cripple"
+                    -- [19134] = "Firghtening Shout",
+                    -- [29544] = "Firghtening Shout",
                 }
             end
             return known_debuffs
@@ -113,7 +128,14 @@ return {
                     [9574] = "Flame Buffet",
                     [33487] = "Addle Humanoid",
                     -- Ramparts
-                    [30615] = "Fear"
+                    [30615] = "Fear",
+                    -- Slave Pens
+                    [32192] = "Frost Nova",
+                    [34984] = "Psychic Horror",
+                    [17883] = "Immolate",
+                    [32173] = "Engtangling Roots",
+                    [164815] = "Sunfire",
+                    [33787] = "Cripple"
                 }
             end
             return magics
@@ -121,7 +143,10 @@ return {
         ["get_diseases"] = function(env)
             if (diseases == nil) then
                 print("creating known diseases list...")
-                diseases = {}
+                diseases = {
+                    -- Slave Pens
+                    [35760] = "Decayed Strength"
+                }
             end
             return diseases
         end,
@@ -131,7 +156,10 @@ return {
                 poisons = {
                     -- Blood Furnace
                     [34969] = "Poison",
-                    [30917] = "Poison Bolt"
+                    [30917] = "Poison Bolt",
+                    -- Slave Pens
+                    [36872] = "Deadly Poison",
+                    [34780] = "Poison Bolt Volley"
                 }
             end
             return poisons
@@ -276,15 +304,24 @@ return {
                 env:execute_action("move", {53.5, -314.5, -7.9})
             end
         end,
-        test_flamestrike = function(env)
+        quagmire_positions = function(env)
+            local player_class = env:evaluate_variable("myself.class")
+            if player_class == "PALADIN" then
+                env:execute_action("move", {-149.2, -735.5, 37.9})
+            elseif player_class == "PRIEST" then
+                env:execute_action("move", {-140.9, -744.4, 37.9})
+            elseif player_class == "DRUID" then
+                env:execute_action("move", {-152.8, -756.9, 37.9})
+            elseif player_class == "SHAMAN" then
+                env:execute_action("move", {-146.0, -751.2, 37.9})
+            elseif player_class == "MAGE" then
+                env:execute_action("move", {-135.2, -733.5, 37.9})
+            end
+        end,
+        mage_food = function(env)
             local player_class = env:evaluate_variable("myself.class")
             if player_class == "MAGE" then
-                local main_tank = "ceejpaladin"
-                local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
-                local pos = {tank_x, tank_y, tank_z}
-                local spell = "Flamestrike"
-                local args = {["spell"] = spell, ["position"] = pos, ["devoaton"] = 2}
-                env:execute_action("cast_ground", args)
+                env:execute_action("cast", "Conjure Refreshment")
             end
         end
     },
@@ -298,6 +335,8 @@ return {
             debug_spells = false
             debug_frame = true
             debug_frame_setup = false
+            in_steamvaults = false
+
             debug_msg = function(override, message)
                 if (debug or override) then
                     print("debug: ", tostring(message))
@@ -332,6 +371,9 @@ return {
             if (safe_position == nil) then
                 safe_position = 1
             end
+            if (fire_timer == nil) then
+                fire_timer = 0
+            end
 
             if (moving == nil) then
                 moving = false
@@ -345,14 +387,15 @@ return {
             if (debug_frame_setup) then
                 print("Configuring event handler ..")
             end
-            event_frame:SetScript(
-                "OnEvent",
-                function(self, event)
-                    -- pass a variable number of arguments
-                    self:OnEvent(event, CombatLogGetCurrentEventInfo())
-                end
-            )
-
+            if (in_steamvaults) then
+                event_frame:SetScript(
+                    "OnEvent",
+                    function(self, event)
+                        -- pass a variable number of arguments
+                        self:OnEvent(event, CombatLogGetCurrentEventInfo())
+                    end
+                )
+            end
             if (debug_frame_setup) then
                 print(".. registering event handler ..")
             end
@@ -375,13 +418,16 @@ return {
                         --  RunMacroText("/p New spell found - Name :" .. spell_name .. " id :" .. spell_id)
                         end
                         if (bad_spells[spell_id]) then
-                            print("You are stading in the fire, you should probably move.")
-                            standing_in_fire = true
-                            -- print(".. calling move function.")
-                            if (moving) then
-                                print(".. hurry up!")
-                            else
-                                move_to_next_safe_location()
+                            if (fire_timer < GetTime()) then
+                                fire_timer = GetTime() + 2
+                                print("You are stading in the fire, you should probably move.")
+                                standing_in_fire = true
+                                -- print(".. calling move function.")
+                                if (moving) then
+                                    print(".. hurry up!")
+                                else
+                                    move_to_next_safe_location()
+                                end
                             end
                         end
                     end
@@ -558,8 +604,11 @@ return {
                         if (spell_cd ~= 0) then
                             message = "Warning, cast aborted as spell is currently on cooldown :" .. spell
                         else
-                            --
+                            face = env:execute_action("face_target") -- posible move fix?
                             result = env:execute_action("cast", spellId) --cast_target
+                            if (debug_spells) then
+                                print("Facing result :", dXW)
+                            end
                             if (debug_spells) then
                                 print("Spell cast :", spellId)
                             end
@@ -673,9 +722,9 @@ return {
                 end
             end
 
-            -------------------------------------------------------------------------------------------------------------------
-            -------------------------------------------       General Combat Code    ------------------------------------------
-            -------------------------------------------------------------------------------------------------------------------
+            -------------------------------------------------------------------------------------------------------------------------------------------------------------------
+            -------------------------------------------------------------------       General Combat Code    ------------------------------------------------------------------
+            -------------------------------------------------------------------------------------------------------------------------------------------------------------------
             local _, global_cd, _, _ = GetSpellCooldown("61304")
             local player_class = env:evaluate_variable("myself.class")
             local min_dot_hp = 10
@@ -941,8 +990,9 @@ return {
                                     local _, solace_cd, _, _ = GetSpellCooldown("Power Word: Solace")
                                     local _, fiend_cd, _, _ = GetSpellCooldown("Shadowfiend")
                                     local _, death_cd, _, _ = GetSpellCooldown("Shadow Word: Death")
+                                    local _, mind_blast_cd, _, _ = GetSpellCooldown("Mind Blast")
 
-                                    local min_swp_hp = 20
+                                    local min_swd_hp = 40
 
                                     if (target_health > min_dot_hp and swpain_duration == -1) then
                                         check_cast("Shadow Word: Pain")
@@ -952,8 +1002,10 @@ return {
                                         check_cast("Shadowfiend")
                                     elseif (solace_cd == 0) then
                                         check_cast("Power Word: Solace")
-                                    elseif (target_health < min_dot_hp and my_hp > 20 and death_cd == 0) then
+                                    elseif (target_health < min_swd_hp and my_hp > 20 and death_cd == 0) then
                                         check_cast("Shadow Word: Death")
+                                    elseif (mind_blast_cd == 0) then
+                                        check_cast("Mind Blast")
                                     elseif (penance_cd == 0) then
                                         check_cast("Penance")
                                     elseif (not moving) then
@@ -974,6 +1026,9 @@ return {
                     -- Check for priority targets
                     RunMacroText("/tar Naga Distiller")
                     RunMacroText("/tar Void Traveler")
+                    RunMacroText("/tar Totem")
+                    RunMacroText("/tar Ward") -- "Mennu's Healing Ward", "Tainted Stoneskin Totem" Corrupted Nova Totem" "Tainted Earthgrab Totem"
+                    RunMacroText("/tar Raging Flames")
 
                     if (dispelling == false) then
                         if (UnitExists("target")) then
@@ -1007,24 +1062,26 @@ return {
                             debug_msg(false, "Enemy aoe count : " .. enemy_count)
 
                             -- check combat res
-                            local resing = false
+                            combat_res = false
                             if (rebirth_cd == 0) then
                                 for _, player_name in ipairs(party) do
-                                    if (resing == false) then
+                                    if (combat_res == false) then
+                                        local distance = env:evaluate_variable("unit." .. player_name .. ".distance")
                                         local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
-                                        if (target_hp == 0) then
-                                            resing = true
+                                        if (target_hp == 0 and distance < 20) then
+                                            combat_res = true
+                                            print("I should probably res :", player_name)
                                         end
                                     end
                                 end
                             end
+                            -- barkskin, soothe
+                            combat_res = false -- something up with it
 
                             if (my_hp < renewal_hp and renewal_cd == 0) then
                                 check_cast("/cast Renewal")
-                            elseif (resing) then
+                            elseif (combat_res) then
                                 RunMacroText("/cast [target=" .. player_name .. "] Rebirth")
-                            elseif (beam_cd == 0) then
-                                check_cast("Solar Beam")
                             elseif (target_hp > min_dot_hp and sunfire_duration < 1 and eclipse_charges == 0) then
                                 check_cast("Sunfire")
                             elseif (target_hp > min_dot_hp and moonfire_duration < 1 and eclipse_charges == 0) then
@@ -1075,6 +1132,8 @@ return {
                                 else
                                     check_cast("Wrath")
                                 end
+                            elseif (beam_cd == 0) then -- why not :)
+                                check_cast("Solar Beam")
                             elseif (sunfire_duration < 6) then -- pandemic dots
                                 check_cast("Sunfire")
                             elseif (moonfire_duration < 7) then
@@ -1111,7 +1170,8 @@ return {
                     -- Check for priority targets
                     RunMacroText("/tar Naga Distiller")
                     RunMacroText("/tar Void Traveler")
-
+                    RunMacroText("/tar Totem")
+                    RunMacroText("/tar Raging Flames")
                     if (debug) then
                         print(".. done with curses")
                     end
@@ -1178,6 +1238,8 @@ return {
                     -- Check for priority targets
                     RunMacroText("/tar Naga Distiller")
                     RunMacroText("/tar Void Traveler")
+                    RunMacroText("/tar Totem")
+                    RunMacroText("/tar Raging Flames")
                     local dispelling = dispell("Cleanse Spirit", curses) --or tremor()
                     if (dispelling == false) then
                         if (UnitExists("target")) then
@@ -1271,6 +1333,11 @@ return {
             ------------------------------------------------------------------------------------------------------------
             ---------------                               Preparation Setup                              ---------------
             ------------------------------------------------------------------------------------------------------------
+            debug_msg = function(override, message)
+                if (debug or override) then
+                    print("debug: ", tostring(message))
+                end
+            end
             party = env:evaluate_variable("get_party")
             in_combat = env:evaluate_variable("myself.is_in_combat")
             healer_name = env:evaluate_variable("get_healer_name")
@@ -1293,7 +1360,7 @@ return {
                 end
                 if (wipe) then
                     --release (might need to pause to let others catchup)
-                    env:execute_action("set_next_waypoint", {1})
+                    env:execute_action("set_next_waypoint", 1)
                     env:execute_action("release_spirit")
                 end
             end
@@ -1314,9 +1381,7 @@ return {
                         reviving = true
                         RunMacroText("/target " .. player_name)
                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
-                        if (debug) then
-                            print("Can't start, " .. player_name .. " still needs resing")
-                        end
+                        debug_msg(false, "Can't start, " .. player_name .. " still needs resing")
                     end
                 end
                 if (reviving) then
@@ -1334,7 +1399,7 @@ return {
                         print("Aborting uncecessary :", spell, " on target :", target)
                         RunMacroText("/stopcasting")
                         still_resing = true
-                        print("Can't start, still need casting res")
+                        debug_msg(false, "Can't start, still need casting res")
                     end
                 end
                 return still_resing
@@ -1346,7 +1411,7 @@ return {
                     local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
                     if (target_hp == 0) then
                         dead = true
-                        print("Can't start, " .. player_name .. " still dead")
+                        debug_msg(false, "Can't start, " .. player_name .. " still dead")
                     end
                 end
                 return dead
@@ -1361,7 +1426,22 @@ return {
                     if (target_hp > 0 and needs_buff == false and buff_duration == -1 and distance < 20) then
                         needs_buff = true
                         RunMacroText("/cast " .. spell)
-                        print("Can't start, " .. player_name .. " still needs buff")
+                        debug_msg(false, "Can't start, " .. player_name .. " still needs buff")
+                    end
+                end
+                return needs_buff
+            end
+
+            function anyone_need_individual_buff(env, buff, spell)
+                local needs_buff = false
+                for _, player_name in ipairs(party) do
+                    local buff_duration = env:evaluate_variable("unit." .. player_name .. ".buff." .. buff)
+                    local distance = env:evaluate_variable("unit." .. player_name .. ".distance")
+                    local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
+                    if (target_hp > 0 and needs_buff == false and buff_duration == -1 and distance < 30) then
+                        needs_buff = true
+                        RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
+                        debug_msg(false, "Can't start, " .. player_name .. " still needs buff")
                     end
                 end
                 return needs_buff
@@ -1374,7 +1454,7 @@ return {
                 if (buff_cd == 0 and buff_duration == -1) then
                     needs_buff = true
                     RunMacroText("/cast " .. spell)
-                    print("Can't start, I needs a buff")
+                    debug_msg(false, "Can't start, I needs a buff")
                 end
                 return needs_buff
             end
@@ -1389,7 +1469,7 @@ return {
                 if (target_hp > 0 and buff_duration == -1 and distance < 20) then
                     needs_buff = true
                     RunMacroText("/cast [@" .. tank_name .. "]" .. spell)
-                    print("Can't start, tank needs a buff")
+                    debug_msg(false, "Can't start, tank needs a buff")
                 end
                 return needs_buff
             end
@@ -1428,7 +1508,7 @@ return {
                 if (hp < 90) then
                     healing = true
                     RunMacroText("/cast [@player] " .. spell)
-                    print("Can't start, I need a heal")
+                    debug_msg(false, "Can't start, I need a heal")
                 end
                 return healing
             end
@@ -1482,10 +1562,12 @@ return {
                 -- ** PRIEST ** --
                 local res_spell = "Mass Resurrection" -- 37
                 local res_spell = "Resurrection"
-                local buff = "21562"
-                local buff_spell = "Power Word: Fortitude"
+                local party_buff = "21562"
+                local party_spell = "Power Word: Fortitude"
+                local individual_spell = "Levitate"
+                local individual_buff = "Levitate"
                 local self_heal = "Shadow Mend"
-                if (check_hybrid(env, res_spell, self_heal) or anyone_need_party_buff(env, buff, buff_spell)) then
+                if (check_hybrid(env, res_spell, self_heal) or anyone_need_party_buff(env, party_buff, party_spell) or anyone_need_individual_buff(env, individual_buff, individual_spell)) then
                     return true
                 end
             elseif player_class == "PALADIN" then
@@ -1497,10 +1579,12 @@ return {
                 end
             elseif player_class == "MAGE" then
                 -- ** MAGE ** --
-                local buff_spell = "Arcane Intellect"
-                local buff = "1459"
+                local party_spell = "Arcane Intellect"
+                local party_buff = "1459"
+                -- local individual_spell = "Slow Fall"
+                -- local individual_buff = "Slow Fall" --or anyone_need_individual_buff(env, individual_buff, individual_spell
                 local self_buff = "Blazing Barrier"
-                if (do_i_need_buffing(env, self_buff) or does_healer_need_mana(env) or is_anyone_dead(env) or anyone_need_party_buff(env, buff, buff_spell)) then
+                if (do_i_need_buffing(env, self_buff) or does_healer_need_mana(env) or is_anyone_dead(env) or anyone_need_party_buff(env, party_buff, party_spell)) then
                     return true
                 end
             elseif player_class == "DRUID" then
@@ -1516,8 +1600,10 @@ return {
                 local res_spell = "Ancestral Spirit"
                 local self_heal = "Healing Surge"
                 local tank_buff = "Earth Shield"
+                local individual_spell = "Water Walking"
+                local individual_buff = "Water Walking"
                 local charges = 10
-                if (check_hybrid(env, res_spell, self_heal) or tank_needs_buff(env, tank_buff, charges)) then
+                if (check_hybrid(env, res_spell, self_heal) or tank_needs_buff(env, tank_buff, charges) or anyone_need_individual_buff(env, individual_buff, individual_spell)) then
                     return true
                 end
             end

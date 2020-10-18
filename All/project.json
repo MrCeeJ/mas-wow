@@ -188,7 +188,21 @@
         }
       },
       "rendezvous": {
-        "actions": [],
+        "actions": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": [
+                {
+                  "operator": "<",
+                  "value": 3,
+                  "variable": "action.duration"
+                }
+              ]
+            },
+            "type": "mage_food"
+          }
+        ],
         "name": "Entrance",
         "value": [
           -2.7,
@@ -246,8 +260,6 @@
       ]
     },
     {
-      "arrival_tolerance": 5.0,
-      "arrival_tolerance_for_path_finding": 1.0,
       "loot": true,
       "name": "Steamvault",
       "next_groups": [
@@ -268,7 +280,14 @@
             },
             "range": 20.0
           }
-        ]
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
       },
       "rendezvous": {
         "actions": [],
@@ -361,6 +380,78 @@
       "start_distance": 20,
       "value": [
         "training"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Mechanar",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -26.5,
+          0.3,
+          -1.8
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "mech"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Slave Pens",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Slave Pens"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          122.4,
+          -123.6,
+          -0.3
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "sp"
       ]
     }
   ],

@@ -4,7 +4,9 @@
 	underBots2
 ]]
 --env:execute_action("mail", {["recipient"] = mailname,["subject"] = subject1,["body"] = "",["item"] = item1});
-
+--[[
+MiniBot.WoW.Cli.exe inject -u"mrceej@gmail.com" -p "underBots2" -g "D:\Games\World of Warcraft\_retail_\Wow.exe" -l -s "5"
+]]
 -- for name, hp in pairs(enemies) do
 -- end
 --get all targets
@@ -22,6 +24,18 @@
                             --count = GetMissileCount()
                             --Gets the info of a specific missile.
                             --spellId, spellVisualId, x, y, z, sourceObject, sourceX, sourceY, sourceZ, targetObject, targetX, targetY, targetZ = GetMissileWithIndex(index)
+
+							test_flamestrike = function(env)
+								local player_class = env:evaluate_variable("myself.class")
+								if player_class == "MAGE" then
+									local main_tank = "ceejpaladin"
+									local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+									local pos = {tank_x, tank_y, tank_z}
+									local spell = "Flamestrike"
+									local args = {["spell"] = spell, ["position"] = pos, ["devoaton"] = 2}
+									env:execute_action("cast_ground", args)
+								end
+							end
 
 local debug_debuffs = true
 if (debug_debuffs) then

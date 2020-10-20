@@ -1,0 +1,579 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        19.3,
+        -25.0,
+        -2.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Patrol",
+      "value": [
+        64.9,
+        -57.1,
+        -2.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        59.7,
+        -97.4,
+        -2.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        44.6,
+        -107.0,
+        -3.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Turn right",
+      "value": [
+        4.4,
+        -104.6,
+        -4.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round Back",
+      "value": [
+        -4.4,
+        -185.0,
+        -4.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Random Giant",
+      "value": [
+        10.9,
+        -208.1,
+        -4.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of Ramp",
+      "value": [
+        -68.0,
+        -275.7,
+        -3.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp Corner",
+      "value": [
+        -102.3,
+        -287.3,
+        2.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ramp Back",
+      "value": [
+        -125.2,
+        -279.8,
+        6.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Switchback",
+      "value": [
+        -98.3,
+        -253.9,
+        24.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And up",
+      "value": [
+        -96.4,
+        -269.4,
+        24.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left",
+      "value": [
+        -97.9,
+        -348.8,
+        32.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right",
+      "value": [
+        -129.9,
+        -342.1,
+        33.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 0.1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "boss_mode"
+        }
+      ],
+      "name": "Boss Mode engaged",
+      "value": [
+        -129.9,
+        -342.1,
+        33.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "fake",
+      "value": [
+        -96.4,
+        -269.4,
+        24.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss Positions",
+      "value": [
+        -120.0,
+        -346.1,
+        33.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "hungerfen_positions"
+        }
+      ],
+      "name": "Moving",
+      "value": [
+        -120.0,
+        -346.1,
+        33.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -121.3,
+        -388.6,
+        36.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Before Bridge",
+      "value": [
+        -85.1,
+        -387.8,
+        35.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Giant",
+      "value": [
+        6.8,
+        -381.0,
+        27.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Giant",
+      "value": [
+        -0.2,
+        -324.3,
+        30.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "3rd giant",
+      "value": [
+        86.8,
+        -285.7,
+        32.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "4th Giant",
+      "value": [
+        78.3,
+        -383.9,
+        33.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Before",
+      "value": [
+        91.6,
+        -393.1,
+        34.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2nd Bridge",
+      "value": [
+        114.4,
+        -400.7,
+        41.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorkeepers",
+      "value": [
+        148.1,
+        -424.8,
+        48.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor",
+      "value": [
+        177.1,
+        -412.5,
+        48.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round",
+      "value": [
+        207.2,
+        -380.6,
+        48.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back",
+      "value": [
+        230.7,
+        -375.3,
+        48.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of Ramp",
+      "value": [
+        201.4,
+        -377.8,
+        48.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of Ramp",
+      "value": [
+        237.9,
+        -364.2,
+        69.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Pack",
+      "value": [
+        266.7,
+        -378.0,
+        72.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And Along",
+      "value": [
+        202.3,
+        -389.2,
+        72.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Along Balcony",
+      "value": [
+        202.3,
+        -389.2,
+        72.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To the end",
+      "value": [
+        158.8,
+        -429.6,
+        72.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To Boss",
+      "value": [
+        205.0,
+        -475.1,
+        79.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss Island",
+      "value": [
+        251.2,
+        -465.3,
+        81.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "AFter Boss",
+      "value": [
+        260.6,
+        -449.7,
+        81.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ready for jump",
+      "value": [
+        280.8,
+        -456.7,
+        80.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        323.9,
+        -467.8,
+        51.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And another soft landing",
+      "value": [
+        366.2,
+        -479.5,
+        26.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Up te hill",
+      "value": [
+        356.2,
+        -426.7,
+        42.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Over th etop",
+      "value": [
+        338.4,
+        -358.6,
+        33.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round the corner",
+      "value": [
+        326.2,
+        -331.9,
+        22.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Insect row",
+      "value": [
+        263.7,
+        -219.8,
+        28.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And on",
+      "value": [
+        254.6,
+        -181.1,
+        28.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "more",
+      "value": [
+        247.5,
+        -168.8,
+        27.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        262.8,
+        -152.1,
+        29.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        277.6,
+        -121.3,
+        29.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "After Boss",
+      "value": [
+        261.4,
+        -125.7,
+        29.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Giant",
+      "value": [
+        195.8,
+        -133.3,
+        28.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "umm toad",
+      "value": [
+        161.7,
+        -128.6,
+        26.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "more lords",
+      "value": [
+        188.2,
+        -53.8,
+        26.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        223.8,
+        -18.9,
+        27.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Entrance to boss hall",
+      "value": [
+        207.5,
+        12.9,
+        27.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        151.4,
+        20.7,
+        26.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Way out",
+      "value": [
+        151.4,
+        20.7,
+        26.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ledge",
+      "value": [
+        42.6,
+        -21.6,
+        19.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Exit",
+      "value": [
+        15.4,
+        -32.5,
+        -2.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "___ end",
+      "value": [
+        19.3,
+        -25.0,
+        -2.8
+      ]
+    }
+  ]
+}

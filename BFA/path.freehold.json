@@ -1,0 +1,109 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -1586.7,
+        -1002.6,
+        73.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1605.5,
+        -988.4,
+        72.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1632.9,
+        -996.8,
+        75.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1638.8,
+        -970.1,
+        74.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of stairs",
+      "value": [
+        -1635.9,
+        -978.2,
+        74.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of Stairs",
+      "value": [
+        -1651.2,
+        -993.6,
+        85.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs near left pack",
+      "value": [
+        -1665.3,
+        -1022.2,
+        87.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right",
+      "value": [
+        -1684.3,
+        -1001.7,
+        87.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "All the way right pack",
+      "value": [
+        -1706.3,
+        -978.5,
+        85.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs far left pack",
+      "value": [
+        -1687.2,
+        -1036.3,
+        90.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs far right pack",
+      "value": [
+        -1732.1,
+        -1028.3,
+        87.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mouse",
+      "value": [
+        -1781.8,
+        -1000.5,
+        88.6
+      ]
+    }
+  ]
+}

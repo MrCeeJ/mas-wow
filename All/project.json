@@ -453,6 +453,34 @@
       "value": [
         "sp"
       ]
+    },
+    {
+      "loot": true,
+      "name": "Underbog",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          19.3,
+          -25.0,
+          -2.8
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "ub"
+      ]
     }
   ],
   "scripts": [

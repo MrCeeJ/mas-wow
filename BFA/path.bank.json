@@ -1,0 +1,54 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Inn",
+      "value": [
+        1570.8,
+        -4430.5,
+        16.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        1564.8,
+        -4394.7,
+        16.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 10,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "open_all_mail"
+        }
+      ],
+      "name": "Mailbox on Stairs",
+      "value": [
+        1547.0,
+        -4367.1,
+        19.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Guild Bank",
+      "value": [
+        1523.4,
+        -4361.4,
+        20.5
+      ]
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-return {
+﻿return {
     -- Define custom variables.
     variables = {
         ["get_fire_event_frame"] = function(env)
@@ -59,159 +59,33 @@ return {
                     [87024] = "Cauterized",
                     [87023] = "Cauterize",
                     [225080] = "Reincarnation",
-                    [1604] = "Dazed",
+                    [1604] = "Dazed"
                     -- Undispellable
-
-                    -- Dispellable
-                    -- Blood Furnace
-                    [6726] = "Silence",
-                    [13338] = "Curse of Tongues",
-                    [30937] = "Mark of Shadow",
-                    [34969] = "Poison",
-                    [30917] = "Poison Bolt",
-                    --Steamvault
-                    [38660] = "Fear",
-                    [31481] = "Lung Burst",
-                    [31718] = "Enveloping Winds",
-                    -- Shadow Labs
-                    [14032] = "Shadow Word: Pain",
-                    [32863] = "Seed of Corruption",
-                    [51514] = "Hex",
-                    [9574] = "Flame Buffet",
-                    [33502] = "Brain Wash",
-                    [17165] = "Mind Flay",
-                    [33487] = "Addle Humanoid",
-                    [30615] = "Fear",
-                    -- Slave Pens
-                    [35760] = "Decayed Strength",
-                    [32192] = "Frost Nova",
-                    [34984] = "Psychic Horror",
-                    [17883] = "Immolate",
-                    [32173] = "Engtangling Roots",
-                    [36872] = "Deadly Poison",
-                    [34780] = "Engtangling Roots",
-                    [34780] = "Poison Bolt Volley",
-                    [164815] = "Sunfire",
-                    [164815] = "Sunfire",
-                    [33787] = "Cripple"
-                    -- [19134] = "Firghtening Shout",
-                    -- [29544] = "Firghtening Shout",
                 }
             end
             return known_debuffs
-        end,
-        ["get_curses"] = function(env)
-            if (curses == nil) then
-                print("creating known curse list...")
-                curses = {
-                    [13338] = "Curse of Tongues",
-                    [51514] = "Hex"
-                }
-            end
-            return curses
-        end,
-        ["get_magics"] = function(env)
-            if (magics == nil) then
-                print("creating known magics list...")
-                magics = {
-                    -- Blood Furnace
-                    [6726] = "Silence",
-                    [32197] = "Corruption",
-                    [30937] = "Mark of Shadow",
-                    -- Steamvault
-                    [38660] = "Fear",
-                    -- [31481] = "Lung Burst", -- not prio over stun
-                    [31718] = "Enveloping Winds",
-                    -- Shadow Labs
-                    [14032] = "Shadow Word: Pain",
-                    [32863] = "Seed of Corruption",
-                    [9574] = "Flame Buffet",
-                    [33487] = "Addle Humanoid",
-                    -- Ramparts
-                    [30615] = "Fear",
-                    -- Slave Pens
-                    [32192] = "Frost Nova",
-                    [34984] = "Psychic Horror",
-                    [17883] = "Immolate",
-                    [32173] = "Engtangling Roots",
-                    [164815] = "Sunfire",
-                    [33787] = "Cripple"
-                }
-            end
-            return magics
         end,
         ["get_ignore_magic"] = function(env)
             if (ignore_magic == nil) then
                 print("creating ingore magics list...")
                 ignore_magic = {
-                    [15497] = "Forst Bolt",
+                    [15497] = "Forst Bolt"
                 }
             end
             return ignore_magic
-        end,
-        ["get_diseases"] = function(env)
-            if (diseases == nil) then
-                print("creating known diseases list...")
-                diseases = {
-                    -- Slave Pens
-                    [35760] = "Decayed Strength",
-                    [32065] = "Fungal Decay"
-                }
-            end
-            return diseases
-        end,
-        ["get_poisons"] = function(env)
-            if (poisons == nil) then
-                print("creating known poisons list...")
-                poisons = {
-                    [34969] = "Poison",
-                    [30917] = "Poison Bolt",
-                    [36872] = "Deadly Poison",
-                    [34780] = "Poison Bolt Volley"
-                }
-            end
-            return poisons
-        end,
-        ["get_tremors"] = function(env)
-            if (tremors == nil) then
-                print("creating known tremors list...")
-                tremors = {
-                    -- Steamvault
-                    [38660] = "Fear"
-                }
-            end
-            return tremors
         end,
         ["get_bad_spells"] = function(env)
             if (bad_spells == nil) then
                 print("creating known bad spell list...")
                 bad_spells = {
-                    ["25033"] = "Lightning Cloud ", --Hydromancer Thespia - Steam Vaults
-                    ["33617"] = "Rain of Fire", --Grandmaster Vorpil - Shadow Labyrinth
-                    ["39363"] = "Rain of Fire", --Grandmaster Vorpil - Shadow Labyrinth Heroic
-                    ["24050"] = "Spirit Burst", -- Sethekk Spirit - Sethekk Halls
-                    ["30508"] = "Dark Spin", -- Grand Warlock Nethekurse - Shattered Halls
-                    ["11990"] = "Rain of Fire", -- Shadowmoon Darkcaster - Shattered Halls
-                    ["30979"] = "Flames", --Shattered Halls
-                    ["32251"] = "Consumption", -- (Grand Warlock Nethekurse - Shattered Halls
-                    ["35057"] = "Netherbomb", -- (Mechanar Tinkerer - Mechanar
-                    ["32302"] = "Focus Fire", -- (Shirrak the Dead Watcher - Auchenai Crypts
-                    ["38382"] = "Focus Fire", -- (Shirrak the Dead Watcher - Auchenai Crypts - Heroic
-                    ["38925"] = "Netherbomb", -- Mechanar Tinkerer - Mechanar Heroic)";
-                    ["36583"] = "Charged Fist", -- Tempest-Forge Destroyer - Mechanar)";
-                    ["35312"] = "Raging Flames", -- Nethermancer Sepethrea - Mechanar)";
-                    ["35283"] = "Inferno", -- Nethermancer Sepethrea - Mechanar)";
-                    ["36121"] = "Consumption", -- Zereketh the Unbound - Arcatraz)";
-                    ["36717"] = "Energy Discharge", -- Destroyed Sentinel - Arcatraz)";
-                    ["38829"] = "Energy Discharge", -- Destroyed Sentinel - Arcatraz Heroic)";
-                    ["36175"] = "Whirlwind", -- Dalliah the Doomsayer - Arcatraz)";
-                    ["35767"] = "Felfire", -- Wrath-Scryer Soccothrates - Arcatraz
-                    ["34358"] = "Vial of Poison", -- Sunseeker Chemist - Botanica)";
-                    ["39127"] = "Vial of Poison", -- Sunseeker Chemist - Botanica Heroic)";
-                    ["34642"] = "Death and Decay", -- Sunseeker Gene-Splicer - Botanica)";
-                    ["39347"] = "Death and Decay", -- Sunseeker Gene-Splicer - Botanica Heroic)";
-                    ["34660"] = "Hellfire", -- Thorngrin the Tender - Botanica)";
-                    ["39132"] = "Hellfire" -- Thorngrin the Tender - Botanica Heroic
+                    -- Atal' Dazar
+                    ["255558"] = "Tainted Blood",
+                    ["255620"] = "Festering Eruption (Reanimated Honor Guard)",
+                    ["255620"] = "Festering Eruption (Reanimated Honor Guard)",
+                    ["257483"] = "Pile of Bones (Rezan)",
+                    ["255371"] = "Terrifying Visage (Rezan)",
+                    ["258986"] = "Stink Bomb (Shadowblade Razi)",
+                    ["277072"] = "Corrupted Gold (Corrupted Gold)"
                 }
             end
             return bad_spells
@@ -326,19 +200,12 @@ return {
                 env:execute_action("move", {-135.2, -733.5, 37.9})
             end
         end,
-        hungerfen_positions = function(env)
-            local player_class = env:evaluate_variable("myself.class")
-            if player_class == "PALADIN" then
-                env:execute_action("move", {-120.0, -346.1, 33.3})
-            elseif player_class == "PRIEST" then
-                env:execute_action("move", {-120.5, -339.8, 33.3})
-            elseif player_class == "DRUID" then
-                env:execute_action("move", {-99.6, -344.0, 32.3})
-            elseif player_class == "SHAMAN" then
-                env:execute_action("move", {-136.3, -348.2, 33.3})
-            elseif player_class == "MAGE" then
-                env:execute_action("move", {-153.2, -358.7, 34.6})
-            end
+        get_vol_kaal_totem_positions = function(env)
+            return {
+                {-591.2, 2292.4, 710.0},
+                {-636.2, 2316.1, 710.0},
+                {-636.0, 2269.2, 710.0}
+            }
         end,
         mage_food = function(env)
             local player_class = env:evaluate_variable("myself.class")
@@ -346,7 +213,7 @@ return {
                 env:execute_action("cast", "Conjure Refreshment")
             end
         end,
-        boss_mode = function(env)
+        engage_boss_mode = function(env)
             local waypoint = 17
             print("Switching to boss waypoint :", waypoint)
             env:execute_action("set_next_waypoint", waypoint)
@@ -358,11 +225,19 @@ return {
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = false
+            print(":: Starting Combat Rotation ::")
+            debug = true
             debug_spells = false
             debug_frame = true
             debug_frame_setup = false
             in_steamvaults = false
+            boss_mode = boss_mode or nil
+            game_timestamp = game_timestamp or 0
+            safe_position = safe_position or 1
+            fire_timer = fire_timer or 0
+            moving = moving or false
+            aoe_timer_start = aoe_timer_start or nil
+            player_class = player_class or env:evaluate_variable("myself.class")
 
             debug_msg = function(override, message)
                 if (debug or override) then
@@ -396,16 +271,6 @@ return {
             main_tank = env:evaluate_variable("get_tank_name")
             bad_spells = env:evaluate_variable("get_bad_spells")
             safe_locations = env:evaluate_variable("get_safe_locations")
-            if (safe_position == nil) then
-                safe_position = 1
-            end
-            if (fire_timer == nil) then
-                fire_timer = 0
-            end
-
-            if (moving == nil) then
-                moving = false
-            end
 
             if (debug or debug_frame_setup) then
                 print("Setting up frame ..")
@@ -446,7 +311,7 @@ return {
                         --  RunMacroText("/p New spell found - Name :" .. spell_name .. " id :" .. spell_id)
                         end
                         if (bad_spells[spell_id]) then
-                            if (fire_timer < GetTime()) then
+                            if (fire_timer < GetTime()) then -- turn off alerts for 2 seconds
                                 fire_timer = GetTime() + 2
                                 print("You are stading in the fire, you should probably move.")
                                 standing_in_fire = true
@@ -475,6 +340,43 @@ return {
             ------------------------ Targeting ------------------------
             -----------------------------------------------------------
 
+            function get_priority_target()
+                RunMacroText("/target Head Of The Horseman")
+                -- RunMacroText("/target Pumpkin Fiend")
+                -- RunMacroText("/target Pulsing ")
+                -- RunMacroText("/target Reanimation Totem")
+            end
+            function do_boss_mechanic()
+                -- number of dudes > 2 go to AoE mode
+
+                local count = get_aoe_count(15)
+                if (boss_mode == nil) then
+                    boss_mode = "Save_CDs"
+                    RunMacroText("/p  Saving Cooldowns")
+                elseif (count > 2 and boss_mode ~= "AoE") then
+                    local time = GetTime()
+                    if (aoe_timer_start == nil) then
+                        aoe_timer_start = time
+                        RunMacroText("/p  Staring timer")
+                    else
+                        if (player_class == "PALADIN") then
+                            if (time > aoe_timer_start + 3) then
+                                RunMacroText("/p  Engaging AoE mode")
+                                boss_mode = "AoE"
+                            end
+                        else
+                            if (time > aoe_timer_start + 9) then
+                                RunMacroText("/p  Engaging AoE mode")
+                                boss_mode = "AoE"
+                            end
+                        end
+                    end
+                elseif (count < 2 and boss_mode == "AoE") then
+                    RunMacroText("/p  Returning to nomal")
+                    boss_mode = "Normal"
+                end
+            end
+
             function get_npc_info()
                 --  count = GetNpcCount([center | x, y, z][, range][, rangeOption])
                 --npc = GetNpcWithIndex(index)
@@ -487,13 +389,14 @@ return {
                 end
             end
 
-            function get_aoe_count()
+            function get_aoe_count(range)
+                local range = range or 8
                 if (UnitExists(main_tank)) then
                     local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
                     local x = math.floor(tank_x + 0.5)
                     local y = math.floor(tank_y + 0.5)
                     local z = math.floor(tank_z + 0.5)
-                    local args = "npcs.attackable.range_8.center_" .. x .. "," .. y .. "," .. z
+                    local args = "npcs.attackable.range_" .. range .. ".center_" .. x .. "," .. y .. "," .. z
                     local enemies = env:evaluate_variable(args)
                     if (enemies) then
                         return enemies
@@ -711,7 +614,7 @@ return {
                                     elseif (type == "Curse" and curse) then
                                         RunMacroText("/cast [target=" .. player_name .. "]" .. curse)
                                         return true
-                                    end                                    
+                                    end
                                 else
                                     RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
                                 end
@@ -797,7 +700,6 @@ return {
             -------------------------------------------------------------------       General Combat Code    ------------------------------------------------------------------
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
             local _, global_cd, _, _ = GetSpellCooldown("61304")
-            local player_class = env:evaluate_variable("myself.class")
             local min_dot_hp = 10
 
             -- check_position_and_move_during_fight()
@@ -822,6 +724,8 @@ return {
 
                     -- A fix for no target spam
                     RunMacroText("/cleartarget [dead][noexists]")
+                    get_priority_target()
+                    do_boss_mechanic()
                     if (UnitExists("target") == false) then
                         if (debug) then
                             print(".. no target, fixing")
@@ -846,6 +750,7 @@ return {
                             local _, hands_cd = GetSpellCooldown("Lay on Hands")
                             -- local _, guardian_cd = GetSpellCooldown("Guardian Of Ancient Kings")
                             local _, divine_protection_cd = GetSpellCooldown("Divine Protection")
+                            local _, avenging_wrath_cd = GetSpellCooldown("Avenging Wrath")
 
                             local life = env:evaluate_variable("myself.health")
                             local holy_power = UnitPower("player", 9)
@@ -888,9 +793,9 @@ return {
                                     check_cast("Shield of the Righteous")
                                 elseif (holy_power == 5) then
                                     check_cast("Shield of the Righteous")
+                                elseif (avenging_wrath_cd == 0 and boss_mode ~= "Save_CDs") then
+                                    check_cast("Avenging Wrath")
                                 elseif (avengers_shield_cd == 0) then
-                                    check_cast("Avenger's Shield", "target")
-
                                     check_cast("Avenger's Shield")
                                 elseif (consecration_duration == -1 and consecration_cd == 0 and env:evaluate_variable("npcs.attackable.range_8") >= 1) then
                                     check_cast("Consecration")
@@ -914,6 +819,8 @@ return {
                     ------------------------------------------------------------------------------------------------------------
                     -----------------------------------------------      Priest     --------------------------------------------
                     ------------------------------------------------------------------------------------------------------------
+                    get_priority_target()
+                    do_boss_mechanic()
                     if (UnitExists("target")) then
                         debug_msg(false, ".. have target")
 
@@ -949,11 +856,9 @@ return {
                                 if (schism_cd == 0 and not moving) then
                                     --cast("Schism")
                                     check_cast("Schism")
-                                elseif (fiend_cd == 0) then
-                                    --RunMacroText("/cast Shadowfiend")
+                                elseif (fiend_cd == 0 and boss_mode ~= "Save_CDs") then
                                     check_cast("Shadowfiend")
                                 elseif (solace_cd == 0) then
-                                    --RunMacroText("/cast Shadowfiend")
                                     check_cast("Power Word: Solace")
                                 end
                                 debug_msg(false, "Sorting on HP")
@@ -963,12 +868,18 @@ return {
                                 --     local p2_hp = env:evaluate_variable("unit." .. player_2 .. ".health")
                                 --     return p1 < p2
                                 -- end
-                                table.sort(party, order_by_hp)
+                                table.sort(
+                                    party,
+                                    function(a, b)
+                                        return env:evaluate_variable("unit." .. a .. ".health") < env:evaluate_variable("unit." .. b .. ".health")
+                                    end
+                                )
+
                                 debug_msg(false, "Sorting finished")
                                 debug_msg(false, ".. group healing")
                                 -- If 3 or more people have taken damage and don't have Atonement cast Radiance (currently seems to double cast, same as druid empowerment)
                                 local radiance_charges, _, _, radiance_cd_duration, _ = GetSpellCharges("Power Word: Radiance")
-                                if (radiance_charges > 0 and not moving) then
+                                if (radiance_charges > 0 and radiance_cd_duration < 18 and not moving) then
                                     local sinners = 0
                                     for _, player_name in ipairs(party) do
                                         local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
@@ -1073,10 +984,12 @@ return {
                                         check_cast("Shadow Word: Pain")
                                     elseif (schism_cd == 0 and not moving) then
                                         check_cast("Schism")
-                                    elseif (fiend_cd == 0) then
+                                    elseif (fiend_cd == 0 and boss_mode ~= "Save_CDs") then
                                         check_cast("Shadowfiend")
                                     elseif (solace_cd == 0) then
                                         check_cast("Power Word: Solace")
+                                    elseif (boss_mode == "AoE") then
+                                        check_cast("Holy Nova")
                                     elseif (target_health < min_swd_hp and my_hp > 20 and death_cd == 0) then
                                         check_cast("Shadow Word: Death")
                                     elseif (mind_blast_cd == 0) then
@@ -1099,18 +1012,16 @@ return {
                     ------------------------------------------------------------------------------------------------------------
                     local dispelling = dispell("Remove Corruption", curses, poisons)
                     -- Check for priority targets
-                    -- RunMacroText("/tar Naga Distiller")
-                    -- RunMacroText("/tar Void Traveler")
-                    -- RunMacroText("/tar Totem")
-                    -- RunMacroText("/tar Ward") -- "Mennu's Healing Ward", "Tainted Stoneskin Totem" Corrupted Nova Totem" "Tainted Earthgrab Totem"
-                    -- RunMacroText("/tar Raging Flames")
-
+                    get_priority_target()
+                    do_boss_mechanic()
                     if (dispelling == false) then
                         if (UnitExists("target")) then
                             -- Check for renewal
                             local my_hp = env:evaluate_variable("myself.health")
                             local _, renewal_cd, _, _ = GetSpellCooldown("Renewal")
                             local renewal_hp = 70
+                            local _, barkskin_cd, _, _ = GetSpellCooldown("Barkskin")
+                            local barksin_hp = 50
                             local enemy_count = get_aoe_count()
 
                             local target_hp = env:evaluate_variable("unit.target.health")
@@ -1155,21 +1066,23 @@ return {
 
                             if (my_hp < renewal_hp and renewal_cd == 0) then
                                 check_cast("/cast Renewal")
+                            elseif (my_hp < barksin_hp and barkskin_cd == 0) then
+                                check_cast("/cast Barkskin")
                             elseif (combat_res) then
                                 RunMacroText("/cast [target=" .. player_name .. "] Rebirth")
                             elseif (target_hp > min_dot_hp and sunfire_duration < 1 and eclipse_charges == 0) then
                                 check_cast("Sunfire")
                             elseif (target_hp > min_dot_hp and moonfire_duration < 1 and eclipse_charges == 0) then
                                 check_cast("Moonfire")
-                            elseif (alignment_cd == 0) then
+                            elseif (alignment_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Celestial Alignment")
-                            elseif (berserking_cd == 0) then
+                            elseif (berserking_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Berserking")
-                            elseif (incarnation_cd == 0) then
+                            elseif (incarnation_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Incarnation: Chosen of Elune")
-                            elseif (solar_emp_duration > 0 and eclipse_charges == 0) then -- will recast as buff isn't removed until spell lands
+                            elseif (solar_emp_duration > 0 and eclipse_charges == 0) then
                                 check_cast("Wrath")
-                            elseif (lunar_empduration > 0 and eclipse_charges == 0) then -- will recast as buff isn't removed until spell lands
+                            elseif (lunar_empduration > 0 and eclipse_charges == 0) then
                                 check_cast("Lunar Strike")
                             elseif (alignment_eclipse_duration > 0) then -- Lunar Eclipse
                                 if (enemy_count < 2) then
@@ -1243,10 +1156,8 @@ return {
                     end
                     local dispelling = dispell("Remove Curse", curses)
                     -- Check for priority targets
-                    -- RunMacroText("/tar Naga Distiller")
-                    -- RunMacroText("/tar Void Traveler")
-                    -- RunMacroText("/tar Totem")
-                    -- RunMacroText("/tar Raging Flames")
+                    get_priority_target()
+                    do_boss_mechanic()
                     if (debug) then
                         print(".. done with curses")
                     end
@@ -1255,6 +1166,13 @@ return {
                             if (debug) then
                                 print(".. dps rotation setup")
                             end
+                            local my_hp = env:evaluate_variable("myself.health")
+                            local _, invis_cd, _, _ = GetSpellCooldown("Invisibility")
+                            local invis_hp = 60
+                            local _, iceblock_cd, _, _ = GetSpellCooldown("Iceblock")
+                            local iceblock_duration = env:evaluate_variable("myself.buff.Iceblock")
+                            local iceblock_hp = 20
+
                             local hotstreak_duration = env:evaluate_variable("myself.buff.48108")
                             local heating_up_duration = env:evaluate_variable("myself.buff.48107")
                             local combustion_duration = env:evaluate_variable("myself.buff.Combustion")
@@ -1273,9 +1191,13 @@ return {
 
                             local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges("Phoenix Flames")
 
-                            if (berserking_cd == 0) then
+                            if (my_hp < invis_hp and invis_cd == 0) then
+                                check_cast("Invisibility")
+                            elseif (my_hp < iceblock_hp and iceblock_cd == 0) then
+                                check_cast("Ice block")
+                            elseif (berserking_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Berserking")
-                            elseif (combustion_cd == 0) then
+                            elseif (combustion_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Combustion")
                             elseif (rune_cd == 0 and power_duration == -1) then
                                 check_cast("Rune of Power")
@@ -1298,6 +1220,10 @@ return {
                                     cast_at_target_position("Ring of Frost", main_tank)
                                 elseif (power_duration == 0 and phoenix_charges == 1 and phoenix_cd_duration < combustion_cd) then
                                     check_cast("Phoenix Flames")
+                                elseif (boss_mode == "AoE" and phoenix_charges > 0) then
+                                    check_cast("Phoenix Flames")
+                                elseif (boss_mode == "AoE") then
+                                    cast_at_target_position("Flamestrike", main_tank)
                                 else -- check 2nd phoenix
                                     check_cast("Fireball")
                                 end
@@ -1311,10 +1237,8 @@ return {
                     ---------------                                      Shaman                                   ---------------
                     ------------------------------------------------------------------------------------------------------------
                     -- Check for priority targets
-                    -- RunMacroText("/tar Naga Distiller")
-                    -- RunMacroText("/tar Void Traveler")
-                    -- RunMacroText("/tar Totem")
-                    -- RunMacroText("/tar Raging Flames")
+                    get_priority_target()
+                    do_boss_mechanic()
                     local dispelling = dispell("Cleanse Spirit", curses) --or tremor()
                     if (dispelling == false) then
                         if (UnitExists("target")) then
@@ -1330,6 +1254,7 @@ return {
                             local _, ancestral_guidance_cd, _, _ = GetSpellCooldown("Ancestral Guidance")
                             local _, bloodlust_cd, _, _ = GetSpellCooldown("Bloodlust")
                             local _, healing_stream_cd, _, _ = GetSpellCooldown("Healing Stream Totem")
+                            local tank_hp = env:evaluate_variable("unit." .. main_tank .. ".health")
 
                             local lightning_shield_duration = env:evaluate_variable("myself.buff.Lightning Shield")
                             if (debug) then
@@ -1337,6 +1262,10 @@ return {
                             end
                             local enemy_count = get_aoe_count()
                             debug_msg(false, "Enemy aoe count : " .. enemy_count)
+                            local my_hp = env:evaluate_variable("myself.health")
+                            local _, astral_shift_cd, _, _ = GetSpellCooldown("Astral Shift")
+                            local astral_shift_hp = 70
+
                             -- TODO:
                             -- Check for rebuffing Earth Shield
                             -- Sheck for healing stream
@@ -1365,20 +1294,21 @@ return {
                                 end
                             end
                             av_hp = total_hp / players
-
-                            if (healing_stream_cd == 0 and av_hp < 95) then
+                            if (my_hp < astral_shift_hp and astral_shift_cd == 0) then
+                                check_cast("Astral Shift")
+                            elseif (healing_stream_cd == 0 and av_hp < 95) then
                                 check_cast("Healing Stream Totem")
                             elseif (ancestral_guidance_cd == 0 and av_hp < 80) then
                                 check_cast("Ancestral Guidance")
                             elseif (lightning_shield_duration == -1) then
                                 check_cast("Lightning Shield")
-                            elseif (earth_elemental_cd == 0) then
+                            elseif (earth_elemental_cd == 0 and tank_hp < 40) then
                                 check_cast("Earth Elemental")
-                            elseif (storm_elemental_cd == 0) then
+                            elseif (storm_elemental_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Storm Elemental")
-                            elseif (fire_elemental_cd == 0) then
+                            elseif (fire_elemental_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Fire Elemental")
-                            elseif (berserking_cd == 0) then
+                            elseif (berserking_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Berserking")
                             elseif (target_hp > min_dot_hp and flame_shock_duration < 1 and flame_shock_cd == 0) then
                                 check_cast("Flame Shock")
@@ -1417,12 +1347,13 @@ return {
             in_combat = env:evaluate_variable("myself.is_in_combat")
             healer_name = env:evaluate_variable("get_healer_name")
             tank_name = env:evaluate_variable("get_tank_name")
-            food_name = "Conjured Mana Cake" -- Mage foods
-
-            -- food_name = "Conjured Mana Strudel" -- Mage foods
-            --food_name = "Conjured Mana Pie" -- Mage foods
+            -- Mage food
+            food_name = "Conjured Mana Pudding"
+            -- food_name = "Conjured Mana Cake"
+            -- food_name = "Conjured Mana Strudel"
+            -- food_name = "Conjured Mana Pie"
             food_buff = "167152" -- Replenishment
-            debug = false
+            debug = true
             debug_spells = false
             -- Support Functions - return true if there is work to do
             function release_on_wipe()
@@ -1435,7 +1366,10 @@ return {
                 end
                 if (wipe) then
                     --release (might need to pause to let others catchup)
-                    env:execute_action("set_next_waypoint", 1)
+                    local waypoint = 1
+                    print("Releasing and resetting waypoint to :", waypoint)
+                    -- env:execute_action("set_waypoint", waypoint)
+                    env:execute_action("set_next_waypoint", waypoint)
                     env:execute_action("release_spirit")
                 end
             end
@@ -1639,10 +1573,10 @@ return {
                 local res_spell = "Resurrection"
                 local party_buff = "21562"
                 local party_spell = "Power Word: Fortitude"
-                local individual_spell = "Levitate"
-                local individual_buff = "Levitate"
+                -- local individual_spell = "Levitate"or anyone_need_individual_buff(env, individual_buff, individual_spell)
+                -- local individual_buff = "Levitate"
                 local self_heal = "Shadow Mend"
-                if (check_hybrid(env, res_spell, self_heal) or anyone_need_party_buff(env, party_buff, party_spell) or anyone_need_individual_buff(env, individual_buff, individual_spell)) then
+                if (check_hybrid(env, res_spell, self_heal) or anyone_need_party_buff(env, party_buff, party_spell)) then
                     return true
                 end
             elseif player_class == "PALADIN" then
@@ -1675,10 +1609,10 @@ return {
                 local res_spell = "Ancestral Spirit"
                 local self_heal = "Healing Surge"
                 local tank_buff = "Earth Shield"
-                local individual_spell = "Water Walking"
-                local individual_buff = "Water Walking"
+                -- local individual_spell = "Water Walking" or anyone_need_individual_buff(env, individual_buff, individual_spell)
+                -- local individual_buff = "Water Walking"
                 local charges = 10
-                if (check_hybrid(env, res_spell, self_heal) or tank_needs_buff(env, tank_buff, charges) or anyone_need_individual_buff(env, individual_buff, individual_spell)) then
+                if (check_hybrid(env, res_spell, self_heal) or tank_needs_buff(env, tank_buff, charges)) then
                     return true
                 end
             end

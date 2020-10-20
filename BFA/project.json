@@ -1,0 +1,204 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Atal'Dazar",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Atal'Dazar"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -848.4,
+          2082.5,
+          725.1
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "atal_dazar"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Freehold",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -1586.7,
+          -1002.6,
+          73.5
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "freehold"
+      ]
+    },
+    {
+      "name": "Testing",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Training Dummy",
+        "value": [
+          1890.6,
+          -4624.3,
+          66.5
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "training"
+      ]
+    },
+    {
+      "name": "Orgrimar",
+      "rendezvous": {
+        "actions": [],
+        "name": "Broken Tusk Inn",
+        "value": [
+          1572.1,
+          -4441.7,
+          16.1
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "bank"
+      ]
+    },
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 40.0
+      },
+      "name": "Horseman",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Horseman"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          1124.1,
+          520.2,
+          0.7
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "hh"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Farming Pugilists",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Farming Pugilists"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Saber",
+        "value": [
+          -1811.1,
+          1594.8,
+          93.8
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "pugilist",
+        "sabertuskt"
+      ]
+    }
+  ],
+  "scripts": [
+    "code"
+  ]
+}

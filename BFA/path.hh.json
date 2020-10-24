@@ -1,4 +1,23 @@
 {
+  "loot": true,
+  "pve": {
+    "attacks": [
+      {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 40.0
+      }
+    ]
+  },
+  "skin": {
+    "conditions": {
+      "type": "and",
+      "value": []
+    },
+    "range": 40.0
+  },
   "value": [
     {
       "actions": [],

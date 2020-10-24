@@ -24,7 +24,14 @@
                 party_info = GetHomePartyInfo()
                 if (party_info ~= nil) then
                     for id, name in pairs(party_info) do
-                        print("Welcome to :", name)
+                        isTank, isHeal, isDPS = UnitGroupRolesAssigned(Unit)
+                        if (isTank) then
+                            print("Welcome to the tank :", name)
+                        elseif (isDPS) then
+                            print("Welcome to the deeps :", name)
+                        elseif (isHeal) then
+                            print("Finally, a healer! :", name)
+                        end
                         table.insert(party, name)
                     end
                 end
@@ -59,8 +66,8 @@
                     [87024] = "Cauterized",
                     [87023] = "Cauterize",
                     [225080] = "Reincarnation",
+                    [57724] = "Sated",
                     [1604] = "Dazed"
-                    -- Undispellable
                 }
             end
             return known_debuffs
@@ -217,6 +224,30 @@
             local waypoint = 17
             print("Switching to boss waypoint :", waypoint)
             env:execute_action("set_next_waypoint", waypoint)
+        end,
+        fight_boss = function(env, boss_name)
+            if (boss_name) then
+                RunMacroText("/target " .. boss_name)
+                local hp = UnitHealth("target")
+                local boss_dead = UnitIsDead("target")
+            else
+                print("Warning, no boss specified!")
+            end
+        end,
+        choose_wm_route= function(env)
+            local bottom_left = 282408
+            local bottom_right = 282409
+            local top_right = 282766
+            local top_right = 282768
+
+        end,
+        group_up = function(env)
+            party_info = GetHomePartyInfo()
+            if (party_info ~= nil) then
+                local grouped = true
+                for id, name in pairs(party_info) do
+                end
+            end
         end
     },
     -- Define rotation
@@ -225,14 +256,13 @@
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            print(":: Starting Combat Rotation ::")
-            debug = true
+            debug = false
             debug_spells = false
-            debug_frame = true
+            debug_frame = false
             debug_frame_setup = false
             in_steamvaults = false
             boss_mode = boss_mode or nil
-            game_timestamp = game_timestamp or 0
+            time = GetTime()
             safe_position = safe_position or 1
             fire_timer = fire_timer or 0
             moving = moving or false
@@ -246,7 +276,6 @@
             end
             debug_msg(false, "Begining combat init")
             -- Set up static data
-            known_debuffs = env:evaluate_variable("get_known_debuffs")
             known_spells = {
                 ["81297"] = "Consecration",
                 ["204301"] = "Blessed Hammer",
@@ -261,6 +290,7 @@
                 ["47666"] = "Penance"
             }
             known_buffs = env:evaluate_variable("get_known_buffs")
+            known_debuffs = env:evaluate_variable("get_known_debuffs")
             curses = env:evaluate_variable("get_curses")
             magics = env:evaluate_variable("get_magics")
             ignore_magic = env:evaluate_variable("get_ignore_magic")
@@ -269,7 +299,9 @@
             tremors = env:evaluate_variable("get_tremors")
             party = env:evaluate_variable("get_party")
             main_tank = env:evaluate_variable("get_tank_name")
-            bad_spells = env:evaluate_variable("get_bad_spells")
+            healer_name = env:evaluate_variable("get_healer_name")
+
+            bad_spells = bad_spells or env:evaluate_variable("get_bad_spells")
             safe_locations = env:evaluate_variable("get_safe_locations")
 
             if (debug or debug_frame_setup) then
@@ -311,8 +343,8 @@
                         --  RunMacroText("/p New spell found - Name :" .. spell_name .. " id :" .. spell_id)
                         end
                         if (bad_spells[spell_id]) then
-                            if (fire_timer < GetTime()) then -- turn off alerts for 2 seconds
-                                fire_timer = GetTime() + 2
+                            if (fire_timer < GetTime()) then
+                                fire_timer = GetTime() + 2 -- turn off alerts for 2 seconds
                                 print("You are stading in the fire, you should probably move.")
                                 standing_in_fire = true
                                 -- print(".. calling move function.")
@@ -348,43 +380,54 @@
             end
             function do_boss_mechanic()
                 -- number of dudes > 2 go to AoE mode
+                boss_fight = false
 
-                local count = get_aoe_count(15)
-                if (boss_mode == nil) then
-                    boss_mode = "Save_CDs"
-                    RunMacroText("/p  Saving Cooldowns")
-                elseif (count > 2 and boss_mode ~= "AoE") then
-                    local time = GetTime()
-                    if (aoe_timer_start == nil) then
-                        aoe_timer_start = time
-                        RunMacroText("/p  Staring timer")
-                    else
-                        if (player_class == "PALADIN") then
-                            if (time > aoe_timer_start + 3) then
-                                RunMacroText("/p  Engaging AoE mode")
-                                boss_mode = "AoE"
-                            end
+                if (boss_fight) then
+                    local count = get_aoe_count(15)
+                    if (boss_mode == nil) then
+                        boss_mode = "Save_CDs"
+                        RunMacroText("/p  Saving Cooldowns")
+                    elseif (count > 2 and boss_mode ~= "AoE") then
+                        if (aoe_timer_start == nil) then
+                            aoe_timer_start = time
+                            RunMacroText("/p  Staring timer")
                         else
-                            if (time > aoe_timer_start + 9) then
-                                RunMacroText("/p  Engaging AoE mode")
-                                boss_mode = "AoE"
+                            if (player_class == "PALADIN") then
+                                if (time > aoe_timer_start + 3) then
+                                    RunMacroText("/p  Engaging AoE mode")
+                                    boss_mode = "AoE"
+                                end
+                            else
+                                if (time > aoe_timer_start + 9) then
+                                    RunMacroText("/p  Engaging AoE mode")
+                                    boss_mode = "AoE"
+                                end
                             end
                         end
+                    elseif (count < 2 and boss_mode == "AoE") then
+                        RunMacroText("/p  Returning to nomal")
+                        boss_mode = "Normal"
                     end
-                elseif (count < 2 and boss_mode == "AoE") then
-                    RunMacroText("/p  Returning to nomal")
-                    boss_mode = "Normal"
                 end
             end
 
             function get_npc_info()
-                --  count = GetNpcCount([center | x, y, z][, range][, rangeOption])
-                --npc = GetNpcWithIndex(index)
-                local count = GetNpcCount()
-                print("There ", " NPCs")
-                if (count > 0) then
-                    for i = 1, count do
-                        print(" NPC: ", GetNpcWithIndex(i))
+                enemies = {}
+                local prevous_found = true
+                for i = 1, 20 do
+                    local unit = "nameplate" .. i
+                    if (previous_found and env:evaluate_variable("unit." .. unit)) then
+                        if (UnitAffectingCombat(unit)) then
+                            local unit_health = UnitHealth(unit)
+                            if (unit_health) then
+                                local unit_name = UnitName(unit)
+                                if (unit_name) then
+                                    print("Encountering unit :", unit_name, " on ", unit_health, "% hp")
+                                end
+                            end
+                        end
+                    else
+                        prevous_found = false
                     end
                 end
             end
@@ -562,62 +605,75 @@
                 return result
             end
 
-            function check_for_new_debuffs(magic, poison, disease, curse)
-                -- Check for new debuffs
-                for _, player_name in ipairs(party) do
-                    for i = 1, 5 do
-                        local name, _, _, type, duration, _, _, _, _, spellId = UnitDebuff(player_name, i)
-                        if (name) then
-                            local debuff_present = known_debuffs[spellId]
-                            if (debuff_present == nil) then
-                                known_debuffs[spellId] = name
-                                if (type) then
-                                    RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId .. " type: " .. type .. " duration :" .. duration)
-                                else
-                                    RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
-                                end
-                            end
-                        end
-                    end
-                end
-            end
-
             function handle_new_debuffs_mpdc(magic, poison, disease, curse)
-                -- Check for new debuffs
+                --     -- Check for new debuffs
                 for _, player_name in ipairs(party) do
                     for i = 1, 5 do
                         local name, _, _, type, duration, _, _, _, _, spellId = UnitDebuff(player_name, i)
                         if (name) then
-                            local debuff_present = known_debuffs[spellId]
-                            if (debuff_present == nil) then
-                                known_debuffs[spellId] = name
-                                if (type) then
-                                    RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId .. " type: " .. type .. " duration :" .. duration)
-                                    local ignore = false
-                                    if (type == "Magic" and magic) then
-                                        for id, name in pairs(ignore_magic) do
-                                            if (spellId == id) then
-                                                ignore = true
-                                                print("Ignoring debuff :", name)
-                                            end
-                                        end
+                            local id = tonumber(spellId)
+                            local debuff_present = known_debuffs[id]
+                            if (type) then
+                                if (type == "Magic" and magic) then
+                                    local _, cd, _, _ = GetSpellCooldown(magic)
+                                    if (cd == 0) then
+                                        local ignore = false
+                                        -- for id, name in pairs(ignore_magic) do
+                                        --     if (spellId == id) then
+                                        --         ignore = true
+                                        --         print("Ignoring debuff :", name)
+                                        --     end
+                                        -- end
                                         if (ignore == false) then
+                                            debug_msg(false, "Using " .. magic .. " to dispel :" .. name)
                                             RunMacroText("/cast [target=" .. player_name .. "]" .. magic)
                                             return true
                                         end
-                                    elseif (type == "Poison" and poison) then
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. poison)
-                                        return true
-                                    elseif (type == "Disease" and disease) then
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. disease)
-                                        return true
-                                    elseif (type == "Curse" and curse) then
-                                        RunMacroText("/cast [target=" .. player_name .. "]" .. curse)
-                                        return true
+                                    else
+                                        debug_msg(false, magic .. " is on cd, ignoring " .. name)
                                     end
-                                else
-                                    RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
+                                elseif (type == "Poison" and poison) then
+                                    local _, cd, _, _ = GetSpellCooldown(poison)
+                                    if (cd == 0) then
+                                        local ignore = false
+                                        if (ignore == false) then
+                                            debug_msg(false, "Using " .. poison .. " to dispel :" .. name)
+                                            RunMacroText("/cast [target=" .. player_name .. "]" .. poison)
+                                            return true
+                                        end
+                                    else
+                                        debug_msg(false, poison .. " is on cd, ignoring " .. name)
+                                    end
+                                elseif (type == "Disease" and disease) then
+                                    local _, cd, _, _ = GetSpellCooldown(disease)
+                                    if (cd == 0) then
+                                        local ignore = false
+                                        if (ignore == false) then
+                                            debug_msg(false, "Using " .. disease .. " to dispel :" .. name)
+                                            RunMacroText("/cast [target=" .. player_name .. "]" .. disease)
+                                            return true
+                                        end
+                                    else
+                                        debug_msg(false, disease .. " is on cd, ignoring " .. name)
+                                    end
+                                elseif (type == "Curse" and curse) then
+                                    local _, cd, _, _ = GetSpellCooldown(curse)
+                                    if (cd == 0) then
+                                        local ignore = false
+                                        if (ignore == false) then
+                                            debug_msg(false, "Using " .. curse .. " to dispel :" .. name)
+                                            RunMacroText("/cast [target=" .. player_name .. "]" .. curse)
+                                            return true
+                                        end
+                                    else
+                                        debug_msg(false, disease .. " is on cd, ignoring " .. name)
+                                    end
                                 end
+                                if (debuff_present == false) then
+                                    RunMacroText("/p Debuff found - Name :" .. name .. " id :" .. spellId .. " type: " .. type)
+                                end
+                            elseif (debuff_present == false) then
+                                RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
                             end
                         end
                     end
@@ -625,22 +681,49 @@
                 return false
             end
 
-            function check_for_new_buffs()
-                -- Check for new buffs
-                for _, player_name in ipairs(party) do
-                    for i = 1, 10 do
-                        local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(player_name, i)
-                        if (spellId) then
-                            local buff_present = known_duffs[spellId]
-                            if (buff_present == nil) then
-                                known_buffs[spellId] = name
-                                RunMacroText("/p New buff found - Name :" .. name .. " id :" .. spellId)
+            function handle_interupts(spell)
+                local _, kick_cd, _, _ = GetSpellCooldown(spell)
+                if (kick_cd == 0) then
+                    -- local casting = UnitCastingInfo("target")
+                    local name, text, texture, startTimeMS, endTimeMS, isTradeSkill, castID, notInterruptible, spellId = UnitCastingInfo("target")
+                    if (spellId and name and endTimeMS) then
+                        if (notInterruptible == false) then
+                            debug_msg(true, "Interuptable spell found :" .. name .. " finishing in :" .. endTimeMS .. " current time " .. time)
+                            if ((2 + time) * 1000 > endTimeMS) then
+                                check_cast(spell)
+                                if (spell and name) then
+                                    debug_msg(true, ".. " .. spell .. " used to squish :" .. name)
+                                end
+                                return true
                             end
                         end
                     end
                 end
+                return false
             end
 
+            function handle_purges(spell)
+                local _, purge_cd, _, _ = GetSpellCooldown(spell)
+                local unit = "target"
+                if (purge_cd == 0) then
+                    for i = 1, 5 do
+                        local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i, "HELPFUL")
+                        if (name) then
+                            if (type == "MAGIC" and (spell == "Dispel Magic" or spell == "Purge")) then
+                                check_cast(spell)
+                                return true
+                            elseif (type == "ENRAGE" and spell == "Soothe") then
+                                check_cast(spell)
+                                return true
+                            elseif (stealable and spell == "Spellsteal") then
+                                check_cast(spell)
+                                return true
+                            end
+                        end
+                    end
+                end
+                return false
+            end
             -----------------------------------------------------------------------
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
@@ -720,6 +803,7 @@
                     if (debug) then
                         print("In paladin, no gcd")
                     end
+                    get_npc_info()
                     --  eecc = env:evaluate_variable("npcs.attackable.range_8") -- temporay debugging
 
                     -- A fix for no target spam
@@ -740,15 +824,17 @@
                         if (debug) then
                             print(" .. dispell result :", dispelling)
                         end
-                        if (dispelling == false) then
+                        local kicking = handle_interupts("Rebuke")
+
+                        if (dispelling == false and kicking == false) then
                             if (debug) then
                                 print(".. fetching cooldowns")
                             end
                             local _, hoj_cd = GetSpellCooldown("Hammer of Justice")
                             local _, lotp_cd = GetSpellCooldown("Light Of The Protector")
-                            -- local _, ardent_cd = GetSpellCooldown("Ardent Defender")
+                            local _, ardent_cd = GetSpellCooldown("Ardent Defender")
                             local _, hands_cd = GetSpellCooldown("Lay on Hands")
-                            -- local _, guardian_cd = GetSpellCooldown("Guardian Of Ancient Kings")
+                            local _, guardian_cd = GetSpellCooldown("Guardian Of Ancient Kings")
                             local _, divine_protection_cd = GetSpellCooldown("Divine Protection")
                             local _, avenging_wrath_cd = GetSpellCooldown("Avenging Wrath")
 
@@ -760,13 +846,13 @@
                             end
                             -- defensives
                             if (hands_cd == 0 and life < 10) then
-                                -- elseif (guardian_cd == 0 and life < 40) then
-                                --     check_cast("Guardian Of Ancient Kings")
-                                -- elseif (ardent_cd == 0 and life < 60) then
-                                --     check_cast("Ardent Defender")
+                                RunMacroText("/cast [@player] Lay on Hands")
+                            elseif (guardian_cd == 0 and life < 40) then
+                                check_cast("Guardian Of Ancient Kings")
+                            elseif (ardent_cd == 0 and life < 60) then
                                 -- elseif (lotp_cd == 0 and life < 70) then
                                 --     check_cast("Light Of The Protector")
-                                RunMacroText("/cast [@player] Lay on Hands")
+                                check_cast("Ardent Defender")
                             elseif (divine_protection_cd == 0 and life < 80) then
                                 check_cast("Divine Protection")
                             elseif (life < 70 and holy_power >= 3) then
@@ -774,7 +860,7 @@
                             else
                                 --    print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count()) -- temporay debugging
                                 if (debug) then
-                                    print(".. loading tank cooldowns")
+                                    print(".. loading dps cooldowns")
                                 end
                                 -- tank rotation
                                 local _, avengers_shield_cd = GetSpellCooldown("Avenger's Shield")
@@ -828,17 +914,13 @@
                         local _, penance_cd, _, _ = GetSpellCooldown("Penance")
                         local rapture_duration = env:evaluate_variable("myself.buff.Rapture")
 
-                        debug_msg(false, ".. checking debuffs")
-
-                        -- log out any exiting new buffs and debuffs
-                        check_for_new_debuffs(env)
-                        debug_msg(false, ".. checking buffs")
-                        --check_for_new_buffs(env) -- seems crashy
-                        debug_msg(false, ".. checking dispells")
                         -- Dispell everyone
-                        local dispelling = dispell("Purify", magics, diseases)
+                        debug_msg(false, ".. checking dispells")
+                        local dispelling = handle_new_debuffs_mpdc("Purify", false, "Purify", false)
                         debug_msg(false, ".. dispelling :" .. tostring(dispelling))
-                        if (dispelling == false) then
+                        debug_msg(false, ".. checking purges")
+                        local purging = handle_purges("Dispel Magic")
+                        if (dispelling == false and purging == false) then
                             debug_msg(false, ".. not dispelling")
                             -- Check for Desperate Prayer
                             local health_check = 60
@@ -1010,11 +1092,13 @@
                     ------------------------------------------------------------------------------------------------------------
                     ---------------                                      Druid                                   ---------------
                     ------------------------------------------------------------------------------------------------------------
-                    local dispelling = dispell("Remove Corruption", curses, poisons)
+                    local dispelling = handle_new_debuffs_mpdc(false, "Remove Corruption", false, "Remove Corruption")
+                    debug_msg(false, ".. checking purges")
+                    local purging = handle_purges("Soothe")
                     -- Check for priority targets
                     get_priority_target()
                     do_boss_mechanic()
-                    if (dispelling == false) then
+                    if (dispelling == false and purging == false) then
                         if (UnitExists("target")) then
                             -- Check for renewal
                             local my_hp = env:evaluate_variable("myself.health")
@@ -1030,11 +1114,18 @@
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
                             local _, alignment_cd, _, _ = GetSpellCooldown("Celestial Alignment") --39
                             local _, incarnation_cd, _, _ = GetSpellCooldown("Incarnation: Chosen of Elune")
+                            local _, fury_cd, _, _ = GetSpellCooldown("Fury of Elune")
                             local _, beam_cd, _, _ = GetSpellCooldown("Solar Beam")
                             local _, rebirth_cd, _, _ = GetSpellCooldown("Rebirth")
+                            local _, innervate_cd, _, _ = GetSpellCooldown("Innervate")
+                            local healer_mana = UnitPower(healer_name, 0)
+                            local healer_max_mana = UnitPowerMax(healer_name, 0)
+                            local healer_mp = 100 * healer_mana / healer_max_mana
                             local solar_emp_duration = env:evaluate_variable("myself.buff.164545") -- solar
                             local lunar_empduration = env:evaluate_variable("myself.buff.164547") -- lunar
                             local astral_power = UnitPower("player", 8)
+                            local knows_stellar_flare = GetSpellInfo("Stellar Flare")
+                            local flare_duration = env:evaluate_variable("unit.target.debuff.Stellar Flare")
 
                             previous_eclipse = env:evaluate_variable("get_previous_eclipse")
                             local lunar_eclipse_duration = env:evaluate_variable("myself.buff.Eclipse (Lunar)")
@@ -1068,12 +1159,16 @@
                                 check_cast("/cast Renewal")
                             elseif (my_hp < barksin_hp and barkskin_cd == 0) then
                                 check_cast("/cast Barkskin")
+                            elseif (healer_mp < 65 and innervate_cd == 0) then
+                                RunMacroText("/cast [target=" .. healer_name .. "] Innervate")
                             elseif (combat_res) then
                                 RunMacroText("/cast [target=" .. player_name .. "] Rebirth")
                             elseif (target_hp > min_dot_hp and sunfire_duration < 1 and eclipse_charges == 0) then
                                 check_cast("Sunfire")
                             elseif (target_hp > min_dot_hp and moonfire_duration < 1 and eclipse_charges == 0) then
                                 check_cast("Moonfire")
+                            elseif (knows_stellar_flare and target_hp > min_dot_hp and flare_duration < 1 and eclipse_charges == 0) then
+                                check_cast("Stellar Flare")
                             elseif (alignment_cd == 0 and boss_mode ~= "Save_CDs") then
                                 check_cast("Celestial Alignment")
                             elseif (berserking_cd == 0 and boss_mode ~= "Save_CDs") then
@@ -1084,17 +1179,19 @@
                                 check_cast("Wrath")
                             elseif (lunar_empduration > 0 and eclipse_charges == 0) then
                                 check_cast("Lunar Strike")
-                            elseif (alignment_eclipse_duration > 0) then -- Lunar Eclipse
-                                if (enemy_count < 2) then
+                            elseif (alignment_eclipse_duration > 0) then -- Double Eclipse
+                                if (fury_cd == 0) then
+                                    check_cast("Fury Of Elune")
+                                elseif (enemy_count < 2) then -- Count it as Lunar
                                     previous_eclipse = "Lunar"
                                     if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
                                         check_cast("Starsurge")
                                     elseif (astral_power >= 50) then
-                                        check_cast("Starsurge")
+                                        cast_at_target_position("Starfall", main_tank)
                                     else
                                         check_cast("Wrath")
                                     end
-                                else
+                                else -- Count it as Solar
                                     previous_eclipse = "Solar"
                                     if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
                                         check_cast("Starsurge")
@@ -1106,7 +1203,9 @@
                                 end
                             elseif (lunar_eclipse_duration > 0) then -- Lunar Eclipse
                                 previous_eclipse = "Lunar"
-                                if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
+                                if (fury_cd == 0) then
+                                    check_cast("Fury Of Elune")
+                                elseif (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
                                     check_cast("Starsurge")
                                 elseif (astral_power >= 50) then
                                     cast_at_target_position("Starfall", main_tank)
@@ -1115,17 +1214,21 @@
                                 end
                             elseif (solar_eclipse_duration > 0) then -- Solar Eclipse
                                 previous_eclipse = "Solar"
-                                if (astral_power >= 30 and solar_eclipse_duration > 6) then
+                                if (fury_cd == 0) then
+                                    check_cast("Fury Of Elune")
+                                elseif (astral_power >= 30 and solar_eclipse_duration > 6) then
                                     check_cast("Starsurge")
                                 else
                                     check_cast("Wrath")
                                 end
                             elseif (beam_cd == 0) then -- why not :)
                                 check_cast("Solar Beam")
-                            elseif (sunfire_duration < 6) then -- pandemic dots
+                            elseif (sunfire_duration < 6 and target_hp > min_dot_hp) then -- pandemic dots
                                 check_cast("Sunfire")
-                            elseif (moonfire_duration < 7) then
+                            elseif (moonfire_duration < 7 and target_hp > min_dot_hp) then
                                 check_cast("Moonfire")
+                            elseif (knows_stellar_flare and target_hp > min_dot_hp and flare_duration < 8) then
+                                check_cast("Stellar Flare")
                             elseif (previous_eclipse == "Solar") then -- Switch to Lunar
                                 if (eclipse_charges < 2) then
                                     eclipse_charges = eclipse_charges + 1
@@ -1154,14 +1257,17 @@
                     if (debug) then
                         print(".. Mage Code checking curses")
                     end
-                    local dispelling = dispell("Remove Curse", curses)
+                    local dispelling = handle_new_debuffs_mpdc(false, false, false, "Remove Curse")
+                    local kicking = handle_interupts("Counterspell")
+                    debug_msg(false, ".. checking purges")
+                    local purging = handle_purges("Spellsteal")
                     -- Check for priority targets
                     get_priority_target()
                     do_boss_mechanic()
                     if (debug) then
                         print(".. done with curses")
                     end
-                    if (dispelling == false) then
+                    if (dispelling == false and kicking == false and purging == false) then
                         if (UnitExists("target")) then
                             if (debug) then
                                 print(".. dps rotation setup")
@@ -1187,6 +1293,8 @@
                             local _, fireblast_cd, _, _ = GetSpellCooldown("Fire Blast")
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
                             local _, combustion_cd, _, _ = GetSpellCooldown("Combustion")
+                            local _, meteor_cd, _, _ = GetSpellCooldown("Meteor")
+
                             local _, rune_cd, _, _ = GetSpellCooldown("Rune Of Power")
 
                             local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges("Phoenix Flames")
@@ -1201,6 +1309,8 @@
                                 check_cast("Combustion")
                             elseif (rune_cd == 0 and power_duration == -1) then
                                 check_cast("Rune of Power")
+                            elseif (meteor_cd == 0) then
+                                cast_at_target_position("Meteor", main_tank)
                             elseif (hotstreak_duration > 0) then
                                 if (enemy_count > 2) then
                                     cast_at_target_position("Flamestrike", main_tank)
@@ -1240,7 +1350,9 @@
                     get_priority_target()
                     do_boss_mechanic()
                     local dispelling = dispell("Cleanse Spirit", curses) --or tremor()
-                    if (dispelling == false) then
+                    local dispelling = handle_new_debuffs_mpdc(false, false, false, "Cleanse Spirit")
+                    local kicking = handle_interupts("Wind Shear")
+                    if (dispelling == false and kicking == false) then
                         if (UnitExists("target")) then
                             local target_hp = env:evaluate_variable("unit.target.health")
                             local _, flame_shock_cd, _, _ = GetSpellCooldown("188389")
@@ -1253,8 +1365,11 @@
                             local _, berserking_cd, _, _ = GetSpellCooldown("Berserking")
                             local _, ancestral_guidance_cd, _, _ = GetSpellCooldown("Ancestral Guidance")
                             local _, bloodlust_cd, _, _ = GetSpellCooldown("Bloodlust")
+                            local _, ascendance_cd, _, _ = GetSpellCooldown("Ascendance")
+
                             local _, healing_stream_cd, _, _ = GetSpellCooldown("Healing Stream Totem")
                             local tank_hp = env:evaluate_variable("unit." .. main_tank .. ".health")
+                            local tank_distance = env:evaluate_variable("unit." .. main_tank .. ".distance")
 
                             local lightning_shield_duration = env:evaluate_variable("myself.buff.Lightning Shield")
                             if (debug) then
@@ -1312,7 +1427,9 @@
                                 check_cast("Berserking")
                             elseif (target_hp > min_dot_hp and flame_shock_duration < 1 and flame_shock_cd == 0) then
                                 check_cast("Flame Shock")
-                            elseif (enemy_count > 2 and maelstrom >= 60) then
+                            elseif (ascendance_cd == 0) then
+                                check_cast("Ascendance")
+                            elseif (enemy_count > 2 and maelstrom >= 60 and tank_distance < 40) then
                                 cast_at_target_position("Earthquake", main_tank)
                             elseif (maelstrom ~= nil and maelstrom >= 60) then
                                 check_cast("Earth Shock")
@@ -1343,6 +1460,11 @@
                     print("debug: ", tostring(message))
                 end
             end
+
+            if (false) then
+                return false
+            end
+
             party = env:evaluate_variable("get_party")
             in_combat = env:evaluate_variable("myself.is_in_combat")
             healer_name = env:evaluate_variable("get_healer_name")
@@ -1353,7 +1475,7 @@
             -- food_name = "Conjured Mana Strudel"
             -- food_name = "Conjured Mana Pie"
             food_buff = "167152" -- Replenishment
-            debug = true
+            debug = false
             debug_spells = false
             -- Support Functions - return true if there is work to do
             function release_on_wipe()
@@ -1365,7 +1487,6 @@
                     end
                 end
                 if (wipe) then
-                    --release (might need to pause to let others catchup)
                     local waypoint = 1
                     print("Releasing and resetting waypoint to :", waypoint)
                     -- env:execute_action("set_waypoint", waypoint)
@@ -1534,6 +1655,7 @@
                     local is_drinking = env:evaluate_variable("myself.buff." .. food_buff)
                     if (is_drinking == -1) then
                         RunMacroText("/use " .. food_name)
+                        debug_msg(false, "Can't start, need to drink")
                     end
                 elseif (max_mana > 0) then
                     if (mp < 90) then
@@ -1541,6 +1663,7 @@
                         local is_drinking = env:evaluate_variable("myself.buff." .. food_buff)
                         if (is_drinking == -1) then
                             RunMacroText("/use " .. food_name)
+                            debug_msg(false, "Can't start, need to eat")
                         end
                     end
                 end
@@ -1549,6 +1672,7 @@
 
             --TODO:
             function need_mage_food(env, food)
+                -- food_name
                 return false
             end
             ------------------------------------------------------------------------------------------------------------

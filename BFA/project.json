@@ -32,9 +32,10 @@
           725.1
         ]
       },
+      "skin": true,
       "start_distance": 20,
       "value": [
-        "atal_dazar"
+        "leather"
       ]
     },
     {
@@ -193,8 +194,167 @@
       "skin": true,
       "start_distance": 20,
       "value": [
-        "pugilist",
-        "sabertuskt"
+        "pugilist"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "grind",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "grind"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "By the lake",
+        "value": [
+          -240.3,
+          1789.3,
+          423.6
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "thumpers"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Spiders",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Spiders"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Stairs",
+        "value": [
+          3560.8,
+          2594.0,
+          40.0
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "spiders"
+      ]
+    },
+    {
+      "is_direct": true,
+      "loot": true,
+      "name": "Tol Dagor",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Tol Dagor"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 8.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 8.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          85.3,
+          -2933.5,
+          1.4
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "td"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Waycrest Manor",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Waycrest Manor"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Inside Entrance",
+        "value": [
+          -607.3,
+          -259.3,
+          236.0
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "wmtr",
+        "wm",
+        "wmtl"
       ]
     }
   ],

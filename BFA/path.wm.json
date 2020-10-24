@@ -1,0 +1,65 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -626.4,
+        -260.2,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -614.2,
+        -259.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -572.7,
+        -259.9,
+        236.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right treash",
+      "value": [
+        -593.4,
+        -284.3,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Trash",
+      "value": [
+        -570.8,
+        -233.9,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -558.5,
+        -259.3,
+        242.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Choose Path",
+      "value": [
+        -558.5,
+        -259.3,
+        242.2
+      ]
+    }
+  ]
+}

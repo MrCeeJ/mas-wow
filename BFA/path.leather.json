@@ -1,0 +1,228 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -848.4,
+        2082.5,
+        725.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -828.3,
+        2098.7,
+        726.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -827.7,
+        2135.1,
+        694.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -833.6,
+        2148.2,
+        692.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -846.9,
+        2162.6,
+        693.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -852.6,
+        2190.7,
+        678.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -850.9,
+        2239.4,
+        677.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -847.7,
+        2283.6,
+        678.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -919.6,
+        2293.1,
+        677.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -771.0,
+        2294.2,
+        677.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -844.2,
+        2279.8,
+        678.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -844.2,
+        2294.1,
+        678.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back at stair junction",
+      "value": [
+        -845.8,
+        2191.4,
+        678.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right Side",
+      "value": [
+        -790.1,
+        2189.6,
+        662.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Again",
+      "value": [
+        -846.4,
+        2192.9,
+        678.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Side",
+      "value": [
+        -943.4,
+        2190.4,
+        665.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "And again",
+      "value": [
+        -856.9,
+        2190.7,
+        678.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back to Entrance",
+      "value": [
+        -868.0,
+        2136.2,
+        693.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of Stairs",
+      "value": [
+        -868.5,
+        2098.8,
+        726.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Start",
+      "value": [
+        -848.7,
+        2073.6,
+        725.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 10,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "leave_lfd"
+        }
+      ],
+      "name": "Reset",
+      "value": [
+        -848.7,
+        2073.6,
+        725.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Jungle Hut",
+      "value": [
+        -97.9,
+        1526.4,
+        396.5
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 10,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "queue_lfd",
+          "value": 1668
+        }
+      ],
+      "name": "Requeue",
+      "value": [
+        -97.9,
+        1526.4,
+        396.5
+      ]
+    }
+  ]
+}

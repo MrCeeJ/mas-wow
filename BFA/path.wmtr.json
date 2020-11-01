@@ -80,6 +80,15 @@
     },
     {
       "actions": [],
+      "name": "Corner",
+      "value": [
+        -536.9,
+        -378.1,
+        242.9
+      ]
+    },
+    {
+      "actions": [],
       "name": "Bottom",
       "value": [
         -555.6,

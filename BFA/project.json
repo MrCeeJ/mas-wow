@@ -218,7 +218,14 @@
             },
             "range": 40.0
           }
-        ]
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
       },
       "rendezvous": {
         "actions": [],
@@ -354,7 +361,9 @@
       "value": [
         "wmtr",
         "wm",
-        "wmtl"
+        "wmtl",
+        "wmb",
+        "wmtl2"
       ]
     }
   ],

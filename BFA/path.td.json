@@ -1749,38 +1749,52 @@
     },
     {
       "actions": [],
-      "name": "Tank Position",
+      "name": "Move forward",
       "value": [
-        162.7,
-        -2720.8,
-        78.1
+        145.7,
+        -2692.9,
+        74.4
       ]
     },
     {
       "actions": [],
-      "name": "D1",
+      "name": "Postions Ready",
       "value": [
-        169.6,
-        -2711.8,
-        75.0
+        114.3,
+        -2674.7,
+        74.4
       ]
     },
     {
       "actions": [],
-      "name": "D2",
+      "name": "Boss",
       "value": [
-        154.0,
-        -2714.2,
-        74.8
+        125.1,
+        -2660.3,
+        74.4
       ]
     },
     {
-      "actions": [],
-      "name": "H1",
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "overseer_korgus_positions"
+        }
+      ],
+      "name": "Positions",
       "value": [
-        158.7,
-        -2696.4,
-        74.9
+        114.3,
+        -2674.7,
+        74.4
       ]
     },
     {

@@ -1,0 +1,210 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Dooway",
+      "value": [
+        -488.8,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -488.4,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 290130,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open Door",
+      "value": [
+        -488.4,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -515.0,
+        -208.3,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "OP Basement",
+      "value": [
+        -513.7,
+        -230.8,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -504.6,
+        -258.5,
+        226.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -519.7,
+        -259.7,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -528.4,
+        -237.3,
+        216.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downer",
+      "value": [
+        -564.8,
+        -226.9,
+        202.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downest",
+      "value": [
+        -588.8,
+        -245.4,
+        191.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Junction",
+      "value": [
+        -591.4,
+        -259.8,
+        191.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Grafiti",
+      "value": [
+        -580.7,
+        -277.9,
+        191.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Miniboss",
+      "value": [
+        -553.3,
+        -260.5,
+        185.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lord and Lady Waycrest",
+      "value": [
+        -549.4,
+        -262.6,
+        185.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Drop Down",
+      "value": [
+        -542.9,
+        -256.3,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Horror",
+      "value": [
+        -522.2,
+        -296.2,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tunnel",
+      "value": [
+        -517.1,
+        -304.0,
+        180.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -489.6,
+        -329.2,
+        159.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Gorak Tul",
+      "value": [
+        -448.2,
+        -344.0,
+        152.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -626.4,
+        -260.2,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

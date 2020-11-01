@@ -212,64 +212,28 @@
     },
     {
       "actions": [],
-      "name": "Trash",
+      "name": "Banquet hall",
       "value": [
-        -483.4,
-        -297.7,
+        -481.8,
+        -313.9,
         236.0
       ]
     },
     {
       "actions": [],
-      "name": "Corner",
+      "name": "Reveler",
       "value": [
-        -535.8,
-        -299.3,
-        236.0
-      ]
-    },
-    {
-      "actions": [],
-      "name": "More",
-      "value": [
-        -534.6,
-        -330.6,
-        236.0
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Banqueting Room",
-      "value": [
-        -517.0,
-        -329.9,
-        236.0
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Servants",
-      "value": [
-        -517.2,
-        -334.5,
-        236.0
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Clearing",
-      "value": [
-        -514.1,
-        -325.9,
+        -475.0,
+        -319.8,
         235.6
       ]
     },
     {
       "actions": [],
-      "name": "Gorger",
+      "name": "More Revelers",
       "value": [
-        -494.8,
-        -320.8,
+        -491.1,
+        -321.0,
         235.6
       ]
     },
@@ -284,7 +248,7 @@
     },
     {
       "actions": [],
-      "name": "Door",
+      "name": "Door _ 33",
       "value": [
         -481.8,
         -313.9,

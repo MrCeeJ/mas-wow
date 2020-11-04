@@ -837,15 +837,6 @@
     },
     {
       "actions": [],
-      "name": "Boss",
-      "value": [
-        143.0,
-        -2655.0,
-        44.1
-      ]
-    },
-    {
-      "actions": [],
       "name": "Jess Howlis",
       "pve": {
         "attacks": [
@@ -861,106 +852,6 @@
       "value": [
         131.2,
         -2653.4,
-        44.1
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Way Back 1",
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 8.0
-          }
-        ]
-      },
-      "value": [
-        140.4,
-        -2652.9,
-        44.1
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Way Back 2",
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 8.0
-          }
-        ]
-      },
-      "value": [
-        158.3,
-        -2664.7,
-        44.1
-      ]
-    },
-    {
-      "actions": [],
-      "name": "WAy Back 2.1",
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 8.0
-          }
-        ]
-      },
-      "value": [
-        163.5,
-        -2669.1,
-        44.1
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Way Back 3",
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 8.0
-          }
-        ]
-      },
-      "value": [
-        179.4,
-        -2680.0,
-        44.1
-      ]
-    },
-    {
-      "actions": [],
-      "name": "Way Back 4",
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 8.0
-          }
-        ]
-      },
-      "value": [
-        161.6,
-        -2707.9,
         44.1
       ]
     },
@@ -1766,15 +1657,6 @@
       ]
     },
     {
-      "actions": [],
-      "name": "Boss",
-      "value": [
-        125.1,
-        -2660.3,
-        74.4
-      ]
-    },
-    {
       "actions": [
         {
           "conditions": {
@@ -1794,6 +1676,15 @@
       "value": [
         114.3,
         -2674.7,
+        74.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        125.1,
+        -2660.3,
         74.4
       ]
     },

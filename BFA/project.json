@@ -167,6 +167,11 @@
       "pve": {
         "attacks": [
           {
+            "blacklist": [
+              130575,
+              130577,
+              131574
+            ],
             "conditions": {
               "type": "and",
               "value": []
@@ -184,11 +189,11 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Saber",
+        "name": "Path",
         "value": [
-          -1811.1,
-          1594.8,
-          93.8
+          -1660.9,
+          1375.5,
+          137.1
         ]
       },
       "skin": true,
@@ -212,11 +217,16 @@
       "pve": {
         "attacks": [
           {
+            "blacklist": [
+              130575,
+              130577,
+              131574
+            ],
             "conditions": {
               "type": "and",
               "value": []
             },
-            "range": 40.0
+            "range": 45.0
           }
         ],
         "defense": {
@@ -295,6 +305,9 @@
       "pve": {
         "attacks": [
           {
+            "blacklist": [
+              133972
+            ],
             "conditions": {
               "type": "and",
               "value": []
@@ -363,11 +376,61 @@
         "wm",
         "wmtl",
         "wmb",
-        "wmtl2"
+        "wmtl2",
+        "wmbr"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Farming Hippos",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Farming Hippos"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              123502
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Path",
+        "value": [
+          -175.1,
+          -184.8,
+          210.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "hippo"
       ]
     }
   ],
   "scripts": [
-    "code"
+    "code",
+    "rotation"
   ]
 }

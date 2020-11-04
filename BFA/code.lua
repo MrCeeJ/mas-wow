@@ -1,4 +1,6 @@
-﻿return {
+﻿-- rotation = require("rotation")
+
+return {
     -- Define custom variables.
     variables = {
         ["get_fire_event_frame"] = function(env)
@@ -137,6 +139,37 @@
                     -- Waycrest Manor
                     ["Sister Malady"] = function(env)
                         local found = false
+                        local override_target = nil
+                        for b = 1, 3 do
+                            local target = "boss" .. b
+                            for i = 1, 5 do
+                                local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
+                                if (name == "Focusing Iris") then --"260805"
+                                    found = true
+                                    print("Targeting Boss :", b)
+                                    override_target = target
+                                end
+                            end
+                        end
+                        -- if (env:evaluate_variable("myself.debuff.")) then Jump if you have thing
+                        -- end
+
+                        -- Target people with Soul Manipulation to free them
+                        for i, player_name in ipairs(party) do
+                            local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff.Soul Manipulation") --225788
+                            if (debuff_duration == 0) then
+                                print("Mind Control found, need to attack :", player_name)
+                                override_target = player_name
+                            end
+                        end
+                        if (override_target ~= nil) then
+                            RunMacroText("/target " .. override_target)
+                        end
+                        -- Move apart if you have Unstable Runic Mark
+                    end,
+                    ["Sister Briar"] = function(env)
+                        local found = false
+                        local override_target = nil
                         for b = 1, 3 do
                             local target = "boss" .. b
                             for i = 1, 5 do
@@ -144,7 +177,7 @@
                                 if (name == "Focusing Iris") then --"260805"
                                     found = true
                                     -- print("Targeting Boss :", b)
-                                    RunMacroText("/target " .. target)
+                                    override_target = target
                                 end
                             end
                         end
@@ -154,9 +187,43 @@
                         -- Target people with Soul Manipulation to free them
                         for i, player_name in ipairs(party) do
                             local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff.Soul Manipulation")
-                            if (debuff_duration > 0) then
-                                RunMacroText("/target " .. player_name)
+                            if (debuff_duration == 0) then
+                                print("Mind Control found, need to attack :", player_name)
+                                override_target = player_name
                             end
+                        end
+                        if (override_target ~= nil) then
+                            RunMacroText("/target " .. override_target)
+                        end
+                        -- Move apart if you have Unstable Runic Mark
+                    end,
+                    ["Sister Solena"] = function(env)
+                        local found = false
+                        local override_target = nil
+                        for b = 1, 3 do
+                            local target = "boss" .. b
+                            for i = 1, 5 do
+                                local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
+                                if (name == "Focusing Iris") then --"260805"
+                                    found = true
+                                    -- print("Targeting Boss :", b)
+                                    override_target = target
+                                end
+                            end
+                        end
+                        -- if (env:evaluate_variable("myself.debuff.")) then Jump if you have thing
+                        -- end
+
+                        -- Target people with Soul Manipulation to free them
+                        for i, player_name in ipairs(party) do
+                            local debuff_duration = env:evaluate_variable("unit." .. player_name .. ".debuff.Soul Manipulation")
+                            if (debuff_duration == 0) then
+                                print("Mind Control found, need to attack :", player_name)
+                                override_target = player_name
+                            end
+                        end
+                        if (override_target ~= nil) then
+                            RunMacroText("/target " .. override_target)
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
@@ -185,9 +252,19 @@
                     ["Knight Captain Valyri"] = function(env)
                     end,
                     ["Overseer Korgus"] = function(env)
-                        --
                     end,
-                    ["257483"] = function(env)
+                    -- Freehold
+                    ["Skycap'n Kragg"] = function(env)
+                    end,
+                    ["Captain Raoul"] = function(env)
+                    end,
+                    ["Captain Eudora"] = function(env)
+                    end,
+                    ["Captain Jolly"] = function(env)
+                    end,
+                    ["Trothak"] = function(env)
+                    end,
+                    ["Harlan Sweete"] = function(env)
                     end,
                     -- Bonus
                     ["Headless Horseman"] = function(env)
@@ -345,6 +422,8 @@
     },
     -- Define rotation
     rotations = {
+        -- combat = rotation.combat_rotation,
+        -- combat = function(env, is_pulling) end,
         --------------------------------------------------------------------------------------------------------------------
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
@@ -470,6 +549,7 @@
                 -- RunMacroText("/target Pumpkin Fiend")
                 -- RunMacroText("/target Pulsing ")
                 -- RunMacroText("/target Reanimation Totem")
+                RunMacroText("/target Thumpknuckle")
             end
 
             function do_boss_mechanic()
@@ -533,6 +613,9 @@
 
             function cast_at_target_position(spell, target)
                 local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(target)
+                if (tank_x == nil) then
+                    tank_x, tank_y, tank_z = wmbapi.ObjectPosition("player")
+                end
                 debug_msg(false, "Target position :[" .. tank_x .. "," .. tank_x .. "," .. tank_z .. "]")
                 local pos = {tank_x, tank_y, tank_z}
                 local args = {["spell"] = spell, ["position"] = pos}
@@ -686,6 +769,16 @@
                 return result
             end
 
+            function use_trinkets()
+                for i=13,14 do
+                    local itemID = GetInventoryItemID("player", i) -- 13 for trinket1, 14 for trinket2
+                    local start, duration, enable = GetItemCooldown(itemID)
+                    if (enable == 1 and duration == 0) then
+                        RunMacroText("/use " .. i) 
+                    end
+                end                                
+            end
+
             function handle_new_debuffs_mpdc(magic, poison, disease, curse)
                 --     -- Check for new debuffs
                 debug_dispells = false
@@ -764,7 +857,7 @@
                                     RunMacroText("/p New debuff found - Name :" .. name .. " id :" .. spellId)
                                 end
                             else
-                                debug_msg(debug_dispells, "No debuffs found :(" .. i.." /5)")
+                                debug_msg(debug_dispells, "No debuffs found :(" .. i .. " /5)")
                             end
                         end
                         debug_msg(debug_dispells, "No debuffs found on player :" .. player_name)
@@ -799,7 +892,7 @@
                                 if (game_time + 1.5 > end_time) then
                                     check_cast(spell)
                                     if (spell and name) then
-                                    debug_msg(true, ".. " .. spell .. " used to squish :" .. name)
+                                        debug_msg(true, ".. " .. spell .. " used to squish :" .. name)
                                     end
                                     return true
                                 end
@@ -938,13 +1031,12 @@
                             local _, guardian_cd = GetSpellCooldown("Guardian Of Ancient Kings")
                             local _, divine_protection_cd = GetSpellCooldown("Divine Protection")
                             local _, avenging_wrath_cd = GetSpellCooldown("Avenging Wrath")
-                            local shining_light_duration = env:evaluate_variable("myself.buff.327510")  -- shining light
+                            local shining_light_duration = env:evaluate_variable("myself.buff.327510") -- shining light (182104 is for building stacks)
 
                             local life = env:evaluate_variable("myself.health")
                             local holy_power = UnitPower("player", 9)
                             -- Trinket spam
-                            RunMacroText("/use 13")
-                            RunMacroText("/use 14")
+                            use_trinkets()
                             debug_msg(false, ".. checking defensives")
                             -- defensives
                             if (hands_cd == 0 and life < 10) then
@@ -976,7 +1068,7 @@
                                 local shield_duration = env:evaluate_variable("myself.buff.132403") -- 132403 for dmg reduction effect, 53600 for spell
 
                                 debug_msg(false, ".. performing roation")
-                                        
+
                                 -- Use shield if we have taken damage and don't have it up
                                 if (life < 100 and shield_duration == -1 and holy_power > 2 and env:evaluate_variable("npcs.attackable.range_8") >= 1) then
                                     check_cast("Shield of the Righteous")
@@ -1037,8 +1129,7 @@
                                 local _, solace_cd, _, _ = GetSpellCooldown("Power Word: Solace")
                                 local _, fiend_cd, _, _ = GetSpellCooldown("Shadowfiend")
                                 -- Trinket spam
-                                RunMacroText("/use 13")
-                                RunMacroText("/use 14")
+                                use_trinkets()
                                 if (schism_cd == 0 and not moving) then
                                     --cast("Schism")
                                     check_cast("Schism")
@@ -1242,7 +1333,7 @@
 
                             -- check combat res
                             combat_res = false
-                            if (rebirth_cd == 0) then
+                            if (rebirth_cd == 0 and party) then
                                 for _, player_name in ipairs(party) do
                                     if (combat_res == false) then
                                         local distance = env:evaluate_variable("unit." .. player_name .. ".distance")
@@ -1257,14 +1348,14 @@
                             -- barkskin, soothe
                             combat_res = false -- something up with it
                             -- Trinket spam
-                            RunMacroText("/use 13")
-                            RunMacroText("/use 14")
+                            use_trinkets()
                             --rotation
+                            debug_msg(false, ".. starting moonkin pewpew")
                             if (my_hp < renewal_hp and renewal_cd == 0) then
                                 check_cast("Renewal")
                             elseif (my_hp < barksin_hp and barkskin_cd == 0) then
                                 check_cast("Barkskin")
-                            elseif (healer_mp < 65 and innervate_cd == 0) then
+                            elseif (healer_mp ~= 0 and healer_mp < 65 and innervate_cd == 0) then
                                 RunMacroText("/cast [target=" .. healer_name .. "] Innervate")
                             elseif (combat_res) then
                                 RunMacroText("/cast [target=" .. player_name .. "] Rebirth")
@@ -1291,8 +1382,6 @@
                                     previous_eclipse = "Lunar"
                                     if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
                                         check_cast("Starsurge")
-                                    elseif (astral_power >= 50) then
-                                        cast_at_target_position("Starfall", main_tank)
                                     else
                                         check_cast("Wrath")
                                     end
@@ -1301,7 +1390,7 @@
                                     if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
                                         check_cast("Starsurge")
                                     elseif (astral_power >= 50) then
-                                        check_cast("Starsurge")
+                                        cast_at_target_position("Starfall", main_tank)
                                     else
                                         check_cast("Starfire")
                                     end
@@ -1312,7 +1401,7 @@
                                     check_cast("Fury Of Elune")
                                 elseif (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
                                     check_cast("Starsurge")
-                                elseif (astral_power >= 50) then
+                                elseif (enemy_count > 2 and astral_power >= 50) then
                                     cast_at_target_position("Starfall", main_tank)
                                 else
                                     check_cast("Starfire")
@@ -1321,8 +1410,10 @@
                                 previous_eclipse = "Solar"
                                 if (fury_cd == 0) then
                                     check_cast("Fury Of Elune")
-                                elseif (astral_power >= 30 and solar_eclipse_duration > 6) then
+                                elseif (enemy_count < 3 and astral_power >= 30 and solar_eclipse_duration > 6) then
                                     check_cast("Starsurge")
+                                elseif (enemy_count > 2 and astral_power >= 50) then
+                                    cast_at_target_position("Starfall", main_tank)
                                 else
                                     check_cast("Wrath")
                                 end
@@ -1351,6 +1442,7 @@
                                     check_cast("Wrath")
                                 end
                             end
+                            debug_msg(false, ".. done zapping things for this gcd")
                         else
                             RunMacroText("/assist " .. main_tank)
                         end
@@ -1400,8 +1492,7 @@
 
                             local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges("Phoenix Flames")
                             -- Trinket spam
-                            RunMacroText("/use 13")
-                            RunMacroText("/use 14")
+                            use_trinkets()
 
                             if (my_hp < invis_hp and invis_cd == 0) then
                                 check_cast("Invisibility")
@@ -1502,9 +1593,7 @@
                                 end
                             end
                             av_hp = total_hp / players
-                            -- Trinket spam
-                            RunMacroText("/use 13")
-                            RunMacroText("/use 14")
+                            use_trinkets()
 
                             if (my_hp < astral_shift_hp and astral_shift_cd == 0) then
                                 check_cast("Astral Shift")
@@ -1592,11 +1681,27 @@
                 end
             end
 
-            function check_hybrid(env, res_spell, self_heal)
+            function check_hybrid(env, res_spell, heal_spell)
                 --return does_healer_need_mana(env) or need_to_eat(env) or is_anyone_dead(env)
-                --need_self_heal(env, self_heal)
-                return anyone_need_resing(env, res_spell) or still_resing(env, res_spell) or need_to_eat(env) or does_healer_need_mana(env)
+                return anyone_need_resing(env, res_spell) or still_resing(env, res_spell) or check_heal(env, heal_spell) or need_to_eat(env) or does_healer_need_mana(env)
                 --or need_mage_food(env)
+            end
+
+            function check_heal(env, spell)
+                local hp = 80
+                local name = nil
+                for _, player_name in ipairs(party) do
+                    local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
+                    if (target_hp > 0 and target_hp < hp) then
+                        hp = target_hp
+                        name = player_name
+                    end
+                end
+                if (name) then
+                    RunMacroText("/cast [target=" .. name .. "]" .. spell)
+                    return true
+                end
+                return false
             end
 
             function anyone_need_resing(env, spell)
@@ -1610,8 +1715,6 @@
                         RunMacroText("/cast [target=" .. player_name .. "]" .. spell)
                         debug_msg(false, "Can't start, " .. player_name .. " still needs resing")
                     end
-                end
-                if (reviving) then
                 end
                 return reviving
             end
@@ -1755,7 +1858,7 @@
                         debug_msg(false, "Can't start, need to drink")
                     end
                 elseif (max_mana > 0) then
-                    if (mp < 90) then
+                    if (mp < 30) then
                         thirsty = true
                         local is_drinking = env:evaluate_variable("myself.buff." .. food_buff)
                         if (is_drinking == -1) then
@@ -1791,20 +1894,20 @@
             if player_class == "PRIEST" then
                 -- ** PRIEST ** --
                 local res_spell = "Mass Resurrection" -- 37
-                local res_spell = "Resurrection"
+                -- local res_spell = "Resurrection"
                 local party_buff = "21562"
                 local party_spell = "Power Word: Fortitude"
                 -- local individual_spell = "Levitate"or anyone_need_individual_buff(env, individual_buff, individual_spell)
                 -- local individual_buff = "Levitate"
-                local self_heal = "Shadow Mend"
-                if (check_hybrid(env, res_spell, self_heal) or anyone_need_party_buff(env, party_buff, party_spell)) then
+                local heal_spell = "Shadow Mend"
+                if (check_hybrid(env, res_spell, heal_spell) or anyone_need_party_buff(env, party_buff, party_spell)) then
                     return true
                 end
             elseif player_class == "PALADIN" then
                 -- ** PALADIN ** --
                 local res_spell = "Redemption"
-                local self_heal = "Flash Of Light"
-                if (check_hybrid(env, res_spell, self_heal)) then
+                local heal_spell = "Flash Of Light"
+                if (check_hybrid(env, res_spell, heal_spell)) then
                     return true
                 end
             elseif player_class == "MAGE" then
@@ -1820,20 +1923,20 @@
             elseif player_class == "DRUID" then
                 -- ** DRUID ** --
                 local res_spell = "Revive"
-                local self_heal = "Regrowth"
-                if (check_hybrid(env, res_spell, self_heal)) then
+                local heal_spell = "Regrowth"
+                if (check_hybrid(env, res_spell, heal_spell)) then
                     return true
                 end
                 RunMacroText("/cast [noform:4] Moonkin Form")
             elseif player_class == "SHAMAN" then
                 -- ** SHAMAN ** --
                 local res_spell = "Ancestral Spirit"
-                local self_heal = "Healing Surge"
+                local heal_spell = "Healing Surge"
                 local tank_buff = "Earth Shield"
                 -- local individual_spell = "Water Walking" or anyone_need_individual_buff(env, individual_buff, individual_spell)
                 -- local individual_buff = "Water Walking"
                 local charges = 10
-                if (check_hybrid(env, res_spell, self_heal) or tank_needs_buff(env, tank_buff, charges)) then
+                if (check_heal(env, heal_spell) or check_hybrid(env, res_spell, heal_spell) or tank_needs_buff(env, tank_buff, charges)) then
                     return true
                 end
             end

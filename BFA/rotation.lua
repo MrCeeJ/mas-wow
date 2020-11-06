@@ -1,6 +1,5 @@
--- local NAME = ...
--- local R = {}
-return {
+-- local addonName, NS = ...
+--[[
 combat_rotation = function (env, is_pulling)
         debug = false
         debug_spells = false
@@ -1207,5 +1206,6 @@ combat_rotation = function (env, is_pulling)
             print("Nothing to do, gcd:", global_cd, " moving out of fire :", moving)
         end
     end
-}
--- return R
+end
+--]]
+-- NS.combat_rotation = combat_rotation

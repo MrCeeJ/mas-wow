@@ -473,6 +473,15 @@
     },
     {
       "actions": [],
+      "name": "Corner",
+      "value": [
+        -534.0,
+        -281.6,
+        178.9
+      ]
+    },
+    {
+      "actions": [],
       "name": "Horror",
       "value": [
         -522.2,

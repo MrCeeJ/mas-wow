@@ -1,4 +1,4 @@
-﻿-- rotation = require("rotation")
+﻿-- local addonName, NS = ...
 
 return {
     -- Define custom variables.
@@ -146,7 +146,7 @@ return {
                                 local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
                                 if (name == "Focusing Iris") then --"260805"
                                     found = true
-                                    print("Targeting Boss :", b)
+                                    -- print("Targeting Boss :", b)
                                     override_target = target
                                 end
                             end
@@ -422,7 +422,7 @@ return {
     },
     -- Define rotation
     rotations = {
-        -- combat = rotation.combat_rotation,
+        -- combat = NS.combat_rotation,
         -- combat = function(env, is_pulling) end,
         --------------------------------------------------------------------------------------------------------------------
         ---------------                                          Combat                                      ---------------
@@ -908,7 +908,7 @@ return {
                 local unit = "target"
                 if (purge_cd == 0) then
                     for i = 1, 5 do
-                        local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i, "HELPFUL")
+                        local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i)
                         if (name) then
                             if (type == "MAGIC" and (spell == "Dispel Magic" or spell == "Purge")) then
                                 check_cast(spell)
@@ -1661,7 +1661,7 @@ return {
             -- food_name = "Conjured Mana Strudel"
             -- food_name = "Conjured Mana Pie"
             food_buff = "167152" -- Replenishment
-            debug = false
+            debug = true
             debug_spells = false
             -- Support Functions - return true if there is work to do
             function release_on_wipe()
@@ -1692,12 +1692,13 @@ return {
                 local name = nil
                 for _, player_name in ipairs(party) do
                     local target_hp = env:evaluate_variable("unit." .. player_name .. ".health")
-                    if (target_hp > 0 and target_hp < hp) then
+                    local distance = env:evaluate_variable("unit." .. player_name .. ".distance")
+                    if (target_hp > 0 and target_hp < hp and distance <= 30) then
                         hp = target_hp
                         name = player_name
                     end
                 end
-                if (name) then
+                if (name and spell) then
                     RunMacroText("/cast [target=" .. name .. "]" .. spell)
                     return true
                 end

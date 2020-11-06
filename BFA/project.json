@@ -430,7 +430,7 @@
     }
   ],
   "scripts": [
-    "code",
-    "rotation"
+    "rotation",
+    "code"
   ]
 }

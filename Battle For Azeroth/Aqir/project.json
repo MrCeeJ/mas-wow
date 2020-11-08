@@ -1,0 +1,158 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Camp Grind",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Camp Grind"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Hill",
+        "value": [
+          -10439.1,
+          847.8,
+          52.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "camp"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Dest",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Dest"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          -10491.5,
+          1177.2,
+          44.8
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "dest"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Panda",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Panda"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 30.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Meeting Stone",
+        "value": [
+          1285.6,
+          334.3,
+          433.5
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "panda"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Ruin",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Ruin"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Bottom of stairs",
+        "value": [
+          1365.4,
+          1037.0,
+          345.7
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "ruin"
+      ]
+    }
+  ],
+  "scripts": [
+    "roatation",
+    "code"
+  ]
+}

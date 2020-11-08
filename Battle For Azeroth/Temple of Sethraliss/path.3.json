@@ -1,0 +1,190 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Sporecaller Middle",
+      "value": [
+        1032.9,
+        1058.3,
+        33.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        1033.0,
+        1068.7,
+        33.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        1033.2,
+        1091.3,
+        32.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        1033.4,
+        1134.7,
+        14.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tentwocle",
+      "value": [
+        1069.2,
+        1134.2,
+        16.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tentacle",
+      "value": [
+        1100.6,
+        1130.0,
+        14.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of stairs",
+      "value": [
+        1088.7,
+        1142.0,
+        14.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of Stairs",
+      "value": [
+        1083.7,
+        1179.7,
+        19.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs near left pack",
+      "value": [
+        1079.9,
+        1197.8,
+        19.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right",
+      "value": [
+        1066.7,
+        1219.8,
+        17.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "T1",
+      "value": [
+        1062.1,
+        1240.2,
+        13.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "T2",
+      "value": [
+        1072.0,
+        1289.0,
+        8.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "RP",
+      "value": [
+        1091.3,
+        1318.7,
+        5.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        1200.3,
+        1496.1,
+        -181.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Attack",
+      "value": [
+        1191.1,
+        1485.3,
+        -181.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        1184.0,
+        1454.7,
+        -181.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        1199.0,
+        1481.5,
+        -181.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "B",
+      "value": [
+        1184.0,
+        1454.7,
+        -181.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "M",
+      "value": [
+        1199.0,
+        1481.5,
+        -181.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "B",
+      "value": [
+        1184.0,
+        1454.7,
+        -181.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "M",
+      "value": [
+        1199.0,
+        1481.5,
+        -181.7
+      ]
+    }
+  ]
+}

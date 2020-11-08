@@ -1,0 +1,158 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Adderis and Aspix",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Merektha"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          636.7,
+          1253.0,
+          98.5
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Merektha",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Galvazzt"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Middle of Cragmaw",
+        "value": [
+          859.7,
+          983.4,
+          39.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Galvazzt",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Avatar of Sethraliss"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Sporecaller Middle",
+        "value": [
+          1032.9,
+          1058.3,
+          33.3
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "loot": false,
+      "name": "Avatar of Sethraliss",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Avatar of Sethraliss"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          1200.3,
+          1496.1,
+          -181.7
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4"
+      ]
+    }
+  ],
+  "scripts": [
+    "code"
+  ]
+}

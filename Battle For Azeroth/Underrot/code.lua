@@ -284,17 +284,6 @@
                     ['Unbound Abomination'] = function(env)
                         RunMacroText("/tar Blood Visage")
                     end,
-                    -- Temple of Sethralis                    
-                    ["Adderis"] = function(env)
-                    end,
-                    ["Aspix"] = function(env)
-                    end,                    
-                    ['Merektha'] = function(env)
-                    end,
-                    ['Galvazzt'] = function(env)
-                    end,
-                    ['Avatar of Sethraliss'] = function(env)
-                    end,
                     -- Bonus
                     ['Headless Horseman'] = function(env)
                         -- number of dudes > 2 go to AoE mode

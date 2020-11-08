@@ -1,0 +1,183 @@
+{
+  "path_groups": [
+    {
+      "loot": {
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "name": "Sand Queen",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Jess Howlis"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ],
+        "distance_max": {
+          "default": 35.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          85.3,
+          -2933.5,
+          1.4
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Jess Howlis",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Knight Captain Valria"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 5.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Sand Queen Respawn",
+        "value": [
+          119.9,
+          -2743.3,
+          3.7
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Knight Captain Valria",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Overseer Korgus"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Jess Howlis Respawn",
+        "value": [
+          131.2,
+          -2653.4,
+          44.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Overseer Korgus",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Valira Respawn Point",
+        "value": [
+          60.3,
+          -2692.6,
+          60.8
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4"
+      ]
+    },
+    {
+      "name": "Victory",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Victory"
+        }
+      ],
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "start_distance": 20,
+      "value": []
+    }
+  ],
+  "scripts": [
+    "utils",
+    "rotations",
+    "code"
+  ]
+}

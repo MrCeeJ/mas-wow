@@ -1,0 +1,99 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        85.3,
+        -2933.5,
+        1.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Line up",
+      "value": [
+        85.1,
+        -2871.6,
+        -0.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "All the crocs",
+      "value": [
+        134.6,
+        -2855.8,
+        3.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Crocks and rocks",
+      "value": [
+        82.5,
+        -2816.5,
+        3.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        48.4,
+        -2824.5,
+        2.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        45.7,
+        -2784.0,
+        3.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        79.7,
+        -2770.0,
+        3.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        87.6,
+        -2784.2,
+        3.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "The Sand Queen",
+      "value": [
+        119.9,
+        -2743.3,
+        3.7
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "name": "wait",
+      "value": [
+        103.0,
+        -2771.7,
+        4.3
+      ]
+    }
+  ]
+}

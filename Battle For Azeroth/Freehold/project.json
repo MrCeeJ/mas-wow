@@ -1,0 +1,156 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Skycap'n Kragg",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Council o' Captains"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -1586.7,
+          -1002.6,
+          73.5
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Council o' Captains",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Ring of Booty"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Ring of Booty",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Harlan Sweete"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Harlan Sweete",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Harlan Sweete"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          0.0,
+          0.0,
+          0.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4"
+      ]
+    }
+  ],
+  "scripts": [
+    "code"
+  ]
+}

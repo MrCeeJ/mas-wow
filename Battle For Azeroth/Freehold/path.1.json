@@ -1,0 +1,226 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -1586.7,
+        -1002.6,
+        73.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1605.5,
+        -988.4,
+        72.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1625.6,
+        -989.2,
+        74.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1638.8,
+        -970.1,
+        74.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom of stairs",
+      "value": [
+        -1635.9,
+        -978.2,
+        74.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top of Stairs",
+      "value": [
+        -1651.2,
+        -993.6,
+        85.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs near left pack",
+      "value": [
+        -1665.1,
+        -1013.8,
+        86.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Right",
+      "value": [
+        -1684.3,
+        -1001.7,
+        87.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "All the way right pack",
+      "value": [
+        -1701.8,
+        -987.9,
+        86.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs far left pack",
+      "value": [
+        -1693.5,
+        -1025.4,
+        87.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Upstairs far right pack",
+      "value": [
+        -1732.1,
+        -1028.3,
+        87.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mouse",
+      "value": [
+        -1781.8,
+        -1000.5,
+        88.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs down",
+      "value": [
+        -1788.8,
+        -958.7,
+        86.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        -1794.0,
+        -949.9,
+        81.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ground",
+      "value": [
+        -1779.3,
+        -940.1,
+        73.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Enforcer",
+      "value": [
+        -1747.4,
+        -924.5,
+        74.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Accross Bridge",
+      "value": [
+        -1849.0,
+        -792.4,
+        58.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Round Back",
+      "value": [
+        -1855.7,
+        -775.4,
+        55.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -1821.9,
+        -745.9,
+        56.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bridge",
+      "value": [
+        -1822.8,
+        -737.7,
+        57.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Over",
+      "value": [
+        -1815.9,
+        -731.5,
+        59.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Temp",
+      "value": [
+        -1829.7,
+        -717.4,
+        42.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Juggler",
+      "value": [
+        -1823.6,
+        -676.1,
+        40.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Captains",
+      "value": [
+        -1778.9,
+        -685.4,
+        40.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -1586.7,
+        -1002.6,
+        73.5
+      ]
+    }
+  ]
+}

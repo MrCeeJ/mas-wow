@@ -190,6 +190,7 @@
     }
   ],
   "scripts": [
+    "utils",
     "code"
   ]
 }

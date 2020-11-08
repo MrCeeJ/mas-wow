@@ -1,4 +1,7 @@
-﻿return {
+﻿local utils = _G.getUtils
+local rotations = _G.getRotations
+
+return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
@@ -283,6 +286,17 @@
                     end,
                     ['Unbound Abomination'] = function(env)
                         RunMacroText("/tar Blood Visage")
+                    end,
+                    -- Temple of Sethralis                    
+                    ["Adderis"] = function(env)
+                    end,
+                    ["Aspix"] = function(env)
+                    end,                    
+                    ['Merektha'] = function(env)
+                    end,
+                    ['Galvazzt'] = function(env)
+                    end,
+                    ['Avatar of Sethraliss'] = function(env)
                     end,
                     -- Bonus
                     ['Headless Horseman'] = function(env)

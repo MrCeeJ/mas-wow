@@ -1,4 +1,7 @@
-﻿return {
+﻿local utils = _G.getUtils
+local rotations = _G.getRotations
+
+return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)

@@ -1,6 +1,6 @@
 _G.getRotations = {}
 
-combat_rotation = function(env, _)
+combat = function(env, is_pulling)
     debug = false
     debug_spells = false
     debug_frame = false
@@ -14,6 +14,7 @@ combat_rotation = function(env, _)
     aoe_timer_start = aoe_timer_start or nil
     player_class = player_class or env:evaluate_variable('myself.class')
     boss_mechanics = boss_mechanics or env:evaluate_variable('get_boss_mechanics')
+    standing_in_fire = standing_in_fire or false
 
     debug_msg = function(override, message)
         if (debug or override) then
@@ -242,7 +243,8 @@ combat_rotation = function(env, _)
             for i, player_name in ipairs(party) do
                 for id, name in pairs(tremors) do
                     if (name) then
-                        local debuff_duration = env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
+                        local debuff_duration =
+                            env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
                         if (debuff_duration > 0) then
                             RunMacroText('/s Unleashing the totem to free ' .. player_name .. ' of ' .. name)
                             dispelling = true
@@ -265,7 +267,8 @@ combat_rotation = function(env, _)
                 if (debuff_1 ~= nil) then
                     for id, name in pairs(debuff_1) do
                         if (name and dispelling == false) then
-                            local debuff_duration = env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
+                            local debuff_duration =
+                                env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
                             if (debuff_duration > 0) then
                                 if (debug) then
                                     RunMacroText('/s Dispelling ' .. player_name .. ' of ' .. name)
@@ -279,7 +282,8 @@ combat_rotation = function(env, _)
                 if (debuff_2 ~= nil) then
                     for id, name in pairs(debuff_2) do
                         if (name and dispelling == false) then
-                            local debuff_duration = env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
+                            local debuff_duration =
+                                env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
                             if (debuff_duration > 0) then
                                 if (debug) then
                                     RunMacroText('/s Dispelling ' .. player_name .. ' of ' .. name)
@@ -293,7 +297,8 @@ combat_rotation = function(env, _)
                 if (debuff_3 ~= nil) then
                     for id, name in pairs(debuff_3) do
                         if name and (dispelling == false) then
-                            local debuff_duration = env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
+                            local debuff_duration =
+                                env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
                             if (debuff_duration > 0) then
                                 if (debug) then
                                     RunMacroText('/s Dispelling ' .. player_name .. ' of ' .. name)
@@ -362,6 +367,34 @@ combat_rotation = function(env, _)
         end
         debug_msg(false, message)
         return result
+    end
+
+    function check_azerites()
+        local spell = 'Concentrated Flame'
+        local name, _, _, _, _, _, spellId = GetSpellInfo(spell)
+        local _, spell_cd, enabled = GetSpellCooldown(spellId)
+        if (debug_spells) then
+            print('Spell CD :', spell_cd, ' enabled :', enabled)
+        end
+        if (enabled and spell_cd == 0) then
+            result = env:execute_action('cast', spellId)
+
+            if (result) then
+                return true
+            end
+        end
+
+        return false
+    end
+
+    function use_trinkets()
+        for i = 13, 14 do
+            local itemID = GetInventoryItemID('player', i) -- 13 for trinket1, 14 for trinket2
+            local start, duration, enable = GetItemCooldown(itemID)
+            if (enable == 1 and duration == 0) then
+                RunMacroText('/use ' .. i)
+            end
+        end
     end
 
     function handle_new_debuffs_mpdc(magic, poison, disease, curse)
@@ -437,7 +470,8 @@ combat_rotation = function(env, _)
                             end
                             if (debuff_present == false) then
                                 RunMacroText(
-                                    '/p Debuff found - Name :' .. name .. ' id :' .. spellId .. ' type: ' .. type
+                                    '/p Debuff found - Name :' ..
+                                        name .. ' id :' .. spellId .. ' type: ' .. type
                                 )
                             end
                         elseif (debuff_present == false) then
@@ -470,7 +504,10 @@ combat_rotation = function(env, _)
             if (name and spellId and endTimeMS) then
                 debug_msg(false, '.. checking target range')
                 local distance = env:evaluate_variable('unit.target.distance')
-                debug_msg(false, '.. distance ' .. name .. ' target distance :' .. distance .. ' max range' .. maxRange)
+                debug_msg(
+                    false,
+                    '.. distance ' .. name .. ' target distance :' .. distance .. ' max range' .. maxRange
+                )
                 if (distance <= maxRange) then
                     if (notInterruptible == false) then
                         local end_time = endTimeMS / 1000
@@ -495,10 +532,13 @@ combat_rotation = function(env, _)
         local _, purge_cd, _, _ = GetSpellCooldown(spell)
         local unit = 'target'
         if (purge_cd == 0) then
-            for i = 1, 5 do
-                local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i, 'HELPFUL')
+            for i = 1, 40 do
+                local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i) -- CANCELABLE ?
                 if (name) then
-                    if (type == 'MAGIC' and (spell == 'Dispel Magic' or spell == 'Purge')) then
+                    if (type == 'MAGIC' and spell == 'Dispel Magic') then
+                        check_cast(spell)
+                        return true
+                    elseif (type == 'MAGIC' and spell == 'Purge') then
                         check_cast(spell)
                         return true
                     elseif (type == 'ENRAGE' and spell == 'Soothe') then
@@ -516,6 +556,14 @@ combat_rotation = function(env, _)
     -----------------------------------------------------------------------
     ---------------------------    Positional Code    ---------------------
     -----------------------------------------------------------------------
+    function check_fire()
+        return false
+    end
+
+    function check_move()
+        return false
+    end
+
     function move_to_next_safe_location()
         if (moving) then
             -- print("Already moving, target is position :", safe_position)
@@ -624,8 +672,7 @@ combat_rotation = function(env, _)
                     local life = env:evaluate_variable('myself.health')
                     local holy_power = UnitPower('player', 9)
                     -- Trinket spam
-                    RunMacroText('/use 13')
-                    RunMacroText('/use 14')
+                    use_trinkets()
                     debug_msg(false, '.. checking defensives')
                     -- defensives
                     if (hands_cd == 0 and life < 10) then
@@ -668,6 +715,7 @@ combat_rotation = function(env, _)
                             check_cast('Shield of the Righteous')
                         elseif (avenging_wrath_cd == 0 and boss_mode ~= 'Save_CDs') then
                             check_cast('Avenging Wrath')
+                        elseif (check_azerites()) then
                         elseif (avengers_shield_cd == 0) then
                             check_cast("Avenger's Shield")
                         elseif
@@ -724,8 +772,7 @@ combat_rotation = function(env, _)
                         local _, solace_cd, _, _ = GetSpellCooldown('Power Word: Solace')
                         local _, fiend_cd, _, _ = GetSpellCooldown('Shadowfiend')
                         -- Trinket spam
-                        RunMacroText('/use 13')
-                        RunMacroText('/use 14')
+                        use_trinkets()
                         if (schism_cd == 0 and not moving) then
                             --cast("Schism")
                             check_cast('Schism')
@@ -752,7 +799,8 @@ combat_rotation = function(env, _)
                         debug_msg(false, 'Sorting finished')
                         debug_msg(false, '.. group healing')
                         -- If 3 or more people have taken damage and don't have Atonement cast Radiance (currently seems to double cast, same as druid empowerment)
-                        local radiance_charges, _, _, radiance_cd_duration, _ = GetSpellCharges('Power Word: Radiance')
+                        local radiance_charges, _, _, radiance_cd_duration, _ =
+                            GetSpellCharges('Power Word: Radiance')
                         if (radiance_charges > 0 and radiance_cd_duration < 18 and not moving) then
                             local sinners = 0
                             for _, player_name in ipairs(party) do
@@ -803,7 +851,9 @@ combat_rotation = function(env, _)
                                     local weakened_soul_duration =
                                         env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
                                     local shield_duration =
-                                        env:evaluate_variable('unit.' .. player_name .. '.buff.Power Word: Shield')
+                                        env:evaluate_variable(
+                                        'unit.' .. player_name .. '.buff.Power Word: Shield'
+                                    )
                                     if
                                         (shield_duration == -1 and
                                             (weakened_soul_duration == -1 or rapture_duration > 0))
@@ -866,6 +916,7 @@ combat_rotation = function(env, _)
                                 check_cast('Shadow Word: Pain')
                             elseif (schism_cd == 0 and not moving) then
                                 check_cast('Schism')
+                            elseif (check_azerites()) then
                             elseif (fiend_cd == 0 and boss_mode ~= 'Save_CDs') then
                                 check_cast('Shadowfiend')
                             elseif (solace_cd == 0) then
@@ -954,8 +1005,7 @@ combat_rotation = function(env, _)
                     -- barkskin, soothe
                     combat_res = false -- something up with it
                     -- Trinket spam
-                    RunMacroText('/use 13')
-                    RunMacroText('/use 14')
+                    use_trinkets()
                     --rotation
                     debug_msg(false, '.. starting moonkin pewpew')
                     if (my_hp < renewal_hp and renewal_cd == 0) then
@@ -966,12 +1016,14 @@ combat_rotation = function(env, _)
                         RunMacroText('/cast [target=' .. healer_name .. '] Innervate')
                     elseif (combat_res) then
                         RunMacroText('/cast [target=' .. player_name .. '] Rebirth')
+                    elseif (check_azerites()) then
                     elseif (target_hp > min_dot_hp and sunfire_duration < 1 and eclipse_charges == 0) then
                         check_cast('Sunfire')
                     elseif (target_hp > min_dot_hp and moonfire_duration < 1 and eclipse_charges == 0) then
                         check_cast('Moonfire')
                     elseif
-                        (knows_stellar_flare and target_hp > min_dot_hp and flare_duration < 1 and eclipse_charges == 0)
+                        (knows_stellar_flare and target_hp > min_dot_hp and flare_duration < 1 and
+                            eclipse_charges == 0)
                      then
                         check_cast('Stellar Flare')
                     elseif (alignment_cd == 0 and boss_mode ~= 'Save_CDs') then
@@ -1101,8 +1153,7 @@ combat_rotation = function(env, _)
 
                     local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
                     -- Trinket spam
-                    RunMacroText('/use 13')
-                    RunMacroText('/use 14')
+                    use_trinkets()
 
                     if (my_hp < invis_hp and invis_cd == 0) then
                         check_cast('Invisibility')
@@ -1114,6 +1165,7 @@ combat_rotation = function(env, _)
                         check_cast('Combustion')
                     elseif (rune_cd == 0 and power_duration == -1) then
                         check_cast('Rune of Power')
+                    elseif (check_azerites()) then
                     elseif (meteor_cd == 0) then
                         cast_at_target_position('Meteor', main_tank)
                     elseif (hotstreak_duration > 0) then
@@ -1133,7 +1185,10 @@ combat_rotation = function(env, _)
                             end
                         elseif (enemy_count > 5 and ring_of_frost_cd == 0) then
                             cast_at_target_position('Ring of Frost', main_tank)
-                        elseif (power_duration == 0 and phoenix_charges == 1 and phoenix_cd_duration < combustion_cd) then
+                        elseif
+                            (power_duration == 0 and phoenix_charges == 1 and
+                                phoenix_cd_duration < combustion_cd)
+                         then
                             check_cast('Phoenix Flames')
                         elseif (boss_mode == 'AoE' and phoenix_charges > 0) then
                             check_cast('Phoenix Flames')
@@ -1203,9 +1258,7 @@ combat_rotation = function(env, _)
                         end
                     end
                     av_hp = total_hp / players
-                    -- Trinket spam
-                    RunMacroText('/use 13')
-                    RunMacroText('/use 14')
+                    use_trinkets()
 
                     if (my_hp < astral_shift_hp and astral_shift_cd == 0) then
                         check_cast('Astral Shift')
@@ -1215,6 +1268,7 @@ combat_rotation = function(env, _)
                         check_cast('Ancestral Guidance')
                     elseif (lightning_shield_duration == -1) then
                         check_cast('Lightning Shield')
+                    elseif (check_azerites()) then
                     elseif (earth_elemental_cd == 0 and tank_hp < 40) then
                         check_cast('Earth Elemental')
                     elseif (storm_elemental_cd == 0 and boss_mode ~= 'Save_CDs') then
@@ -1245,8 +1299,11 @@ combat_rotation = function(env, _)
                 end
             end
         end
-    elseif (debug) then
-        print('Nothing to do, gcd:', global_cd, ' moving out of fire :', moving)
+    else
+        if (debug) then
+            print('Nothing to do, gcd:', global_cd, ' moving out of fire :', moving)
+        end
+        return check_fire() or check_move()
     end
 end
 

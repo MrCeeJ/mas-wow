@@ -1,4 +1,7 @@
-﻿return {
+﻿local utils = _G.getUtils
+local rotations = _G.getRotations
+
+return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
@@ -284,6 +287,17 @@
                     ['Unbound Abomination'] = function(env)
                         RunMacroText("/tar Blood Visage")
                     end,
+                    -- Temple of Sethralis                    
+                    ["Adderis"] = function(env)
+                    end,
+                    ["Aspix"] = function(env)
+                    end,                    
+                    ['Merektha'] = function(env)
+                    end,
+                    ['Galvazzt'] = function(env)
+                    end,
+                    ['Avatar of Sethraliss'] = function(env)
+                    end,
                     -- Bonus
                     ['Headless Horseman'] = function(env)
                         -- number of dudes > 2 go to AoE mode
@@ -446,7 +460,7 @@
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = false
+            debug = true
             debug_spells = false
             debug_frame = false
             debug_frame_setup = false
@@ -461,13 +475,15 @@
             boss_mechanics = boss_mechanics or env:evaluate_variable('get_boss_mechanics')
             standing_in_fire = standing_in_fire or false
 
-            debug_msg = function(override, message)
-                if (debug or override) then
-                    print('debug: ', tostring(message))
-                end
-            end
+            -- debug_msg = function(override, message)
+            --     if (debug or override) then
+            --         print('debug: ', tostring(message))
+            --     end
+            -- end
             debug_msg(false, 'Begining combat init')
             -- Set up static data
+            -- print_hello()
+
             known_spells = {
                 ['81297'] = 'Consecration',
                 ['204301'] = 'Blessed Hammer',
@@ -1755,11 +1771,11 @@
             ------------------------------------------------------------------------------------------------------------
             ---------------                               Preparation Setup                              ---------------
             ------------------------------------------------------------------------------------------------------------
-            debug_msg = function(override, message)
-                if (debug or override) then
-                    print('debug: ', tostring(message))
-                end
-            end
+            -- debug_msg = function(override, message)
+            --     if (debug or override) then
+            --         print('debug: ', tostring(message))
+            --     end
+            -- end
 
             if (false) then
                 return false

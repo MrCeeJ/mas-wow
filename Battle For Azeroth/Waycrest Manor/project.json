@@ -2,52 +2,14 @@
   "path_groups": [
     {
       "loot": true,
-      "name": "Camp Grind",
+      "name": "Bottom Right",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Camp Grind"
-        }
-      ],
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 40.0
-          }
-        ]
-      },
-      "rendezvous": {
-        "actions": [],
-        "name": "Hill",
-        "value": [
-          -10439.1,
-          847.8,
-          52.0
-        ]
-      },
-      "skin": true,
-      "start_distance": 20,
-      "value": [
-        "camp"
-      ]
-    },
-    {
-      "loot": true,
-      "name": "Dest",
-      "next_groups": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "name": "Dest"
+          "name": "Basement"
         }
       ],
       "pve": {
@@ -63,65 +25,29 @@
       },
       "rendezvous": {
         "actions": [],
+        "name": "Entrance",
         "value": [
-          -10491.5,
-          1177.2,
-          44.8
-        ]
-      },
-      "start_distance": 20,
-      "value": [
-        "dest"
-      ]
-    },
-    {
-      "loot": true,
-      "name": "Panda",
-      "next_groups": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "name": "Panda"
-        }
-      ],
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 30.0
-          }
-        ]
-      },
-      "rendezvous": {
-        "actions": [],
-        "name": "Meeting Stone",
-        "value": [
-          1285.6,
-          334.3,
-          433.5
+          -626.8,
+          -260.3,
+          236.0
         ]
       },
       "skin": true,
       "start_distance": 20,
       "value": [
-        "panda"
+        "wmbr"
       ]
     },
     {
       "loot": true,
-      "name": "Ruin",
+      "name": "Top Right",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Ruin"
+          "name": "Basement"
         }
       ],
       "pve": {
@@ -137,29 +63,29 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Bottom of stairs",
+        "name": "Entrance",
         "value": [
-          1365.4,
-          1037.0,
-          345.7
+          -626.8,
+          -260.3,
+          236.0
         ]
       },
       "skin": true,
       "start_distance": 20,
       "value": [
-        "ruin"
+        "wmtr"
       ]
     },
     {
       "loot": true,
-      "name": "Minions of NZoth",
+      "name": "Top Left",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Starter Vision"
+          "name": "Basement"
         }
       ],
       "pve": {
@@ -175,29 +101,29 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Obelisk",
+        "name": "Entrance",
         "value": [
-          1033.1,
-          358.0,
-          438.1
+          -626.8,
+          -260.3,
+          236.0
         ]
       },
       "skin": true,
       "start_distance": 20,
       "value": [
-        "v2"
+        "wmtl"
       ]
     },
     {
       "loot": true,
-      "name": "Vision of Ogrimar",
+      "name": "Top Left Two",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Vision of Ogrimar"
+          "name": "Basement"
         }
       ],
       "pve": {
@@ -213,27 +139,29 @@
       },
       "rendezvous": {
         "actions": [],
+        "name": "Entrance",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          -626.8,
+          -260.3,
+          236.0
         ]
       },
       "skin": true,
       "start_distance": 20,
       "value": [
-        "o1"
+        "wmtl2"
       ]
     },
     {
-      "name": "x Defend Chamber",
+      "loot": true,
+      "name": "Basement",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "x Defend Chamber"
+          "name": "Basement"
         }
       ],
       "pve": {
@@ -249,16 +177,17 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Wrathion",
+        "name": "Entrance",
         "value": [
-          -8353.3,
-          1767.4,
-          314.9
+          -626.8,
+          -260.3,
+          236.0
         ]
       },
+      "skin": true,
       "start_distance": 20,
       "value": [
-        "d1"
+        "wmb"
       ]
     }
   ],

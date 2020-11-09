@@ -1,0 +1,404 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -626.3,
+        -259.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -596.8,
+        -259.8,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -570.8,
+        -230.8,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -566.4,
+        -242.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -590.3,
+        -260.1,
+        235.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -565.3,
+        -277.3,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Last Shades",
+      "value": [
+        -593.4,
+        -284.3,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Survivalist",
+      "value": [
+        -588.1,
+        -345.7,
+        235.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Dogs",
+      "value": [
+        -575.2,
+        -358.0,
+        235.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Hunters",
+      "value": [
+        -531.4,
+        -366.8,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Pigs",
+      "value": [
+        -536.3,
+        -312.0,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -535.0,
+        -330.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -524.9,
+        -330.5,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -508.6,
+        -326.3,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Left",
+      "value": [
+        -494.8,
+        -320.8,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Corner",
+      "value": [
+        -475.0,
+        -319.8,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Piglets",
+      "value": [
+        -474.7,
+        -337.1,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "POsitions",
+      "value": [
+        -480.0,
+        -332.6,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -493.3,
+        -339.2,
+        236.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -481.3,
+        -322.9,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor",
+      "value": [
+        -481.1,
+        -300.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Courtyard",
+      "value": [
+        -485.2,
+        -260.0,
+        234.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Thornshaper",
+      "value": [
+        -450.4,
+        -252.2,
+        234.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doggo",
+      "value": [
+        -433.0,
+        -252.0,
+        234.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Brindle",
+      "value": [
+        -432.6,
+        -259.5,
+        233.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Soulbound Goliath",
+      "value": [
+        -421.7,
+        -258.5,
+        233.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -487.7,
+        -259.3,
+        234.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -523.7,
+        -239.5,
+        236.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Back Inside",
+      "value": [
+        -519.3,
+        -192.9,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor",
+      "value": [
+        -531.2,
+        -195.4,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "and along",
+      "value": [
+        -566.4,
+        -195.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -575.2,
+        -196.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Through",
+      "value": [
+        -574.8,
+        -183.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Into room",
+      "value": [
+        -576.6,
+        -174.5,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Toads",
+      "value": [
+        -605.1,
+        -165.3,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Sisters",
+      "value": [
+        -574.7,
+        -145.9,
+        235.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More Sisters",
+      "value": [
+        -568.6,
+        -150.7,
+        235.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Backup Sisters",
+      "value": [
+        -580.2,
+        -150.6,
+        235.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More sisters",
+      "value": [
+        -574.7,
+        -145.9,
+        235.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway Out",
+      "value": [
+        -574.9,
+        -185.2,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corridor again",
+      "value": [
+        -574.3,
+        -197.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Halway",
+      "value": [
+        -524.6,
+        -198.4,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Last Baddies",
+      "value": [
+        -480.6,
+        -189.4,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Switch to wmb",
+      "value": [
+        -480.6,
+        -189.4,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__ End",
+      "value": [
+        -626.3,
+        -259.7,
+        236.0
+      ]
+    }
+  ]
+}

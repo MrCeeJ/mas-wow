@@ -1,7 +1,4 @@
-﻿local utils = _G.getUtils
-local rotations = _G.getRotations
-
-return {
+﻿return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
@@ -285,7 +282,10 @@ return {
                     ['Sporecaller Zancha'] = function(env)
                     end,
                     ['Unbound Abomination'] = function(env)
-                        RunMacroText("/tar Blood Visage")
+                        local hp = UnitHealth('boss1')
+                        if (hp < 30) then
+                            RunMacroText("/tar Blood Visage")
+                        end
                     end,
                     -- Temple of Sethralis                    
                     ["Adderis"] = function(env)
@@ -396,6 +396,30 @@ return {
                 env:execute_action('move', {-564.1, -166.9, 235.2})
             end
         end,
+        lady_waycrest_positions= function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            if player_class == 'PALADIN' then
+                env:execute_action('move', {-548.0, -262.4, 185.3})
+            elseif player_class == 'PRIEST' then
+                env:execute_action('move', {-562.1, -267.3, 185.3})
+            elseif player_class == 'DRUID' then
+                env:execute_action('move', {-556.0, -272.0, 185.3})
+            elseif player_class == 'SHAMAN' then
+                env:execute_action('move', {-562.2, -257.5, 185.3})
+            elseif player_class == 'MAGE' then
+                env:execute_action('move', {-554.8, -249.4, 185.3})
+            end
+        end,
+        pull_lord_waycrest= function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            if player_class == 'PALADIN' then
+                print("Pulling Lord Waycrest")
+                RunMacroText("/tar Lord Waycrest")
+                RunMacroText("/cast Judgment")
+                -- RunMacroText('/cast [@player]Flame Strike')
+                -- RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
+            end
+        end,
         raal_the_gluttonous_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
@@ -460,7 +484,7 @@ return {
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = false
+            debug = true
             debug_spells = false
             debug_frame = false
             debug_frame_setup = false
@@ -474,14 +498,13 @@ return {
             player_class = player_class or env:evaluate_variable('myself.class')
             boss_mechanics = boss_mechanics or env:evaluate_variable('get_boss_mechanics')
             standing_in_fire = standing_in_fire or false
+            enemies = enemies or {}
 
-            debug_msg = function(override, message)
-                if (debug or override) then
-                    print('debug: ', tostring(message))
-                end
-            end
+            -- debug_msg = utils["debug_msg"]
             debug_msg(false, 'Begining combat init')
             -- Set up static data
+            -- print_hello()
+
             known_spells = {
                 ['81297'] = 'Consecration',
                 ['204301'] = 'Blessed Hammer',
@@ -589,23 +612,12 @@ return {
 
             debug_msg(debug or debug_frame_setup, 'finished with event handler ..')
 
-            debug_spell = function(override, message)
-                if (debug_spells or override) then
-                    print(message)
-                end
-            end
             debug_msg(false, 'Data loaded, defining functions')
 
             -----------------------------------------------------------
             ------------------------ Targeting ------------------------
             -----------------------------------------------------------
-            function get_priority_target()
-                -- RunMacroText("/target Head Of The Horseman")
-                -- RunMacroText("/target Pumpkin Fiend")
-                -- RunMacroText("/target Pulsing ")
-                -- RunMacroText("/target Reanimation Totem")
-                RunMacroText('/target Thumpknuckle')
-            end
+
 
             function do_boss_mechanic()
                 local unit_name = UnitName('boss1') or nil
@@ -1003,8 +1015,9 @@ return {
                             elseif (type == 'ENRAGE' and spell == 'Soothe') then
                                 check_cast(spell)
                                 return true
-                            elseif (stealable and spell == 'Spellsteal') then
+                            elseif (type == 'MAGIC' and stealable and spell == 'Spellsteal') then
                                 check_cast(spell)
+                                RunMacroText("/p Stealing stuffs!")
                                 return true
                             end
                         end
@@ -1769,16 +1782,17 @@ return {
             ------------------------------------------------------------------------------------------------------------
             ---------------                               Preparation Setup                              ---------------
             ------------------------------------------------------------------------------------------------------------
-            debug_msg = function(override, message)
-                if (debug or override) then
-                    print('debug: ', tostring(message))
-                end
-            end
+            -- debug_msg = function(override, message)
+            --     if (debug or override) then
+            --         print('debug: ', tostring(message))
+            --     end
+            -- end
+            -- debug_msg = utils["debug_msg"]
 
             if (false) then
                 return false
             end
-
+            started = started or get_start()
             party = env:evaluate_variable('get_party')
             in_combat = env:evaluate_variable('myself.is_in_combat')
             healer_name = env:evaluate_variable('get_healer_name')

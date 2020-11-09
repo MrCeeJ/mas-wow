@@ -85,7 +85,7 @@
             "type": "and",
             "value": []
           },
-          "name": "Unbound Abomination"
+          "name": "Last Boss Only"
         }
       ],
       "pve": {
@@ -115,43 +115,6 @@
       ]
     },
     {
-      "loot": false,
-      "name": "Ruin's Descent",
-      "next_groups": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "name": "Ruin's Descent"
-        }
-      ],
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 20.0
-          }
-        ]
-      },
-      "rendezvous": {
-        "actions": [],
-        "value": [
-          1200.3,
-          1496.1,
-          -181.7
-        ]
-      },
-      "skin": true,
-      "start_distance": 20,
-      "value": [
-        "4"
-      ]
-    },
-    {
       "loot": true,
       "name": "Last Boss Only",
       "next_groups": [
@@ -177,9 +140,9 @@
       "rendezvous": {
         "actions": [],
         "value": [
-          0.0,
-          0.0,
-          0.0
+          636.7,
+          1253.0,
+          98.5
         ]
       },
       "skin": true,

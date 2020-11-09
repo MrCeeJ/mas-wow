@@ -1,0 +1,593 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        -626.4,
+        -260.2,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -614.2,
+        -259.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -572.7,
+        -259.9,
+        236.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -558.5,
+        -259.3,
+        242.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -542.7,
+        -259.7,
+        245.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Top Right Door",
+      "value": [
+        -559.0,
+        -285.6,
+        249.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Servants",
+      "value": [
+        -559.4,
+        -331.6,
+        249.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "End of corridor",
+      "value": [
+        -554.9,
+        -384.6,
+        249.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs Down",
+      "value": [
+        -536.5,
+        -385.2,
+        242.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -536.9,
+        -378.1,
+        242.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom",
+      "value": [
+        -555.6,
+        -376.0,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -554.1,
+        -361.3,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Maggots 1",
+      "value": [
+        -533.9,
+        -360.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Maggots 2",
+      "value": [
+        -537.1,
+        -295.5,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mag 3",
+      "value": [
+        -500.2,
+        -298.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Mag 4",
+      "value": [
+        -480.8,
+        -299.5,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -476.5,
+        -338.4,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Trash",
+      "value": [
+        -476.5,
+        -338.4,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -492.6,
+        -340.4,
+        236.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -481.5,
+        -312.0,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Courtyard Door",
+      "value": [
+        -481.5,
+        -290.5,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Charge",
+      "value": [
+        -485.2,
+        -260.0,
+        234.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Trash",
+      "value": [
+        -450.4,
+        -252.2,
+        234.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Brindle",
+      "value": [
+        -432.6,
+        -259.5,
+        233.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Soulbound Goliath",
+      "value": [
+        -421.8,
+        -258.1,
+        233.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Accross Courtyard",
+      "value": [
+        -477.0,
+        -258.6,
+        234.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -484.0,
+        -233.2,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Disciples",
+      "value": [
+        -484.0,
+        -190.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Op Guards",
+      "value": [
+        -519.3,
+        -192.9,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -518.5,
+        -207.0,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Up",
+      "value": [
+        -480.6,
+        -206.2,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door Outside",
+      "value": [
+        -502.6,
+        -183.2,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ravens",
+      "value": [
+        -502.9,
+        -169.1,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -540.7,
+        -168.3,
+        249.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Inside",
+      "value": [
+        -542.8,
+        -192.6,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs 1",
+      "value": [
+        -574.8,
+        -191.8,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs 2",
+      "value": [
+        -573.8,
+        -183.7,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ballroom",
+      "value": [
+        -539.1,
+        -183.1,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Toads",
+      "value": [
+        -543.2,
+        -157.2,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Sisters",
+      "value": [
+        -574.7,
+        -145.9,
+        235.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -574.8,
+        -185.9,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hall",
+      "value": [
+        -574.7,
+        -198.4,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Hall",
+      "value": [
+        -485.0,
+        -198.0,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -488.4,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 290130,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open Door",
+      "value": [
+        -488.4,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -515.0,
+        -208.3,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "OP Basement",
+      "value": [
+        -513.7,
+        -230.8,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -504.6,
+        -258.5,
+        226.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -519.7,
+        -259.7,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -528.4,
+        -237.3,
+        216.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downer",
+      "value": [
+        -564.8,
+        -226.9,
+        202.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downest",
+      "value": [
+        -588.8,
+        -245.4,
+        191.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Junction",
+      "value": [
+        -591.4,
+        -259.8,
+        191.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Grafiti",
+      "value": [
+        -580.7,
+        -277.9,
+        191.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Miniboss",
+      "value": [
+        -553.3,
+        -260.5,
+        185.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lord and Lady Waycrest",
+      "value": [
+        -542.9,
+        -256.3,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Drop Down",
+      "value": [
+        -542.9,
+        -256.3,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -537.9,
+        -276.0,
+        179.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Horror",
+      "value": [
+        -522.2,
+        -296.2,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tunnel",
+      "value": [
+        -517.1,
+        -304.0,
+        180.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -489.6,
+        -329.2,
+        159.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Gorak Tul",
+      "value": [
+        -448.2,
+        -344.0,
+        152.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -626.4,
+        -260.2,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

@@ -1,0 +1,556 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -607.3,
+        -259.3,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -574.4,
+        -259.7,
+        235.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -542.5,
+        -260.1,
+        245.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway to path",
+      "value": [
+        -559.1,
+        -239.3,
+        249.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Diciples",
+      "value": [
+        -559.6,
+        -200.6,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -558.0,
+        -191.1,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -573.8,
+        -191.2,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        -571.5,
+        -182.3,
+        249.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ballroom Floor",
+      "value": [
+        -539.7,
+        -184.2,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Toads",
+      "value": [
+        -540.8,
+        -154.1,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Three Sisters",
+      "value": [
+        -574.7,
+        -145.9,
+        235.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Doorway",
+      "value": [
+        -574.6,
+        -176.6,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hall",
+      "value": [
+        -574.7,
+        -199.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Guards",
+      "value": [
+        -522.8,
+        -195.2,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Extras",
+      "value": [
+        -484.0,
+        -190.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Head Outside",
+      "value": [
+        -524.0,
+        -200.5,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -523.7,
+        -232.8,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -505.3,
+        -254.4,
+        234.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -476.5,
+        -260.0,
+        234.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -433.9,
+        -251.9,
+        234.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Brindle",
+      "value": [
+        -432.6,
+        -259.5,
+        233.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -421.9,
+        -258.3,
+        233.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -481.9,
+        -264.6,
+        234.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To the kitchens",
+      "value": [
+        -482.8,
+        -300.9,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Trash",
+      "value": [
+        -483.4,
+        -297.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Corner",
+      "value": [
+        -535.8,
+        -299.3,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "More",
+      "value": [
+        -534.6,
+        -330.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Banqueting Room",
+      "value": [
+        -517.0,
+        -329.9,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Servants",
+      "value": [
+        -517.2,
+        -334.5,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Clearing",
+      "value": [
+        -514.1,
+        -325.9,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Gorger",
+      "value": [
+        -494.8,
+        -320.8,
+        235.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Rall the Gluttonous",
+      "value": [
+        -493.8,
+        -340.0,
+        236.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -481.8,
+        -313.9,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Courtyard Door",
+      "value": [
+        -481.8,
+        -288.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 290702,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open",
+      "value": [
+        -481.8,
+        -288.1,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle Again",
+      "value": [
+        -481.9,
+        -264.6,
+        234.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Across",
+      "value": [
+        -483.5,
+        -230.6,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "To The Basement",
+      "value": [
+        -488.8,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Far Hall",
+      "value": [
+        -485.0,
+        -198.0,
+        235.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "value": [
+        -488.4,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 290130,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open Door",
+      "value": [
+        -488.4,
+        -207.7,
+        236.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -515.0,
+        -208.3,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "OP Basement",
+      "value": [
+        -513.7,
+        -230.8,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -504.6,
+        -258.5,
+        226.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Stairs",
+      "value": [
+        -519.7,
+        -259.7,
+        225.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -528.4,
+        -237.3,
+        216.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downer",
+      "value": [
+        -564.8,
+        -226.9,
+        202.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Downest",
+      "value": [
+        -588.8,
+        -245.4,
+        191.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Junction",
+      "value": [
+        -591.4,
+        -259.8,
+        191.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Grafiti",
+      "value": [
+        -580.7,
+        -277.9,
+        191.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Miniboss",
+      "value": [
+        -553.3,
+        -260.5,
+        185.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Lord and Lady Waycrest",
+      "value": [
+        -542.9,
+        -256.3,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Drop Down",
+      "value": [
+        -542.9,
+        -256.3,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Horror",
+      "value": [
+        -522.2,
+        -296.2,
+        179.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Tunnel",
+      "value": [
+        -517.1,
+        -304.0,
+        180.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Down",
+      "value": [
+        -489.6,
+        -329.2,
+        159.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Gorak Tul",
+      "value": [
+        -448.2,
+        -344.0,
+        152.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -607.3,
+        -259.3,
+        236.0
+      ]
+    }
+  ]
+}

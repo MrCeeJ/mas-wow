@@ -177,7 +177,6 @@
   ],
   "scripts": [
     "utils",
-    "rotations",
     "code"
   ]
 }

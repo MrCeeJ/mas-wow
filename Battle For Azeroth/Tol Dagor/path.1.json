@@ -20,6 +20,15 @@
     },
     {
       "actions": [],
+      "name": "Rocks",
+      "value": [
+        95.0,
+        -2867.6,
+        -0.5
+      ]
+    },
+    {
+      "actions": [],
       "name": "All the crocs",
       "value": [
         134.6,

@@ -1,89 +1,15 @@
 {
-  "path_groups": [
+  "path_groups": [    
     {
       "loot": true,
-      "name": "Camp Grind",
+      "name": "NE Corner Grind",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Camp Grind"
-        }
-      ],
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 40.0
-          }
-        ]
-      },
-      "rendezvous": {
-        "actions": [],
-        "name": "Hill",
-        "value": [
-          -10439.1,
-          847.8,
-          52.0
-        ]
-      },
-      "skin": true,
-      "start_distance": 20,
-      "value": [
-        "camp"
-      ]
-    },
-    {
-      "loot": true,
-      "name": "Dest",
-      "next_groups": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "name": "Dest"
-        }
-      ],
-      "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 20.0
-          }
-        ]
-      },
-      "rendezvous": {
-        "actions": [],
-        "value": [
-          -10491.5,
-          1177.2,
-          44.8
-        ]
-      },
-      "start_distance": 20,
-      "value": [
-        "dest"
-      ]
-    },
-    {
-      "loot": true,
-      "name": "Panda",
-      "next_groups": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": []
-          },
-          "name": "Panda"
+          "name": "NE Corner Grind"
         }
       ],
       "pve": {
@@ -109,7 +35,7 @@
       "skin": true,
       "start_distance": 20,
       "value": [
-        "panda"
+        "g1"
       ]
     },
     {
@@ -152,14 +78,52 @@
     },
     {
       "loot": true,
-      "name": "Minions of NZoth",
+      "name": "Vision - Minions of NZoth",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Starter Vision"
+          "name": "Vision - Minions of NZoth"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Obelisk",
+        "value": [
+          1033.1,
+          358.0,
+          438.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "v1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Vision - Dark, Glaring Reality",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Vision - Dark, Glaring Reality"
         }
       ],
       "pve": {
@@ -190,14 +154,14 @@
     },
     {
       "loot": true,
-      "name": "Vision of Ogrimar",
+      "name": "Vision - A Hand in the Dark",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Vision of Ogrimar"
+          "name": "Vision - A Hand in the Dark"
         }
       ],
       "pve": {
@@ -213,27 +177,29 @@
       },
       "rendezvous": {
         "actions": [],
+        "name": "Obelisk",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          1033.1,
+          358.0,
+          438.1
         ]
       },
       "skin": true,
       "start_distance": 20,
       "value": [
-        "o1"
+        "v3"
       ]
     },
     {
-      "name": "x Defend Chamber",
+      "loot": true,
+      "name": "Vision - Preventative Measures",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "x Defend Chamber"
+          "name": "Vision - Preventative Measures"
         }
       ],
       "pve": {
@@ -249,16 +215,55 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Wrathion",
+        "name": "Obelisk",
         "value": [
-          -8353.3,
-          1767.4,
-          314.9
+          1033.1,
+          358.0,
+          438.1
         ]
       },
+      "skin": true,
       "start_distance": 20,
       "value": [
-        "d1"
+        "v4"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Vision - Vanquishing the Darkness",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Vision - Vanquishing the Darkness"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Obelisk",
+        "value": [
+          1033.1,
+          358.0,
+          438.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "v5"
       ]
     }
   ],

@@ -1,5 +1,5 @@
 {
-  "path_groups": [
+  "path_groups": [    
     {
       "loot": true,
       "name": "NE Corner Grind",
@@ -57,17 +57,17 @@
               "type": "and",
               "value": []
             },
-            "range": 20.0
+            "range": 30.0
           }
         ]
       },
       "rendezvous": {
         "actions": [],
-        "name": "Bottom of slope",
+        "name": "Meeting Stone",
         "value": [
-          897.1,
-          1192.4,
-          433.4
+          1285.6,
+          334.3,
+          433.5
         ]
       },
       "skin": true,

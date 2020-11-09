@@ -274,8 +274,8 @@
                     end,
                     ['Harlan Sweete'] = function(env)
                     end,
-                    -- Underrot
-                    ['Elder Leaxa'] = function(env)
+                    -- Underrot                    
+                    ["Elder Leaxa"] = function(env)
                     end,
                     ['Cragmaw the Infested'] = function(env)
                     end,
@@ -284,14 +284,14 @@
                     ['Unbound Abomination'] = function(env)
                         local hp = UnitHealth('boss1')
                         if (hp < 30) then
-                            RunMacroText('/tar Blood Visage')
+                            RunMacroText("/tar Blood Visage")
                         end
                     end,
-                    -- Temple of Sethralis
-                    ['Adderis'] = function(env)
+                    -- Temple of Sethralis                    
+                    ["Adderis"] = function(env)
                     end,
-                    ['Aspix'] = function(env)
-                    end,
+                    ["Aspix"] = function(env)
+                    end,                    
                     ['Merektha'] = function(env)
                     end,
                     ['Galvazzt'] = function(env)
@@ -396,7 +396,7 @@
                 env:execute_action('move', {-564.1, -166.9, 235.2})
             end
         end,
-        lady_waycrest_positions = function(env)
+        lady_waycrest_positions= function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
                 env:execute_action('move', {-548.0, -262.4, 185.3})
@@ -410,14 +410,14 @@
                 env:execute_action('move', {-554.8, -249.4, 185.3})
             end
         end,
-        pull_lord_waycrest = function(env)
+        pull_lord_waycrest= function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
-                print('Pulling Lord Waycrest')
-                RunMacroText('/tar Lord Waycrest')
-                RunMacroText('/cast Judgment')
-            -- RunMacroText('/cast [@player]Flame Strike')
-            -- RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
+                print("Pulling Lord Waycrest")
+                RunMacroText("/tar Lord Waycrest")
+                RunMacroText("/cast Judgment")
+                -- RunMacroText('/cast [@player]Flame Strike')
+                -- RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
             end
         end,
         raal_the_gluttonous_positions = function(env)
@@ -484,7 +484,7 @@
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = false
+            debug = true
             debug_spells = false
             debug_frame = false
             debug_frame_setup = false
@@ -617,6 +617,7 @@
             -----------------------------------------------------------
             ------------------------ Targeting ------------------------
             -----------------------------------------------------------
+
 
             function do_boss_mechanic()
                 local unit_name = UnitName('boss1') or nil
@@ -1016,7 +1017,7 @@
                                 return true
                             elseif (type == 'MAGIC' and stealable and spell == 'Spellsteal') then
                                 check_cast(spell)
-                                RunMacroText('/p Stealing stuffs!')
+                                RunMacroText("/p Stealing stuffs!")
                                 return true
                             end
                         end
@@ -1831,7 +1832,7 @@
             end
 
             function check_heal(env, spell)
-                local hp = 50
+                local hp = 80
                 local name = nil
                 for _, player_name in ipairs(party) do
                     local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
@@ -2064,8 +2065,7 @@
                 local self_buff = 'Blazing Barrier'
                 if
                     (do_i_need_buffing(env, self_buff) or does_healer_need_mana(env) or is_anyone_dead(env) or
-                        anyone_need_party_buff(env, party_buff, party_spell) or
-                        need_to_eat(env))
+                        anyone_need_party_buff(env, party_buff, party_spell))
                  then
                     return true
                 end

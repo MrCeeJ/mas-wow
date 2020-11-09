@@ -4,6 +4,9 @@ copy "utils.lua" "Aqir\utils.lua"
 copy "code.lua" "Freehold\code.lua"
 copy "utils.lua" "Freehold\utils.lua"
 
+copy "code.lua" "Nazjatar\code.lua"
+copy "utils.lua" "Nazjatar\utils.lua"
+
 copy "code.lua" "Panda Assault\code.lua"
 copy "utils.lua" "Panda Assault\utils.lua"
 
@@ -21,3 +24,8 @@ copy "utils.lua" "Underrot\utils.lua"
 
 copy "code.lua" "Waycrest Manor\code.lua"
 copy "utils.lua" "Waycrest Manor\utils.lua"
+@echo off
+
+echo ***********   All files copied :)   ***********
+
+pause

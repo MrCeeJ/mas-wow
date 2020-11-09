@@ -1,4 +1,8 @@
-﻿get_start = function()
+﻿local wmbapi, wowapi = ...
+utils = {}
+
+
+get_start = function()
     if (not start) then
         print('Hi, welcome to the preparation prep!')
     end
@@ -190,3 +194,4 @@ get_priority_target = function()
     -- RunMacroText("/target Reanimation Totem")
     -- RunMacroText('/target Thumpknuckle')
 end
+

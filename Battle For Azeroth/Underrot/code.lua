@@ -1,7 +1,4 @@
-﻿local utils = _G.getUtils
-local rotations = _G.getRotations
-
-return {
+﻿return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
@@ -1018,8 +1015,9 @@ return {
                             elseif (type == 'ENRAGE' and spell == 'Soothe') then
                                 check_cast(spell)
                                 return true
-                            elseif (stealable and spell == 'Spellsteal') then
+                            elseif (type == 'MAGIC' and stealable and spell == 'Spellsteal') then
                                 check_cast(spell)
+                                RunMacroText("/p Stealing stuffs!")
                                 return true
                             end
                         end

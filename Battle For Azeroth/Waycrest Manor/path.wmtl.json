@@ -277,9 +277,9 @@
       "actions": [],
       "name": "Rall the Gluttonous",
       "value": [
-        -493.8,
-        -340.0,
-        236.3
+        -493.3,
+        -339.2,
+        236.1
       ]
     },
     {
@@ -490,12 +490,26 @@
       ]
     },
     {
-      "actions": [],
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "pull_lord_waycrest"
+        }
+      ],
       "name": "Lord and Lady Waycrest",
       "value": [
-        -542.9,
-        -256.3,
-        179.6
+        -548.3,
+        -257.3,
+        185.3
       ]
     },
     {
@@ -511,9 +525,9 @@
       "actions": [],
       "name": "Horror",
       "value": [
-        -522.2,
-        -296.2,
-        179.6
+        -541.3,
+        -271.9,
+        179.4
       ]
     },
     {

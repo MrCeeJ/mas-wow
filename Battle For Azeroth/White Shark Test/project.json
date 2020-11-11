@@ -1,0 +1,53 @@
+{
+  "path_groups": [
+    {
+      "name": "Test",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Test"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Outside Mr Nice",
+        "value": [
+          -1928.6,
+          602.6,
+          53.7
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "code"
+  ]
+}

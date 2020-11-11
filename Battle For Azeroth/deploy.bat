@@ -16,6 +16,9 @@ copy "utils.lua" "Temple of Sethraliss\utils.lua"
 copy "code.lua" "Tol Dagor\code.lua"
 copy "utils.lua" "Tol Dagor\utils.lua"
 
+copy "code.lua" "Training Dummy\code.lua"
+copy "utils.lua" "Training Dummy\utils.lua"
+
 copy "code.lua" "Uldum Assault\code.lua"
 copy "utils.lua" "Uldum Assault\utils.lua"
 
@@ -24,8 +27,10 @@ copy "utils.lua" "Underrot\utils.lua"
 
 copy "code.lua" "Waycrest Manor\code.lua"
 copy "utils.lua" "Waycrest Manor\utils.lua"
+
+copy "code.lua" "White Shark Test\code.lua"
+copy "utils.lua" "White Shark Test\utils.lua"
+
 @echo off
-
 echo ***********   All files copied :)   ***********
-
 pause

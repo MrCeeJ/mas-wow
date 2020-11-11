@@ -1,0 +1,56 @@
+{
+  "path_groups": [
+    {
+      "name": "1",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "1"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ],
+        "distance_max": {
+          "default": 30.0
+        },
+        "distance_min": {
+          "default": 30.0
+        },
+        "multiplayer_angle_max": {
+          "default": -1.0
+        },
+        "multiplayer_angle_min": {
+          "default": -1.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Next to tent",
+        "value": [
+          1887.8,
+          -4625.1,
+          66.5
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "code"
+  ]
+}

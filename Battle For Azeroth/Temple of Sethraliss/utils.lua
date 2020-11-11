@@ -1,6 +1,5 @@
 ﻿local wmbapi, wowapi = ...
-utils = {}
-
+-- utils = {}
 
 get_start = function()
     if (not start) then
@@ -195,3 +194,22 @@ get_priority_target = function()
     -- RunMacroText('/target Thumpknuckle')
 end
 
+-----------------------------------------------------------
+------------------------   Maths   ------------------------
+-----------------------------------------------------------
+GetPositionFromPosition = function(X, Y, Z, dist, angle)
+    return math.cos(angle) * dist + X, math.sin(angle) * dist + Y, math.sin(0) * dist + Z
+end
+GetAnglesBetweenPositions = function(X1, Y1, Z1, X2, Y2, Z2)
+    return math.atan2(Y2 - Y1, X2 - X1) % (math.pi * 2), math.atan(
+        (Z1 - Z2) / math.sqrt(math.pow(X1 - X2, 2) + math.pow(Y1 - Y2, 2))
+    ) % math.pi
+end
+GetDistanceBetweenPositions = function(X1, Y1, Z1, X2, Y2, Z2)
+    return math.sqrt(math.pow(X2 - X1, 2) + math.pow(Y2 - Y1, 2) + math.pow(Z2 - Z1, 2))
+end
+return {
+    variables = {},
+    actions = {},
+    rotations = {}
+}

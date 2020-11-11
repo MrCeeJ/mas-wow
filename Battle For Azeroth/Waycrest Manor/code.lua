@@ -1,14 +1,18 @@
-﻿return {
+﻿local wmbapi, wowapi = ...
+return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
             if (event_frame == nil) then
-                print('creating frame of fire...')
+                if (debug or debug_frame_setup) then
+                    print('Setting up frame ..')
+                end                
                 event_frame = CreateFrame('Frame', 'event_frame', UIParent) --
                 event_frame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
             end
             return event_frame
         end,
+        -- ['moving'] = gcd_moved or false,
         ['get_healer_name'] = function(env)
             local healer_name = 'Ceejpriest'
             return healer_name
@@ -24,8 +28,10 @@
                 party_info = GetHomePartyInfo()
                 if (party_info ~= nil) then
                     for id, name in pairs(party_info) do
-                        isTank, isHeal, isDPS = UnitGroupRolesAssigned(Unit)
-                        if (isTank) then
+                        -- local isTank, isHeal, isDPS = UnitGroupRolesAssigned(Unit) -- uses bliz unit id not name
+                        if (true) then
+                            print('Welcome to you :', name)
+                        elseif (isTank) then
                             print('Welcome to the tank :', name)
                         elseif (isDPS) then
                             print('Welcome to the deeps :', name)
@@ -85,6 +91,8 @@
             if (bad_spells == nil) then
                 print('creating known bad spell list...')
                 bad_spells = {
+                    ['2120'] = 'Flame Strike',
+                    ['205470'] = 'Flame Patch',
                     -- Atal' Dazar
                     ['255558'] = 'Tainted Blood',
                     ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
@@ -100,6 +108,7 @@
                     ['265687'] = 'Noxious Poison (Venomous Lasher)',
                     ['269838'] = 'Vile Expulsion (Unbound Abomination)',
                     ['278789'] = 'Wave of Decay'
+                    -- Tol Dagor
                 }
             end
             return bad_spells
@@ -413,8 +422,8 @@
         pull_lord_waycrest = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
-                print('Pulling Lord Waycrest')
-                RunMacroText('/tar Lord Waycrest')
+                print('Pulling Lady Waycrest')
+                RunMacroText('/tar Lady Waycrest')
                 RunMacroText('/cast Judgment')
             -- RunMacroText('/cast [@player]Flame Strike')
             -- RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
@@ -487,37 +496,32 @@
             debug = false
             debug_spells = false
             debug_frame = false
+            debug_movement = true
             debug_frame_setup = false
-            in_steamvaults = false
+
+            enable_event_frame = enable_event_frame or true
             boss_mode = boss_mode or nil
             game_time = tonumber(GetTime())
+            gcd_moved_time = gcd_moved_time or game_time
+            gcd_moved = gcd_moved or false
+            check_move_destination = check_move_destination or false
+            -- wmbapi.SetSystemVar("moving", gcd_moved)
             safe_position = safe_position or 1
             fire_timer = fire_timer or 0
             moving = moving or false
+            strafe_end_time = strafe_end_time or nil
             aoe_timer_start = aoe_timer_start or nil
             player_class = player_class or env:evaluate_variable('myself.class')
             boss_mechanics = boss_mechanics or env:evaluate_variable('get_boss_mechanics')
-            standing_in_fire = standing_in_fire or false
             enemies = enemies or {}
 
-            -- debug_msg = utils["debug_msg"]
-            debug_msg(false, 'Begining combat init')
-            -- Set up static data
-            -- print_hello()
+            -- Fire Movement Code
+            standing_in_fire = standing_in_fire or false
+            fire_x = fire_x or nil
+            fire_y = fire_y or nil
+            fire_z = fire_z or nil
 
-            known_spells = {
-                ['81297'] = 'Consecration',
-                ['204301'] = 'Blessed Hammer',
-                ['275779'] = 'Judgment',
-                ['31935'] = "Avenger's Shield",
-                ['53600'] = 'Shield Of The Righteous',
-                ['17501'] = 'Cannon Fire',
-                ['585'] = 'Smite',
-                ['589'] = 'SW :P',
-                ['214621'] = 'Schism',
-                ['129250'] = 'Solace',
-                ['47666'] = 'Penance'
-            }
+            debug_msg(false, 'Init combat variables')
             known_buffs = env:evaluate_variable('get_known_buffs')
             known_debuffs = env:evaluate_variable('get_known_debuffs')
             curses = env:evaluate_variable('get_curses')
@@ -529,19 +533,13 @@
             party = env:evaluate_variable('get_party')
             main_tank = env:evaluate_variable('get_tank_name')
             healer_name = env:evaluate_variable('get_healer_name')
-
             bad_spells = bad_spells or env:evaluate_variable('get_bad_spells')
-            safe_locations = env:evaluate_variable('get_safe_locations')
-
-            if (debug or debug_frame_setup) then
-                print('Setting up frame ..')
-            end
+            safe_locations = env:evaluate_variable('get_safe_locations')            
             event_frame = env:evaluate_variable('get_fire_event_frame')
 
-            if (debug or debug_frame_setup) then
-                print('Configuring event handler ..')
-            end
-            if (in_steamvaults) then
+            debug_msg(debug_frame_setup, '.. registering event handler ..')
+            if (enable_event_frame) then
+                enable_event_frame = false
                 event_frame:SetScript(
                     'OnEvent',
                     function(self, event)
@@ -549,13 +547,11 @@
                         self:OnEvent(event, CombatLogGetCurrentEventInfo())
                     end
                 )
-            end
-            if (debug or debug_frame_setup) then
-                print('.. registering event handler ..')
-            end
+            end            
             -----------------------------------------------------------
             ----------------------- Event Frame -----------------------
             -----------------------------------------------------------
+            debug_msg(debug_frame_setup, 'Configuring event handler ..')
             function event_frame:OnEvent(event, ...)
                 local timestamp,
                     subevent,
@@ -570,7 +566,10 @@
                     destRaidFlags = ...
                 local spellID, spellName, spellSchool
                 local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand
-                if (subevent == 'SPELL_DAMAGE') then --or subevent == "SPELL_AURA_APPLIED" or subevent == "SPELL_AURA_APPLIED_DOSE" or subevent == "SPELL_AURA_REFRESH") then
+                if (subevent == 'SPELL_DAMAGE' --) then
+                    or subevent == 'SPELL_AURA_APPLIED' or
+                        subevent == 'SPELL_AURA_APPLIED_DOSE' or
+                        subevent == 'SPELL_AURA_REFRESH') then
                     spellID,
                         spellName,
                         spellSchool,
@@ -587,24 +586,11 @@
                     local spell_id = tostring(spellID)
                     local spell_name = tostring(spellName)
                     if (spellID > 0) then
-                        -- print("Spell fonud :", spell_id)
-                        local spell_present = known_spells[spell_id]
-                        if (spell_present == nil) then
-                            known_spells[spell_id] = spell_name
-                        --  RunMacroText("/p New spell found - Name :" .. spell_name .. " id :" .. spell_id)
-                        end
                         if (bad_spells[spell_id]) then
-                            if (fire_timer < GetTime()) then
-                                fire_timer = GetTime() + 2 -- turn off alerts for 2 seconds
-                                print('You are stading in the fire, you should probably move.')
-                                standing_in_fire = true
-                                -- print(".. calling move function.")
-                                if (moving) then
-                                    print('.. hurry up!')
-                                else
-                                    move_to_next_safe_location()
-                                end
-                            end
+                            debug_msg(debug_movement, 'Standing in Fire!! :'..spell_name)
+                            RunMacroText("/p MOVE!")
+                            standing_in_fire = true
+                            fire_x, fire_y, fire_z = wmbapi.ObjectPosition('player')
                         end
                     end
                 end
@@ -664,6 +650,7 @@
             function get_aoe_count(range)
                 local range = range or 8
                 if (UnitExists(main_tank)) then
+                    -- TODO: add in range check for tank, or use self
                     local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
                     local x = math.floor(tank_x + 0.5)
                     local y = math.floor(tank_y + 0.5)
@@ -728,61 +715,6 @@
                 end
                 return dispelling
             end
-
-            function dispell(spell, debuff_1, debuff_2, debuff_3)
-                local _, dispell_cd, _, _ = GetSpellCooldown(spell)
-                local dispelling = false
-                if (dispell_cd == 0) then
-                    for i, player_name in ipairs(party) do
-                        if (debuff_1 ~= nil) then
-                            for id, name in pairs(debuff_1) do
-                                if (name and dispelling == false) then
-                                    local debuff_duration =
-                                        env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
-                                    if (debuff_duration > 0) then
-                                        if (debug) then
-                                            RunMacroText('/s Dispelling ' .. player_name .. ' of ' .. name)
-                                        end
-                                        RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                        if (debuff_2 ~= nil) then
-                            for id, name in pairs(debuff_2) do
-                                if (name and dispelling == false) then
-                                    local debuff_duration =
-                                        env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
-                                    if (debuff_duration > 0) then
-                                        if (debug) then
-                                            RunMacroText('/s Dispelling ' .. player_name .. ' of ' .. name)
-                                        end
-                                        RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                        if (debuff_3 ~= nil) then
-                            for id, name in pairs(debuff_3) do
-                                if name and (dispelling == false) then
-                                    local debuff_duration =
-                                        env:evaluate_variable('unit.' .. player_name .. '.debuff.' .. id)
-                                    if (debuff_duration > 0) then
-                                        if (debug) then
-                                            RunMacroText('/s Dispelling ' .. player_name .. ' of ' .. name)
-                                        end
-                                        RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
-                                        dispelling = true
-                                    end
-                                end
-                            end
-                        end
-                    end
-                end
-                return dispelling
-            end
             -----------------------------------------------------------
             -------------------    Spell Casting    -------------------
             -----------------------------------------------------------
@@ -840,20 +772,27 @@
             end
 
             function check_azerites()
-                local spell = 'Concentrated Flame'
-                local name, _, _, _, _, _, spellId = GetSpellInfo(spell)
-                local _, spell_cd, enabled = GetSpellCooldown(spellId)
-                if (debug_spells) then
-                    print('Spell CD :', spell_cd, ' enabled :', enabled)
-                end
-                if (enabled and spell_cd == 0) then
-                    result = env:execute_action('cast', spellId)
-
-                    if (result) then
-                        return true
+                debug_msg(false, '.. checking azerites')
+                local concentrated_flame = 295373
+                local focused_azerite_beam = 295258
+                local spells = {concentrated_flame, focused_azerite_beam}
+                for _, spell in ipairs(spells) do
+                    debug_msg(false, '.. checking :' .. tostring(spell))
+                    if (IsSpellKnown(spell)) then
+                        local name, _, _, _, _, _, spellId = GetSpellInfo(spell)
+                        local _, spell_cd, enabled = GetSpellCooldown(spellId)
+                        if (debug_spells) then
+                            print('Spell CD :', spell_cd, ' enabled :', enabled)
+                        end
+                        if (enabled and spell_cd == 0) then
+                            debug_msg(false, '.. using azerite')
+                            result = env:execute_action('cast', spellId)
+                            if (result) then
+                                return true
+                            end
+                        end
                     end
                 end
-
                 return false
             end
 
@@ -982,9 +921,10 @@
                             if (notInterruptible == false) then
                                 local end_time = endTimeMS / 1000
                                 local delay = end_time - game_time
+                                local _, global_cd, _, _ = GetSpellCooldown('61304')
                                 -- print("t :",game_time",   e_t :", end_time ",    d :", delay)
                                 -- debug_msg(true, "Interuptable spell found :" .. name .. " finishing in :" .. delay .. " (" .. endTimeMS .. " - " ..game_time .. ")")
-                                if (game_time + 1.5 > end_time) then
+                                if (game_time + global_cd > end_time) then
                                     check_cast(spell)
                                     if (spell and name) then
                                         debug_msg(true, '.. ' .. spell .. ' used to squish :' .. name)
@@ -1028,11 +968,74 @@
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
             function check_fire()
-                return false
+                --205470 Flame Patch
+                local move_distance = 5
+                debug_msg(debug_movement, 'Checking for fire..')
+                local name, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player')
+                if (standing_in_fire and not endTimeMS) then
+                    local px, py, pz = wmbapi.ObjectPosition('player')
+                    local distance = GetDistanceBetweenPositions(px, py, pz, fire_x, fire_y, fire_z)
+                    debug_msg(debug_movement, 'Fire is :' .. tostring(distance) .. ' away!')
+                    if (distance < move_distance) then
+                        StrafeLeftStart()
+                    else
+                        debug_msg(debug_movement, 'Made it 2 yards away. Stopping.')
+                        StrafeLeftStop()
+                        standing_in_fire = false
+                    end
+                else
+                    debug_msg(debug_movement, '.. no fire or busy casting')
+                end
+                -- if (standing_in_fire and UnitExists('target')) then
+                --     debug_msg(debug_movement, 'Moving out of Stuffs!')
+                --     local px, py, pz = wmbapi.ObjectPosition('player')
+                --     local tx, ty, tz = wmbapi.ObjectPosition('target')
+                --     local h, v = GetAnglesBetweenPositions(px, py, pz, tx, ty, tz)
+                --     debug_msg(debug_movement, 'Angle is :' .. tostring(h))
+                --     local distance = 1
+                --     local nx, ny, nz = GetPositionFromPosition(px, py, pz, distance, h + math.pi * 1.5) -- 5 yards to the left
+                --     check_move_destination = {nx, ny, nz}
+                --     standing_in_fire = false
+                -- end
+                -- return false
             end
 
             function check_move()
+                -- if (check_move_destination and not endTimeMS) then
+                --     local dest =
+                --         check_move_destination[1] ..
+                --         ',' .. check_move_destination[2] .. ',' .. check_move_destination[3]
+                --     local distance = env:evaluate_variable('myself.distance.' .. dest)
+                --     if (distance < 1) then
+                --         check_move_destination = nil
+                --     else
+                --         local step_size = 0.1
+                --         if (game_time - gcd_moved_time > step_size) then
+                --             gcd_moved = true
+                --             gcd_moved_time = game_time
+                --             local x, y, z = wmbapi.ObjectPosition('player')
+                --             debug_msg(debug_movement, "I'm at :[" .. x .. ' ' .. y .. ' ' .. z .. ']')
+                --             -- print("I'm at :[".. x.. ' '.. y.. ' '.. z.. ']')
+                --             local d_x = 0.7
+                --             local d_y = 0.35
+                --             local x2 = x + d_x
+                --             local y2 = y + d_y
+                --             -- wmbapi.MoveTo(x + d_x, y + d_y, z)
+                --             local pos = {}
+                --             pos[1] = x2
+                --             pos[2] = y2
+                --             pos[3] = z
+                --             debug_msg(debug_movement, 'Moving to :[' .. x2 .. ' ' .. y2 .. ' ' .. z .. ']')
+                --             env:execute_action('face_target') -- posible move fix?
+                --             env:execute_action('move', check_move_destination)
+
+                --         end
+                --     end
+                -- end
                 return false
+            end
+
+            function move_away_from()
             end
 
             function move_to_next_safe_location()
@@ -1104,6 +1107,7 @@
 
             if (global_cd == 0) then
                 debug_msg(false, '.. ready to act')
+                gcd_moved = false
                 if player_class == 'PALADIN' then -- and player_spec = 66 (prot)
                     ------------------------------------------------------------------------------------------------------------
                     ---------------                                     Paladin                                  ---------------
@@ -1423,14 +1427,14 @@
                     do_boss_mechanic()
                     if (dispelling == false and purging == false) then
                         if (UnitExists('target')) then
+                            debug_msg(false, '.. checking cooldowns')
                             -- Check for renewal
                             local my_hp = env:evaluate_variable('myself.health')
                             local _, renewal_cd, _, _ = GetSpellCooldown('Renewal')
                             local renewal_hp = 70
                             local _, barkskin_cd, _, _ = GetSpellCooldown('Barkskin')
                             local barksin_hp = 50
-                            local enemy_count = get_aoe_count()
-
+                            debug_msg(false, '.. checking target')
                             local target_hp = env:evaluate_variable('unit.target.health')
                             local moonfire_duration = env:evaluate_variable('unit.target.debuff.Moonfire')
                             local sunfire_duration = env:evaluate_variable('unit.target.debuff.Sunfire')
@@ -1441,9 +1445,12 @@
                             local _, beam_cd, _, _ = GetSpellCooldown('Solar Beam')
                             local _, rebirth_cd, _, _ = GetSpellCooldown('Rebirth')
                             local _, innervate_cd, _, _ = GetSpellCooldown('Innervate')
-                            local healer_mana = UnitPower(healer_name, 0)
-                            local healer_max_mana = UnitPowerMax(healer_name, 0)
-                            local healer_mp = 100 * healer_mana / healer_max_mana
+                            local healer_mp = 0
+                            if (healer_name) then
+                                local healer_mana = UnitPower(healer_name, 0)
+                                local healer_max_mana = UnitPowerMax(healer_name, 0)
+                                healer_mp = 100 * healer_mana / healer_max_mana
+                            end
                             local solar_emp_duration = env:evaluate_variable('myself.buff.164545') -- solar
                             local lunar_empduration = env:evaluate_variable('myself.buff.164547') -- lunar
                             local astral_power = UnitPower('player', 8)
@@ -1488,6 +1495,7 @@
                             elseif (combat_res) then
                                 RunMacroText('/cast [target=' .. player_name .. '] Rebirth')
                             elseif (check_azerites()) then
+                                debug_msg(false, '.. Did an Azerite')
                             elseif (target_hp > min_dot_hp and sunfire_duration < 1 and eclipse_charges == 0) then
                                 check_cast('Sunfire')
                             elseif (target_hp > min_dot_hp and moonfire_duration < 1 and eclipse_charges == 0) then
@@ -1619,13 +1627,13 @@
                             local _, berserking_cd, _, _ = GetSpellCooldown('Berserking')
                             local _, combustion_cd, _, _ = GetSpellCooldown('Combustion')
                             local _, meteor_cd, _, _ = GetSpellCooldown('Meteor')
-
+                            local _, images_cd, _, _ = GetSpellCooldown('Mirror Image')
                             local _, rune_cd, _, _ = GetSpellCooldown('Rune Of Power')
 
                             local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
                             -- Trinket spam
                             use_trinkets()
-
+                            debug_msg(false, '.. start casting')
                             if (my_hp < invis_hp and invis_cd == 0) then
                                 check_cast('Invisibility')
                             elseif (my_hp < iceblock_hp and iceblock_cd == 0) then
@@ -1634,6 +1642,9 @@
                                 check_cast('Berserking')
                             elseif (combustion_cd == 0 and boss_mode ~= 'Save_CDs') then
                                 check_cast('Combustion')
+                            elseif (images_cd == 0 and boss_mode ~= 'Save_CDs') then
+                                debug_msg(false, '.. start casting images')
+                                check_cast('Mirror Image')
                             elseif (rune_cd == 0 and power_duration == -1) then
                                 check_cast('Rune of Power')
                             elseif (check_azerites()) then
@@ -1680,7 +1691,6 @@
                     -- Check for priority targets
                     get_priority_target()
                     do_boss_mechanic()
-                    local dispelling = dispell('Cleanse Spirit', curses) --or tremor()
                     local dispelling = handle_new_debuffs_mpdc(false, false, false, 'Cleanse Spirit')
                     local kicking = handle_interupts('Wind Shear')
                     if (dispelling == false and kicking == false) then

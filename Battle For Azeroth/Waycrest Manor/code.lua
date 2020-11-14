@@ -91,11 +91,10 @@ return {
             if (bad_spells == nil) then
                 print('creating known bad spell list...')
                 bad_spells = {
-                    ['2120'] = 'Flame Strike',
-                    ['205470'] = 'Flame Patch',
+                    -- ['2120'] = 'Flame Strike',
+                    -- ['205470'] = 'Flame Patch',
                     -- Atal' Dazar
                     ['255558'] = 'Tainted Blood',
-                    ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
                     ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
                     ['257483'] = 'Pile of Bones (Rezan)',
                     ['255371'] = 'Terrifying Visage (Rezan)',
@@ -110,18 +109,18 @@ return {
                     ['278789'] = 'Wave of Decay',
                     -- Tol Dagor
                    -- Waycrest Manor
-                    ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',                      
-                      ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',                                          
-                      ['264476'] = 'Tracking Explosive (Crazed Marksman)',                                             
-                      ['271174'] = 'Retch (Pallid Gorger)',                                        
-                      ['264923'] = 'Tenderize (Raal the Gluttonous)',                                         
-                      ['265757'] = 'Splinter Spike (Matron Bryndle)',                                        
-                      ['264150'] = 'Shatter (Thornguard)',                                             
-                      ['265372'] = 'Shadow Cleave (Enthralled Guard)',                                         
-                      ['265352'] = 'Toad Blight (Blight Toad)',                                          
-                      ['288922'] = 'Call Meteor (Aman)',                                        
-                      ['288951'] = 'Burning (Burninator Mark V)',                                        
-                      ['288716'] = 'Fire Fall (Conflagros)',                    
+                    ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',
+                      ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',
+                      ['264476'] = 'Tracking Explosive (Crazed Marksman)',
+                      ['271174'] = 'Retch (Pallid Gorger)',
+                      ['264923'] = 'Tenderize (Raal the Gluttonous)',
+                      ['265757'] = 'Splinter Spike (Matron Bryndle)',
+                      ['264150'] = 'Shatter (Thornguard)',
+                      ['265372'] = 'Shadow Cleave (Enthralled Guard)',
+                      ['265352'] = 'Toad Blight (Blight Toad)',
+                      ['288922'] = 'Call Meteor (Aman)',
+                      ['288951'] = 'Burning (Burninator Mark V)',
+                      ['288716'] = 'Fire Fall (Conflagros)',
                 }
             end
             return bad_spells
@@ -391,11 +390,11 @@ return {
         start_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
-                MoveForwardStart() 
-            elseif player_class == 'PRIEST' then                
+                MoveForwardStart()
+            elseif player_class == 'PRIEST' then
                 RunMacroText("/dance")
             elseif player_class == 'DRUID' then
-                MoveBackwardStart() 
+                MoveBackwardStart()
             elseif player_class == 'SHAMAN' then
                 StrafeLeftStart()
             elseif player_class == 'MAGE' then
@@ -405,11 +404,11 @@ return {
         stop_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
-                MoveForwardStop() 
-            elseif player_class == 'PRIEST' then       
-                RunMacroText("/cheer")         
+                MoveForwardStop()
+            elseif player_class == 'PRIEST' then
+                RunMacroText("/cheer")
             elseif player_class == 'DRUID' then
-                MoveBackwardStop() 
+                MoveBackwardStop()
             elseif player_class == 'SHAMAN' then
                 StrafeLeftStop()
             elseif player_class == 'MAGE' then
@@ -466,8 +465,6 @@ return {
                 print('Pulling Lady Waycrest')
                 RunMacroText('/tar Lady Waycrest')
                 RunMacroText('/cast Judgment')
-            -- RunMacroText('/cast [@player]Flame Strike')
-            -- RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
             end
         end,
         raal_the_gluttonous_positions = function(env)
@@ -497,26 +494,6 @@ return {
                 env:execute_action('cast', 'Conjure Refreshment')
             end
         end,
-        engage_boss_mode = function(env)
-            local waypoint = 17
-            print('Switching to boss waypoint :', waypoint)
-            env:execute_action('set_next_waypoint', waypoint)
-        end,
-        fight_boss = function(env, boss_name)
-            if (boss_name) then
-                RunMacroText('/target ' .. boss_name)
-                local hp = UnitHealth('target')
-                local boss_dead = UnitIsDead('target')
-            else
-                print('Warning, no boss specified!')
-            end
-        end,
-        choose_wm_route = function(env)
-            local bottom_left = 282408
-            local bottom_right = 282409
-            local top_right = 282766
-            local top_right = 282768
-        end,
         group_up = function(env)
             party_info = GetHomePartyInfo()
             if (party_info ~= nil) then
@@ -528,8 +505,6 @@ return {
     },
     -- Define rotation
     rotations = {
-        -- combat = _G.getRotations.combat_rotation,
-        -- combat = function(env, is_pulling) end,
         --------------------------------------------------------------------------------------------------------------------
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
@@ -579,6 +554,7 @@ return {
             event_frame = env:evaluate_variable('get_fire_event_frame')
 
             debug_msg(debug_frame_setup, '.. registering event handler ..')
+
             if (enable_event_frame) then
                 enable_event_frame = false
                 event_frame:SetScript(
@@ -607,7 +583,8 @@ return {
                     destRaidFlags = ...
                 local spellID, spellName, spellSchool
                 local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand
-                if (subevent == 'SPELL_DAMAGE' --) then
+                local playerGUID = UnitGUID("player")
+                if (destGUID == playerGUID and subevent == 'SPELL_DAMAGE' --) then
                     or subevent == 'SPELL_AURA_APPLIED' or
                         subevent == 'SPELL_AURA_APPLIED_DOSE' or
                         subevent == 'SPELL_AURA_REFRESH') then
@@ -1328,8 +1305,6 @@ return {
 
             function tank_needs_buff(env, spell, charges)
                 local needs_buff = false
-                -- local name, _, count, type, duration, _, _, _, _, spellId = UnitBuff(tank_name, 1, "PLAYER" ) --, "CANCELABLE"
-                -- print("You have ".. count .. " charges of " .. name)
                 local buff_duration = env:evaluate_variable('unit.' .. tank_name .. '.buff.' .. spell)
                 local distance = env:evaluate_variable('unit.' .. tank_name .. '.distance')
                 local target_hp = env:evaluate_variable('unit.' .. tank_name .. '.health')
@@ -1350,7 +1325,7 @@ return {
                     local healer_mp = 100 * healer_mana / healer_max_mana
                     if (healer_mp < 80) then
                         needs_mana = true
-                    -- print("Can't start, healer needs mana")
+                    debug_msg(false,"Can't start, healer needs mana")
                     end
                 end
                 return needs_mana

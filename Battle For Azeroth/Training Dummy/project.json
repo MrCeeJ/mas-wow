@@ -20,19 +20,7 @@
             },
             "range": 20.0
           }
-        ],
-        "distance_max": {
-          "default": 30.0
-        },
-        "distance_min": {
-          "default": 30.0
-        },
-        "multiplayer_angle_max": {
-          "default": -1.0
-        },
-        "multiplayer_angle_min": {
-          "default": -1.0
-        }
+        ]
       },
       "rendezvous": {
         "actions": [],
@@ -52,6 +40,10 @@
   "scripts": [
     "utils",
     "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
     "code"
   ]
 }

@@ -96,7 +96,6 @@ return {
                     -- Atal' Dazar
                     ['255558'] = 'Tainted Blood',
                     ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
-                    ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
                     ['257483'] = 'Pile of Bones (Rezan)',
                     ['255371'] = 'Terrifying Visage (Rezan)',
                     ['258986'] = 'Stink Bomb (Shadowblade Razi)',
@@ -110,18 +109,18 @@ return {
                     ['278789'] = 'Wave of Decay',
                     -- Tol Dagor
                    -- Waycrest Manor
-                    ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',                      
-                      ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',                                          
-                      ['264476'] = 'Tracking Explosive (Crazed Marksman)',                                             
-                      ['271174'] = 'Retch (Pallid Gorger)',                                        
-                      ['264923'] = 'Tenderize (Raal the Gluttonous)',                                         
-                      ['265757'] = 'Splinter Spike (Matron Bryndle)',                                        
-                      ['264150'] = 'Shatter (Thornguard)',                                             
-                      ['265372'] = 'Shadow Cleave (Enthralled Guard)',                                         
-                      ['265352'] = 'Toad Blight (Blight Toad)',                                          
-                      ['288922'] = 'Call Meteor (Aman)',                                        
-                      ['288951'] = 'Burning (Burninator Mark V)',                                        
-                      ['288716'] = 'Fire Fall (Conflagros)',                    
+                    ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',
+                      ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',
+                      ['264476'] = 'Tracking Explosive (Crazed Marksman)',
+                      ['271174'] = 'Retch (Pallid Gorger)',
+                      ['264923'] = 'Tenderize (Raal the Gluttonous)',
+                      ['265757'] = 'Splinter Spike (Matron Bryndle)',
+                      ['264150'] = 'Shatter (Thornguard)',
+                      ['265372'] = 'Shadow Cleave (Enthralled Guard)',
+                      ['265352'] = 'Toad Blight (Blight Toad)',
+                      ['288922'] = 'Call Meteor (Aman)',
+                      ['288951'] = 'Burning (Burninator Mark V)',
+                      ['288716'] = 'Fire Fall (Conflagros)',
                 }
             end
             return bad_spells
@@ -391,11 +390,11 @@ return {
         start_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
-                MoveForwardStart() 
-            elseif player_class == 'PRIEST' then                
+                MoveForwardStart()
+            elseif player_class == 'PRIEST' then
                 RunMacroText("/dance")
             elseif player_class == 'DRUID' then
-                MoveBackwardStart() 
+                MoveBackwardStart()
             elseif player_class == 'SHAMAN' then
                 StrafeLeftStart()
             elseif player_class == 'MAGE' then
@@ -405,11 +404,11 @@ return {
         stop_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
-                MoveForwardStop() 
-            elseif player_class == 'PRIEST' then       
-                RunMacroText("/cheer")         
+                MoveForwardStop()
+            elseif player_class == 'PRIEST' then
+                RunMacroText("/cheer")
             elseif player_class == 'DRUID' then
-                MoveBackwardStop() 
+                MoveBackwardStop()
             elseif player_class == 'SHAMAN' then
                 StrafeLeftStop()
             elseif player_class == 'MAGE' then
@@ -466,8 +465,6 @@ return {
                 print('Pulling Lady Waycrest')
                 RunMacroText('/tar Lady Waycrest')
                 RunMacroText('/cast Judgment')
-            -- RunMacroText('/cast [@player]Flame Strike')
-            -- RunMacroText('/cast [target=' .. player_name .. ']' .. spell)
             end
         end,
         raal_the_gluttonous_positions = function(env)
@@ -528,8 +525,6 @@ return {
     },
     -- Define rotation
     rotations = {
-        -- combat = _G.getRotations.combat_rotation,
-        -- combat = function(env, is_pulling) end,
         --------------------------------------------------------------------------------------------------------------------
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
@@ -1134,8 +1129,8 @@ return {
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
             -------------------------------------------------------------------       General Combat Code    ------------------------------------------------------------------
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-            local _, global_cd, _, _ = GetSpellCooldown('61304')
-            local min_dot_hp = 10
+             _, global_cd, _, _ = GetSpellCooldown('61304')
+             min_dot_hp = 10
 
             -- check_position_and_move_during_fight()
             -- NOTE: Off gcd abilities won't be used until the next free gcd, but they won't trigger gcd so the next ability will happen at the same time
@@ -1149,678 +1144,19 @@ return {
             if (global_cd == 0) then
                 debug_msg(false, '.. ready to act')
                 gcd_moved = false
-                if player_class == 'PALADIN' then -- and player_spec = 66 (prot)
-                    ------------------------------------------------------------------------------------------------------------
-                    ---------------                                     Paladin                                  ---------------
-                    ------------------------------------------------------------------------------------------------------------
-                    debug_msg(false, 'In paladin, no gcd')
-                    get_npc_info()
-                    --  eecc = env:evaluate_variable("npcs.attackable.range_8") -- temporay debugging
 
-                    -- A fix for no target spam
-                    RunMacroText('/cleartarget [dead][noexists]')
-                    get_priority_target()
-                    do_boss_mechanic()
-                    if (UnitExists('target') == false) then
-                        debug_msg(false, '.. no target, fixing')
-                        --  env:execute_action("target_nearest_enemy")
-                        RunMacroText('/targetenemy [nodead][exists]')
-                    else
-                        debug_msg(false, '.. Checking for dispels')
-                        local dispelling = handle_new_debuffs_mpdc(nil, 'Cleanse Toxins', 'Cleanse Toxins', nil)
-                        debug_msg(false, '..  Finished checking for dispels')
-                        debug_msg(false, ' .. dispell result :' .. tostring(dispelling))
-
-                        local kicking = handle_interupts('Rebuke')
-                        debug_msg(false, ' .. interrupt result :' .. tostring(kicking))
-
-                        if (dispelling == false and kicking == false) then
-                            debug_msg(false, '.. fetching cooldowns')
-                            local _, hoj_cd = GetSpellCooldown('Hammer of Justice')
-                            local _, lotp_cd = GetSpellCooldown('Light Of The Protector')
-                            local _, ardent_cd = GetSpellCooldown('Ardent Defender')
-                            local _, hands_cd = GetSpellCooldown('Lay on Hands')
-                            local _, guardian_cd = GetSpellCooldown('Guardian Of Ancient Kings')
-                            local _, divine_protection_cd = GetSpellCooldown('Divine Protection')
-                            local _, avenging_wrath_cd = GetSpellCooldown('Avenging Wrath')
-                            local shining_light_duration = env:evaluate_variable('myself.buff.327510') -- shining light (182104 is for building stacks)
-
-                            local life = env:evaluate_variable('myself.health')
-                            local holy_power = UnitPower('player', 9)
-                            -- Trinket spam
-                            use_trinkets()
-                            debug_msg(false, '.. checking defensives')
-                            -- defensives
-                            if (hands_cd == 0 and life < 10) then
-                                RunMacroText('/cast [@player] Lay on Hands')
-                            elseif (guardian_cd == 0 and life < 40) then
-                                check_cast('Guardian Of Ancient Kings')
-                            elseif (ardent_cd == 0 and life < 60) then
-                                -- elseif (lotp_cd == 0 and life < 70) then
-                                --     check_cast("Light Of The Protector")
-                                check_cast('Ardent Defender')
-                            elseif (divine_protection_cd == 0 and life < 80) then
-                                check_cast('Divine Protection')
-                            elseif (life < 70 and holy_power >= 3) then
-                                RunMacroText('/cast [@player] Word of Glory')
-                            elseif (life < 90 and shining_light_duration > 0) then
-                                RunMacroText('/cast [@player] Word of Glory')
-                            else
-                                --    print("Attackable range 8 :", eecc, " enemy_count:", get_enemy_count()) -- temporay debugging
-                                debug_msg(false, '.. loading dps cooldowns')
-
-                                -- tank rotation
-                                local _, avengers_shield_cd = GetSpellCooldown("Avenger's Shield")
-                                local _, hammer_cd = GetSpellCooldown('Blessed Hammer')
-                                local _, judgment_cd = GetSpellCooldown('Judgment')
-                                -- local _, crusader_strike_cd = GetSpellCooldown("Crusader Strike")
-                                local _, consecration_cd = GetSpellCooldown('Consecration')
-                                local consecration_duration = env:evaluate_variable('myself.buff.Consecration')
-                                -- local shield_charges, shield_max_harges, shield_cooldown_start, shield_cooldown_duration, _ = GetSpellCharges("Shield of the Righteous")
-                                local shield_duration = env:evaluate_variable('myself.buff.132403') -- 132403 for dmg reduction effect, 53600 for spell
-
-                                debug_msg(false, '.. performing roation')
-
-                                -- Use shield if we have taken damage and don't have it up
-                                if
-                                    (life < 100 and shield_duration == -1 and holy_power > 2 and
-                                        env:evaluate_variable('npcs.attackable.range_8') >= 1)
-                                 then
-                                    check_cast('Shield of the Righteous')
-                                elseif (holy_power == 5) then
-                                    check_cast('Shield of the Righteous')
-                                elseif (avenging_wrath_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                    check_cast('Avenging Wrath')
-                                elseif (check_azerites()) then
-                                elseif (avengers_shield_cd == 0) then
-                                    check_cast("Avenger's Shield")
-                                elseif
-                                    (consecration_duration == -1 and consecration_cd == 0 and
-                                        env:evaluate_variable('npcs.attackable.range_8') >= 1)
-                                 then
-                                    check_cast('Consecration')
-                                elseif (hammer_cd == 0) then
-                                    check_cast('Blessed Hammer')
-                                elseif (judgment_cd == 0) then
-                                    check_cast('Judgment')
-                                elseif (consecration_cd == 0 and env:evaluate_variable('npcs.attackable.range_8') >= 1) then
-                                    check_cast('Consecration')
-                                elseif (hoj_cd == 0) then
-                                    check_cast('Hammer of Justice')
-                                end
-                                debug_msg(false, '.. finished paladin code')
-                            end
-                        end
-                    end
+                if player_class == 'PALADIN' then
+                    protection(env)
                 elseif player_class == 'PRIEST' then -- and player_spec = 256 (disc)
-                    debug_msg(false, 'Priest code')
-                    ------------------------------------------------------------------------------------------------------------
-                    -----------------------------------------------      Priest     --------------------------------------------
-                    ------------------------------------------------------------------------------------------------------------
-                    get_priority_target()
-                    do_boss_mechanic()
-                    if (UnitExists('target')) then
-                        debug_msg(false, '.. have target')
-
-                        local healing = false
-                        local _, penance_cd, _, _ = GetSpellCooldown('Penance')
-                        local rapture_duration = env:evaluate_variable('myself.buff.Rapture')
-
-                        -- Dispell everyone
-                        debug_msg(false, '.. checking dispells')
-                        local dispelling = handle_new_debuffs_mpdc('Purify', false, 'Purify', false)
-                        debug_msg(false, '.. dispelling :' .. tostring(dispelling))
-                        debug_msg(false, '.. checking purges')
-                        local purging = handle_purges('Dispel Magic')
-                        if (dispelling == false and purging == false) then
-                            debug_msg(false, '.. not dispelling')
-                            -- Check for Desperate Prayer
-                            local health_check = 60
-                            local my_hp = env:evaluate_variable('myself.health')
-                            local _, desperate_cd, _, _ = GetSpellCooldown('Desperate Prayer')
-
-                            if (my_hp < health_check and desperate_cd == 0) then
-                                healing = true
-                                RunMacroText('/cast [@player] Desperate Prayer')
-                            else
-                                -- Never slack on Schism or Solace
-                                local _, schism_cd, _, _ = GetSpellCooldown('Schism')
-                                local _, solace_cd, _, _ = GetSpellCooldown('Power Word: Solace')
-                                local _, fiend_cd, _, _ = GetSpellCooldown('Shadowfiend')
-                                -- Trinket spam
-                                use_trinkets()
-                                if (schism_cd == 0 and not moving) then
-                                    --cast("Schism")
-                                    check_cast('Schism')
-                                elseif (fiend_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                    check_cast('Shadowfiend')
-                                elseif (solace_cd == 0) then
-                                    check_cast('Power Word: Solace')
-                                end
-                                debug_msg(false, 'Sorting on HP')
-                                -- check HP
-                                -- order_by_hp = function(player_1, player_2)
-                                --     local p1_hp = env:evaluate_variable("unit." .. player_1 .. ".health")
-                                --     local p2_hp = env:evaluate_variable("unit." .. player_2 .. ".health")
-                                --     return p1 < p2
-                                -- end
-                                table.sort(
-                                    party,
-                                    function(a, b)
-                                        return env:evaluate_variable('unit.' .. a .. '.health') <
-                                            env:evaluate_variable('unit.' .. b .. '.health')
-                                    end
-                                )
-
-                                debug_msg(false, 'Sorting finished')
-                                debug_msg(false, '.. group healing')
-                                -- If 3 or more people have taken damage and don't have Atonement cast Radiance (currently seems to double cast, same as druid empowerment)
-                                local radiance_charges, _, _, radiance_cd_duration, _ =
-                                    GetSpellCharges('Power Word: Radiance')
-                                if (radiance_charges > 0 and radiance_cd_duration < 18 and not moving) then
-                                    local sinners = 0
-                                    for _, player_name in ipairs(party) do
-                                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                                        local atonement_duration =
-                                            env:evaluate_variable('unit.' .. player_name .. '.buff.atonement')
-                                        if (target_hp > 0 and target_hp < 90 and atonement_duration < 3) then
-                                            sinners = sinners + 1
-                                        end
-                                    end
-                                    if (sinners > 2) then
-                                        healing = true
-                                        check_cast('Power Word: Radiance')
-                                    end
-                                end
-                                if (healing == false) then
-                                    -- If people have less than 40% hp, panic
-                                    health_check = 40
-                                    for _, player_name in ipairs(party) do
-                                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                                        if (target_hp > 0 and target_hp < health_check) then
-                                            local weakened_soul_duration =
-                                                env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
-                                            local _, pain_suppression_cd, _, _ = GetSpellCooldown('Pain Suppression')
-                                            local _, rapture_cd, _, _ = GetSpellCooldown('Rapture')
-                                            local pain_suppression_duration =
-                                                env:evaluate_variable('unit.' .. player_name .. '.buff.Pain Supression')
-
-                                            if (rapture_duration > 0 or pain_suppression_duration > 0) then
-                                                -- happy days, already on it
-                                            elseif (rapture_cd == 0) then
-                                                healing = true
-                                                check_cast('Rapture')
-                                            elseif (rapture_duration == -1 and pain_suppression_cd == 0) then -- Chuck them a super shield
-                                                healing = true
-                                                RunMacroText('/cast [target=' .. player_name .. '] Pain Suppression')
-                                            end
-                                        end
-                                    end
-                                end
-                                debug_msg(false, '.. over 40% healing')
-                                -- If people have 40-70% hp, help them out
-                                health_check = 70
-                                for _, player_name in ipairs(party) do
-                                    if (healing == false) then
-                                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                                        if (target_hp > 0 and target_hp < health_check) then
-                                            local weakened_soul_duration =
-                                                env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
-                                            local shield_duration =
-                                                env:evaluate_variable(
-                                                'unit.' .. player_name .. '.buff.Power Word: Shield'
-                                            )
-                                            if
-                                                (shield_duration == -1 and
-                                                    (weakened_soul_duration == -1 or rapture_duration > 0))
-                                             then
-                                                -- Chuck them a shield
-                                                healing = true
-                                                RunMacroText('/cast [target=' .. player_name .. '] Power Word: Shield')
-                                            else
-                                                if (penance_cd == 0) then
-                                                    -- They have had a shield, can we top them off with Penance?
-                                                    healing = true
-                                                    RunMacroText('/cast [target=' .. player_name .. '] Penance')
-                                                elseif (not moving) then
-                                                    -- They have had a shield, and they are still below 80, give them a mend
-                                                    healing = true
-                                                    RunMacroText('/cast [target=' .. player_name .. ']Shadow Mend')
-                                                end
-                                            end
-                                        end
-                                    end
-                                end
-                                debug_msg(false, '.. over 70% healing')
-
-                                -- If people have over 70% hp, just use Atonement
-                                health_check = 100
-                                for _, player_name in ipairs(party) do
-                                    if (healing == false) then
-                                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                                        if (target_hp > 0 and target_hp < health_check) then
-                                            local atonement_duration =
-                                                env:evaluate_variable('unit.' .. player_name .. '.buff.Atonement')
-                                            if (atonement_duration > 0) then
-                                                -- Do nothing, they are have atonement
-                                            else
-                                                -- Chuck them a shield, they will be fine (If you have weakened soul you also have atonement, so always use a shieled)
-                                                healing = true
-                                                RunMacroText('/cast [target=' .. player_name .. '] Power Word: Shield')
-                                            end
-                                        end
-                                    end
-                                end
-                                debug_msg(false, '.. priest go pewpew')
-                                -- Do Damage
-                                if (healing == false) then
-                                    local swpain_duration = env:evaluate_variable('unit.target.debuff.589') -- TODO: Check all in combat targets
-                                    local purge_duration = env:evaluate_variable('unit.target.debuff.204213')
-                                    local target_health = env:evaluate_variable('unit.target.health')
-                                    local _, schism_cd, _, _ = GetSpellCooldown('Schism')
-                                    local _, solace_cd, _, _ = GetSpellCooldown('Power Word: Solace')
-                                    local _, fiend_cd, _, _ = GetSpellCooldown('Shadowfiend')
-                                    local _, death_cd, _, _ = GetSpellCooldown('Shadow Word: Death')
-                                    local _, mind_blast_cd, _, _ = GetSpellCooldown('Mind Blast')
-                                    if (purge_duration > swpain_duration) then
-                                        swpain_duration = purge_duration
-                                    end
-
-                                    local min_swd_hp = 40
-
-                                    if (target_health > min_dot_hp and swpain_duration == -1) then
-                                        check_cast('Shadow Word: Pain')
-                                    elseif (schism_cd == 0 and not moving) then
-                                        check_cast('Schism')
-                                    elseif (check_azerites()) then
-                                    elseif (fiend_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                        check_cast('Shadowfiend')
-                                    elseif (solace_cd == 0) then
-                                        check_cast('Power Word: Solace')
-                                    elseif (boss_mode == 'AoE') then
-                                        check_cast('Holy Nova')
-                                    elseif (target_health < min_swd_hp and my_hp > 20 and death_cd == 0) then
-                                        check_cast('Shadow Word: Death')
-                                    elseif (mind_blast_cd == 0) then
-                                        check_cast('Mind Blast')
-                                    elseif (penance_cd == 0) then
-                                        check_cast('Penance')
-                                    elseif (not moving) then
-                                        check_cast('Smite')
-                                    end
-                                end
-                            end
-                        end
-                    else
-                        debug_msg(false, ".. don't have target")
-                        RunMacroText('/assist ' .. main_tank)
-                    end
+                    discipline(env)
                 elseif player_class == 'DRUID' then -- and player_spec = 102 (balance)
-                    ------------------------------------------------------------------------------------------------------------
-                    ---------------                                      Druid                                   ---------------
-                    ------------------------------------------------------------------------------------------------------------
-                    debug_msg(false, '.. checking dispels')
-                    local dispelling = handle_new_debuffs_mpdc(false, 'Remove Corruption', false, 'Remove Corruption')
-                    debug_msg(false, '.. checking purges')
-                    local purging = handle_purges('Soothe')
-                    -- Check for priority targets
-                    get_priority_target()
-                    do_boss_mechanic()
-                    if (dispelling == false and purging == false) then
-                        if (UnitExists('target')) then
-                            debug_msg(false, '.. checking cooldowns')
-                            -- Check for renewal
-                            local my_hp = env:evaluate_variable('myself.health')
-                            local _, renewal_cd, _, _ = GetSpellCooldown('Renewal')
-                            local renewal_hp = 70
-                            local _, barkskin_cd, _, _ = GetSpellCooldown('Barkskin')
-                            local barksin_hp = 50
-                            debug_msg(false, '.. checking target')
-                            local target_hp = env:evaluate_variable('unit.target.health')
-                            local moonfire_duration = env:evaluate_variable('unit.target.debuff.Moonfire')
-                            local sunfire_duration = env:evaluate_variable('unit.target.debuff.Sunfire')
-                            local _, berserking_cd, _, _ = GetSpellCooldown('Berserking')
-                            local _, alignment_cd, _, _ = GetSpellCooldown('Celestial Alignment') --39
-                            local _, incarnation_cd, _, _ = GetSpellCooldown('Incarnation: Chosen of Elune')
-                            local _, fury_cd, _, _ = GetSpellCooldown('Fury of Elune')
-                            local _, beam_cd, _, _ = GetSpellCooldown('Solar Beam')
-                            local _, rebirth_cd, _, _ = GetSpellCooldown('Rebirth')
-                            local _, innervate_cd, _, _ = GetSpellCooldown('Innervate')
-                            local healer_mp = 0
-                            if (healer_name) then
-                                local healer_mana = UnitPower(healer_name, 0)
-                                local healer_max_mana = UnitPowerMax(healer_name, 0)
-                                healer_mp = 100 * healer_mana / healer_max_mana
-                            end
-                            local solar_emp_duration = env:evaluate_variable('myself.buff.164545') -- solar
-                            local lunar_empduration = env:evaluate_variable('myself.buff.164547') -- lunar
-                            local astral_power = UnitPower('player', 8)
-                            local knows_stellar_flare = GetSpellInfo('Stellar Flare')
-                            local flare_duration = env:evaluate_variable('unit.target.debuff.Stellar Flare')
-
-                            previous_eclipse = env:evaluate_variable('get_previous_eclipse')
-                            local lunar_eclipse_duration = env:evaluate_variable('myself.buff.Eclipse (Lunar)')
-                            local solar_eclipse_duration = env:evaluate_variable('myself.buff.Eclipse (Solar)')
-                            local alignment_eclipse_duration = env:evaluate_variable('myself.buff.Celestial Alignment')
-                            local eclipse_charges = env:evaluate_variable('get_eclipse_charges')
-                            debug_msg(false, '.. counting enemies')
-                            local enemy_count = get_aoe_count()
-                            debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
-
-                            -- check combat res
-                            combat_res = false
-                            if (rebirth_cd == 0 and party) then
-                                for _, player_name in ipairs(party) do
-                                    if (combat_res == false) then
-                                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
-                                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                                        if (target_hp == 0 and distance < 20) then
-                                            combat_res = true
-                                            print('I should probably res :', player_name)
-                                        end
-                                    end
-                                end
-                            end
-                            -- barkskin, soothe
-                            combat_res = false -- something up with it
-                            -- Trinket spam
-                            use_trinkets()
-                            --rotation
-                            debug_msg(false, '.. starting moonkin pewpew')
-                            if (my_hp < renewal_hp and renewal_cd == 0) then
-                                check_cast('Renewal')
-                            elseif (my_hp < barksin_hp and barkskin_cd == 0) then
-                                check_cast('Barkskin')
-                            elseif (healer_mp ~= 0 and healer_mp < 65 and innervate_cd == 0) then
-                                RunMacroText('/cast [target=' .. healer_name .. '] Innervate')
-                            elseif (combat_res) then
-                                RunMacroText('/cast [target=' .. player_name .. '] Rebirth')
-                            elseif (check_azerites()) then
-                                debug_msg(false, '.. Did an Azerite')
-                            elseif (target_hp > min_dot_hp and sunfire_duration < 1 and eclipse_charges == 0) then
-                                check_cast('Sunfire')
-                            elseif (target_hp > min_dot_hp and moonfire_duration < 1 and eclipse_charges == 0) then
-                                check_cast('Moonfire')
-                            elseif
-                                (knows_stellar_flare and target_hp > min_dot_hp and flare_duration < 1 and
-                                    eclipse_charges == 0)
-                             then
-                                check_cast('Stellar Flare')
-                            elseif (alignment_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Celestial Alignment')
-                            elseif (berserking_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Berserking')
-                            elseif (incarnation_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Incarnation: Chosen of Elune')
-                            elseif (solar_emp_duration > 0 and eclipse_charges == 0) then
-                                check_cast('Wrath')
-                            elseif (lunar_empduration > 0 and eclipse_charges == 0) then
-                                check_cast('Lunar Strike')
-                            elseif (alignment_eclipse_duration > 0) then -- Double Eclipse
-                                if (fury_cd == 0) then
-                                    check_cast('Fury Of Elune')
-                                elseif (enemy_count < 2) then -- Count it as Lunar
-                                    previous_eclipse = 'Lunar'
-                                    if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
-                                        check_cast('Starsurge')
-                                    else
-                                        check_cast('Wrath')
-                                    end
-                                else -- Count it as Solar
-                                    previous_eclipse = 'Solar'
-                                    if (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
-                                        check_cast('Starsurge')
-                                    elseif (astral_power >= 50) then
-                                        cast_at_target_position('Starfall', main_tank)
-                                    else
-                                        check_cast('Starfire')
-                                    end
-                                end
-                            elseif (lunar_eclipse_duration > 0) then -- Lunar Eclipse
-                                previous_eclipse = 'Lunar'
-                                if (fury_cd == 0) then
-                                    check_cast('Fury Of Elune')
-                                elseif (enemy_count < 3 and astral_power >= 30 and lunar_eclipse_duration > 6) then
-                                    check_cast('Starsurge')
-                                elseif (enemy_count > 2 and astral_power >= 50) then
-                                    cast_at_target_position('Starfall', main_tank)
-                                else
-                                    check_cast('Starfire')
-                                end
-                            elseif (solar_eclipse_duration > 0) then -- Solar Eclipse
-                                previous_eclipse = 'Solar'
-                                if (fury_cd == 0) then
-                                    check_cast('Fury Of Elune')
-                                elseif (enemy_count < 3 and astral_power >= 30 and solar_eclipse_duration > 6) then
-                                    check_cast('Starsurge')
-                                elseif (enemy_count > 2 and astral_power >= 50) then
-                                    cast_at_target_position('Starfall', main_tank)
-                                else
-                                    check_cast('Wrath')
-                                end
-                            elseif (beam_cd == 0) then -- why not :)
-                                check_cast('Solar Beam')
-                            elseif (sunfire_duration < 6 and target_hp > min_dot_hp) then -- pandemic dots
-                                check_cast('Sunfire')
-                            elseif (moonfire_duration < 7 and target_hp > min_dot_hp) then
-                                check_cast('Moonfire')
-                            elseif (knows_stellar_flare and target_hp > min_dot_hp and flare_duration < 8) then
-                                check_cast('Stellar Flare')
-                            elseif (previous_eclipse == 'Solar') then -- Switch to Lunar
-                                if (eclipse_charges < 2) then
-                                    eclipse_charges = eclipse_charges + 1
-                                    check_cast('Wrath')
-                                else
-                                    eclipse_charges = 0
-                                    check_cast('Starfire')
-                                end
-                            elseif (previous_eclipse == 'Lunar') then -- Switch to Solar
-                                if (eclipse_charges < 2) then
-                                    eclipse_charges = eclipse_charges + 1
-                                    check_cast('Starfire')
-                                else
-                                    eclipse_charges = 0
-                                    check_cast('Wrath')
-                                end
-                            end
-                            debug_msg(false, '.. done zapping things for this gcd')
-                        else
-                            RunMacroText('/assist ' .. main_tank)
-                        end
-                    end
+                    balance(env)
                 elseif player_class == 'MAGE' then -- and player_spec = 63 (fire)
-                    ------------------------------------------------------------------------------------------------------------
-                    ---------------                                      Mage                                    ---------------
-                    ------------------------------------------------------------------------------------------------------------
-                    if (debug) then
-                        print('.. Mage Code checking curses')
-                    end
-                    local dispelling = handle_new_debuffs_mpdc(false, false, false, 'Remove Curse')
-                    local kicking = handle_interupts('Counterspell')
-                    debug_msg(false, '.. checking purges')
-                    local purging = handle_purges('Spellsteal')
-                    -- Check for priority targets
-                    get_priority_target()
-                    do_boss_mechanic()
-                    if (debug) then
-                        print('.. done with curses')
-                    end
-                    if (dispelling == false and kicking == false and purging == false) then
-                        if (UnitExists('target')) then
-                            debug_msg(false, '.. dps rotation setup')
-
-                            local my_hp = env:evaluate_variable('myself.health')
-                            local _, invis_cd, _, _ = GetSpellCooldown('Invisibility')
-                            local invis_hp = 60
-                            local _, iceblock_cd, _, _ = GetSpellCooldown('Iceblock')
-                            local iceblock_duration = env:evaluate_variable('myself.buff.Iceblock')
-                            local iceblock_hp = 20
-
-                            local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
-                            local heating_up_duration = env:evaluate_variable('myself.buff.48107')
-                            local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
-                            local power_duration = env:evaluate_variable('myself.buff.Rune of Power')
-                            debug_msg(false, '.. counting enemies')
-                            local enemy_count = get_aoe_count()
-                            debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
-                            local fireblast_charges, _, _, fireblast_cd_duration, _ = GetSpellCharges('Fire Blast')
-                            local _, fireblast_cd, _, _ = GetSpellCooldown('Fire Blast')
-                            local _, berserking_cd, _, _ = GetSpellCooldown('Berserking')
-                            local _, combustion_cd, _, _ = GetSpellCooldown('Combustion')
-                            local _, meteor_cd, _, _ = GetSpellCooldown('Meteor')
-                            local _, images_cd, _, _ = GetSpellCooldown('Mirror Image')
-                            local _, rune_cd, _, _ = GetSpellCooldown('Rune Of Power')
-
-                            local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
-                            -- Trinket spam
-                            use_trinkets()
-                            debug_msg(false, '.. start casting')
-                            if (my_hp < invis_hp and invis_cd == 0) then
-                                check_cast('Invisibility')
-                            elseif (my_hp < iceblock_hp and iceblock_cd == 0) then
-                                check_cast('Ice block')
-                            elseif (berserking_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Berserking')
-                            elseif (combustion_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Combustion')
-                            elseif (images_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                debug_msg(false, '.. start casting images')
-                                check_cast('Mirror Image')
-                            elseif (rune_cd == 0 and power_duration == -1) then
-                                check_cast('Rune of Power')
-                            elseif (check_azerites()) then
-                            elseif (meteor_cd == 0) then
-                                cast_at_target_position('Meteor', main_tank)
-                            elseif (hotstreak_duration > 0) then
-                                if (enemy_count > 2) then
-                                    cast_at_target_position('Flamestrike', main_tank)
-                                else
-                                    check_cast('Pyroblast')
-                                end
-                            elseif (fireblast_charges > 0 and heating_up_duration > 0) then
-                                check_cast('Fire Blast')
-                            else
-                                if (combustion_duration > 0) then
-                                    if (phoenix_charges > 0 and heating_up_duration > 0) then
-                                        check_cast('Phoenix Flames')
-                                    else
-                                        check_cast('Scorch')
-                                    end
-                                elseif (enemy_count > 5 and ring_of_frost_cd == 0) then
-                                    cast_at_target_position('Ring of Frost', main_tank)
-                                elseif
-                                    (power_duration == 0 and phoenix_charges == 1 and
-                                        phoenix_cd_duration < combustion_cd)
-                                 then
-                                    check_cast('Phoenix Flames')
-                                elseif (boss_mode == 'AoE' and phoenix_charges > 0) then
-                                    check_cast('Phoenix Flames')
-                                elseif (boss_mode == 'AoE') then
-                                    cast_at_target_position('Flamestrike', main_tank)
-                                else -- check 2nd phoenix
-                                    check_cast('Fireball')
-                                end
-                            end
-                        else
-                            RunMacroText('/assist ' .. main_tank) -- perhaps an oops
-                        end
-                    end
+                    fire(env)
                 elseif player_class == 'SHAMAN' then -- and player_spec = 262 (elemental)
-                    ------------------------------------------------------------------------------------------------------------
-                    ---------------                                      Shaman                                   ---------------
-                    ------------------------------------------------------------------------------------------------------------
-                    -- Check for priority targets
-                    get_priority_target()
-                    do_boss_mechanic()
-                    local dispelling = handle_new_debuffs_mpdc(false, false, false, 'Cleanse Spirit')
-                    local kicking = handle_interupts('Wind Shear')
-                    if (dispelling == false and kicking == false) then
-                        if (UnitExists('target')) then
-                            local target_hp = env:evaluate_variable('unit.target.health')
-                            local _, flame_shock_cd, _, _ = GetSpellCooldown('188389')
-                            local _, earth_elemental_cd, _, _ = GetSpellCooldown('Earth Elemental')
-                            local _, fire_elemental_cd, _, _ = GetSpellCooldown('Fire Elemental')
-                            local _, storm_elemental_cd, _, _ = GetSpellCooldown('Storm Elemental')
-                            local flame_shock_duration = env:evaluate_variable('unit.target.debuff.188389')
-                            local maelstrom = UnitPower('player', 11)
-                            local lb_charges, _, _, lb_cooldownDuration, _ = GetSpellCharges('Lava Burst')
-                            local _, berserking_cd, _, _ = GetSpellCooldown('Berserking')
-                            local _, ancestral_guidance_cd, _, _ = GetSpellCooldown('Ancestral Guidance')
-                            local _, bloodlust_cd, _, _ = GetSpellCooldown('Bloodlust')
-                            local _, ascendance_cd, _, _ = GetSpellCooldown('Ascendance')
-
-                            local _, healing_stream_cd, _, _ = GetSpellCooldown('Healing Stream Totem')
-                            local tank_hp = env:evaluate_variable('unit.' .. main_tank .. '.health')
-                            local tank_distance = env:evaluate_variable('unit.' .. main_tank .. '.distance')
-
-                            local lightning_shield_duration = env:evaluate_variable('myself.buff.Lightning Shield')
-                            debug_msg(false, '.. counting enemies')
-                            local enemy_count = get_aoe_count()
-                            debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
-                            local my_hp = env:evaluate_variable('myself.health')
-                            local _, astral_shift_cd, _, _ = GetSpellCooldown('Astral Shift')
-                            local astral_shift_hp = 70
-
-                            -- TODO:
-                            -- Check for rebuffing Earth Shield
-                            -- Check for defensive Tremor Totem (47)
-                            -- Check for defensive Thunderstorm (49)
-                            -- Check AoE Capacitor Totem ?
-                            -- Check Tremor Totem (Fear, Charm, Sleep)
-
-                            --multidot flameshock
-                            -- Check Av HP for Ancestral Guidance healing
-                            local total_hp = 0
-                            local players = 0
-                            for _, player_name in ipairs(party) do
-                                local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                                total_hp = total_hp + target_hp
-                                if (target_hp > 0) then
-                                    players = players + 1
-                                end
-                            end
-                            av_hp = total_hp / players
-                            use_trinkets()
-
-                            if (my_hp < astral_shift_hp and astral_shift_cd == 0) then
-                                check_cast('Astral Shift')
-                            elseif (healing_stream_cd == 0 and av_hp < 95) then
-                                check_cast('Healing Stream Totem')
-                            elseif (ancestral_guidance_cd == 0 and av_hp < 80) then
-                                check_cast('Ancestral Guidance')
-                            elseif (lightning_shield_duration == -1) then
-                                check_cast('Lightning Shield')
-                            elseif (check_azerites()) then
-                            elseif (earth_elemental_cd == 0 and tank_hp < 40) then
-                                check_cast('Earth Elemental')
-                            elseif (storm_elemental_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Storm Elemental')
-                            elseif (fire_elemental_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Fire Elemental')
-                            elseif (berserking_cd == 0 and boss_mode ~= 'Save_CDs') then
-                                check_cast('Berserking')
-                            elseif (target_hp > min_dot_hp and flame_shock_duration < 1 and flame_shock_cd == 0) then
-                                check_cast('Flame Shock')
-                            elseif (ascendance_cd == 0) then
-                                check_cast('Ascendance')
-                            elseif (enemy_count > 2 and maelstrom >= 60 and tank_distance < 40) then
-                                cast_at_target_position('Earthquake', main_tank)
-                            elseif (maelstrom ~= nil and maelstrom >= 60) then
-                                check_cast('Earth Shock')
-                            elseif (lb_cooldownDuration == 0 or lb_charges > 0) then
-                                check_cast('Lava Burst')
-                            elseif (bloodlust_cd == 0) then
-                                check_cast('Bloodlust') -- probably shouldn't use on CD :/
-                            elseif (enemy_count > 2) then
-                                check_cast('Chain Lightning')
-                            else
-                                check_cast('Lightning Bolt')
-                            end
-                        else
-                            RunMacroText('/assist ' .. main_tank)
-                        end
-                    end
+                   elemental(env)
                 end
+            
             else
                 if (debug) then
                     print('Nothing to do, gcd:', global_cd, ' moving out of fire :', moving)
@@ -1987,8 +1323,6 @@ return {
 
             function tank_needs_buff(env, spell, charges)
                 local needs_buff = false
-                -- local name, _, count, type, duration, _, _, _, _, spellId = UnitBuff(tank_name, 1, "PLAYER" ) --, "CANCELABLE"
-                -- print("You have ".. count .. " charges of " .. name)
                 local buff_duration = env:evaluate_variable('unit.' .. tank_name .. '.buff.' .. spell)
                 local distance = env:evaluate_variable('unit.' .. tank_name .. '.distance')
                 local target_hp = env:evaluate_variable('unit.' .. tank_name .. '.health')
@@ -2009,7 +1343,7 @@ return {
                     local healer_mp = 100 * healer_mana / healer_max_mana
                     if (healer_mp < 80) then
                         needs_mana = true
-                    -- print("Can't start, healer needs mana")
+                    debug_msg(false,"Can't start, healer needs mana")
                     end
                 end
                 return needs_mana

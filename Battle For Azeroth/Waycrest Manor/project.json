@@ -194,6 +194,10 @@
   "scripts": [
     "utils",
     "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
     "code"
   ]
 }

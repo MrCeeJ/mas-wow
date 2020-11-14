@@ -1,5 +1,4 @@
-﻿-- local wmbapi, wowapi = ...
-------------------------------------------------------------------------------------------------------------
+﻿------------------------------------------------------------------------------------------------------------
 ---------------                                     Prot                                  ---------------
 ------------------------------------------------------------------------------------------------------------
 function protection(env)
@@ -63,6 +62,9 @@ function protection(env)
                 local _, avengers_shield_cd = GetSpellCooldown("Avenger's Shield")
                 local _, hammer_cd = GetSpellCooldown('Blessed Hammer')
                 local _, judgment_cd = GetSpellCooldown('Judgment')
+                local target_health = env:evaluate_variable('unit.target.health')
+                local _, wrath_cd = GetSpellCooldown('Hammer Of Wrath')
+
                 -- local _, crusader_strike_cd = GetSpellCooldown("Crusader Strike")
                 local _, consecration_cd = GetSpellCooldown('Consecration')
                 local consecration_duration = env:evaluate_variable('myself.buff.Consecration')
@@ -89,6 +91,8 @@ function protection(env)
                         env:evaluate_variable('npcs.attackable.range_8') >= 1)
                  then
                     check_cast('Consecration')
+                elseif (wrath_cd == 0 and target_health < 20) then
+                    check_cast('Blessed Hammer')
                 elseif (hammer_cd == 0) then
                     check_cast('Blessed Hammer')
                 elseif (judgment_cd == 0) then

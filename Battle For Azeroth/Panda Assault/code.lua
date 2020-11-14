@@ -107,8 +107,21 @@ return {
                     ['261498'] = 'Creeping Rot (Elder Leaxa)',
                     ['265687'] = 'Noxious Poison (Venomous Lasher)',
                     ['269838'] = 'Vile Expulsion (Unbound Abomination)',
-                    ['278789'] = 'Wave of Decay'
+                    ['278789'] = 'Wave of Decay',
                     -- Tol Dagor
+                   -- Waycrest Manor
+                    ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',                      
+                      ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',                                          
+                      ['264476'] = 'Tracking Explosive (Crazed Marksman)',                                             
+                      ['271174'] = 'Retch (Pallid Gorger)',                                        
+                      ['264923'] = 'Tenderize (Raal the Gluttonous)',                                         
+                      ['265757'] = 'Splinter Spike (Matron Bryndle)',                                        
+                      ['264150'] = 'Shatter (Thornguard)',                                             
+                      ['265372'] = 'Shadow Cleave (Enthralled Guard)',                                         
+                      ['265352'] = 'Toad Blight (Blight Toad)',                                          
+                      ['288922'] = 'Call Meteor (Aman)',                                        
+                      ['288951'] = 'Burning (Burninator Mark V)',                                        
+                      ['288716'] = 'Fire Fall (Conflagros)',                    
                 }
             end
             return bad_spells
@@ -158,7 +171,7 @@ return {
                             local target = 'boss' .. b
                             for i = 1, 5 do
                                 local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
-                                if (name == 'Focusing Iris') then --"260805"
+                                if (name == 'Focusing Iris') then --'260805'
                                     found = true
                                     -- print("Targeting Boss :", b)
                                     override_target = target
@@ -375,6 +388,34 @@ return {
             end
             return false
         end,
+        start_scatter = function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            if player_class == 'PALADIN' then
+                MoveForwardStart() 
+            elseif player_class == 'PRIEST' then                
+                RunMacroText("/dance")
+            elseif player_class == 'DRUID' then
+                MoveBackwardStart() 
+            elseif player_class == 'SHAMAN' then
+                StrafeLeftStart()
+            elseif player_class == 'MAGE' then
+                StrafeRightStart()
+            end
+        end,
+        stop_scatter = function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            if player_class == 'PALADIN' then
+                MoveForwardStop() 
+            elseif player_class == 'PRIEST' then       
+                RunMacroText("/cheer")         
+            elseif player_class == 'DRUID' then
+                MoveBackwardStop() 
+            elseif player_class == 'SHAMAN' then
+                StrafeLeftStop()
+            elseif player_class == 'MAGE' then
+                StrafeRightStop()
+            end
+        end,
         -- Tol
         overseer_korgus_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
@@ -496,7 +537,7 @@ return {
             debug = false
             debug_spells = false
             debug_frame = false
-            debug_movement = true
+            debug_movement = false
             debug_frame_setup = false
 
             enable_event_frame = enable_event_frame or true
@@ -588,7 +629,7 @@ return {
                     if (spellID > 0) then
                         if (bad_spells[spell_id]) then
                             debug_msg(debug_movement, 'Standing in Fire!! :'..spell_name)
-                            RunMacroText("/p MOVE!")
+                            RunMacroText("/p um, looks like a :"..spell_name..", lets move!")
                             standing_in_fire = true
                             fire_x, fire_y, fire_z = wmbapi.ObjectPosition('player')
                         end
@@ -968,7 +1009,7 @@ return {
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
             function check_fire()
-                --205470 Flame Patch
+                --205470 Flame Patch - 2120
                 local move_distance = 5
                 debug_msg(debug_movement, 'Checking for fire..')
                 local name, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player')
@@ -979,7 +1020,7 @@ return {
                     if (distance < move_distance) then
                         StrafeLeftStart()
                     else
-                        debug_msg(debug_movement, 'Made it 2 yards away. Stopping.')
+                        debug_msg(debug_movement, 'Made it '.. tostring(move_distance)..' yards away. Stopping.')
                         StrafeLeftStop()
                         standing_in_fire = false
                     end

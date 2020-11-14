@@ -153,6 +153,8 @@
     }
   ],
   "scripts": [
+    "utils",
+    "paladin",
     "code"
   ]
 }

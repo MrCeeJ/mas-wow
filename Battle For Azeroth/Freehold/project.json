@@ -156,7 +156,12 @@
     "priest",
     "druid",
     "shaman",
-    "mage",
+    "mage",  
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
     "code"
   ]
 }

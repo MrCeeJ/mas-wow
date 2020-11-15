@@ -44,6 +44,11 @@
     "druid",
     "shaman",
     "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
     "code"
   ]
 }

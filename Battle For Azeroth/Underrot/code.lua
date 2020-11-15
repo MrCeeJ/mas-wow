@@ -6,7 +6,7 @@ return {
             if (event_frame == nil) then
                 if (debug or debug_frame_setup) then
                     print('Setting up frame ..')
-                end                
+                end
                 event_frame = CreateFrame('Frame', 'event_frame', UIParent) --
                 event_frame:RegisterEvent('COMBAT_LOG_EVENT_UNFILTERED')
             end
@@ -18,6 +18,12 @@ return {
             return healer_name
         end,
         ['get_tank_name'] = function(env)
+            -- role = UnitGroupRolesAssigned(unit);
+            -- local tank_unit
+            -- if (role == "TANK") then --String - TANK, HEALER, DAMAGER, NONE
+            --     tank_unit = unit
+            -- end
+
             local tank_name = 'Ceejpaladin'
             return tank_name
         end,
@@ -91,8 +97,6 @@ return {
             if (bad_spells == nil) then
                 print('creating known bad spell list...')
                 bad_spells = {
-                    -- ['2120'] = 'Flame Strike',
-                    -- ['205470'] = 'Flame Patch',
                     -- Atal' Dazar
                     ['255558'] = 'Tainted Blood',
                     ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
@@ -108,19 +112,19 @@ return {
                     ['269838'] = 'Vile Expulsion (Unbound Abomination)',
                     ['278789'] = 'Wave of Decay',
                     -- Tol Dagor
-                   -- Waycrest Manor
+                    -- Waycrest Manor
                     ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',
-                      ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',
-                      ['264476'] = 'Tracking Explosive (Crazed Marksman)',
-                      ['271174'] = 'Retch (Pallid Gorger)',
-                      ['264923'] = 'Tenderize (Raal the Gluttonous)',
-                      ['265757'] = 'Splinter Spike (Matron Bryndle)',
-                      ['264150'] = 'Shatter (Thornguard)',
-                      ['265372'] = 'Shadow Cleave (Enthralled Guard)',
-                      ['265352'] = 'Toad Blight (Blight Toad)',
-                      ['288922'] = 'Call Meteor (Aman)',
-                      ['288951'] = 'Burning (Burninator Mark V)',
-                      ['288716'] = 'Fire Fall (Conflagros)',
+                    ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',
+                    ['264476'] = 'Tracking Explosive (Crazed Marksman)',
+                    ['271174'] = 'Retch (Pallid Gorger)',
+                    ['264923'] = 'Tenderize (Raal the Gluttonous)',
+                    ['265757'] = 'Splinter Spike (Matron Bryndle)',
+                    ['264150'] = 'Shatter (Thornguard)',
+                    ['265372'] = 'Shadow Cleave (Enthralled Guard)',
+                    ['265352'] = 'Toad Blight (Blight Toad)',
+                    ['288922'] = 'Call Meteor (Aman)',
+                    ['288951'] = 'Burning (Burninator Mark V)',
+                    ['288716'] = 'Fire Fall (Conflagros)'
                 }
             end
             return bad_spells
@@ -163,8 +167,7 @@ return {
                 print('creating boss mechanic list...')
                 boss_mechanics = {
                     -- Waycrest Manor
-                    ['Sister Malady'] = function(env)
-                        local found = false
+                    ['Sister Malady'] = function()
                         local override_target = nil
                         for b = 1, 3 do
                             local target = 'boss' .. b
@@ -194,8 +197,7 @@ return {
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
-                    ['Sister Briar'] = function(env)
-                        local found = false
+                    ['Sister Briar'] = function()
                         local override_target = nil
                         for b = 1, 3 do
                             local target = 'boss' .. b
@@ -225,8 +227,7 @@ return {
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
-                    ['Sister Solena'] = function(env)
-                        local found = false
+                    ['Sister Solena'] = function()
                         local override_target = nil
                         for b = 1, 3 do
                             local target = 'boss' .. b
@@ -256,11 +257,11 @@ return {
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
-                    ['Lady Waycrest'] = function(env)
+                    ['Lady Waycrest'] = function()
                         -- spread
                         -- move out of disease residue
                     end,
-                    ['Gorak Tul'] = function(env)
+                    ['Gorak Tul'] = function()
                         -- positions
                         -- tank  -455.9, -339.3, 152.4
                         -- healer - -466.7, -337.3, 152.1
@@ -268,59 +269,59 @@ return {
                         ---458.3, -352.7, 152.1
                         ---466.9, -346.1, 152.1
                     end,
-                    ['Soulbound Goliath'] = function(env)
+                    ['Soulbound Goliath'] = function()
                         RunMacroText('/target Soul Thorns')
                     end,
-                    ['Raal the Gluttonous'] = function(env)
+                    ['Raal the Gluttonous'] = function()
                     end,
                     -- Tol Dagor
-                    ['The Sand Queen'] = function(env)
+                    ['The Sand Queen'] = function()
                     end,
-                    ['Jes Howlis'] = function(env)
+                    ['Jes Howlis'] = function()
                     end,
-                    ['Knight Captain Valyri'] = function(env)
+                    ['Knight Captain Valyri'] = function()
                     end,
-                    ['Overseer Korgus'] = function(env)
+                    ['Overseer Korgus'] = function()
                     end,
                     -- Freehold
-                    ["Skycap'n Kragg"] = function(env)
+                    ["Skycap'n Kragg"] = function()
                     end,
-                    ['Captain Raoul'] = function(env)
+                    ['Captain Raoul'] = function()
                     end,
-                    ['Captain Eudora'] = function(env)
+                    ['Captain Eudora'] = function()
                     end,
-                    ['Captain Jolly'] = function(env)
+                    ['Captain Jolly'] = function()
                     end,
-                    ['Trothak'] = function(env)
+                    ['Trothak'] = function()
                     end,
-                    ['Harlan Sweete'] = function(env)
+                    ['Harlan Sweete'] = function()
                     end,
                     -- Underrot
-                    ['Elder Leaxa'] = function(env)
+                    ['Elder Leaxa'] = function()
                     end,
-                    ['Cragmaw the Infested'] = function(env)
+                    ['Cragmaw the Infested'] = function()
                     end,
-                    ['Sporecaller Zancha'] = function(env)
+                    ['Sporecaller Zancha'] = function()
                     end,
-                    ['Unbound Abomination'] = function(env)
+                    ['Unbound Abomination'] = function()
                         local hp = UnitHealth('boss1')
                         if (hp < 30) then
                             RunMacroText('/tar Blood Visage')
                         end
                     end,
                     -- Temple of Sethralis
-                    ['Adderis'] = function(env)
+                    ['Adderis'] = function()
                     end,
-                    ['Aspix'] = function(env)
+                    ['Aspix'] = function()
                     end,
-                    ['Merektha'] = function(env)
+                    ['Merektha'] = function()
                     end,
-                    ['Galvazzt'] = function(env)
+                    ['Galvazzt'] = function()
                     end,
-                    ['Avatar of Sethraliss'] = function(env)
+                    ['Avatar of Sethraliss'] = function()
                     end,
                     -- Bonus
-                    ['Headless Horseman'] = function(env)
+                    ['Headless Horseman'] = function()
                         -- number of dudes > 2 go to AoE mode
                         local count = get_aoe_count(15)
                         if (boss_mode == nil) then
@@ -392,7 +393,7 @@ return {
             if player_class == 'PALADIN' then
                 MoveForwardStart()
             elseif player_class == 'PRIEST' then
-                RunMacroText("/dance")
+                RunMacroText('/dance')
             elseif player_class == 'DRUID' then
                 MoveBackwardStart()
             elseif player_class == 'SHAMAN' then
@@ -406,7 +407,7 @@ return {
             if player_class == 'PALADIN' then
                 MoveForwardStop()
             elseif player_class == 'PRIEST' then
-                RunMacroText("/cheer")
+                RunMacroText('/cheer')
             elseif player_class == 'DRUID' then
                 MoveBackwardStop()
             elseif player_class == 'SHAMAN' then
@@ -493,14 +494,6 @@ return {
             if player_class == 'MAGE' then
                 env:execute_action('cast', 'Conjure Refreshment')
             end
-        end,
-        group_up = function(env)
-            party_info = GetHomePartyInfo()
-            if (party_info ~= nil) then
-                local grouped = true
-                for id, name in pairs(party_info) do
-                end
-            end
         end
     },
     -- Define rotation
@@ -509,7 +502,7 @@ return {
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = false
+            debug = true
             debug_spells = false
             debug_frame = false
             debug_movement = false
@@ -550,7 +543,7 @@ return {
             main_tank = env:evaluate_variable('get_tank_name')
             healer_name = env:evaluate_variable('get_healer_name')
             bad_spells = bad_spells or env:evaluate_variable('get_bad_spells')
-            safe_locations = env:evaluate_variable('get_safe_locations')            
+            safe_locations = env:evaluate_variable('get_safe_locations')
             event_frame = env:evaluate_variable('get_fire_event_frame')
 
             debug_msg(debug_frame_setup, '.. registering event handler ..')
@@ -564,7 +557,7 @@ return {
                         self:OnEvent(event, CombatLogGetCurrentEventInfo())
                     end
                 )
-            end            
+            end
             -----------------------------------------------------------
             ----------------------- Event Frame -----------------------
             -----------------------------------------------------------
@@ -583,11 +576,13 @@ return {
                     destRaidFlags = ...
                 local spellID, spellName, spellSchool
                 local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand
-                local playerGUID = UnitGUID("player")
-                if (destGUID == playerGUID and subevent == 'SPELL_DAMAGE' --) then
-                    or subevent == 'SPELL_AURA_APPLIED' or
+                local playerGUID = UnitGUID('player')
+                if
+                    (destGUID == playerGUID and subevent == 'SPELL_DAMAGE' or --) then
+                        subevent == 'SPELL_AURA_APPLIED' or
                         subevent == 'SPELL_AURA_APPLIED_DOSE' or
-                        subevent == 'SPELL_AURA_REFRESH') then
+                        subevent == 'SPELL_AURA_REFRESH')
+                 then
                     spellID,
                         spellName,
                         spellSchool,
@@ -605,8 +600,8 @@ return {
                     local spell_name = tostring(spellName)
                     if (spellID > 0) then
                         if (bad_spells[spell_id]) then
-                            debug_msg(debug_movement, 'Standing in Fire!! :'..spell_name)
-                            RunMacroText("/p um, looks like a :"..spell_name..", lets move!")
+                            debug_msg(debug_movement, 'Standing in Fire!! :' .. spell_name)
+                            RunMacroText('/p um, looks like a :' .. spell_name .. ', lets move!')
                             standing_in_fire = true
                             fire_x, fire_y, fire_z = wmbapi.ObjectPosition('player')
                         end
@@ -714,7 +709,7 @@ return {
             function tremor()
                 local _, tremor_cd, _, _ = GetSpellCooldown('Tremor Totem')
                 local dispelling = false
-                if (dispell_cd == 0 and tremors ~= nil) then
+                if (tremor_cd == 0 and dispell_cd == 0 and tremors ~= nil) then
                     for i, player_name in ipairs(party) do
                         for id, name in pairs(tremors) do
                             if (name) then
@@ -759,7 +754,7 @@ return {
                         print('Spell CD :', spell_cd, ' enabled :', enabled)
                     end
                     if (enabled == 0) then
-                        message = 'Warning, cast aborted as spell is already active :' .. spell
+                        message = 'Warning, cast aborted as spell is already active :' .. spell0
                     else
                         if (spell_cd ~= 0) then
                             message = 'Warning, cast aborted as spell is currently on cooldown :' .. spell
@@ -905,7 +900,7 @@ return {
                                     RunMacroText('/p New debuff found - Name :' .. name .. ' id :' .. spellId)
                                 end
                             else
-                                debug_msg(debug_dispells, 'No debuffs found :(' .. i .. ' /5)')
+                                -- debug_msg(debug_dispells, 'No debuffs found :(' .. i .. ' /5)')
                             end
                         end
                         debug_msg(debug_dispells, 'No debuffs found on player :' .. player_name)
@@ -997,7 +992,7 @@ return {
                     if (distance < move_distance) then
                         StrafeLeftStart()
                     else
-                        debug_msg(debug_movement, 'Made it '.. tostring(move_distance)..' yards away. Stopping.')
+                        debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
                         StrafeLeftStop()
                         standing_in_fire = false
                     end
@@ -1018,38 +1013,7 @@ return {
                 -- return false
             end
 
-            function check_move()
-                -- if (check_move_destination and not endTimeMS) then
-                --     local dest =
-                --         check_move_destination[1] ..
-                --         ',' .. check_move_destination[2] .. ',' .. check_move_destination[3]
-                --     local distance = env:evaluate_variable('myself.distance.' .. dest)
-                --     if (distance < 1) then
-                --         check_move_destination = nil
-                --     else
-                --         local step_size = 0.1
-                --         if (game_time - gcd_moved_time > step_size) then
-                --             gcd_moved = true
-                --             gcd_moved_time = game_time
-                --             local x, y, z = wmbapi.ObjectPosition('player')
-                --             debug_msg(debug_movement, "I'm at :[" .. x .. ' ' .. y .. ' ' .. z .. ']')
-                --             -- print("I'm at :[".. x.. ' '.. y.. ' '.. z.. ']')
-                --             local d_x = 0.7
-                --             local d_y = 0.35
-                --             local x2 = x + d_x
-                --             local y2 = y + d_y
-                --             -- wmbapi.MoveTo(x + d_x, y + d_y, z)
-                --             local pos = {}
-                --             pos[1] = x2
-                --             pos[2] = y2
-                --             pos[3] = z
-                --             debug_msg(debug_movement, 'Moving to :[' .. x2 .. ' ' .. y2 .. ' ' .. z .. ']')
-                --             env:execute_action('face_target') -- posible move fix?
-                --             env:execute_action('move', check_move_destination)
-
-                --         end
-                --     end
-                -- end
+            function check_move()               
                 return false
             end
 
@@ -1111,8 +1075,8 @@ return {
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
             -------------------------------------------------------------------       General Combat Code    ------------------------------------------------------------------
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
-             _, global_cd, _, _ = GetSpellCooldown('61304')
-             min_dot_hp = 10
+            _, global_cd, _, _ = GetSpellCooldown('61304')
+            min_dot_hp = 10
 
             -- check_position_and_move_during_fight()
             -- NOTE: Off gcd abilities won't be used until the next free gcd, but they won't trigger gcd so the next ability will happen at the same time
@@ -1136,9 +1100,18 @@ return {
                 elseif player_class == 'MAGE' then -- and player_spec = 63 (fire)
                     fire(env)
                 elseif player_class == 'SHAMAN' then -- and player_spec = 262 (elemental)
-                   elemental(env)
+                    elemental(env)
+                elseif player_class == 'WARRIOR' then -- and player_spec = 71 (arms) (fury 72)
+                    arms(env)
+                elseif player_class == 'DEMONHUNTER' then -- and player_spec = 
+                    vengeance(env)
+                elseif player_class == 'HUNTER' then -- and player_spec = 
+                    marksman(env)
+                elseif player_class == 'MONK' then -- and player_spec = 
+                    mistweaver(env)
+                elseif player_class == 'WARLOCK' then -- and player_spec = 
+                    destruction(env)
                 end
-            
             else
                 if (debug) then
                     print('Nothing to do, gcd:', global_cd, ' moving out of fire :', moving)
@@ -1157,10 +1130,10 @@ return {
             -- end
             -- debug_msg = utils["debug_msg"]
 
-            if (false) then
-                return false
-            end
-            started = started or get_start()
+            -- if (false) then
+            --     return false
+            -- end
+            -- started = started or get_start()
             party = env:evaluate_variable('get_party')
             in_combat = env:evaluate_variable('myself.is_in_combat')
             healer_name = env:evaluate_variable('get_healer_name')
@@ -1171,7 +1144,7 @@ return {
             -- food_name = "Conjured Mana Strudel"
             -- food_name = "Conjured Mana Pie"
             food_buff = '167152' -- Replenishment
-            debug = false
+            debug = true
             debug_spells = false
             -- Support Functions - return true if there is work to do
             function release_on_wipe()
@@ -1325,7 +1298,7 @@ return {
                     local healer_mp = 100 * healer_mana / healer_max_mana
                     if (healer_mp < 80) then
                         needs_mana = true
-                    debug_msg(false,"Can't start, healer needs mana")
+                        debug_msg(false, "Can't start, healer needs mana")
                     end
                 end
                 return needs_mana

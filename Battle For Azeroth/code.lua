@@ -18,6 +18,12 @@ return {
             return healer_name
         end,
         ['get_tank_name'] = function(env)
+            -- role = UnitGroupRolesAssigned(unit);
+            -- local tank_unit
+            -- if (role == "TANK") then --String - TANK, HEALER, DAMAGER, NONE
+            --     tank_unit = unit
+            -- end
+
             local tank_name = 'Ceejpaladin'
             return tank_name
         end,
@@ -161,8 +167,7 @@ return {
                 print('creating boss mechanic list...')
                 boss_mechanics = {
                     -- Waycrest Manor
-                    ['Sister Malady'] = function(env)
-                        local found = false
+                    ['Sister Malady'] = function()
                         local override_target = nil
                         for b = 1, 3 do
                             local target = 'boss' .. b
@@ -192,8 +197,7 @@ return {
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
-                    ['Sister Briar'] = function(env)
-                        local found = false
+                    ['Sister Briar'] = function()
                         local override_target = nil
                         for b = 1, 3 do
                             local target = 'boss' .. b
@@ -223,8 +227,7 @@ return {
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
-                    ['Sister Solena'] = function(env)
-                        local found = false
+                    ['Sister Solena'] = function()
                         local override_target = nil
                         for b = 1, 3 do
                             local target = 'boss' .. b
@@ -254,11 +257,11 @@ return {
                         end
                         -- Move apart if you have Unstable Runic Mark
                     end,
-                    ['Lady Waycrest'] = function(env)
+                    ['Lady Waycrest'] = function()
                         -- spread
                         -- move out of disease residue
                     end,
-                    ['Gorak Tul'] = function(env)
+                    ['Gorak Tul'] = function()
                         -- positions
                         -- tank  -455.9, -339.3, 152.4
                         -- healer - -466.7, -337.3, 152.1
@@ -266,59 +269,59 @@ return {
                         ---458.3, -352.7, 152.1
                         ---466.9, -346.1, 152.1
                     end,
-                    ['Soulbound Goliath'] = function(env)
+                    ['Soulbound Goliath'] = function()
                         RunMacroText('/target Soul Thorns')
                     end,
-                    ['Raal the Gluttonous'] = function(env)
+                    ['Raal the Gluttonous'] = function()
                     end,
                     -- Tol Dagor
-                    ['The Sand Queen'] = function(env)
+                    ['The Sand Queen'] = function()
                     end,
-                    ['Jes Howlis'] = function(env)
+                    ['Jes Howlis'] = function()
                     end,
-                    ['Knight Captain Valyri'] = function(env)
+                    ['Knight Captain Valyri'] = function()
                     end,
-                    ['Overseer Korgus'] = function(env)
+                    ['Overseer Korgus'] = function()
                     end,
                     -- Freehold
-                    ["Skycap'n Kragg"] = function(env)
+                    ["Skycap'n Kragg"] = function()
                     end,
-                    ['Captain Raoul'] = function(env)
+                    ['Captain Raoul'] = function()
                     end,
-                    ['Captain Eudora'] = function(env)
+                    ['Captain Eudora'] = function()
                     end,
-                    ['Captain Jolly'] = function(env)
+                    ['Captain Jolly'] = function()
                     end,
-                    ['Trothak'] = function(env)
+                    ['Trothak'] = function()
                     end,
-                    ['Harlan Sweete'] = function(env)
+                    ['Harlan Sweete'] = function()
                     end,
                     -- Underrot
-                    ['Elder Leaxa'] = function(env)
+                    ['Elder Leaxa'] = function()
                     end,
-                    ['Cragmaw the Infested'] = function(env)
+                    ['Cragmaw the Infested'] = function()
                     end,
-                    ['Sporecaller Zancha'] = function(env)
+                    ['Sporecaller Zancha'] = function()
                     end,
-                    ['Unbound Abomination'] = function(env)
+                    ['Unbound Abomination'] = function()
                         local hp = UnitHealth('boss1')
                         if (hp < 30) then
                             RunMacroText('/tar Blood Visage')
                         end
                     end,
                     -- Temple of Sethralis
-                    ['Adderis'] = function(env)
+                    ['Adderis'] = function()
                     end,
-                    ['Aspix'] = function(env)
+                    ['Aspix'] = function()
                     end,
-                    ['Merektha'] = function(env)
+                    ['Merektha'] = function()
                     end,
-                    ['Galvazzt'] = function(env)
+                    ['Galvazzt'] = function()
                     end,
-                    ['Avatar of Sethraliss'] = function(env)
+                    ['Avatar of Sethraliss'] = function()
                     end,
                     -- Bonus
-                    ['Headless Horseman'] = function(env)
+                    ['Headless Horseman'] = function()
                         -- number of dudes > 2 go to AoE mode
                         local count = get_aoe_count(15)
                         if (boss_mode == nil) then
@@ -491,14 +494,6 @@ return {
             if player_class == 'MAGE' then
                 env:execute_action('cast', 'Conjure Refreshment')
             end
-        end,
-        group_up = function(env)
-            party_info = GetHomePartyInfo()
-            if (party_info ~= nil) then
-                local grouped = true
-                for id, name in pairs(party_info) do
-                end
-            end
         end
     },
     -- Define rotation
@@ -507,7 +502,7 @@ return {
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = false
+            debug = true
             debug_spells = false
             debug_frame = false
             debug_movement = false
@@ -714,7 +709,7 @@ return {
             function tremor()
                 local _, tremor_cd, _, _ = GetSpellCooldown('Tremor Totem')
                 local dispelling = false
-                if (dispell_cd == 0 and tremors ~= nil) then
+                if (tremor_cd == 0 and dispell_cd == 0 and tremors ~= nil) then
                     for i, player_name in ipairs(party) do
                         for id, name in pairs(tremors) do
                             if (name) then
@@ -759,7 +754,7 @@ return {
                         print('Spell CD :', spell_cd, ' enabled :', enabled)
                     end
                     if (enabled == 0) then
-                        message = 'Warning, cast aborted as spell is already active :' .. spell
+                        message = 'Warning, cast aborted as spell is already active :' .. spell0
                     else
                         if (spell_cd ~= 0) then
                             message = 'Warning, cast aborted as spell is currently on cooldown :' .. spell
@@ -905,7 +900,7 @@ return {
                                     RunMacroText('/p New debuff found - Name :' .. name .. ' id :' .. spellId)
                                 end
                             else
-                                debug_msg(debug_dispells, 'No debuffs found :(' .. i .. ' /5)')
+                                -- debug_msg(debug_dispells, 'No debuffs found :(' .. i .. ' /5)')
                             end
                         end
                         debug_msg(debug_dispells, 'No debuffs found on player :' .. player_name)
@@ -1106,6 +1101,16 @@ return {
                     fire(env)
                 elseif player_class == 'SHAMAN' then -- and player_spec = 262 (elemental)
                     elemental(env)
+                elseif player_class == 'WARRIOR' then -- and player_spec = 71 (arms) (fury 72)
+                    arms(env)
+                elseif player_class == 'DEMONHUNTER' then -- and player_spec = 
+                    vengeance(env)
+                elseif player_class == 'HUNTER' then -- and player_spec = 
+                    marksman(env)
+                elseif player_class == 'MONK' then -- and player_spec = 
+                    mistweaver(env)
+                elseif player_class == 'WARLOCK' then -- and player_spec = 
+                    destruction(env)
                 end
             else
                 if (debug) then
@@ -1125,10 +1130,10 @@ return {
             -- end
             -- debug_msg = utils["debug_msg"]
 
-            if (false) then
-                return false
-            end
-            started = started or get_start()
+            -- if (false) then
+            --     return false
+            -- end
+            -- started = started or get_start()
             party = env:evaluate_variable('get_party')
             in_combat = env:evaluate_variable('myself.is_in_combat')
             healer_name = env:evaluate_variable('get_healer_name')
@@ -1139,7 +1144,7 @@ return {
             -- food_name = "Conjured Mana Strudel"
             -- food_name = "Conjured Mana Pie"
             food_buff = '167152' -- Replenishment
-            debug = false
+            debug = true
             debug_spells = false
             -- Support Functions - return true if there is work to do
             function release_on_wipe()

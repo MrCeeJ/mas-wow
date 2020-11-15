@@ -739,7 +739,7 @@ return {
                 end
                 local name, _, _, _, _, _, spellId = GetSpellInfo(spell)
                 local result = false
-                local message = ''
+                local message
                 if (debug_spells) then
                     print('Spell Id :', spellId, ' name :', name)
                 end

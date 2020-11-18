@@ -92,7 +92,7 @@ function protection(env)
                  then
                     check_cast('Consecration')
                 elseif (wrath_cd == 0 and target_health < 20) then
-                    check_cast('Blessed Hammer')
+                    check_cast('Hammer Of Wrath')
                 elseif (hammer_cd == 0) then
                     check_cast('Blessed Hammer')
                 elseif (judgment_cd == 0) then

@@ -1,0 +1,176 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Taloc Tentacles",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Taloc"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              127019
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -349.7,
+          -255.6,
+          1120.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Taloc",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Rixxa Fluxflame"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              127019
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Taloc",
+        "value": [
+          -286.4,
+          -255.3,
+          1120.6
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Rixxa Fluxflame",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Mogul Razdunk"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Azerokk Spawn",
+        "value": [
+          1255.7,
+          -3364.0,
+          56.3
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Mogul Razdunk",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Harlan Sweete"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Rixxa Spawn",
+        "value": [
+          1273.0,
+          -3698.0,
+          26.7
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

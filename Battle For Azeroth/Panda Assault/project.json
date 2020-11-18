@@ -307,6 +307,7 @@
   ],
   "scripts": [
     "utils",
+    "instances",
     "paladin",
     "priest",
     "druid",

@@ -9,12 +9,15 @@
             "type": "and",
             "value": []
           },
-          "name": "Council o' Captains"
+          "name": "Join Mob"
         }
       ],
       "pve": {
         "attacks": [
           {
+            "blacklist": [
+              127019
+            ],
             "conditions": {
               "type": "and",
               "value": []
@@ -36,6 +39,47 @@
       "start_distance": 20,
       "value": [
         "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Join Mob",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Ring of Booty"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              127019
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Skycaptain",
+        "value": [
+          -1765.3,
+          -1007.3,
+          88.4
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1m"
       ]
     },
     {
@@ -100,10 +144,11 @@
       },
       "rendezvous": {
         "actions": [],
+        "name": "Council O Captains",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          -1806.8,
+          -679.5,
+          39.1
         ]
       },
       "skin": true,
@@ -137,10 +182,11 @@
       },
       "rendezvous": {
         "actions": [],
+        "name": "Trothak",
         "value": [
-          0.0,
-          0.0,
-          0.0
+          -1813.2,
+          -492.3,
+          35.0
         ]
       },
       "skin": true,
@@ -156,7 +202,7 @@
     "priest",
     "druid",
     "shaman",
-    "mage",  
+    "mage",
     "warrior",
     "monk",
     "warlock",

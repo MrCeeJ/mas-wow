@@ -81,8 +81,9 @@ function discipline(env)
                     -- If people have less than 40% hp, panic
                     health_check = 40
                     for _, player_name in ipairs(party) do
+                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
                         local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        if (target_hp > 0 and target_hp < health_check) then
+                        if (distance < 40 and target_hp > 0 and target_hp < health_check) then
                             local weakened_soul_duration =
                                 env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
                             local _, pain_suppression_cd, _, _ = GetSpellCooldown('Pain Suppression')
@@ -107,8 +108,9 @@ function discipline(env)
                 health_check = 70
                 for _, player_name in ipairs(party) do
                     if (healing == false) then
+                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
                         local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        if (target_hp > 0 and target_hp < health_check) then
+                        if (distance < 40 and target_hp > 0 and target_hp < health_check) then
                             local weakened_soul_duration =
                                 env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
                             local shield_duration =
@@ -138,7 +140,8 @@ function discipline(env)
                 for _, player_name in ipairs(party) do
                     if (healing == false) then
                         local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        if (target_hp > 0 and target_hp < health_check) then
+                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
+                        if (distance < 40 and target_hp > 0 and target_hp < health_check) then
                             local atonement_duration =
                                 env:evaluate_variable('unit.' .. player_name .. '.buff.Atonement')
                             if (atonement_duration > 0) then

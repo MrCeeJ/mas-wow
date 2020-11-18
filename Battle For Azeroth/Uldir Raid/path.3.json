@@ -1,0 +1,130 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1255.7,
+        -3364.0,
+        56.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Cart",
+      "value": [
+        1267.1,
+        -3378.8,
+        55.5
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 10,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 136776,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Click",
+      "value": [
+        1267.1,
+        -3378.8,
+        55.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bottom",
+      "value": [
+        1229.9,
+        -3483.4,
+        27.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1197.1,
+        -3499.1,
+        22.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1204.3,
+        -3526.6,
+        23.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1223.2,
+        -3538.9,
+        23.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1256.4,
+        -3565.6,
+        23.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1259.0,
+        -3583.6,
+        22.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1271.9,
+        -3593.1,
+        23.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        1262.5,
+        -3627.7,
+        27.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Rixxa",
+      "value": [
+        1273.1,
+        -3698.6,
+        26.7
+      ]
+    }
+  ]
+}

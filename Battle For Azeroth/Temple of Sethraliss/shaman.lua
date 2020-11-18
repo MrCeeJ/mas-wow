@@ -7,7 +7,8 @@ function elemental(env)
     do_boss_mechanic()
     local dispelling = handle_new_debuffs_mpdc(false, false, false, 'Cleanse Spirit')
     local kicking = handle_interupts('Wind Shear')
-    if (dispelling == false and kicking == false) then
+    local purging = handle_purges('Purge')
+    if (dispelling == false and kicking == false and purging == false) then
         if (UnitExists('target')) then
             local target_hp = env:evaluate_variable('unit.target.health')
             local _, flame_shock_cd, _, _ = GetSpellCooldown('188389')

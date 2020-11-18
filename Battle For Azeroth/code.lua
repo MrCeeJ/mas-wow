@@ -93,42 +93,6 @@ return {
             end
             return ignore_magic
         end,
-        ['get_bad_spells'] = function(env)
-            if (bad_spells == nil) then
-                print('creating known bad spell list...')
-                bad_spells = {
-                    -- Atal' Dazar
-                    ['255558'] = 'Tainted Blood',
-                    ['255620'] = 'Festering Eruption (Reanimated Honor Guard)',
-                    ['257483'] = 'Pile of Bones (Rezan)',
-                    ['255371'] = 'Terrifying Visage (Rezan)',
-                    ['258986'] = 'Stink Bomb (Shadowblade Razi)',
-                    ['277072'] = 'Corrupted Gold (Corrupted Gold)',
-                    -- The Underrot
-                    ['265542'] = 'Rotten Bile (Fetid Maggot)',
-                    ['265540'] = 'Rotten Bile (Fetid Maggot)',
-                    ['261498'] = 'Creeping Rot (Elder Leaxa)',
-                    ['265687'] = 'Noxious Poison (Venomous Lasher)',
-                    ['269838'] = 'Vile Expulsion (Unbound Abomination)',
-                    ['278789'] = 'Wave of Decay',
-                    -- Tol Dagor
-                    -- Waycrest Manor
-                    ['263905'] = 'Marking Cleave (Heartsbane Runeweaver)',
-                    ['264531'] = 'Shrapnel Trap (Maddened Survivalist)',
-                    ['264476'] = 'Tracking Explosive (Crazed Marksman)',
-                    ['271174'] = 'Retch (Pallid Gorger)',
-                    ['264923'] = 'Tenderize (Raal the Gluttonous)',
-                    ['265757'] = 'Splinter Spike (Matron Bryndle)',
-                    ['264150'] = 'Shatter (Thornguard)',
-                    ['265372'] = 'Shadow Cleave (Enthralled Guard)',
-                    ['265352'] = 'Toad Blight (Blight Toad)',
-                    ['288922'] = 'Call Meteor (Aman)',
-                    ['288951'] = 'Burning (Burninator Mark V)',
-                    ['288716'] = 'Fire Fall (Conflagros)'
-                }
-            end
-            return bad_spells
-        end,
         ['get_safe_locations'] = function(env)
             if (safe_locations == nil) then
                 print('creating known safe location list...')
@@ -161,197 +125,6 @@ return {
                 eclipse_charges = 0
             end
             return eclipse_charges
-        end,
-        ['get_boss_mechanics'] = function(env)
-            if (boss_mechanics == nil) then
-                print('creating boss mechanic list...')
-                boss_mechanics = {
-                    -- Waycrest Manor
-                    ['Sister Malady'] = function()
-                        local override_target = nil
-                        for b = 1, 3 do
-                            local target = 'boss' .. b
-                            for i = 1, 5 do
-                                local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
-                                if (name == 'Focusing Iris') then --'260805'
-                                    found = true
-                                    -- print("Targeting Boss :", b)
-                                    override_target = target
-                                end
-                            end
-                        end
-                        -- if (env:evaluate_variable("myself.debuff.")) then Jump if you have thing
-                        -- end
-
-                        -- Target people with Soul Manipulation to free them
-                        for i, player_name in ipairs(party) do
-                            local debuff_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.debuff.Soul Manipulation') --225788
-                            if (debuff_duration == 0) then
-                                print('Mind Control found, need to attack :', player_name)
-                                override_target = player_name
-                            end
-                        end
-                        if (override_target ~= nil) then
-                            RunMacroText('/target ' .. override_target)
-                        end
-                        -- Move apart if you have Unstable Runic Mark
-                    end,
-                    ['Sister Briar'] = function()
-                        local override_target = nil
-                        for b = 1, 3 do
-                            local target = 'boss' .. b
-                            for i = 1, 5 do
-                                local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
-                                if (name == 'Focusing Iris') then --"260805"
-                                    found = true
-                                    -- print("Targeting Boss :", b)
-                                    override_target = target
-                                end
-                            end
-                        end
-                        -- if (env:evaluate_variable("myself.debuff.")) then Jump if you have thing
-                        -- end
-
-                        -- Target people with Soul Manipulation to free them
-                        for i, player_name in ipairs(party) do
-                            local debuff_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.debuff.Soul Manipulation')
-                            if (debuff_duration == 0) then
-                                print('Mind Control found, need to attack :', player_name)
-                                override_target = player_name
-                            end
-                        end
-                        if (override_target ~= nil) then
-                            RunMacroText('/target ' .. override_target)
-                        end
-                        -- Move apart if you have Unstable Runic Mark
-                    end,
-                    ['Sister Solena'] = function()
-                        local override_target = nil
-                        for b = 1, 3 do
-                            local target = 'boss' .. b
-                            for i = 1, 5 do
-                                local name, _, _, type, duration, _, _, _, _, spellId = UnitBuff(target, i)
-                                if (name == 'Focusing Iris') then --"260805"
-                                    found = true
-                                    -- print("Targeting Boss :", b)
-                                    override_target = target
-                                end
-                            end
-                        end
-                        -- if (env:evaluate_variable("myself.debuff.")) then Jump if you have thing
-                        -- end
-
-                        -- Target people with Soul Manipulation to free them
-                        for i, player_name in ipairs(party) do
-                            local debuff_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.debuff.Soul Manipulation')
-                            if (debuff_duration == 0) then
-                                print('Mind Control found, need to attack :', player_name)
-                                override_target = player_name
-                            end
-                        end
-                        if (override_target ~= nil) then
-                            RunMacroText('/target ' .. override_target)
-                        end
-                        -- Move apart if you have Unstable Runic Mark
-                    end,
-                    ['Lady Waycrest'] = function()
-                        -- spread
-                        -- move out of disease residue
-                    end,
-                    ['Gorak Tul'] = function()
-                        -- positions
-                        -- tank  -455.9, -339.3, 152.4
-                        -- healer - -466.7, -337.3, 152.1
-                        ---459.8, -330.9, 152.1
-                        ---458.3, -352.7, 152.1
-                        ---466.9, -346.1, 152.1
-                    end,
-                    ['Soulbound Goliath'] = function()
-                        RunMacroText('/target Soul Thorns')
-                    end,
-                    ['Raal the Gluttonous'] = function()
-                    end,
-                    -- Tol Dagor
-                    ['The Sand Queen'] = function()
-                    end,
-                    ['Jes Howlis'] = function()
-                    end,
-                    ['Knight Captain Valyri'] = function()
-                    end,
-                    ['Overseer Korgus'] = function()
-                    end,
-                    -- Freehold
-                    ["Skycap'n Kragg"] = function()
-                    end,
-                    ['Captain Raoul'] = function()
-                    end,
-                    ['Captain Eudora'] = function()
-                    end,
-                    ['Captain Jolly'] = function()
-                    end,
-                    ['Trothak'] = function()
-                    end,
-                    ['Harlan Sweete'] = function()
-                    end,
-                    -- Underrot
-                    ['Elder Leaxa'] = function()
-                    end,
-                    ['Cragmaw the Infested'] = function()
-                    end,
-                    ['Sporecaller Zancha'] = function()
-                    end,
-                    ['Unbound Abomination'] = function()
-                        local hp = UnitHealth('boss1')
-                        if (hp < 30) then
-                            RunMacroText('/tar Blood Visage')
-                        end
-                    end,
-                    -- Temple of Sethralis
-                    ['Adderis'] = function()
-                    end,
-                    ['Aspix'] = function()
-                    end,
-                    ['Merektha'] = function()
-                    end,
-                    ['Galvazzt'] = function()
-                    end,
-                    ['Avatar of Sethraliss'] = function()
-                    end,
-                    -- Bonus
-                    ['Headless Horseman'] = function()
-                        -- number of dudes > 2 go to AoE mode
-                        local count = get_aoe_count(15)
-                        if (boss_mode == nil) then
-                            boss_mode = 'Save_CDs'
-                            RunMacroText('/p  Saving Cooldowns')
-                        elseif (count > 2 and boss_mode ~= 'AoE') then
-                            if (aoe_timer_start == nil) then
-                                aoe_timer_start = game_time
-                                RunMacroText('/p  Staring timer')
-                            else
-                                if (player_class == 'PALADIN') then
-                                    if (game_time > aoe_timer_start + 3) then
-                                        RunMacroText('/p  Engaging AoE mode')
-                                        boss_mode = 'AoE'
-                                    end
-                                else
-                                    if (game_time > aoe_timer_start + 9) then
-                                        RunMacroText('/p  Engaging AoE mode')
-                                        boss_mode = 'AoE'
-                                    end
-                                end
-                            end
-                        elseif (count < 2 and boss_mode == 'AoE') then
-                            RunMacroText('/p  Returning to nomal')
-                            boss_mode = 'Normal'
-                        end
-                    end
-                }
-                return boss_mechanics
-            end
         end
     },
     --Custom Actions
@@ -502,7 +275,7 @@ return {
         ---------------                                          Combat                                      ---------------
         --------------------------------------------------------------------------------------------------------------------
         combat = function(env, is_pulling)
-            debug = true
+            debug = false
             debug_spells = false
             debug_frame = false
             debug_movement = false
@@ -521,7 +294,7 @@ return {
             strafe_end_time = strafe_end_time or nil
             aoe_timer_start = aoe_timer_start or nil
             player_class = player_class or env:evaluate_variable('myself.class')
-            boss_mechanics = boss_mechanics or env:evaluate_variable('get_boss_mechanics')
+            boss_mechanics = boss_mechanics or get_boss_mechanics()
             enemies = enemies or {}
 
             -- Fire Movement Code
@@ -529,6 +302,7 @@ return {
             fire_x = fire_x or nil
             fire_y = fire_y or nil
             fire_z = fire_z or nil
+            move_distance = move_distance or 5
 
             debug_msg(false, 'Init combat variables')
             known_buffs = env:evaluate_variable('get_known_buffs')
@@ -542,7 +316,7 @@ return {
             party = env:evaluate_variable('get_party')
             main_tank = env:evaluate_variable('get_tank_name')
             healer_name = env:evaluate_variable('get_healer_name')
-            bad_spells = bad_spells or env:evaluate_variable('get_bad_spells')
+            bad_spells = bad_spells or get_bad_spells()
             safe_locations = env:evaluate_variable('get_safe_locations')
             event_frame = env:evaluate_variable('get_fire_event_frame')
 
@@ -959,18 +733,18 @@ return {
                         local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i) -- CANCELABLE ?
                         if (name) then
                             if (type == 'MAGIC' and spell == 'Dispel Magic') then
-                                check_cast(spell)
-                                return true
+                                return check_cast(spell)
                             elseif (type == 'MAGIC' and spell == 'Purge') then
-                                check_cast(spell)
-                                return true
+                                return check_cast(spell)
+                            elseif (type == 'MAGIC' and spell == 'Arcane Torrent') then
+                                return check_cast(spell)
+                            elseif (type == 'MAGIC' and spell == 'Consume Magic') then
+                                return check_cast(spell)
                             elseif (type == 'ENRAGE' and spell == 'Soothe') then
-                                check_cast(spell)
-                                return true
+                                return check_cast(spell)
                             elseif (type == 'MAGIC' and stealable and spell == 'Spellsteal') then
-                                check_cast(spell)
                                 RunMacroText('/p Stealing stuffs!')
-                                return true
+                                return check_cast(spell)
                             end
                         end
                     end
@@ -982,19 +756,30 @@ return {
             -----------------------------------------------------------------------
             function check_fire()
                 --205470 Flame Patch - 2120
-                local move_distance = 5
                 debug_msg(debug_movement, 'Checking for fire..')
                 local name, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player')
                 if (standing_in_fire and not endTimeMS) then
                     local px, py, pz = wmbapi.ObjectPosition('player')
                     local distance = GetDistanceBetweenPositions(px, py, pz, fire_x, fire_y, fire_z)
                     debug_msg(debug_movement, 'Fire is :' .. tostring(distance) .. ' away!')
-                    if (distance < move_distance) then
-                        StrafeLeftStart()
+                    if (move_direction == 'back_left') then
+                        if (distance < move_distance) then
+                            StrafeLeftStart()
+                            MoveBackwardStart()
+                        else
+                            debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
+                            StrafeLeftStop()
+                            MoveBackwardStop()
+                            standing_in_fire = false
+                        end
                     else
-                        debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
-                        StrafeLeftStop()
-                        standing_in_fire = false
+                        if (distance < move_distance) then
+                            StrafeLeftStart()
+                        else
+                            debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
+                            StrafeLeftStop()
+                            standing_in_fire = false
+                        end
                     end
                 else
                     debug_msg(debug_movement, '.. no fire or busy casting')
@@ -1013,65 +798,9 @@ return {
                 -- return false
             end
 
-            function check_move()               
+            function check_move()
                 return false
             end
-
-            function move_away_from()
-            end
-
-            function move_to_next_safe_location()
-                if (moving) then
-                    -- print("Already moving, target is position :", safe_position)
-                    -- local x = math.floor(safe_destination[1] + 0.5)
-                    -- local y = math.floor(safe_destination[2] + 0.5)
-                    -- local z = math.floor(safe_destination[3] + 0.5)
-                    local x = safe_destination[1]
-                    local y = safe_destination[2]
-                    local z = safe_destination[3]
-                    local dest = x .. ',' .. y .. ',' .. z
-
-                    -- print(".. heading to :[", tostring(dest), "]")
-
-                    local distance = env:evaluate_variable('myself.distance.' .. dest)
-
-                    print('Already moving, distance to saftey :', tostring(distance))
-                    if (distance < 5) then
-                        moving = false
-                        print('We made it, next safe position :', safe_position)
-                    else
-                        print('We should already be moving')
-                        -- wmbapi.MoveTo(x,y,z)
-                        env:execute_action('terminate_path')
-                        env:execute_action('move', safe_destination)
-                    end
-                else
-                    -- print(".. leaving move function.")
-                    moving = true
-                    print('Run away! heading to safe position:', safe_position)
-                    -- get furthest?
-                    safe_destination = safe_locations[safe_position]
-                    local x = safe_destination[1]
-                    local y = safe_destination[2]
-                    local z = safe_destination[3]
-                    -- wmbapi.MoveTo(x,y,z)
-                    env:execute_action('terminate_path')
-                    env:execute_action('move', safe_destination)
-                    safe_position = safe_position + 1
-                    if (safe_position > table.getn(safe_locations)) then
-                        safe_position = 1
-                        print('Used all the safe positions, round again!:')
-                    end
-                end
-            end
-
-            function check_position_and_move_during_fight(poistion, target)
-                position = {185.0, 968.1, 190.8}
-                if (env:evaluate_variable('myself.distance.' .. position) > 5) then
-                    env:execute_action('move', position)
-                end
-            end
-
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
             -------------------------------------------------------------------       General Combat Code    ------------------------------------------------------------------
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1103,13 +832,13 @@ return {
                     elemental(env)
                 elseif player_class == 'WARRIOR' then -- and player_spec = 71 (arms) (fury 72)
                     arms(env)
-                elseif player_class == 'DEMONHUNTER' then -- and player_spec = 
+                elseif player_class == 'DEMONHUNTER' then -- and player_spec =
                     vengeance(env)
-                elseif player_class == 'HUNTER' then -- and player_spec = 
+                elseif player_class == 'HUNTER' then -- and player_spec =
                     marksman(env)
-                elseif player_class == 'MONK' then -- and player_spec = 
+                elseif player_class == 'MONK' then -- and player_spec =
                     mistweaver(env)
-                elseif player_class == 'WARLOCK' then -- and player_spec = 
+                elseif player_class == 'WARLOCK' then -- and player_spec =
                     destruction(env)
                 end
             else

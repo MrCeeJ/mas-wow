@@ -1,0 +1,195 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Mouse",
+      "value": [
+        -1781.8,
+        -1000.5,
+        88.6
+      ]
+    },    
+    {
+      "actions": [],
+      "name": "Stairs down",
+      "value": [
+        -1788.8,
+        -958.7,
+        86.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        -1794.0,
+        -949.9,
+        81.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ground",
+      "value": [
+        -1779.3,
+        -940.1,
+        73.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Enforcer",
+      "value": [
+        -1747.4,
+        -924.5,
+        74.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Accross Bridge",
+      "value": [
+        -1849.0,
+        -792.4,
+        58.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1848.3,
+        -793.2,
+        58.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1852.4,
+        -780.0,
+        56.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1854.8,
+        -756.5,
+        56.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1878.6,
+        -745.7,
+        56.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "On to boss",
+      "value": [
+        -1869.0,
+        -740.4,
+        55.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1867.1,
+        -722.5,
+        55.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1833.9,
+        -699.0,
+        43.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -1820.0,
+        -702.2,
+        41.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Knife Jugglers",
+      "value": [
+        -1823.6,
+        -676.1,
+        40.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Bosses",
+      "value": [
+        -1799.8,
+        -683.3,
+        38.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Pull",
+      "value": [
+        -1788.7,
+        -686.4,
+        38.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Chest",
+      "value": [
+        -1785.2,
+        -683.9,
+        38.5
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 0.5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 288636,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Open",
+      "value": [
+        -1785.2,
+        -683.9,
+        38.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -1806.8,
+        -679.5,
+        39.1
+      ]
+    }
+  ]
+}

@@ -41,7 +41,7 @@ function balance(env)
             local knows_stellar_flare = GetSpellInfo('Stellar Flare')
             local flare_duration = env:evaluate_variable('unit.target.debuff.Stellar Flare')
 
-            previous_eclipse = env:evaluate_variable('get_previous_eclipse')
+            local previous_eclipse = env:evaluate_variable('get_previous_eclipse')
             local lunar_eclipse_duration = env:evaluate_variable('myself.buff.Eclipse (Lunar)')
             local solar_eclipse_duration = env:evaluate_variable('myself.buff.Eclipse (Solar)')
             local alignment_eclipse_duration = env:evaluate_variable('myself.buff.Celestial Alignment')

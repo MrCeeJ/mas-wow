@@ -453,13 +453,71 @@
         185.3
       ]
     },
+    
     {
       "actions": [],
       "name": "Lord and Lady Waycrest",
       "value": [
-        -542.9,
-        -256.3,
-        179.6
+        -561.0,
+        -259.9,
+        185.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "lady_waycrest_positions"
+        },
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "pull_lord_waycrest"
+        }
+      ],
+      "name": "Positions",
+      "pve": false,
+      "value": [
+        -561.0,
+        -259.9,
+        185.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Pull Boss",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "value": [
+        -548.0,
+        -262.4,
+        185.3
       ]
     },
     {
@@ -473,10 +531,25 @@
     },
     {
       "actions": [],
-      "name": "Corner",
       "value": [
-        -534.0,
-        -281.6,
+        -541.5,
+        -267.0,
+        178.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -536.6,
+        -277.7,
+        178.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -529.7,
+        -284.2,
         178.9
       ]
     },
@@ -520,9 +593,17 @@
       "actions": [],
       "name": "__end",
       "value": [
-        -607.3,
-        -259.3,
+        -626.4,
+        -260.2,
         236.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        0.0,
+        0.0,
+        0.0
       ]
     }
   ]

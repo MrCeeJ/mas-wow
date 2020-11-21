@@ -24,7 +24,7 @@ return {
             --     tank_unit = unit
             -- end
 
-            local tank_name = 'Ceejpaladin'
+            local tank_name = 'Ceejdemon'
             return tank_name
         end,
         ['get_party'] = function(env)
@@ -52,67 +52,6 @@ return {
                 table.insert(party, me)
             end
             return party
-        end,
-        ['get_known_buffs'] = function(env)
-            if (known_buffs == nil) then
-                print('creating known buff list...')
-                known_buffs = {
-                    [326419] = 'Winds of Wisdom',
-                    [21562] = 'Fortitude',
-                    [194384] = 'Attonement',
-                    [26297] = 'Power Word: Shield',
-                    [193065] = 'Masochism',
-                    [167152] = 'Replensihment'
-                }
-            end
-            return known_buffs
-        end,
-        ['get_known_debuffs'] = function(env)
-            if (known_debuffs == nil) then
-                print('creating known debuff list...')
-                known_debuffs = {
-                    -- Our own / generic
-                    [6788] = 'Weakened Soul',
-                    [25771] = 'Forbearance',
-                    [187464] = 'Shadow Mend',
-                    [87024] = 'Cauterized',
-                    [87023] = 'Cauterize',
-                    [225080] = 'Reincarnation',
-                    [57724] = 'Sated',
-                    [1604] = 'Dazed'
-                }
-            end
-            return known_debuffs
-        end,
-        ['get_ignore_magic'] = function(env)
-            if (ignore_magic == nil) then
-                print('creating ingore magics list...')
-                ignore_magic = {
-                    [15497] = 'Forst Bolt'
-                }
-            end
-            return ignore_magic
-        end,
-        ['get_safe_locations'] = function(env)
-            if (safe_locations == nil) then
-                print('creating known safe location list...')
-                safe_locations = {
-                    {90.0, -326.1, -7.9},
-                    {58.5, -323.1, -7.9},
-                    {91.3, -306.5, -7.9},
-                    {59.3, -303.4, -7.9}
-                }
-            end
-            return safe_locations
-        end,
-        ['get_priority_targets'] = function(env)
-            if (priorities == nil) then
-                print('creating known priority targets list...')
-                priorities = {
-                    'Naga Distiller'
-                }
-            end
-            return priorities
         end,
         ['get_previous_eclipse'] = function(env)
             if (previous_eclipse == nil) then
@@ -163,7 +102,7 @@ return {
         end,
         start_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 MoveForwardStart()
             elseif player_class == 'PRIEST' then
                 RunMacroText('/dance')
@@ -177,7 +116,7 @@ return {
         end,
         stop_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 MoveForwardStop()
             elseif player_class == 'PRIEST' then
                 RunMacroText('/cheer')
@@ -192,7 +131,7 @@ return {
         -- Tol
         overseer_korgus_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {99.5, -2676.1, 78.1})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {123.1, -2671.7, 74.9})
@@ -207,7 +146,7 @@ return {
         -- Waycrest Manor
         heartsbane_triad_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {-562.9, -153.0, 235.2})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {-555.9, -169.3, 235.2})
@@ -221,7 +160,7 @@ return {
         end,
         lady_waycrest_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {-548.0, -262.4, 185.3})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {-562.1, -267.3, 185.3})
@@ -239,11 +178,15 @@ return {
                 print('Pulling Lady Waycrest')
                 RunMacroText('/tar Lady Waycrest')
                 RunMacroText('/cast Judgment')
+            elseif player_class == 'DEMONHUNTER' then
+                print('Pulling Lady Waycrest')
+                RunMacroText('/tar Lady Waycrest')
+                RunMacroText('/cast Throw Glaive')
             end
         end,
         raal_the_gluttonous_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {-494.3, -341.1, 236.5})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {-497.4, -337.0, 235.6})
@@ -278,7 +221,6 @@ return {
             debug = false
             debug_spells = false
             debug_frame = false
-            debug_movement = false
             debug_frame_setup = false
 
             enable_event_frame = enable_event_frame or true
@@ -287,7 +229,6 @@ return {
             gcd_moved_time = gcd_moved_time or game_time
             gcd_moved = gcd_moved or false
             check_move_destination = check_move_destination or false
-            -- wmbapi.SetSystemVar("moving", gcd_moved)
             safe_position = safe_position or 1
             fire_timer = fire_timer or 0
             moving = moving or false
@@ -297,19 +238,9 @@ return {
             boss_mechanics = boss_mechanics or get_boss_mechanics()
             enemies = enemies or {}
 
-            -- Fire Movement Code
-            standing_in_fire = standing_in_fire or false
-            fire_x = fire_x or nil
-            fire_y = fire_y or nil
-            fire_z = fire_z or nil
-            move_distance = move_distance or 5
-
             debug_msg(false, 'Init combat variables')
-            known_buffs = env:evaluate_variable('get_known_buffs')
-            known_debuffs = env:evaluate_variable('get_known_debuffs')
             curses = env:evaluate_variable('get_curses')
             magics = env:evaluate_variable('get_magics')
-            ignore_magic = env:evaluate_variable('get_ignore_magic')
             diseases = env:evaluate_variable('get_diseases')
             poisons = env:evaluate_variable('get_poisons')
             tremors = env:evaluate_variable('get_tremors')
@@ -317,7 +248,6 @@ return {
             main_tank = env:evaluate_variable('get_tank_name')
             healer_name = env:evaluate_variable('get_healer_name')
             bad_spells = bad_spells or get_bad_spells()
-            safe_locations = env:evaluate_variable('get_safe_locations')
             event_frame = env:evaluate_variable('get_fire_event_frame')
 
             debug_msg(debug_frame_setup, '.. registering event handler ..')
@@ -337,7 +267,7 @@ return {
             -----------------------------------------------------------
             debug_msg(debug_frame_setup, 'Configuring event handler ..')
             function event_frame:OnEvent(event, ...)
-                local timestamp,
+                local _,
                     subevent,
                     _,
                     sourceGUID,
@@ -351,30 +281,24 @@ return {
                 local spellID, spellName, spellSchool
                 local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand
                 local playerGUID = UnitGUID('player')
+                local me, _ = UnitName('player') --and destName == me
+
                 if
-                    (destGUID == playerGUID and subevent == 'SPELL_DAMAGE' or --) then
-                        subevent == 'SPELL_AURA_APPLIED' or
-                        subevent == 'SPELL_AURA_APPLIED_DOSE' or
-                        subevent == 'SPELL_AURA_REFRESH')
+                    (destGUID == playerGUID or destName == me) and
+                        (subevent == 'SPELL_DAMAGE' or --) then
+                            subevent == 'SPELL_AURA_APPLIED' or
+                            subevent == 'SPELL_AURA_APPLIED_DOSE' or
+                            subevent == 'SPELL_AURA_REFRESH')
                  then
-                    spellID,
-                        spellName,
-                        spellSchool,
-                        amount,
-                        overkill,
-                        school,
-                        resisted,
-                        blocked,
-                        absorbed,
-                        critical,
-                        glancing,
-                        crushing,
-                        isOffHand = select(12, ...)
+                    spellID, spellName = select(12, ...)
                     local spell_id = tostring(spellID)
                     local spell_name = tostring(spellName)
                     if (spellID > 0) then
                         if (bad_spells[spell_id]) then
                             debug_msg(debug_movement, 'Standing in Fire!! :' .. spell_name)
+                            -- print log event?
+                            debug_msg(debug_movement, 'dest Name :' .. tostring(destName))
+                            debug_msg(debug_movement, 'dest GUID :' .. tostring(destGUID))
                             RunMacroText('/p um, looks like a :' .. spell_name .. ', lets move!')
                             standing_in_fire = true
                             fire_x, fire_y, fire_z = wmbapi.ObjectPosition('player')
@@ -511,6 +435,7 @@ return {
                 if (debug_spells) then
                     print('Attempting to cast :', spell)
                 end
+                -- if spell is a name this checks you know it, but not if spell is an ID
                 local name, _, _, _, _, _, spellId = GetSpellInfo(spell)
                 local result = false
                 local message
@@ -520,9 +445,7 @@ return {
                 if (name == nil) then
                     message = "Warning, cast aborted as you don't know the spell :" .. spell
                 else
-                    if (debug_spells) then
-                        message = 'Casting spell: ' .. spell .. ' with name: ' .. name .. ' and id: ' .. spellId
-                    end
+                    debug_msg(debug_spells, 'Casting spell: ' .. spell .. ', name: ' .. name .. ', id: ' .. spellId)
                     local _, spell_cd, enabled = GetSpellCooldown(spellId)
                     if (debug_spells) then
                         print('Spell CD :', spell_cd, ' enabled :', enabled)
@@ -533,8 +456,8 @@ return {
                         if (spell_cd ~= 0) then
                             message = 'Warning, cast aborted as spell is currently on cooldown :' .. spell
                         else
-                            face = env:execute_action('face_target') -- posible move fix?
-                            result = env:execute_action('cast', spellId) --cast_target
+                            face = env:execute_action('face_target')
+                            result = env:execute_action('cast', spellId)
                             if (debug_spells) then
                                 print('Facing result :', face)
                             end
@@ -573,10 +496,7 @@ return {
                         end
                         if (enabled and spell_cd == 0) then
                             debug_msg(false, '.. using azerite')
-                            result = env:execute_action('cast', spellId)
-                            if (result) then
-                                return true
-                            end
+                            return env:execute_action('cast', spellId)
                         end
                     end
                 end
@@ -607,7 +527,6 @@ return {
                             if (name) then
                                 debug_msg(false, 'Debuff found :' .. name)
                                 local id = tonumber(spellId)
-                                local debuff_present = known_debuffs[id]
                                 if (type) then
                                     if (type == 'Magic' and magic) then
                                         local _, cd, _, _ = GetSpellCooldown(magic)
@@ -664,17 +583,7 @@ return {
                                             debug_msg(false, curse .. ' is on cd, ignoring ' .. name)
                                         end
                                     end
-                                    if (debuff_present == false) then
-                                        RunMacroText(
-                                            '/p Debuff found - Name :' ..
-                                                name .. ' id :' .. spellId .. ' type: ' .. type
-                                        )
-                                    end
-                                elseif (debuff_present == false) then
-                                    RunMacroText('/p New debuff found - Name :' .. name .. ' id :' .. spellId)
                                 end
-                            else
-                                -- debug_msg(debug_dispells, 'No debuffs found :(' .. i .. ' /5)')
                             end
                         end
                         debug_msg(debug_dispells, 'No debuffs found on player :' .. player_name)
@@ -689,7 +598,7 @@ return {
                 debug_msg(false, '.. checking ' .. spell .. ' cd :' .. kick_cd)
 
                 local spell_name, rank, icon, castTime, minRange, maxRange, spell_spellId = GetSpellInfo(spell)
-                debug_msg(false, '.. range of' .. spell .. ' is :' .. maxRange)
+                debug_msg(false, '.. range of ' .. spell .. ' is :' .. maxRange)
 
                 if (kick_cd == 0 and UnitExists('target')) then
                     -- local casting = UnitCastingInfo("target")
@@ -720,6 +629,8 @@ return {
                                 end
                             end
                         end
+                    else
+                        debug_msg(false, '.. Nothing to interrupt')
                     end
                 end
                 return false
@@ -754,48 +665,115 @@ return {
             -----------------------------------------------------------------------
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
+            debug_movement = true
+            debug_fire = false
+            standing_in_fire = standing_in_fire or false
+            fire_x = fire_x or nil
+            fire_y = fire_y or nil
+            fire_z = fire_z or nil
+            move_distance = move_distance or 3
+            move_direction = move_direction or 7
+
+            move_fuctions =
+                move_fuctions or
+                {
+                    [1] = function()
+                        MoveForwardStart()
+                    end,
+                    [2] = function()
+                        MoveForwardStart()
+                        StrafeRightStart()
+                    end,
+                    [3] = function()
+                        debug_msg(debug_movement, 'Starting to move right')
+
+                        StrafeRightStart()
+                    end,
+                    [4] = function()
+                        MoveBackwardStart()
+                        StrafeRightStart()
+                    end,
+                    [5] = function()
+                        MoveBackwardStart()
+                    end,
+                    [6] = function()
+                        MoveBackwardStart()
+                        StrafeLeftStart()
+                    end,
+                    [7] = function()
+                        debug_msg(debug_movement, 'Starting to move left')
+                        StrafeLeftStart()
+                    end,
+                    [8] = function()
+                        MoveForwardStart()
+                        StrafeLeftStart()
+                    end
+                }
+            stop_fuctions =
+                stop_fuctions or
+                {
+                    [1] = function()
+                        MoveForwardStop()
+                    end,
+                    [2] = function()
+                        MoveForwardStop()
+                        StrafeRightStop()
+                    end,
+                    [3] = function()
+                        StrafeRightStop()
+                    end,
+                    [4] = function()
+                        MoveBackwardStop()
+                        StrafeRightStop()
+                    end,
+                    [5] = function()
+                        MoveBackwardStop()
+                    end,
+                    [6] = function()
+                        MoveBackwardStop()
+                        StrafeLeftStop()
+                    end,
+                    [7] = function()
+                        StrafeLeftStop()
+                    end,
+                    [8] = function()
+                        MoveForwardStop()
+                        StrafeLeftStop()
+                    end
+                }
+
+            function start_moving()
+                debug_msg(debug_movement, 'Starting to move')
+                move_fuctions[move_direction]()
+            end
+
+            function stop_moving()
+                debug_msg(debug_movement, 'Stopping movement')
+                stop_fuctions[move_direction]()
+                if (move_direction == 7) then
+                    move_direction = 3
+                elseif (move_direction == 3) then
+                    move_direction = 7
+                end
+            end
+
             function check_fire()
-                --205470 Flame Patch - 2120
-                debug_msg(debug_movement, 'Checking for fire..')
-                local name, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player')
+                debug_msg(debug_fire, 'Checking for fire..')
+                local _, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player')
                 if (standing_in_fire and not endTimeMS) then
                     local px, py, pz = wmbapi.ObjectPosition('player')
                     local distance = GetDistanceBetweenPositions(px, py, pz, fire_x, fire_y, fire_z)
                     debug_msg(debug_movement, 'Fire is :' .. tostring(distance) .. ' away!')
-                    if (move_direction == 'back_left') then
-                        if (distance < move_distance) then
-                            StrafeLeftStart()
-                            MoveBackwardStart()
-                        else
-                            debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
-                            StrafeLeftStop()
-                            MoveBackwardStop()
-                            standing_in_fire = false
-                        end
+                    if (distance < move_distance) then
+                        start_moving()
                     else
-                        if (distance < move_distance) then
-                            StrafeLeftStart()
-                        else
-                            debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
-                            StrafeLeftStop()
-                            standing_in_fire = false
-                        end
+                        stop_moving()
+                        debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
+                        standing_in_fire = false
                     end
                 else
-                    debug_msg(debug_movement, '.. no fire or busy casting')
+                    debug_msg(debug_fire, '.. no fire or busy casting')
                 end
-                -- if (standing_in_fire and UnitExists('target')) then
-                --     debug_msg(debug_movement, 'Moving out of Stuffs!')
-                --     local px, py, pz = wmbapi.ObjectPosition('player')
-                --     local tx, ty, tz = wmbapi.ObjectPosition('target')
-                --     local h, v = GetAnglesBetweenPositions(px, py, pz, tx, ty, tz)
-                --     debug_msg(debug_movement, 'Angle is :' .. tostring(h))
-                --     local distance = 1
-                --     local nx, ny, nz = GetPositionFromPosition(px, py, pz, distance, h + math.pi * 1.5) -- 5 yards to the left
-                --     check_move_destination = {nx, ny, nz}
-                --     standing_in_fire = false
-                -- end
-                -- return false
             end
 
             function check_move()
@@ -821,25 +799,25 @@ return {
                 gcd_moved = false
 
                 if player_class == 'PALADIN' then
-                    protection(env)
+                    protection(env, is_pulling)
                 elseif player_class == 'PRIEST' then -- and player_spec = 256 (disc)
-                    discipline(env)
+                    discipline(env, is_pulling)
                 elseif player_class == 'DRUID' then -- and player_spec = 102 (balance)
-                    balance(env)
+                    balance(env, is_pulling)
                 elseif player_class == 'MAGE' then -- and player_spec = 63 (fire)
-                    fire(env)
+                    fire(env, is_pulling)
                 elseif player_class == 'SHAMAN' then -- and player_spec = 262 (elemental)
-                    elemental(env)
+                    elemental(env, is_pulling)
                 elseif player_class == 'WARRIOR' then -- and player_spec = 71 (arms) (fury 72)
-                    arms(env)
+                    arms(env, is_pulling)
                 elseif player_class == 'DEMONHUNTER' then -- and player_spec =
-                    vengeance(env)
+                    vengeance(env, is_pulling)
                 elseif player_class == 'HUNTER' then -- and player_spec =
-                    marksman(env)
+                    marksmanship(env, is_pulling)
                 elseif player_class == 'MONK' then -- and player_spec =
-                    mistweaver(env)
+                    mistweaver(env, is_pulling)
                 elseif player_class == 'WARLOCK' then -- and player_spec =
-                    destruction(env)
+                    demonology(env, is_pulling)
                 end
             else
                 if (debug) then

@@ -1,14 +1,14 @@
 {
   "path_groups": [
     {
-      "name": "Test",
+      "name": "Random Location",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Test"
+          "name": "Random Location"
         }
       ],
       "pve": {
@@ -33,16 +33,16 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Outside Mr Nice",
+        "name": "Random Location",
         "value": [
-          7551.3,
-          2059.7,
-          500.3
+          8502.8,
+          1380.0,
+          641.2
         ]
       },
       "start_distance": 20,
       "value": [
-        "2"
+        "random"
       ]
     }
   ],

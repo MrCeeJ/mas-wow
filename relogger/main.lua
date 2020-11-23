@@ -4,15 +4,15 @@ if (not IsOnGlueScreen()) then
 end
 
 -- Login email. If not previously set by SetSystemVariable, use "test@test.com".
-local email = wmbapi.GetSystemVar("relogger.email") or "craigjamestongue+paladin@gmail.com";
+local email = wmbapi.GetSystemVar("relogger.email") or "craigjamestongue+warlock@gmail.com";
 -- Login password. If not previously set by SetSystemVariable, use "password".
 local password = wmbapi.GetSystemVar("relogger.password") or "underBots2";
 -- Login account. If not previously set by SetSystemVariable, use "WoW1".
 local account = wmbapi.GetSystemVar("relogger.account") or "WoW1";
 -- Login realm. If not previously set by SetSystemVariable, nil to use the current one.
-local realm = wmbapi.GetSystemVar("relogger.realm");
+local realm = wmbapi.GetSystemVar("relogger.realm") or "Doomhammer";
 -- Login character. If not previously set by SetSystemVariable, use "character".
-local character = wmbapi.GetSystemVar("relogger.character") or "character";
+local character = wmbapi.GetSystemVar("relogger.character") or "CeejWarlock";
 -- Do nothing if email is set to empty.
 if (#email == 0 or #password == 0) then
     return;

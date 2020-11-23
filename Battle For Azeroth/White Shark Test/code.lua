@@ -1,5 +1,4 @@
-﻿local wmbapi, wowapi = ...
-return {
+﻿return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
@@ -102,7 +101,7 @@ return {
         end,
         start_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 MoveForwardStart()
             elseif player_class == 'PRIEST' then
                 RunMacroText('/dance')
@@ -116,7 +115,7 @@ return {
         end,
         stop_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 MoveForwardStop()
             elseif player_class == 'PRIEST' then
                 RunMacroText('/cheer')
@@ -131,7 +130,7 @@ return {
         -- Tol
         overseer_korgus_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {99.5, -2676.1, 78.1})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {123.1, -2671.7, 74.9})
@@ -146,7 +145,7 @@ return {
         -- Waycrest Manor
         heartsbane_triad_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {-562.9, -153.0, 235.2})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {-555.9, -169.3, 235.2})
@@ -160,7 +159,7 @@ return {
         end,
         lady_waycrest_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {-548.0, -262.4, 185.3})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {-562.1, -267.3, 185.3})
@@ -178,11 +177,15 @@ return {
                 print('Pulling Lady Waycrest')
                 RunMacroText('/tar Lady Waycrest')
                 RunMacroText('/cast Judgment')
+            elseif player_class == 'DEMONHUNTER' then
+                print('Pulling Lady Waycrest')
+                RunMacroText('/tar Lady Waycrest')
+                RunMacroText('/cast Throw Glaive')
             end
         end,
         raal_the_gluttonous_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' then
+            if player_class == 'PALADIN' or 'DEMONHUNTER' then
                 env:execute_action('move', {-494.3, -341.1, 236.5})
             elseif player_class == 'PRIEST' then
                 env:execute_action('move', {-497.4, -337.0, 235.6})
@@ -357,15 +360,18 @@ return {
             function get_aoe_count(range)
                 local range = range or 8
                 if (UnitExists(main_tank)) then
-                    -- TODO: add in range check for tank, or use self
-                    local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
-                    local x = math.floor(tank_x + 0.5)
-                    local y = math.floor(tank_y + 0.5)
-                    local z = math.floor(tank_z + 0.5)
-                    local args = 'npcs.attackable.range_' .. range .. '.center_' .. x .. ',' .. y .. ',' .. z
-                    local enemies = env:evaluate_variable(args)
-                    if (enemies) then
-                        return enemies
+                    local distance = env:evaluate_variable('unit.main_tank.distance')
+                    if (distance < 30) then
+                        -- TODO: add in range check for tank, or use self
+                        local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                        local x = math.floor(tank_x + 0.5)
+                        local y = math.floor(tank_y + 0.5)
+                        local z = math.floor(tank_z + 0.5)
+                        local args = 'npcs.attackable.range_' .. range .. '.center_' .. x .. ',' .. y .. ',' .. z
+                        local enemies = env:evaluate_variable(args)
+                        if (enemies) then
+                            return enemies
+                        end
                     end
                 end
                 return 0
@@ -661,7 +667,7 @@ return {
             -----------------------------------------------------------------------
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
-            debug_movement = true
+            debug_movement = false
             debug_fire = false
             standing_in_fire = standing_in_fire or false
             fire_x = fire_x or nil
@@ -1134,6 +1140,10 @@ return {
                  then
                     return true
                 end
+            elseif player_class == 'DEMONHUNTER' then -- and player_spec =
+                prepare_vengeance(env)
+            elseif player_class == 'WARLOCK' then -- and player_spec =
+                prepare_demonology(env)
             end
             -- All done, lets go!
             return false

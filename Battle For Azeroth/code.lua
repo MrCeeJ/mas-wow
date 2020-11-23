@@ -1,5 +1,4 @@
-﻿local wmbapi, wowapi = ...
-return {
+﻿return {
     -- Define custom variables.
     variables = {
         ['get_fire_event_frame'] = function(env)
@@ -361,15 +360,18 @@ return {
             function get_aoe_count(range)
                 local range = range or 8
                 if (UnitExists(main_tank)) then
-                    -- TODO: add in range check for tank, or use self
-                    local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
-                    local x = math.floor(tank_x + 0.5)
-                    local y = math.floor(tank_y + 0.5)
-                    local z = math.floor(tank_z + 0.5)
-                    local args = 'npcs.attackable.range_' .. range .. '.center_' .. x .. ',' .. y .. ',' .. z
-                    local enemies = env:evaluate_variable(args)
-                    if (enemies) then
-                        return enemies
+                    local distance = env:evaluate_variable('unit.main_tank.distance')
+                    if (distance < 30) then
+                        -- TODO: add in range check for tank, or use self
+                        local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                        local x = math.floor(tank_x + 0.5)
+                        local y = math.floor(tank_y + 0.5)
+                        local z = math.floor(tank_z + 0.5)
+                        local args = 'npcs.attackable.range_' .. range .. '.center_' .. x .. ',' .. y .. ',' .. z
+                        local enemies = env:evaluate_variable(args)
+                        if (enemies) then
+                            return enemies
+                        end
                     end
                 end
                 return 0
@@ -665,7 +667,7 @@ return {
             -----------------------------------------------------------------------
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
-            debug_movement = true
+            debug_movement = false
             debug_fire = false
             standing_in_fire = standing_in_fire or false
             fire_x = fire_x or nil
@@ -1138,6 +1140,10 @@ return {
                  then
                     return true
                 end
+            elseif player_class == 'DEMONHUNTER' then -- and player_spec =
+                prepare_vengeance(env)
+            elseif player_class == 'WARLOCK' then -- and player_spec =
+                prepare_demonology(env)
             end
             -- All done, lets go!
             return false

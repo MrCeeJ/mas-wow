@@ -1,6 +1,4 @@
-﻿-- local wmbapi, wowapi = ...
-
-get_boss_mechanics = function()
+﻿get_boss_mechanics = function()
     print('creating boss mechanic list...')
     local boss_mechanics = {
         -- Waycrest Manor

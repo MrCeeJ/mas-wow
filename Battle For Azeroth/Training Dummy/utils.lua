@@ -1,7 +1,4 @@
-﻿-- local wmbapi, wowapi = ...
--- utils = {}
-
-get_start = function()
+﻿get_start = function()
     if (not start) then
         print('Hi, welcome to the preparation prep!')
     end
@@ -10,7 +7,23 @@ end
 
 debug_msg = function(override, message)
     if (debug or override) then
-        print('debug: ', tostring(message))
+        if (message == previous_message) then
+            if (GetTime() - previous_message_time > 1) then
+                print('debug: ', tostring(message))
+                previous_message_time = GetTime()
+                print_dots = true
+            else
+                if (print_dots) then
+                    print('debug: ...')
+                    print_dots = false
+                end
+            end
+        else
+            print('debug: ', tostring(message))
+            previous_message = message
+            previous_message_time = GetTime()
+            print_dots = true
+        end
     end
 end
 
@@ -37,6 +50,7 @@ do_boss_mechanic = function()
         local action = boss_mechanics[unit_name]
         if (action ~= nil) then
             debug_msg(false, 'Doing boss action for :' .. unit_name)
+            use_heroism = true -- can be overridden by the action for specific timings
             action(env)
         else
             debug_msg(true, 'Unable to find boss actions for  :' .. unit_name)

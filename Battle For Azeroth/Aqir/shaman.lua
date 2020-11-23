@@ -3,6 +3,7 @@
 ------------------------------------------------------------------------------------------------------------
 function elemental(env)
     -- Check for priority targets
+    use_heroism = false
     get_priority_target()
     do_boss_mechanic()
     local dispelling = handle_new_debuffs_mpdc(false, false, false, 'Cleanse Spirit')
@@ -83,8 +84,8 @@ function elemental(env)
                 check_cast('Earth Shock')
             elseif (lb_cooldownDuration == 0 or lb_charges > 0) then
                 check_cast('Lava Burst')
-            elseif (bloodlust_cd == 0) then
-                check_cast('Bloodlust') -- probably shouldn't use on CD :/
+            elseif (use_heroism and bloodlust_cd == 0) then
+                check_cast('Bloodlust')
             elseif (enemy_count > 2) then
                 check_cast('Chain Lightning')
             else

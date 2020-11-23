@@ -9,7 +9,7 @@ function vengeance(env, is_pulling)
     do_boss_mechanic()
 
     local my_hp = env:evaluate_variable('myself.health')
-    local fury = UnitPower('player', 18)
+    local fury = UnitPower('player', 17)
     -- local _, _, fragments, _, _, _, _ = AuraUtil.FindAuraByName('Soul Fragments', 'player')
     local spikes_duration = env:evaluate_variable('myself.buff.Demon Spikes')
     local infernal_strike_charges, _, _, infernal_strike_cd, _ = GetSpellCharges('Infernal Strike')
@@ -25,9 +25,9 @@ function vengeance(env, is_pulling)
         return 0
     end
     local fragments = count_soul_fragments()
-
+    local ability = ""
     function defensives()
-        debug_msg(debug_rotation, 'checking Defensives')
+        debug_msg(fales, 'checking Defensives')
         local result = false
         if (my_hp < 60) then
             result = check_cast('Metamorphosis')
@@ -39,7 +39,8 @@ function vengeance(env, is_pulling)
     end
 
     function infernal_strike()
-        debug_msg(debug_rotation, '. checking Infernal Strike')
+        ability = "Infernal Strike"
+        debug_msg(fales, '. checking Infernal Strike')
         if (is_pulling or (infernal_strike_charges == 1 and infernal_strike_cd < 2)) then
             return cast_at_target_position('Infernal Strike', 'player')
         else
@@ -48,6 +49,7 @@ function vengeance(env, is_pulling)
     end
 
     function fracture()
+        ability = "Fracture"
         if (fury < 75) then
             return check_cast('Fracture')
         else
@@ -56,6 +58,7 @@ function vengeance(env, is_pulling)
     end
 
     function spirit_bomb()
+        ability = "Spirit Bomb"
         if (fragments > 3) then
             return check_cast('Spirit Bomb')
         else
@@ -63,22 +66,37 @@ function vengeance(env, is_pulling)
         end
     end
     function fiery_brand()
-        debug_msg(debug_rotation, '. checking Fiery Brand')
+        ability = "Fiery Brand"
+        debug_msg(fales, '. checking Fiery Brand')
         return check_cast('Fiery Brand')
     end
 
     function fel_devastation()
-        debug_msg(debug_rotation, '. checking Fel Devastation')
+        ability = "Fel Devastation"
+        debug_msg(fales, '. checking Fel Devastation')
         return check_cast('Fel Devastation')
     end
 
     function sigil_of_flame()
-        debug_msg(debug_rotation, '. checking Sigil Of Flame')
+        ability = "Sigil Of Flame"
+        debug_msg(fales, '. checking Sigil Of Flame')
         return cast_at_target_position('Sigil Of Flame', 'target')
     end
 
+    function sigil_of_misery()
+        ability = "Sigil Of Misery"
+        debug_msg(fales, '. checking Sigil Of Misery')
+        return cast_at_target_position('Sigil Of Misery', 'target')
+    end
+
+    function sigil_of_silence()
+        ability = "Sigil Of Silence"
+        debug_msg(fales, '. checking Sigil Of Silence')
+        return cast_at_target_position('Sigil Of Silence', 'target')
+    end
+
     function immolation_aura()
-        debug_msg(debug_rotation, '. checking Immolation Aura')
+        debug_msg(fales, '. checking Immolation Aura')
         if (fury < 90) then
             return check_cast('Immolation Aura')
         else
@@ -87,8 +105,9 @@ function vengeance(env, is_pulling)
     end
 
     function soul_cleave()
-        debug_msg(debug_rotation, '. checking Soul Cleave' )
-        if (fury > 50) then
+        ability = "Soul Cleave"
+        debug_msg(fales, '. checking Soul Cleave :' .. fury)
+        if (fury > 30) then
             return check_cast('Soul Cleave')
         else
             return false
@@ -96,7 +115,8 @@ function vengeance(env, is_pulling)
     end
 
     function shear()
-        debug_msg(debug_rotation, '. checking Shear')
+        ability = "Shear"
+        debug_msg(fales, '. checking Shear')
         return check_cast('Shear')
     end
 
@@ -107,13 +127,15 @@ function vengeance(env, is_pulling)
     -- Sigil of Silence (39)
 
     function dps()
-        return check_azerites() or infernal_strike() or spirit_bomb() or fiery_brand() or fel_devastation() or
-            fracture() or
-            sigil_of_flame() or
+        result =
+            check_azerites() or infernal_strike() or spirit_bomb() or fiery_brand() or fel_devastation() or fracture() or
             immolation_aura() or
             soul_cleave() or
+            sigil_of_flame() or
             shear()
 
+        debug_msg(debug_rotation and result, '. dps using :' .. tostring(ability))
+        return result
         -- 'Infernal Strike' -- Leap if about to get 2nd charge
         -- 'Fiery Brand' -- unless saved
         -- Spirit Bomb if souls > 3
@@ -128,8 +150,10 @@ function vengeance(env, is_pulling)
         -- 'Sigil of Flame' -- AoE
         -- 'Throw Glaive'
     end
-    --handle_interupts('Disrupt') or (29)
-    return handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or defensives() or dps()
+    return handle_interupts('Disrupt') or handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or defensives() or dps()
+end
+
+function prepare_vengeance(env)
 end
 return {
     variables = {},

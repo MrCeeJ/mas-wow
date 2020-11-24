@@ -264,7 +264,14 @@ function demonology(env)
     return action
 end
 
-function prepare_demonology()
+function need_pet()
+
+    -- if no pet, summon one and return true
+    return false
+end
+
+function prepare_demonology(env)
+    return need_pet() or does_healer_need_mana(env) or is_anyone_dead(env) or need_to_eat(env)
 end
 
 return {

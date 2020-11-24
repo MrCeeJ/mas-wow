@@ -158,6 +158,7 @@ function vengeance(env, is_pulling)
 end
 
 function prepare_vengeance(env)
+    return does_healer_need_mana(env) or is_anyone_dead(env) or need_to_eat(env)
 end
 return {
     variables = {},

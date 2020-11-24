@@ -127,13 +127,17 @@ function vengeance(env, is_pulling)
     -- Sigil of Silence (39)
 
     function dps()
+        if (UnitExists('target')) then
         result =
             check_azerites() or infernal_strike() or spirit_bomb() or fiery_brand() or fel_devastation() or fracture() or
             immolation_aura() or
             soul_cleave() or
             sigil_of_flame() or
             shear()
-
+        else
+            result = false
+            ability = ' Nothing - no target!'
+        end
         debug_msg(debug_rotation and result, '. dps using :' .. tostring(ability))
         return result
         -- 'Infernal Strike' -- Leap if about to get 2nd charge

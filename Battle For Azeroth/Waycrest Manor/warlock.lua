@@ -76,6 +76,15 @@ function demonology(env)
         return result
     end
 
+    function check_pet()
+        debug_msg(false, '. checking pet')
+        if (not pet_attacking) then
+            RunMacroText('/petattack')
+            pet_attacking = true
+        end
+        return false
+    end
+
     function start_attack()
         debug_msg(false, '. send in the pets')
         if (not pet_attacking) then
@@ -202,7 +211,7 @@ function demonology(env)
     function filler_demonbolt()
         debug_msg(false, '. checking filler Demonbolt')
         local result
-        if (demonic_core_duration > 0 and soul_shards < 4 ) then
+        if (demonic_core_charges > 0 and demonic_core_duration > 0 and soul_shards < 4) then
             result = check_cast('Demonbolt')
         end
         if (result) then
@@ -229,19 +238,24 @@ function demonology(env)
         end
         return false
     end
-    
+
     function dps()
-        return start_attack() or berserking() or implosion() or check_azerites() or grimoire_felguard() or
-            summon_vilefiend() or
-            demonic_strengh() or
-            call_dreadstalkers() or
-            demonic_tyrant() or
-            hand_of_gul_dan(4) or
-            demonbolt() or
-            power_siphon() or
-            hand_of_gul_dan(3) or
-            filler_demonbolt() or
-            shadow_bolt()
+        if (UnitExists('target')) then
+            return start_attack() or berserking() or implosion() or check_azerites() or grimoire_felguard() or
+                summon_vilefiend() or
+                demonic_strengh() or
+                call_dreadstalkers() or
+                demonic_tyrant() or
+                hand_of_gul_dan(4) or
+                demonbolt() or
+                power_siphon() or
+                hand_of_gul_dan(3) or
+                filler_demonbolt() or
+                shadow_bolt()
+        else
+            ability = ' Nothing - no target!'
+            return false
+        end
     end
     debug_msg(false, '.. Starting rotation')
 

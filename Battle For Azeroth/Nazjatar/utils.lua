@@ -53,6 +53,7 @@ do_boss_mechanic = function()
             use_heroism = true -- can be overridden by the action for specific timings
             action(env)
         else
+            use_heroism = true -- can be overridden by the action for specific timings
             debug_msg(true, 'Unable to find boss actions for  :' .. unit_name)
         end
     end

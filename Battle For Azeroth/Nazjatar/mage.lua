@@ -10,6 +10,7 @@ function fire(env)
     debug_msg(false, '.. checking purges')
     local purging = handle_purges('Spellsteal')
     -- Check for priority targets
+    use_heroism = false
     get_priority_target()
     do_boss_mechanic()
     if (debug) then
@@ -37,6 +38,7 @@ function fire(env)
             local _, fireblast_cd, _, _ = GetSpellCooldown('Fire Blast')
             local _, berserking_cd, _, _ = GetSpellCooldown('Berserking')
             local _, combustion_cd, _, _ = GetSpellCooldown('Combustion')
+            local _, time_warp_cd, _, _ = GetSpellCooldown('Time Warp')
             local _, meteor_cd, _, _ = GetSpellCooldown('Meteor')
             local _, images_cd, _, _ = GetSpellCooldown('Mirror Image')
             local _, rune_cd, _, _ = GetSpellCooldown('Rune Of Power')
@@ -51,6 +53,8 @@ function fire(env)
                 check_cast('Ice block')
             elseif (berserking_cd == 0 and boss_mode ~= 'Save_CDs') then
                 check_cast('Berserking')
+            elseif (time_warp_cd == 0 and use_heroism) then
+                check_cast('Time Warp')
             elseif (combustion_cd == 0 and boss_mode ~= 'Save_CDs') then
                 check_cast('Combustion')
             elseif (images_cd == 0 and boss_mode ~= 'Save_CDs') then

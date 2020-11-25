@@ -101,7 +101,7 @@
         end,
         start_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' or 'DEMONHUNTER' then
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
                 MoveForwardStart()
             elseif player_class == 'PRIEST' then
                 RunMacroText('/dance')
@@ -115,7 +115,7 @@
         end,
         stop_scatter = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' or 'DEMONHUNTER' then
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
                 MoveForwardStop()
             elseif player_class == 'PRIEST' then
                 RunMacroText('/cheer')
@@ -127,51 +127,39 @@
                 StrafeRightStop()
             end
         end,
-        -- Tol
-        overseer_korgus_positions = function(env)
+        -- Necrotic Wake
+        narzudah_positions = function(env)
+            debug_msg(true, 'boss positions ho!')
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' or 'DEMONHUNTER' then
-                env:execute_action('move', {99.5, -2676.1, 78.1})
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-3487.2, -3600.5, 6617.8})
             elseif player_class == 'PRIEST' then
-                env:execute_action('move', {123.1, -2671.7, 74.9})
+                env:execute_action('move', {-3496.0, -3607.0, 6617.9})
             elseif player_class == 'DRUID' then
-                env:execute_action('move', {119.0, -2682.9, 74.4})
-            elseif player_class == 'SHAMAN' then
-                env:execute_action('move', {105.7, -2667.0, 75.0})
+                env:execute_action('move', {-3491.5, -3588.4, 6617.8})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-3482.9, -3607.8, 6617.9})
             elseif player_class == 'MAGE' then
-                env:execute_action('move', {107.8, -2682.8, 75.0})
+                env:execute_action('move', {-3475.0, -3613.9, 6617.9})
             end
         end,
-        -- Waycrest Manor
-        heartsbane_triad_positions = function(env)
+        winged_companion_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' or 'DEMONHUNTER' then
-                env:execute_action('move', {-562.9, -153.0, 235.2})
+            debug_msg(true, 'my class is :' .. player_class)
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-3339.1, -3416.4, 6632.8})
             elseif player_class == 'PRIEST' then
-                env:execute_action('move', {-555.9, -169.3, 235.2})
+                debug_msg(true, 'moving to priest waypoint')
+                env:execute_action('move', {-3332.4, -3430.9, 6632.9})
             elseif player_class == 'DRUID' then
-                env:execute_action('move', {-556.1, -161.8, 235.2})
-            elseif player_class == 'SHAMAN' then
-                env:execute_action('move', {-551.8, -154.5, 235.2})
+                env:execute_action('move', {-3303.6, -3423.9, 6633.0})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-3302.6, -3424.5, 6633.2})
             elseif player_class == 'MAGE' then
-                env:execute_action('move', {-564.1, -166.9, 235.2})
+                env:execute_action('move', {-3285.6, -3420.0, 6632.9})
             end
         end,
-        lady_waycrest_positions = function(env)
-            local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' or 'DEMONHUNTER' then
-                env:execute_action('move', {-548.0, -262.4, 185.3})
-            elseif player_class == 'PRIEST' then
-                env:execute_action('move', {-562.1, -267.3, 185.3})
-            elseif player_class == 'DRUID' then
-                env:execute_action('move', {-556.0, -272.0, 185.3})
-            elseif player_class == 'SHAMAN' then
-                env:execute_action('move', {-562.2, -257.5, 185.3})
-            elseif player_class == 'MAGE' then
-                env:execute_action('move', {-554.8, -249.4, 185.3})
-            end
-        end,
-        pull_lord_waycrest = function(env)
+        pull_stitchflesh = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
                 print('Pulling Lady Waycrest')
@@ -183,27 +171,17 @@
                 RunMacroText('/cast Throw Glaive')
             end
         end,
-        raal_the_gluttonous_positions = function(env)
+        stichflesh_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
-            if player_class == 'PALADIN' or 'DEMONHUNTER' then
-                env:execute_action('move', {-494.3, -341.1, 236.5})
-            elseif player_class == 'PRIEST' then
-                env:execute_action('move', {-497.4, -337.0, 235.6})
-            elseif player_class == 'DRUID' then
-                env:execute_action('move', {-486.2, -340.3, 235.7})
-            elseif player_class == 'SHAMAN' then
-                env:execute_action('move', {-501.6, -338.5, 235.6})
-            elseif player_class == 'MAGE' then
-                env:execute_action('move', {-491.3, -338.0, 235.6})
+            debug_msg(true, 'my class is :' .. player_class)
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-3202, -3386.4, 6770.2})
+            else
+                debug_msg(true, 'moving to team waypoint')
+                env:execute_action('move', {-3190.0, -3360.1, 6770.2})
             end
         end,
-        get_vol_kaal_totem_positions = function(env)
-            return {
-                {-591.2, 2292.4, 710.0},
-                {-636.2, 2316.1, 710.0},
-                {-636.0, 2269.2, 710.0}
-            }
-        end,
+        
         mage_food = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'MAGE' then
@@ -330,29 +308,6 @@
                         action(env)
                     else
                         debug_msg(true, 'Unable to find boss actions for  :' .. unit_name)
-                    end
-                end
-            end
-
-            function get_npc_info()
-                enemies = {}
-                local prevous_found = true
-                for i = 1, 20 do
-                    local unit = 'nameplate' .. i
-                    if (previous_found and env:evaluate_variable('unit.' .. unit)) then
-                        if (UnitAffectingCombat(unit)) then
-                            local unit_health = UnitHealth(unit) or 0
-                            if (unit_health) then
-                                local unit_name = UnitName(unit) or '<unknown>'
-                                if (unit_name) then
-                                    print('Encountering unit :', unit_name, ' on ', unit_health, '% hp')
-                                else
-                                    print('Encountering unit, unable to determine name ', unit_health, '% hp')
-                                end
-                            end
-                        end
-                    else
-                        prevous_found = false
                     end
                 end
             end
@@ -513,86 +468,6 @@
                         RunMacroText('/use ' .. i)
                     end
                 end
-            end
-
-            function handle_new_debuffs_mpdc(magic, poison, disease, curse)
-                --     -- Check for new debuffs
-                debug_dispells = false
-                debug_msg(false, 'In handle_new_debuffs_mpdc')
-                if (UnitExists('target') == false) then
-                    debug_msg(false, 'No targets, probably unable to act')
-                else
-                    for _, player_name in ipairs(party) do
-                        debug_msg(debug_dispells, 'Checking player :' .. player_name)
-                        for i = 1, 5 do
-                            local name, _, _, type, duration, _, _, _, _, spellId = UnitDebuff(player_name, i)
-                            if (name) then
-                                debug_msg(false, 'Debuff found :' .. name)
-                                local id = tonumber(spellId)
-                                if (type) then
-                                    if (type == 'Magic' and magic) then
-                                        local _, cd, _, _ = GetSpellCooldown(magic)
-                                        if (cd == 0) then
-                                            local ignore = false
-                                            -- for id, name in pairs(ignore_magic) do
-                                            --     if (spellId == id) then
-                                            --         ignore = true
-                                            --         print("Ignoring debuff :", name)
-                                            --     end
-                                            -- end
-                                            if (ignore == false) then
-                                                debug_msg(false, 'Using ' .. magic .. ' to dispel :' .. name)
-                                                RunMacroText('/cast [target=' .. player_name .. ']' .. magic)
-                                                return true
-                                            end
-                                        else
-                                            debug_msg(false, magic .. ' is on cd, ignoring ' .. name)
-                                        end
-                                    elseif (type == 'Poison' and poison) then
-                                        local _, cd, _, _ = GetSpellCooldown(poison)
-                                        if (cd == 0) then
-                                            local ignore = false
-                                            if (ignore == false) then
-                                                debug_msg(false, 'Using ' .. poison .. ' to dispel :' .. name)
-                                                RunMacroText('/cast [target=' .. player_name .. ']' .. poison)
-                                                return true
-                                            end
-                                        else
-                                            debug_msg(false, poison .. ' is on cd, ignoring ' .. name)
-                                        end
-                                    elseif (type == 'Disease' and disease) then
-                                        local _, cd, _, _ = GetSpellCooldown(disease)
-                                        if (cd == 0) then
-                                            local ignore = false
-                                            if (ignore == false) then
-                                                debug_msg(false, 'Using ' .. disease .. ' to dispel :' .. name)
-                                                RunMacroText('/cast [target=' .. player_name .. ']' .. disease)
-                                                return true
-                                            end
-                                        else
-                                            debug_msg(false, disease .. ' is on cd, ignoring ' .. name)
-                                        end
-                                    elseif (type == 'Curse' and curse) then
-                                        local _, cd, _, _ = GetSpellCooldown(curse)
-                                        if (cd == 0) then
-                                            local ignore = false
-                                            if (ignore == false) then
-                                                debug_msg(false, 'Using ' .. curse .. ' to dispel :' .. name)
-                                                RunMacroText('/cast [target=' .. player_name .. ']' .. curse)
-                                                return true
-                                            end
-                                        else
-                                            debug_msg(false, curse .. ' is on cd, ignoring ' .. name)
-                                        end
-                                    end
-                                end
-                            end
-                        end
-                        debug_msg(debug_dispells, 'No debuffs found on player :' .. player_name)
-                    end
-                end
-                debug_msg(debug_dispells, 'Done checking, returning false.')
-                return false
             end
 
             function handle_interupts(spell)
@@ -832,13 +707,14 @@
             ------------------------------------------------------------------------------------------------------------
             ---------------                               Preparation Setup                              ---------------
             ------------------------------------------------------------------------------------------------------------
-            -- started = started or get_start_message()
+            started = started or get_start_message()
             party = env:evaluate_variable('get_party')
             in_combat = env:evaluate_variable('myself.is_in_combat')
             healer_name = env:evaluate_variable('get_healer_name')
             tank_name = env:evaluate_variable('get_tank_name')
             -- Mage food
-            food_name = 'Conjured Mana Pudding'
+            food_name = 'Conjured Mana Bun'
+            -- food_name = 'Conjured Mana Pudding'
             -- food_name = "Conjured Mana Cake"
             -- food_name = "Conjured Mana Strudel"
             -- food_name = "Conjured Mana Pie"
@@ -974,7 +850,7 @@
                     debug_msg(false, "Can't start, tank needs a buff")
                 end
                 return needs_buff
-            end            
+            end
 
             function am_i_dead()
                 local dead = env:evaluate_variable('myself.life') == 2
@@ -999,7 +875,6 @@
                 end
                 return healing
             end
-
 
             --TODO:
             function need_mage_food(env, food)
@@ -1078,9 +953,9 @@
                     return true
                 end
             elseif player_class == 'DEMONHUNTER' then -- and player_spec =
-                prepare_vengeance(env)
+                return prepare_vengeance(env)
             elseif player_class == 'WARLOCK' then -- and player_spec =
-                prepare_demonology(env)
+                return prepare_demonology(env)
             end
             -- All done, lets go!
             return false

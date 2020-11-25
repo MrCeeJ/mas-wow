@@ -1,0 +1,141 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -3317.6,
+        -3442.3,
+        6632.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3315.4,
+        -3423.5,
+        6632.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 4,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "winged_companion_positions"
+        },
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 165605,
+            "range": 2
+          }
+        }
+      ],
+      "name": "Splits",
+      "value": [
+        -3317.0,
+        -3420.6,
+        6632.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landed",
+      "value": [
+        -3214.7,
+        -3413.2,
+        6770.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "1",
+      "value": [
+        -3164.2,
+        -3377.5,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "2",
+      "value": [
+        -3181.4,
+        -3406.3,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "3",
+      "value": [
+        -3198.8,
+        -3379.6,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "4",
+      "value": [
+        -3234.1,
+        -3391.4,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "5",
+      "value": [
+        -3213.7,
+        -3348.9,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Positions",
+      "value": [
+        -3206.1,
+        -3395.9,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "not boss",
+      "value": [
+        -3174.6,
+        -3346.2,
+        6773.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -3316.2,
+        -3799.4,
+        6603.1
+      ]
+    }
+  ]
+}

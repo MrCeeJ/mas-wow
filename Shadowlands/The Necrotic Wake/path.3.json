@@ -1,0 +1,132 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -3317.6,
+        -3442.3,
+        6632.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3315.4,
+        -3423.5,
+        6632.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 4,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "winged_companion_positions"
+        },
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 165605,
+            "range": 2
+          }
+        }
+      ],
+      "name": "Splits",
+      "value": [
+        -3317.0,
+        -3420.6,
+        6632.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landed",
+      "value": [
+        -3214.7,
+        -3413.2,
+        6770.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Ready",
+      "value": [
+        -3208.5,
+        -3400.2,
+        6770.2
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "pull_stitchflesh"
+        },
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "stichflesh_positions"
+        }
+      ],
+      "name": "Positions",
+      "value": [
+        -3202.0,
+        -3386.4,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "not boss",
+      "value": [
+        -3190.0,
+        -3360.1,
+        6770.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -3316.2,
+        -3799.4,
+        6603.1
+      ]
+    }
+  ]
+}

@@ -9,7 +9,7 @@
             "type": "and",
             "value": []
           },
-          "name": "Blightbone"
+          "name": "Surgeon Stichflesh"
         }
       ],
       "pve": {
@@ -36,18 +36,106 @@
         "actions": [],
         "name": "Entrance",
         "value": [
-          8502.8,
-          1380.0,
-          641.2
+          -3316.2,
+          -3799.4,
+          6603.1
         ]
       },
       "skin": true,
       "start_distance": 20,
-      "value": []
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Surgeon Stichflesh",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Spawn",
+        "value": [
+          -3315.1,
+          -3455.3,
+          6632.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Just Surgeon Stichflesh",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Just Surgeon Stichflesh"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Spawn",
+        "value": [
+          -3315.1,
+          -3455.3,
+          6632.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
     }
   ],
   "scripts": [
     "utils",
+    "prep",
     "instances",
     "paladin",
     "priest",

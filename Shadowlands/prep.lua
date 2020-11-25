@@ -5,6 +5,15 @@
     return true
 end
 
+function need_to_finish_casting(env)
+    local casting = UnitCastingInfo('player')
+    if (casting) then
+        return true
+    else
+        return false
+    end
+end
+
 function does_healer_need_mana(env)
     local needs_mana = false
     local healer_mana = UnitPower(healer_name, 0)
@@ -58,3 +67,9 @@ function need_to_eat(env)
     end
     return thirsty or hungry
 end
+
+return {
+    variables = {},
+    actions = {},
+    rotations = {}
+}

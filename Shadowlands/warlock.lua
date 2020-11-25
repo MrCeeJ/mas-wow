@@ -22,6 +22,8 @@ function demonology(env)
     have_imps = have_imps or false
     local _, dreadstalkers_cd = GetSpellCooldown('Call Dreadstalkers')
     local _, tyrant_cd = GetSpellCooldown('Summon Demonic Tyrant')
+    local _, fel_domination_cd = GetSpellCooldown('Fel Domination')
+    
     -- local demonic_core_charges, _, _, _, _ = GetSpellCharges('Demonic Core')
     demonic_core_charges = 0
     demonic_core_duration = 9999
@@ -92,6 +94,23 @@ function demonology(env)
             pet_attacking = true
         end
         return false
+    end
+
+    function really_need_pet()
+        debug_msg(false, '. checking for pet')
+        if (UnitIsVisible('pet')) then
+            return false
+        else
+            if (fel_domination_cd == 0) then
+                debug_msg(false, '. fel dom one out')
+                check_cast('Fel Domination')
+                return true
+            else
+                debug_msg(false, '. summoning')
+                check_cast('Summon Felguard')
+                return true
+            end
+        end
     end
 
     -- need azerite trait
@@ -259,19 +278,24 @@ function demonology(env)
     end
     debug_msg(false, '.. Starting rotation')
 
-    local action = handle_interupts('Axe Toss') or defensives() or dps()
+    local action = handle_interupts('Axe Toss') or defensives() or really_need_pet() or dps()
     debug_msg(debug_rotation and action, ' used : ' .. tostring(ability))
     return action
 end
 
 function need_pet()
-
-    -- if no pet, summon one and return true
-    return false
+    if (UnitIsVisible('pet')) then
+        return false
+    else
+        debug_spells = true
+        debug_msg(false, '. need pet')
+        RunMacroText('/cast Summon Felguard')
+        return true
+    end
 end
 
 function prepare_demonology(env)
-    return need_pet() or does_healer_need_mana(env) or is_anyone_dead(env) or need_to_eat(env)
+    return need_to_finish_casting() or need_pet() or does_healer_need_mana(env) or is_anyone_dead(env) or need_to_eat(env)
 end
 
 return {

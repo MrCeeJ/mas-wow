@@ -48,9 +48,9 @@ function elemental(env)
             local total_hp = 0
             local players = 0
             for _, player_name in ipairs(party) do
-                local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                total_hp = total_hp + target_hp
-                if (target_hp > 0) then
+                local player_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
+                total_hp = total_hp + player_hp
+                if (player_hp > 0) then
                     players = players + 1
                 end
             end
@@ -66,6 +66,7 @@ function elemental(env)
             elseif (lightning_shield_duration == -1) then
                 check_cast('Lightning Shield')
             elseif (check_azerites()) then
+                -- Nothing to do here
             elseif (earth_elemental_cd == 0 and tank_hp < 40) then
                 check_cast('Earth Elemental')
             elseif (storm_elemental_cd == 0 and boss_mode ~= 'Save_CDs') then

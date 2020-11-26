@@ -343,6 +343,16 @@
                 env:execute_action('cast_ground', args)
             end
 
+            function cast_at_target_location(spell, t_x, t_y, t_z)
+                if (t_x == nil or t_y == nil or t_z == nil) then
+                    t_x, t_y, t_z = wmbapi.ObjectPosition('player')
+                end
+                debug_msg(false, 'Target position :[' .. t_x .. ',' .. t_x .. ',' .. t_z .. ']')
+                local pos = {t_x, t_y, t_z}
+                local args = {['spell'] = spell, ['position'] = pos}
+                env:execute_action('cast_ground', args)
+            end
+
             function thow_more_dots(spell, debuff)
                 local more_dots = false
                 local min_dot_hp = 1000

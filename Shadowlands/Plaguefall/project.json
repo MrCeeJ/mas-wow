@@ -1,0 +1,152 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Globgrog",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Surgeon Stichflesh"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          1984.6,
+          -3206.6,
+          3261.4
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Surgeon Stichflesh",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Spawn",
+        "value": [
+          -3315.1,
+          -3455.3,
+          6632.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "random"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Just Surgeon Stichflesh",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Just Surgeon Stichflesh"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Spawn",
+        "value": [
+          -3315.1,
+          -3455.3,
+          6632.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "random"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

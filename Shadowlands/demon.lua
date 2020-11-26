@@ -42,7 +42,9 @@ function vengeance(env, is_pulling)
         ability = "Infernal Strike"
         debug_msg(fales, '. checking Infernal Strike')
         if (is_pulling or (infernal_strike_charges == 1 and infernal_strike_cd < 2)) then
-            return cast_at_target_position('Infernal Strike', 'player')
+            -- Get distance to target, jump to 2 yards short
+            p_x, p_y, p_z = GetPositionFromTarget(2)
+            return cast_at_target_location('Infernal Strike', px, py, pz)
         else
             return false
         end

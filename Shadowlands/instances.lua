@@ -7,8 +7,16 @@
         end,
         ['Amarth'] = function(env)
             RunMacroText('/tar Reanimated')
-        end
+        end,
         -- Plaguefall
+        ['Globgrog'] = function(env)
+        end,
+        ['Doctor Ickus'] = function(env)
+        end,
+        ['Domina Venomblade'] = function(env)
+        end,
+        ['Margrave Stradama'] = function(env)
+        end
     }
     return boss_mechanics
 end
@@ -27,18 +35,20 @@ get_bad_spells = function(env)
         ['324391'] = 'Grave Spikes', -- "Grave Spikes (Skeletal Monstrosity)";
         ['321253'] = 'Final Harvest', -- "Final Harvest (Amarth)";
         -- Plaguefall
+        ['319120'] = 'Slime',
         ['328012'] = 'Binding Fungus', -- applicationOnly = true
         ['328019'] = 'Plague Bore (Plagueborer)',
         ['327233'] = 'Belch Plague (Plaguebelcher)',
         ['326242'] = 'Slime Wave (Globgrog)', -- applicationOnly = true
         ['328501'] = 'Plague Bomb (Rigged Plagueborer)',
-        ['320519'] = 'Jagged Spines (Blighted Spinebreaker)',
+        -- ['320519'] = 'Jagged Spines (Blighted Spinebreaker)',
         ['318949'] = 'Festering Belch (Blighted Spinebreaker)', -- tankSound = 0
-        ['328986'] = 'Violent Detonation (Unstable Canister)',
+        -- ['328986'] = 'Violent Detonation (Unstable Canister)',
         ['329217'] = 'Slime Lunge (Doctor Ickus)',
         ['330026'] = 'Slime Lunge (Doctor Ickus)',
         ['323572'] = 'Rolling Plague (Plagueborer)',
         ['322475'] = 'Plague Crash (Margrave Stradama)',
+        ['Concentrated Plague'] = 'Concentrated Plague',
         -- Uldir
         ['270288'] = 'Blood Storm'
     }

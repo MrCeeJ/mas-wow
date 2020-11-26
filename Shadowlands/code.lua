@@ -271,7 +271,7 @@
                     local spell_id = tostring(spellID)
                     local spell_name = tostring(spellName)
                     if (spellID > 0) then
-                        if (bad_spells[spell_id]) then
+                        if (bad_spells[spell_id] or bad_spells[spell_name]) then
                             debug_msg(debug_movement, 'Standing in Fire!! :' .. spell_name)
                             -- print log event?
                             debug_msg(debug_movement, 'dest Name :' .. tostring(destName))

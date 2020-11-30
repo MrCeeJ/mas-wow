@@ -1,6 +1,7 @@
 {
   "path_groups": [
     {
+      "loot": true,
       "name": "Random Location",
       "next_groups": [
         {
@@ -35,11 +36,10 @@
         "actions": [],
         "name": "Random Location",
         "value": [
-          2175.1,
-          -3280.9,
-          3263.5
+          10707.4, 1175.4, 55.8
         ]
       },
+      "skin": true,
       "start_distance": 20,
       "value": [
         "random"

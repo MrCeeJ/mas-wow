@@ -1,0 +1,309 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        -6887.0,
+        1835.8,
+        5545.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -6892.9,
+        1862.3,
+        5535.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -6899.2,
+        1915.4,
+        5524.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -6938.8,
+        1907.3,
+        5524.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -6987.9,
+        1906.1,
+        5524.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7083.4,
+        1901.5,
+        5518.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -7053.5,
+        1921.7,
+        5518.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7057.1,
+        1967.9,
+        5519.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -7042.0,
+        1975.0,
+        5519.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -6988.4,
+        2002.1,
+        5519.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -6905.2,
+        2049.5,
+        5526.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -6947.2,
+        2051.4,
+        5527.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Positions",
+      "value": [
+        -6945.4,
+        2077.6,
+        5527.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -6901.9,
+        2086.3,
+        5527.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "narzudah_positions"
+        }
+      ],
+      "name": "",
+      "value": [
+        -6934.1,
+        2080.3,
+        5527.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -6969.0,
+        2122.9,
+        5517.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Into the Maze",
+      "value": [
+        -7018.0,
+        2202.1,
+        5486.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3424.4,
+        -3555.5,
+        6625.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3403.4,
+        -3535.7,
+        6625.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3382.5,
+        -3508.9,
+        6625.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3365.0,
+        -3500.5,
+        6625.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3317.2,
+        -3539.2,
+        6625.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3275.8,
+        -3487.1,
+        6625.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3244.8,
+        -3464.2,
+        6625.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3239.6,
+        -3448.9,
+        6627.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3247.9,
+        -3435.6,
+        6633.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -3278.0,
+        -3427.5,
+        6632.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        -3315.6,
+        -3435.4,
+        6632.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Middle",
+      "value": [
+        -3317.0,
+        -3420.6,
+        6632.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 4,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "winged_companion_positions"
+        },
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 165605,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Splits",
+      "value": [
+        -3317.0,
+        -3420.6,
+        6632.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -3316.2,
+        -3799.4,
+        6603.1
+      ]
+    }
+  ]
+}

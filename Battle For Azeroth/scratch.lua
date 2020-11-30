@@ -1,4 +1,51 @@
+-----------------------------------------------------------
+            ----------------------- Event Frame -----------------------
+            -----------------------------------------------------------
+            debug_msg(debug_frame_setup, 'Configuring event handler ..')
+            function event_frame:OnEvent(event, ...)
+                local _,
+                    subevent,
+                    _,
+                    sourceGUID,
+                    sourceName,
+                    sourceFlags,
+                    sourceRaidFlags,
+                    destGUID,
+                    destName,
+                    destFlags,
+                    destRaidFlags = ...
+                local spellID, spellName, spellSchool
+                local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand
+                local playerGUID = UnitGUID('player')
+                local me, _ = UnitName('player') --and destName == me
 
+                if
+                    (destGUID == playerGUID or destName == me) and
+                        (subevent == 'SPELL_DAMAGE' or --) then
+                            subevent == 'SPELL_AURA_APPLIED' or
+                            subevent == 'SPELL_AURA_APPLIED_DOSE' or
+                            subevent == 'SPELL_AURA_REFRESH')
+                 then
+                    spellID, spellName = select(12, ...)
+                    local spell_id = tostring(spellID)
+                    local spell_name = tostring(spellName)
+                    if (spellID > 0) then
+                        if (bad_spells[spell_id] or bad_spells[spell_name]) then
+                            debug_msg(debug_movement, 'Standing in Fire!! :' .. spell_name)
+                            -- print log event?
+                            debug_msg(debug_movement, 'dest Name :' .. tostring(destName))
+                            debug_msg(debug_movement, 'dest GUID :' .. tostring(destGUID))
+                            RunMacroText('/p um, looks like a :' .. spell_name .. ', lets move!')
+                            standing_in_fire = true
+                            fire_x, fire_y, fire_z = wmbapi.ObjectPosition('player')
+                        end
+                    end
+                end
+            end
+
+
+
+            
     -- function count_pets()
     --     --[[ https://wago.io/H18rRiAm7 Braer's Pet Tracker
     --     aura_env.demonTypes = {

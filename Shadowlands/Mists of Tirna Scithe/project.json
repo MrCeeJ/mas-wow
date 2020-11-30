@@ -1,0 +1,162 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Ingra Malorch",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Maze"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -6887.0,
+          1835.8,
+          5545.7
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Maze",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Maze"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Maze",
+        "value": [
+          -7172.2,
+          2439.4,
+          5459.2
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "Tredova",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Tredova"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "landing",
+        "value": [
+          -7230.6,
+          2518.4,
+          5393.6
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

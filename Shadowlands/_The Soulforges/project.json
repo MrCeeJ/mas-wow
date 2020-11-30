@@ -1,0 +1,561 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "1 fold up specs",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "1 fold up specs"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "1_1",
+        "value": [
+          7883.5,
+          14.3,
+          79.5
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "1 Lumpy Drainpipe",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          4512.0,
+          2492.7,
+          93.2
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1_3"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "1 Hairdryer with plumbing",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "1 Hairdryer with plumbing"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "1",
+        "value": [
+          4380.9,
+          2201.4,
+          131.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1_2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "2 Spikey Chambord",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "2 Spikey Chambord"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "2_1",
+        "value": [
+          7849.6,
+          -781.6,
+          78.2
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "2 Lower case j",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "2 Lower case j"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        },
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          4539.3,
+          2431.8,
+          93.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2_2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "2_3 Pendulum Coffin",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "2_3",
+        "value": [
+          6845.1,
+          3463.1,
+          49.0
+        ]
+      },
+      "skin": false,
+      "start_distance": 20,
+      "value": [
+        "2_3"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "3 Vacuum Tubes",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "3 Vacuum Tubes"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "3 Vacuum Tues",
+        "value": [
+          4586.8,
+          2403.0,
+          34.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3_1"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "4 Jigsaw Piece",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "4 Jigsaw Piece"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "4_1",
+        "value": [
+          4375.0,
+          2200.2,
+          131.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "4 Capital F",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "4 Capital F"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          4477.3,
+          2140.1,
+          130.6
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4_2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "5 Gas Valve exit right",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "5 Gas Valve exit right"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "5_1",
+        "value": [
+          4601.3,
+          3181.7,
+          69.5
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "5_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "5 Left Turn for T",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "value": [
+          3711.5,
+          3209.5,
+          81.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "5_2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "6 Snail Peace Pipe",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "6 Snail Peace Pipe"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "6",
+        "value": [
+          3316.5,
+          4933.8,
+          47.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "6_1"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

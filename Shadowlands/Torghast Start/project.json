@@ -1,0 +1,162 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "1",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "1"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          3957.7,
+          4027.7,
+          218.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "2",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "2"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Maze",
+        "value": [
+          3516.5,
+          4302.1,
+          37.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "3",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "3"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "3",
+        "value": [
+          3000.3,
+          4269.3,
+          94.2
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

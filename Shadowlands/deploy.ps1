@@ -1,4 +1,4 @@
-$location_list = 'Random Location','The Necrotic Wake','Plaguefall'
+$location_list = '_Arkoban Hall', '_The Soulforges', '_The Upper Reaches', 'Halls Of Attonement', 'Mists of Tirna Scithe', 'Plaguefall', 'Random Location', 'The Necrotic Wake', 'Torghast Start'
 $file_list = 'code.lua', 'utils.lua', 'prep.lua', 'instances.lua', 'paladin.lua', 'priest.lua', 'druid.lua', 'shaman.lua', 'mage.lua', 'demon.lua', 'warrior.lua', 'monk.lua', 'hunter.lua', 'warlock.lua'
 foreach ($location in $location_list)
 {

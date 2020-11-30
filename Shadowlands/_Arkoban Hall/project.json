@@ -1,0 +1,304 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "1 left bong",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "1 left bong"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "1_1",
+        "value": [
+          7868.6,
+          292.5,
+          80.1
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "2 Right Flak Cannon",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "2 Right Flak Cannon"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "2_1",
+        "value": [
+          5978.0,
+          2013.6,
+          194.6
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "3 Right Pointing Hand",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "3 Right Pointing Hand"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "3",
+        "value": [
+          6549.9,
+          4847.2,
+          168.5
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3_1"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "4 Left Sea Horse",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "4 Left Sea Horse"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "4_1",
+        "value": [
+          6036.9,
+          1574.8,
+          185.2
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "5 One Leaf Clover",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "5 One Leaf Clover"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "5_1",
+        "value": [
+          8736.0,
+          2088.1,
+          69.2
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "5_1"
+      ]
+    },
+    {
+      "loot": true,
+      "name": "6 Robot Binman",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "6 Robot Binman"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "3",
+        "value": [
+          3787.5,
+          4902.7,
+          57.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "6_1"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

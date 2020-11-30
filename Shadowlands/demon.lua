@@ -25,7 +25,7 @@ function vengeance(env, is_pulling)
         return 0
     end
     local fragments = count_soul_fragments()
-    local ability = ""
+    local ability = ''
     function defensives()
         debug_msg(fales, 'checking Defensives')
         local result = false
@@ -39,7 +39,7 @@ function vengeance(env, is_pulling)
     end
 
     function infernal_strike()
-        ability = "Infernal Strike"
+        ability = 'Infernal Strike'
         debug_msg(fales, '. checking Infernal Strike')
         if (is_pulling or (infernal_strike_charges == 1 and infernal_strike_cd < 2)) then
             -- Get distance to target, jump to 2 yards short
@@ -51,7 +51,7 @@ function vengeance(env, is_pulling)
     end
 
     function fracture()
-        ability = "Fracture"
+        ability = 'Fracture'
         if (fury < 75) then
             return check_cast('Fracture')
         else
@@ -60,7 +60,7 @@ function vengeance(env, is_pulling)
     end
 
     function spirit_bomb()
-        ability = "Spirit Bomb"
+        ability = 'Spirit Bomb'
         if (fragments > 3) then
             return check_cast('Spirit Bomb')
         else
@@ -68,31 +68,37 @@ function vengeance(env, is_pulling)
         end
     end
     function fiery_brand()
-        ability = "Fiery Brand"
+        ability = 'Fiery Brand'
         debug_msg(fales, '. checking Fiery Brand')
         return check_cast('Fiery Brand')
     end
 
     function fel_devastation()
-        ability = "Fel Devastation"
+        ability = 'Fel Devastation'
         debug_msg(fales, '. checking Fel Devastation')
         return check_cast('Fel Devastation')
     end
 
+    function elysian_decree()
+        ability = 'Elysian Decree'
+        debug_msg(fales, '. checking Elysian Decree')
+        return cast_at_target_position('Elysian Decree', 'target')
+    end
+
     function sigil_of_flame()
-        ability = "Sigil Of Flame"
+        ability = 'Sigil Of Flame'
         debug_msg(fales, '. checking Sigil Of Flame')
         return cast_at_target_position('Sigil Of Flame', 'target')
     end
 
     function sigil_of_misery()
-        ability = "Sigil Of Misery"
+        ability = 'Sigil Of Misery'
         debug_msg(fales, '. checking Sigil Of Misery')
         return cast_at_target_position('Sigil Of Misery', 'target')
     end
 
     function sigil_of_silence()
-        ability = "Sigil Of Silence"
+        ability = 'Sigil Of Silence'
         debug_msg(fales, '. checking Sigil Of Silence')
         return cast_at_target_position('Sigil Of Silence', 'target')
     end
@@ -107,7 +113,7 @@ function vengeance(env, is_pulling)
     end
 
     function soul_cleave()
-        ability = "Soul Cleave"
+        ability = 'Soul Cleave'
         debug_msg(fales, '. checking Soul Cleave :' .. fury)
         if (fury > 30) then
             return check_cast('Soul Cleave')
@@ -117,7 +123,7 @@ function vengeance(env, is_pulling)
     end
 
     function shear()
-        ability = "Shear"
+        ability = 'Shear'
         debug_msg(fales, '. checking Shear')
         return check_cast('Shear')
     end
@@ -130,12 +136,14 @@ function vengeance(env, is_pulling)
 
     function dps()
         if (UnitExists('target')) then
-        result =
-            check_azerites() or infernal_strike() or spirit_bomb() or fiery_brand() or fel_devastation() or fracture() or
-            immolation_aura() or
-            soul_cleave() or
-            sigil_of_flame() or
-            shear()
+            result =
+                check_azerites() or infernal_strike() or spirit_bomb() or elysian_decree() or fiery_brand() or
+                fel_devastation() or
+                fracture() or
+                immolation_aura() or
+                soul_cleave() or
+                sigil_of_flame() or
+                shear()
         else
             result = false
             ability = ' Nothing - no target!'
@@ -156,7 +164,9 @@ function vengeance(env, is_pulling)
         -- 'Sigil of Flame' -- AoE
         -- 'Throw Glaive'
     end
-    return handle_interupts('Disrupt') or handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or defensives() or dps()
+    return handle_interupts('Disrupt') or handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or
+        defensives() or
+        dps()
 end
 
 function prepare_vengeance(env)

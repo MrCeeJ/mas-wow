@@ -16,7 +16,20 @@
         ['Domina Venomblade'] = function(env)
         end,
         ['Margrave Stradama'] = function(env)
-        end
+        end,
+        -- Mists of Tirna Schithe
+        ['Ingra Malorch'] = function(env)
+            -- Avoid cast 323137 
+            -- interupt 323057
+            -- Death shroud - radiance?
+            RunMacroText('/tar Droman')
+
+        end,
+        ["Tred'ova"] = function(env)
+            -- mind link break 322648
+            -- makred prey, run away 322563
+            -- 322450 dps shield then can interupt this
+        end,
     }
     return boss_mechanics
 end
@@ -49,8 +62,17 @@ get_bad_spells = function(env)
         ['323572'] = 'Rolling Plague (Plagueborer)',
         ['322475'] = 'Plague Crash (Margrave Stradama)',
         ['Concentrated Plague'] = 'Concentrated Plague',
-        -- Uldir
-        ['270288'] = 'Blood Storm'
+        -- Mists of Tirna Schithe
+      --  ['321968'] = 'Bewildering Pollen (Tirnenn Villager)',
+      --  ['323137'] = 'Bewildering Pollen (Droman Oulfarran)',
+        ['331748'] = 'Back Kick (Mistveil Guardian)',
+        ['321834'] = 'Dodge Ball (Mistcaller)',
+        ['321893'] = 'Freezing Burst (Illusionary Vulpin)',
+        ['325418'] = 'Acid Spray (Spinemaw Acidgullet)',
+        -- ['326022'] = 'Acid Globule (Spinemaw Gorger)',
+        -- ['322655'] = "Acid Expulsion (Tred'ova)",
+        ['326263'] = "Anima Shedding (Tred'ova)",
+        ['323250'] = 'Anima puddle, doh!'
     }
     return bad_spells
 end

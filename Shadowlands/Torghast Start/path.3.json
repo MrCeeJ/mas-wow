@@ -1,0 +1,156 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "value": [
+        3000.3,
+        4269.3,
+        94.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2964.5,
+        4272.1,
+        96.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2883.0,
+        4270.9,
+        106.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2884.8,
+        4272.8,
+        106.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        2840.0,
+        4271.2,
+        106.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7303.3,
+        2652.8,
+        5367.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -7287.8,
+        2679.8,
+        5368.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7280.3,
+        2704.8,
+        5368.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7251.7,
+        2741.2,
+        5358.9
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "pull_stitchflesh"
+        },
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 3,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "stichflesh_positions"
+        }
+      ],
+      "name": "",
+      "value": [
+        -7227.5,
+        2747.6,
+        5357.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -7250.4,
+        2769.8,
+        5355.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7263.4,
+        2791.6,
+        5353.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7289.6,
+        2817.6,
+        5351.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -7374.6,
+        2852.1,
+        5340.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        -7246.3,
+        2754.6,
+        5356.1
+      ]
+    }
+  ]
+}

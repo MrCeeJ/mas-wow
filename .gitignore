@@ -41,3 +41,87 @@ Shadowlands/Plaguefall/utils.lua
 Shadowlands/Plaguefall/warlock.lua
 Shadowlands/Plaguefall/warrior.lua
 Shadowlands/Plaguefall/shaman.lua
+Shadowlands/Torghast Start/code.lua
+Shadowlands/Torghast Start/demon.lua
+Shadowlands/Torghast Start/druid.lua
+Shadowlands/Torghast Start/hunter.lua
+Shadowlands/Torghast Start/instances.lua
+Shadowlands/Torghast Start/mage.lua
+Shadowlands/Torghast Start/monk.lua
+Shadowlands/Torghast Start/paladin.lua
+Shadowlands/Torghast Start/shaman.lua
+Shadowlands/Torghast Start/warlock.lua
+Shadowlands/Torghast Start/warrior.lua
+Shadowlands/Torghast Start/prep.lua
+Shadowlands/Torghast Start/priest.lua
+Shadowlands/_Arkoban Hall/code.lua
+Shadowlands/_Arkoban Hall/demon.lua
+Shadowlands/_Arkoban Hall/druid.lua
+Shadowlands/_Arkoban Hall/hunter.lua
+Shadowlands/_Arkoban Hall/instances.lua
+Shadowlands/_Arkoban Hall/mage.lua
+Shadowlands/_Arkoban Hall/monk.lua
+Shadowlands/_Arkoban Hall/paladin.lua
+Shadowlands/_Arkoban Hall/priest.lua
+Shadowlands/_Arkoban Hall/shaman.lua
+Shadowlands/_Arkoban Hall/utils.lua
+Shadowlands/_Arkoban Hall/warlock.lua
+Shadowlands/_Arkoban Hall/warrior.lua
+Shadowlands/_The Soulforges/code.lua
+Shadowlands/_The Soulforges/demon.lua
+Shadowlands/_The Soulforges/druid.lua
+Shadowlands/_The Soulforges/hunter.lua
+Shadowlands/_The Soulforges/instances.lua
+Shadowlands/_The Soulforges/mage.lua
+Shadowlands/_The Soulforges/monk.lua
+Shadowlands/_The Soulforges/paladin.lua
+Shadowlands/_Arkoban Hall/prep.lua
+Shadowlands/_The Soulforges/prep.lua
+Shadowlands/_The Soulforges/priest.lua
+Shadowlands/_The Soulforges/shaman.lua
+Shadowlands/_The Soulforges/utils.lua
+Shadowlands/_The Soulforges/warlock.lua
+Shadowlands/_The Soulforges/warrior.lua
+Shadowlands/_The Upper Reaches/code.lua
+Shadowlands/_The Upper Reaches/demon.lua
+Shadowlands/_The Upper Reaches/druid.lua
+Shadowlands/_The Upper Reaches/hunter.lua
+Shadowlands/_The Upper Reaches/instances.lua
+Shadowlands/_The Upper Reaches/mage.lua
+Shadowlands/_The Upper Reaches/monk.lua
+Shadowlands/_The Upper Reaches/paladin.lua
+Shadowlands/_The Upper Reaches/prep.lua
+Shadowlands/_The Upper Reaches/priest.lua
+Shadowlands/_The Upper Reaches/shaman.lua
+Shadowlands/_The Upper Reaches/utils.lua
+Shadowlands/_The Upper Reaches/warlock.lua
+Shadowlands/_The Upper Reaches/warrior.lua
+Shadowlands/Halls of Attonement/code.lua
+Shadowlands/Halls of Attonement/demon.lua
+Shadowlands/Halls of Attonement/druid.lua
+Shadowlands/Halls of Attonement/hunter.lua
+Shadowlands/Halls of Attonement/instances.lua
+Shadowlands/Halls of Attonement/mage.lua
+Shadowlands/Halls of Attonement/monk.lua
+Shadowlands/Halls of Attonement/paladin.lua
+Shadowlands/Halls of Attonement/prep.lua
+Shadowlands/Halls of Attonement/priest.lua
+Shadowlands/Halls of Attonement/shaman.lua
+Shadowlands/Halls of Attonement/utils.lua
+Shadowlands/Halls of Attonement/warlock.lua
+Shadowlands/Halls of Attonement/warrior.lua
+Shadowlands/Mists of Tirna Scithe/code.lua
+Shadowlands/Mists of Tirna Scithe/demon.lua
+Shadowlands/Mists of Tirna Scithe/druid.lua
+Shadowlands/Mists of Tirna Scithe/hunter.lua
+Shadowlands/Mists of Tirna Scithe/instances.lua
+Shadowlands/Mists of Tirna Scithe/mage.lua
+Shadowlands/Mists of Tirna Scithe/monk.lua
+Shadowlands/Mists of Tirna Scithe/paladin.lua
+Shadowlands/Mists of Tirna Scithe/prep.lua
+Shadowlands/Mists of Tirna Scithe/priest.lua
+Shadowlands/Mists of Tirna Scithe/shaman.lua
+Shadowlands/Mists of Tirna Scithe/utils.lua
+Shadowlands/Mists of Tirna Scithe/warlock.lua
+Shadowlands/Mists of Tirna Scithe/warrior.lua
+Shadowlands/Torghast Start/utils.lua

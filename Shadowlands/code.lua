@@ -181,7 +181,6 @@
                 env:execute_action('move', {-3190.0, -3360.1, 6770.2})
             end
         end,
-        
         mage_food = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'MAGE' then
@@ -255,8 +254,7 @@
                     destName,
                     destFlags,
                     destRaidFlags = ...
-                local spellID, spellName, spellSchool
-                local amount, overkill, school, resisted, blocked, absorbed, critical, glancing, crushing, isOffHand
+                local spellID, spellName
                 local playerGUID = UnitGUID('player')
                 local me, _ = UnitName('player') --and destName == me
 
@@ -552,14 +550,14 @@
             -----------------------------------------------------------------------
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
-            debug_movement = false
+            debug_movement = true
             debug_fire = false
             standing_in_fire = standing_in_fire or false
             fire_x = fire_x or nil
             fire_y = fire_y or nil
             fire_z = fire_z or nil
-            move_distance = move_distance or 3
-            move_direction = move_direction or 7
+            move_distance = move_distance or 5
+            move_direction = move_direction or 5
 
             move_fuctions =
                 move_fuctions or
@@ -639,24 +637,30 @@
                 stop_fuctions[move_direction]()
                 if (move_direction == 7) then
                     move_direction = 3
-                elseif (move_direction == 3) then
+                elseif (false and move_direction == 3) then
                     move_direction = 7
                 end
             end
 
             function check_fire()
                 debug_msg(debug_fire, 'Checking for fire..')
-                local _, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player')
+                -- local _, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player') -- keeps moving if triggered?
                 if (standing_in_fire and not endTimeMS) then
-                    local px, py, pz = wmbapi.ObjectPosition('player')
-                    local distance = GetDistanceBetweenPositions(px, py, pz, fire_x, fire_y, fire_z)
-                    debug_msg(debug_movement, 'Fire is :' .. tostring(distance) .. ' away!')
-                    if (distance < move_distance) then
-                        start_moving()
-                    else
-                        stop_moving()
-                        debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
-                        standing_in_fire = false
+                    debug_msg(debug_movement, 'Creating fire move action')
+
+                    movement_action = function()
+                        local px, py, pz = wmbapi.ObjectPosition('player')
+                        local distance = GetDistanceBetweenPositions(px, py, pz, fire_x, fire_y, fire_z)
+                        debug_msg(debug_movement, 'Fire is :' .. tostring(distance) .. ' away!')
+                        if (distance < move_distance) then
+                            start_moving()
+                        else
+                            stop_moving()
+                            debug_msg(debug_movement, 'Made it ' .. tostring(move_distance) .. ' yards away. Stopping.')
+                            standing_in_fire = false
+                            debug_msg(debug_movement, '... removing fire move action')
+                            movement_action = nil
+                        end
                     end
                 else
                     debug_msg(debug_fire, '.. no fire or busy casting')
@@ -664,6 +668,10 @@
             end
 
             function check_move()
+                if (movement_action) then
+                    movement_action()
+                    return true
+                end
                 return false
             end
             -------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -697,13 +705,13 @@
                     elemental(env, is_pulling)
                 elseif player_class == 'WARRIOR' then -- and player_spec = 71 (arms) (fury 72)
                     arms(env, is_pulling)
-                elseif player_class == 'DEMONHUNTER' then -- and player_spec =
+                elseif player_class == 'DEMONHUNTER' then -- and player_spec = 581 Veng
                     vengeance(env, is_pulling)
                 elseif player_class == 'HUNTER' then -- and player_spec =
                     marksmanship(env, is_pulling)
                 elseif player_class == 'MONK' then -- and player_spec =
                     mistweaver(env, is_pulling)
-                elseif player_class == 'WARLOCK' then -- and player_spec =
+                elseif player_class == 'WARLOCK' then -- and player_spec = 266 Demon
                     demonology(env, is_pulling)
                 end
             else

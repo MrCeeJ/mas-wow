@@ -70,7 +70,6 @@ function balance(env)
             use_trinkets()
             --rotation
             debug_msg(false, '.. starting moonkin pewpew')
-                            RunMacroText('/cast [noform:4] Moonkin Form')
             if (my_hp < renewal_hp and renewal_cd == 0) then
                 check_cast('Renewal')
             elseif (my_hp < barksin_hp and barkskin_cd == 0) then

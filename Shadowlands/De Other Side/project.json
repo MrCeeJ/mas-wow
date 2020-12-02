@@ -1,0 +1,163 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Hakkar",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "The Manastorms"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              171685
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          3014.2,
+          -2221.7,
+          5.3
+        ]
+      },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "The Manastorms",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "The Manastorms"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              171685,
+              167966
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Spawn",
+        "value": [
+          2740.1,
+          -2017.8,
+          42.0
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "unstuck_mode": 2,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Muel Zala",
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Oustide Dealer",
+        "value": [
+          2914.2,
+          -2222.9,
+          -18.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

@@ -1,30 +1,33 @@
 {
   "path_groups": [
     {
+      "harvests": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 40.0,
+          "whitelist": [
+            336690,
+            336691,
+            351469
+          ]
+        }
+      ],
       "loot": true,
-      "name": "Random Location",
+      "name": "Herb Route",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Random Location"
+          "name": "Herb Route"
         }
       ],
       "pve": {
-        "attacks": [
-          {
-            "conditions": {
-              "type": "and",
-              "value": []
-            },
-            "range": 20.0
-          }
-        ]
-      },
-      "pvp": {
-        "attack": {
+        "defense": {
           "conditions": {
             "type": "and",
             "value": []
@@ -36,13 +39,15 @@
         "actions": [],
         "name": "Random Location",
         "value": [
-          -3201.8, -5266.4, 6600.0
+          -2306.5,
+          -4351.4,
+          6599.3
         ]
       },
       "skin": true,
       "start_distance": 20,
       "value": [
-        "random"
+        "1"
       ]
     }
   ],

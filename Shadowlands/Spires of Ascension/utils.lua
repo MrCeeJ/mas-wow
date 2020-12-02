@@ -95,15 +95,12 @@ end
 cast_at_target_position = function(spell, target)
     local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(target)
     if (tank_x == nil) then
-        tank_x, tank_y, tank_z = wmbapi.ObjectPosition('target')
-    end
-    if (tank_x == nil) then
         tank_x, tank_y, tank_z = wmbapi.ObjectPosition('player')
     end
     debug_msg(false, 'Target position :[' .. tank_x .. ',' .. tank_x .. ',' .. tank_z .. ']')
     local pos = {tank_x, tank_y, tank_z}
     local args = {['spell'] = spell, ['position'] = pos}
-    return env:execute_action('cast_ground', args)
+    env:execute_action('cast_ground', args)
 end
 
 -- ??

@@ -10,31 +10,19 @@ function fire(env)
 
     local my_hp = env:evaluate_variable('myself.health')
 
-    function invis()
-        ability = 'Invisibility'
+    function defensives()
+        debug_msg(fales, 'checking Defensives')
+        local result = false
         if (my_hp < 60) then
-            return check_cast('Invisibility')
-        else
-            return false
+            result = check_cast('Invisibility')
         end
-    end
-
-    function ice_block()
-        ability = 'Ice Block'
-        if (my_hp < 20) then
-            return check_cast('Ice Block')
-        else
-            return false
+        if (result == false and my_hp < 20) then
+            result = check_cast('Ice Block')
         end
-    end
-
-    function barrier()
-        local blazing_barrier_duration = env:evaluate_variable('myself.buff.Blazing Barrier')
-        if (blazing_barrier_duration == -1) then
-            return check_cast('Blazing Barrier')
-        else
-            return false
+        if (result == false and do_i_need_buffing(env, 'Blazing Barrier')) then
+            result = check_cast('Blazing Barrier')
         end
+        return result
     end
 
     function cooldowns()
@@ -133,11 +121,6 @@ function fire(env)
         return check_cast('Fireball')
     end
 
-    function defensives()
-        debug_msg(fales, 'checking Defensives')
-        return invis() or ice_block() or barrier()
-    end
-
     function dps()
         if (UnitExists('target')) then
             result =
@@ -162,7 +145,6 @@ function fire(env)
 
     result =
         handle_interupts('Counterspell') or handle_purges('Spellsteal') or defensives() or cooldowns() or aoe() or dps()
-
     debug_msg(debug_rotation and result, 'Casting :' .. tostring(ability))
     return result
 end

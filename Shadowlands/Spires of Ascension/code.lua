@@ -883,10 +883,10 @@
                 return env:evaluate_variable('myself.is_in_combat')
             end
 
-            function need_self_heal(spell)
+            function need_self_heal(env, spell)
                 local hp = env:evaluate_variable('myself.health')
                 local healing = false
-                if (hp < 60) then
+                if (hp < 90) then
                     healing = true
                     RunMacroText('/cast [@player] ' .. spell)
                     debug_msg(false, "Can't start, I need a heal")
@@ -952,10 +952,10 @@
                 -- ** DRUID ** --
                 local res_spell = 'Revive'
                 local heal_spell = 'Regrowth'
-                if (need_self_heal(heal_spell) or check_hybrid(env, res_spell, heal_spell)) then
+                if (check_hybrid(env, res_spell, heal_spell)) then
                     return true
                 end
-                RunMacroText('/cast [Outdoors,noform:3] Travel Form')
+                RunMacroText('/cast [noform:4] Moonkin Form')
             elseif player_class == 'SHAMAN' then
                 -- ** SHAMAN ** --
                 local res_spell = 'Ancestral Spirit'

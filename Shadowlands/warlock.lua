@@ -62,6 +62,14 @@ function demonology(env)
             end
         end
 
+        if (my_hp < 50) then
+            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
+            if (healthstone_cd == 0) then
+                RunMacroText('/p eating Healthstone')
+                RunMacroText('/use Healthstone')
+            end
+        end
+
         if (my_hp < 25) then
             result = check_cast('Drain Life')
             if (result) then

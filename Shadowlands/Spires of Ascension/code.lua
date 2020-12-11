@@ -181,6 +181,22 @@
                 env:execute_action('move', {-3190.0, -3360.1, 6770.2})
             end
         end,
+        aleez_positions = function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            debug_msg(true, 'my class is :' .. player_class)
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-2211.7, 5667.8, 4179.5})
+            elseif player_class == 'PRIEST' then
+                debug_msg(true, 'moving to priest waypoint')
+                env:execute_action('move', {-2225.1, 5678.3, 4179.9})
+            elseif player_class == 'DRUID' then
+                env:execute_action('move', {-2221.5, 5661.3, 4180.0})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-2199.5, 5661.6, 4179.9})
+            elseif player_class == 'MAGE' then
+                env:execute_action('move', {-2201.1, 5688.8, 4179.9})
+            end
+        end,
         mage_food = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'MAGE' then
@@ -311,7 +327,7 @@
             end
 
             function get_aoe_count(range)
-                local range = range or 8
+                range = range or 8
                 if (UnitExists(main_tank)) then
                     local distance = env:evaluate_variable('unit.main_tank.distance')
                     if (distance < 30) then
@@ -479,23 +495,24 @@
             end
 
             function handle_interupts(spell)
+                debug_interupts = true
                 local _, kick_cd, _, _ = GetSpellCooldown(spell)
-                debug_msg(false, '.. checking ' .. spell .. ' cd :' .. kick_cd)
+                debug_msg(debug_interupts, '.. checking ' .. spell .. ' cd :' .. kick_cd)
 
                 local spell_name, rank, icon, castTime, minRange, maxRange, spell_spellId = GetSpellInfo(spell)
-                debug_msg(false, '.. range of ' .. spell .. ' is :' .. maxRange)
+                debug_msg(debug_interupts, '.. range of ' .. spell .. ' is :' .. maxRange)
 
                 if (kick_cd == 0 and UnitExists('target')) then
                     -- local casting = UnitCastingInfo("target")
-                    debug_msg(false, '.. checking target spell')
+                    debug_msg(faldebug_interuptsse, '.. checking target spell')
 
                     local name, text, texture, startTimeMS, endTimeMS, isTradeSkill, castID, notInterruptible, spellId =
                         UnitCastingInfo('target')
                     if (name and spellId and endTimeMS) then
-                        debug_msg(false, '.. checking target range')
+                        debug_msg(debug_interupts, '.. checking target range')
                         local distance = env:evaluate_variable('unit.target.distance')
                         debug_msg(
-                            false,
+                            debug_interupts,
                             '.. distance ' .. name .. ' target distance :' .. distance .. ' max range' .. maxRange
                         )
                         if (distance <= maxRange) then
@@ -508,14 +525,14 @@
                                 if (game_time + global_cd > end_time) then
                                     check_cast(spell)
                                     if (spell and name) then
-                                        debug_msg(true, '.. ' .. spell .. ' used to squish :' .. name)
+                                        debug_msg(debug_interupts, '.. ' .. spell .. ' used to squish :' .. name)
                                     end
                                     return true
                                 end
                             end
                         end
                     else
-                        debug_msg(false, '.. Nothing to interrupt')
+                        debug_msg(debug_interupts, '.. Nothing to interrupt')
                     end
                 end
                 return false
@@ -550,6 +567,33 @@
             -----------------------------------------------------------------------
             ---------------------------    Positional Code    ---------------------
             -----------------------------------------------------------------------
+            function move_in_direction(angle, time)
+                RunMacroText('/p moving in direction :' .. tostring(angle) .. ' for ' .. tostring(distance) .. ' yards')
+                local time = game_time
+                move_stop_time = game_time + time
+            end
+
+            function check_spread(spread)
+                local min_distance = 9999
+                local nearest_player = nil
+                for _, player_name in ipairs(party) do
+                    local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
+                    if (distance < min_distance) then
+                        nearest_player = player_name
+                        min_distance = distance
+                    end
+                end
+                if (min_distance < spread) then
+                    -- move away from player
+                    local p_x, p_y, p_z = wmbapi.ObjectPosition('player')
+                    local t_x, t_y, t_z = wmbapi.ObjectPosition(nearest_player)
+                    local angle = GetAnglesBetweenPositions(t_x, t_y, t_z, p_x, p_y, p_z)
+                    local dist = spread - min_distance
+                    local time = dist / 5
+                    move_in_direction(angle, time)
+                end
+            end
+
             debug_movement = true
             debug_fire = false
             standing_in_fire = standing_in_fire or false
@@ -634,12 +678,11 @@
 
             function stop_moving()
                 debug_msg(debug_movement, 'Stopping movement')
-                stop_fuctions[move_direction]()
-                if (move_direction == 7) then
-                    move_direction = 3
-                elseif (false and move_direction == 3) then
-                    move_direction = 7
-                end
+                MoveForwardStop()
+                MoveBackwardStop()
+                StrafeRightStop()
+                StrafeLeftStop()
+                -- stop_fuctions[move_direction]()
             end
 
             function check_fire()
@@ -883,10 +926,10 @@
                 return env:evaluate_variable('myself.is_in_combat')
             end
 
-            function need_self_heal(env, spell)
+            function need_self_heal(spell)
                 local hp = env:evaluate_variable('myself.health')
                 local healing = false
-                if (hp < 90) then
+                if (hp < 60) then
                     healing = true
                     RunMacroText('/cast [@player] ' .. spell)
                     debug_msg(false, "Can't start, I need a heal")
@@ -952,10 +995,10 @@
                 -- ** DRUID ** --
                 local res_spell = 'Revive'
                 local heal_spell = 'Regrowth'
-                if (check_hybrid(env, res_spell, heal_spell)) then
+                if (need_self_heal(heal_spell) or check_hybrid(env, res_spell, heal_spell)) then
                     return true
                 end
-                RunMacroText('/cast [noform:4] Moonkin Form')
+                RunMacroText('/cast [outdoors,noform:3, nomounted] Travel Form')
             elseif player_class == 'SHAMAN' then
                 -- ** SHAMAN ** --
                 local res_spell = 'Ancestral Spirit'

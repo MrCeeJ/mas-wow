@@ -10,25 +10,56 @@ function fire(env)
 
     local my_hp = env:evaluate_variable('myself.health')
 
-    function defensives()
-        debug_msg(fales, 'checking Defensives')
-        local result = false
+    function healthstone()
+        if (my_hp < 50) then
+            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
+            if (healthstone_cd == 0) then
+                RunMacroText('/p eating Healthstone')
+                RunMacroText('/use Healthstone')
+            end
+        end
+        return false
+    end
+
+    function invis()
+        ability = 'Invisibility'
         if (my_hp < 60) then
-            result = check_cast('Invisibility')
+            return check_cast('Invisibility')
+        else
+            return false
         end
-        if (result == false and my_hp < 20) then
-            result = check_cast('Ice Block')
+    end
+
+    function ice_block()
+        ability = 'Ice Block'
+        if (my_hp < 20) then
+            return check_cast('Ice Block')
+        else
+            return false
         end
-        if (result == false and do_i_need_buffing(env, 'Blazing Barrier')) then
-            result = check_cast('Blazing Barrier')
+    end
+
+    function barrier()
+        local blazing_barrier_duration = env:evaluate_variable('myself.buff.Blazing Barrier')
+        if (blazing_barrier_duration == -1) then
+            return check_cast('Blazing Barrier')
+        else
+            return false
         end
-        return result
     end
 
     function cooldowns()
         use_trinkets()
-        return check_cast('Berserking') or check_cast('Time Warp') or combustion() or check_cast('Mirror Image') or
-            rune()
+        return check_cast('Berserking') or time_warp() or combustion() or check_cast('Mirror Image') or rune()
+    end
+
+    function time_warp()
+        ability = 'Time Warp'
+        if (UnitExists('boss1')) then
+            return check_cast('Time Warp')
+        else
+            return false
+        end
     end
 
     function combustion()
@@ -121,6 +152,11 @@ function fire(env)
         return check_cast('Fireball')
     end
 
+    function defensives()
+        debug_msg(fales, 'checking Defensives')
+        return healthstone() or invis() or ice_block() or barrier()
+    end
+
     function dps()
         if (UnitExists('target')) then
             result =
@@ -136,7 +172,7 @@ function fire(env)
 
     function aoe()
         local enemy_count = get_aoe_count()
-        debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
+        debug_msg(true, 'Enemy aoe count : ' .. enemy_count)
         if (enemy_count > 3) then
             return hot_flamestrike() or spend_phoenix()
         end
@@ -145,6 +181,7 @@ function fire(env)
 
     result =
         handle_interupts('Counterspell') or handle_purges('Spellsteal') or defensives() or cooldowns() or aoe() or dps()
+
     debug_msg(debug_rotation and result, 'Casting :' .. tostring(ability))
     return result
 end

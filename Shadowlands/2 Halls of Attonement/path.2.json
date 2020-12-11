@@ -1,0 +1,143 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Start",
+      "value": [
+        -2169.4,
+        5245.1,
+        4126.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2171.1,
+        5295.7,
+        4141.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2174.3,
+        5321.0,
+        4140.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2186.9,
+        5349.7,
+        4140.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2205.2,
+        5361.0,
+        4140.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2195.4,
+        5371.8,
+        4140.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        -2219.6,
+        5407.2,
+        4146.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "top of stairs",
+      "value": [
+        -2209.9,
+        5447.5,
+        4170.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2209.2,
+        5457.9,
+        4170.3
+      ]
+    },
+    {
+      "actions": [],
+      "pve": false,
+      "value": [
+        -2209.5,
+        5500.0,
+        4170.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Door",
+      "pve": false,
+      "value": [
+        -2210.0,
+        5508.5,
+        4170.7
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 0.5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 353179,
+            "range": 5
+          }
+        }
+      ],
+      "name": "open",
+      "value": [
+        -2210.0,
+        5508.5,
+        4170.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Fight",
+      "value": [
+        -2210.0,
+        5508.5,
+        4170.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "after boss",
+      "value": [
+        -2209.5,
+        5516.8,
+        4170.8
+      ]
+    }
+  ]
+}

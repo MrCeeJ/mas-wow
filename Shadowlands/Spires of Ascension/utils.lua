@@ -95,12 +95,15 @@ end
 cast_at_target_position = function(spell, target)
     local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(target)
     if (tank_x == nil) then
+        tank_x, tank_y, tank_z = wmbapi.ObjectPosition('target')
+    end
+    if (tank_x == nil) then
         tank_x, tank_y, tank_z = wmbapi.ObjectPosition('player')
     end
     debug_msg(false, 'Target position :[' .. tank_x .. ',' .. tank_x .. ',' .. tank_z .. ']')
     local pos = {tank_x, tank_y, tank_z}
     local args = {['spell'] = spell, ['position'] = pos}
-    env:execute_action('cast_ground', args)
+    return env:execute_action('cast_ground', args)
 end
 
 -- ??
@@ -239,11 +242,13 @@ end
 GetPositionFromPosition = function(X, Y, Z, dist, angle)
     return math.cos(angle) * dist + X, math.sin(angle) * dist + Y, math.sin(0) * dist + Z
 end
+
 GetAnglesBetweenPositions = function(X1, Y1, Z1, X2, Y2, Z2)
     return math.atan2(Y2 - Y1, X2 - X1) % (math.pi * 2), math.atan(
         (Z1 - Z2) / math.sqrt(math.pow(X1 - X2, 2) + math.pow(Y1 - Y2, 2))
     ) % math.pi
 end
+
 GetDistanceBetweenPositions = function(X1, Y1, Z1, X2, Y2, Z2)
     return math.sqrt(math.pow(X2 - X1, 2) + math.pow(Y2 - Y1, 2) + math.pow(Z2 - Z1, 2))
 end
@@ -258,7 +263,7 @@ end
 GetPositionFromTarget = function(dist)
     local target_x, target_y, target_z = wmbapi.ObjectPosition('target')
     local player_x, player_y, player_z = wmbapi.ObjectPosition('player')
-    local angle = GetAnglesBetweenPositions(target_x, target_y, target_z, player_x, player_y, player_z)
+    local angle = GetAnglesBetweenPositions(player_x, player_y, player_z, target_x, target_y, target_z)
     return GetPositionFromPosition(target_x, target_y, target_z, dist, angle)
 end
 

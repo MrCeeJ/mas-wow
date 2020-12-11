@@ -1,0 +1,344 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Clear to 1 - Halkias",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Clear to 2 - Echelon"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -2209.5,
+          5027.1,
+          4140.4
+        ]
+      },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Straight to 1 - Halkias",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Clear to 2 - Echelon"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -2209.5,
+          5027.1,
+          4140.4
+        ]
+      },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "1s"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Clear to 2 - Echelon",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Clear to 3 - Inquisiotr Sigmar"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Stairs",
+        "value": [
+          -2169.4,
+          5245.1,
+          4126.8
+        ]
+      },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Clear to 3 - Inquisiotr Sigmar",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Clear to 4 - High Adjudicator Aleez"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Doorway",
+        "value": [
+          -2209.5,
+          5498.3,
+          4170.3
+        ]
+      },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Clear to 4 - High Adjudicator Aleez",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Straight to 4 - High Adjudicator Aleez"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -2209.5,
+          5027.1,
+          4140.4
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "4"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Straight to 4 - High Adjudicator Aleez",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Straight to 4 - High Adjudicator Aleez"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Entrance",
+        "value": [
+          -2209.5,
+          5027.1,
+          4140.4
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "3"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "prep",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

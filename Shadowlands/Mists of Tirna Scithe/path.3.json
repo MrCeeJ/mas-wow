@@ -3,176 +3,76 @@
     {
       "actions": [],
       "value": [
-        -7230.6,
-        2518.4,
-        5393.6
+        -7002.6,
+        2192.0,
+        5490.9
       ]
     },
     {
       "actions": [],
       "value": [
-        -7247.2,
-        2569.7,
-        5389.0
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 4,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "winged_companion_positions"
-        },
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 1,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "interact",
-          "value": {
-            "id": 165605,
-            "range": 2
-          }
-        }
-      ],
-      "name": "",
-      "value": [
-        -7269.4,
-        2575.1,
-        5383.9
+        -7059.6,
+        2277.3,
+        5477.2
       ]
     },
     {
       "actions": [],
       "name": "",
       "value": [
-        -7309.9,
-        2605.7,
-        5368.1
-      ]
-    },
-    {
-      "actions": [],
-      "value": [
-        -7303.3,
-        2652.8,
-        5367.4
+        -7131.3,
+        2283.6,
+        5473.4
       ]
     },
     {
       "actions": [],
       "name": "",
       "value": [
-        -7287.8,
-        2679.8,
-        5368.1
+        -7178.5,
+        2217.6,
+        5481.7
       ]
     },
     {
       "actions": [],
       "value": [
-        -7280.3,
-        2704.8,
-        5368.0
-      ]
-    },
-    {
-      "actions": [],
-      "value": [
-        -7251.7,
-        2741.2,
-        5358.9
-      ]
-    },
-    {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 1,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "pull_stitchflesh"
-        },
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 3,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "stichflesh_positions"
-        }
-      ],
-      "name": "",
-      "value": [
-        -7227.5,
-        2747.6,
-        5357.2
+        -7215.6,
+        2265.6,
+        5470.0
       ]
     },
     {
       "actions": [],
       "name": "",
       "value": [
-        -7250.4,
-        2769.8,
-        5355.4
+        -7243.2,
+        2343.6,
+        5460.1
       ]
     },
     {
       "actions": [],
       "value": [
-        -7263.4,
-        2791.6,
-        5353.4
+        -7197.8,
+        2388.9,
+        5459.3
       ]
     },
     {
       "actions": [],
       "value": [
-        -7289.6,
-        2817.6,
-        5351.3
-      ]
-    },
-    {
-      "actions": [],
-      "value": [
-        -7374.6,
-        2852.1,
-        5340.9
+        -7172.2,
+        2439.4,
+        5459.2
       ]
     },
     {
       "actions": [],
       "name": "__end",
       "value": [
-        -7246.3,
-        2754.6,
+        -7172.2,
+        2439.4,
         5356.1
       ]
     }

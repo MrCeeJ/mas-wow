@@ -3,14 +3,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Hakkar",
+      "name": "Kin-Tara",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "The Manastorms"
+          "name": "Oryphrion"
         }
       ],
       "pve": {
@@ -40,9 +40,9 @@
         "actions": [],
         "name": "Entrance",
         "value": [
-          3014.2,
-          -2221.7,
-          5.3
+          -1318.4,
+          -6134.1,
+          7067.0
         ]
       },
       "skin": {
@@ -63,14 +63,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "The Manastorms",
+      "name": "Oryphrion",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "The Manastorms"
+          "name": "Oryphrion"
         }
       ],
       "pve": {
@@ -101,9 +101,9 @@
         "actions": [],
         "name": "Spawn",
         "value": [
-          2740.1,
-          -2017.8,
-          42.0
+          -911.5,
+          -6920.9,
+          7182.7
         ]
       },
       "skin": true,

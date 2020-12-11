@@ -1,102 +1,191 @@
-﻿------------------------------------------------------------------------------------------------------------
----------------                                     Fire                                  ---------------
+------------------------------------------------------------------------------------------------------------
+---------------                           Fire                                             ---------------
 ------------------------------------------------------------------------------------------------------------
 function fire(env)
-    if (debug) then
-        print('.. Mage Code checking curses')
-    end
-    local dispelling = handle_new_debuffs_mpdc(false, false, false, 'Remove Curse')
-    local kicking = handle_interupts('Counterspell')
-    debug_msg(false, '.. checking purges')
-    local purging = handle_purges('Spellsteal')
-    -- Check for priority targets
-    use_heroism = false
+    debug_rotation = true
+    debug_msg(false, '.. In Mage Code')
+
     get_priority_target()
     do_boss_mechanic()
-    if (debug) then
-        print('.. done with curses')
-    end
-    if (dispelling == false and kicking == false and purging == false) then
-        if (UnitExists('target')) then
-            debug_msg(false, '.. dps rotation setup')
 
-            local my_hp = env:evaluate_variable('myself.health')
-            local _, invis_cd, _, _ = GetSpellCooldown('Invisibility')
-            local invis_hp = 60
-            local _, iceblock_cd, _, _ = GetSpellCooldown('Iceblock')
-            local iceblock_duration = env:evaluate_variable('myself.buff.Iceblock')
-            local iceblock_hp = 20
+    local my_hp = env:evaluate_variable('myself.health')
 
-            local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
-            local heating_up_duration = env:evaluate_variable('myself.buff.48107')
-            local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
-            local power_duration = env:evaluate_variable('myself.buff.Rune of Power')
-            debug_msg(false, '.. counting enemies')
-            local enemy_count = get_aoe_count()
-            debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
-            local fireblast_charges, _, _, fireblast_cd_duration, _ = GetSpellCharges('Fire Blast')
-            local _, fireblast_cd, _, _ = GetSpellCooldown('Fire Blast')
-            local _, berserking_cd, _, _ = GetSpellCooldown('Berserking')
-            local _, combustion_cd, _, _ = GetSpellCooldown('Combustion')
-            local _, time_warp_cd, _, _ = GetSpellCooldown('Time Warp')
-            local _, meteor_cd, _, _ = GetSpellCooldown('Meteor')
-            local _, images_cd, _, _ = GetSpellCooldown('Mirror Image')
-            local _, rune_cd, _, _ = GetSpellCooldown('Rune Of Power')
-
-            local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
-            -- Trinket spam
-            use_trinkets()
-            debug_msg(false, '.. start casting')
-            if (my_hp < invis_hp and invis_cd == 0) then
-                check_cast('Invisibility')
-            elseif (my_hp < iceblock_hp and iceblock_cd == 0) then
-                check_cast('Ice block')
-            elseif (berserking_cd == 0 and boss_mode ~= 'Save_CDs') then
-                check_cast('Berserking')
-            elseif (time_warp_cd == 0 and use_heroism) then
-                check_cast('Time Warp')
-            elseif (combustion_cd == 0 and boss_mode ~= 'Save_CDs') then
-                check_cast('Combustion')
-            elseif (images_cd == 0 and boss_mode ~= 'Save_CDs') then
-                debug_msg(false, '.. start casting images')
-                check_cast('Mirror Image')
-            elseif (rune_cd == 0 and power_duration == -1) then
-                check_cast('Rune of Power')
-            elseif (check_azerites()) then
-            elseif (meteor_cd == 0) then
-                cast_at_target_position('Meteor', main_tank)
-            elseif (hotstreak_duration > 0) then
-                if (enemy_count > 2) then
-                    cast_at_target_position('Flamestrike', main_tank)
-                else
-                    check_cast('Pyroblast')
-                end
-            elseif (fireblast_charges > 0 and heating_up_duration > 0) then
-                check_cast('Fire Blast')
-            else
-                if (combustion_duration > 0) then
-                    if (phoenix_charges > 0 and heating_up_duration > 0) then
-                        check_cast('Phoenix Flames')
-                    else
-                        check_cast('Scorch')
-                    end
-                elseif (enemy_count > 5 and ring_of_frost_cd == 0) then
-                    cast_at_target_position('Ring of Frost', main_tank)
-                elseif (power_duration == 0 and phoenix_charges == 1 and phoenix_cd_duration < combustion_cd) then
-                    check_cast('Phoenix Flames')
-                elseif (boss_mode == 'AoE' and phoenix_charges > 0) then
-                    check_cast('Phoenix Flames')
-                elseif (boss_mode == 'AoE') then
-                    cast_at_target_position('Flamestrike', main_tank)
-                else -- check 2nd phoenix
-                    check_cast('Fireball')
-                end
+    function healthstone()
+        if (my_hp < 50) then
+            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
+            if (healthstone_cd == 0) then
+                RunMacroText('/p eating Healthstone')
+                RunMacroText('/use Healthstone')
             end
+        end
+        return false
+    end
+
+    function invis()
+        ability = 'Invisibility'
+        if (my_hp < 60) then
+            return check_cast('Invisibility')
         else
-            RunMacroText('/assist ' .. main_tank) -- perhaps an oops
+            return false
         end
     end
+
+    function ice_block()
+        ability = 'Ice Block'
+        if (my_hp < 20) then
+            return check_cast('Ice Block')
+        else
+            return false
+        end
+    end
+
+    function barrier()
+        local blazing_barrier_duration = env:evaluate_variable('myself.buff.Blazing Barrier')
+        if (blazing_barrier_duration == -1) then
+            return check_cast('Blazing Barrier')
+        else
+            return false
+        end
+    end
+
+    function cooldowns()
+        use_trinkets()
+        return check_cast('Berserking') or time_warp() or combustion() or check_cast('Mirror Image') or rune()
+    end
+
+    function time_warp()
+        ability = 'Time Warp'
+        if (UnitExists('boss1')) then
+            return check_cast('Time Warp')
+        else
+            return false
+        end
+    end
+
+    function combustion()
+        ability = 'Combustion'
+        return check_cast('Combustion')
+    end
+
+    function rune()
+        local rune_of_power_duration = env:evaluate_variable('myself.buff.Rune of Power')
+        local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
+        if (rune_of_power_duration > 0 or combustion_duration > 0) then
+            return false
+        else
+            ability = 'Rune of Power'
+            return check_cast('Rune of Power')
+        end
+    end
+
+    function radiant_spark()
+        ability = 'Radiant Spark'
+        return check_cast('Radiant Spark')
+    end
+
+    function meteor()
+        debug_msg(fales, '. checking for Meteor')
+        ability = 'Meteor'
+        return cast_at_target_position('Meteor', main_tank)
+    end
+
+    function hot_pyro()
+        debug_msg(fales, '. checking for Hot Streak Pyroblast')
+        ability = 'Hot Streak - Pyroblast'
+        local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
+        if (hotstreak_duration > 0) then
+            return check_cast('Pyroblast')
+        else
+            return false
+        end
+    end
+
+    function hot_flamestrike()
+        ability = 'Hot Streak - Flamestrike'
+        ability = debug_msg(fales, '. checking for Hot Streak Flamestrike')
+        local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
+        if (hotstreak_duration > 0) then
+            return check_cast('Flamestrike')
+        else
+            return false
+        end
+    end
+
+    function heating_fire_blast()
+        ability = 'Heating Up - Fire Blast'
+        debug_msg(fales, '. checking for Heating Up Fire Blast')
+        local heating_up_duration = env:evaluate_variable('myself.buff.48107')
+        if (heating_up_duration > 0) then
+            return check_cast('Fire Blast')
+        else
+            return false
+        end
+    end
+
+    function heating_phoenix()
+        ability = 'Phoenix Flames'
+        debug_msg(fales, '. checking for Heating Up Phoenix Flames')
+        local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
+        local heating_up_duration = env:evaluate_variable('myself.buff.48107')
+        if (combustion_duration > 0 and heating_up_duration > 0) then
+            return check_cast('Phoenix Flames')
+        else
+            return false
+        end
+    end
+
+    function spend_phoenix()
+        ability = 'Phoenix Flames'
+        debug_msg(fales, '. checking for Heating Up Phoenix Flames')
+        local power_duration = env:evaluate_variable('myself.buff.Rune of Power')
+        local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
+        local _, combustion_cd, _, _ = GetSpellCooldown('Combustion')
+        if (power_duration > 0 and phoenix_charges == 1 and phoenix_cd_duration < combustion_cd) then
+            return check_cast('Phoenix Flames')
+        else
+            return false
+        end
+    end
+
+    function fireball()
+        ability = 'Fireball'
+        return check_cast('Fireball')
+    end
+
+    function defensives()
+        debug_msg(fales, 'checking Defensives')
+        return healthstone() or invis() or ice_block() or barrier()
+    end
+
+    function dps()
+        if (UnitExists('target')) then
+            result =
+                radiant_spark() or meteor() or hot_pyro() or heating_fire_blast() or heating_phoenix() or
+                spend_phoenix() or
+                fireball()
+        else
+            result = false
+            ability = ' Nothing - no target!'
+        end
+        return result
+    end
+
+    function aoe()
+        local enemy_count = get_aoe_count()
+        debug_msg(true, 'Enemy aoe count : ' .. enemy_count)
+        if (enemy_count > 3) then
+            return hot_flamestrike() or spend_phoenix()
+        end
+        return false
+    end
+
+    result =
+        handle_interupts('Counterspell') or handle_purges('Spellsteal') or defensives() or cooldowns() or aoe() or dps()
+
+    debug_msg(debug_rotation and result, 'Casting :' .. tostring(ability))
+    return result
 end
+
 return {
     variables = {},
     actions = {},

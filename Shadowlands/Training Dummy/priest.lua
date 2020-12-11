@@ -183,7 +183,7 @@ function discipline(env)
                         check_cast('Schism')
                     elseif (boon_cd == 0 and not moving) then
                         check_cast('Boon of the Ascended')
-                    elseif (ascended_duration > 0 and ascended_blast_cd == 0 and not moving) then
+                    elseif (ascended_duration > 0 and ascended_blast_cd == 0) then
                         check_cast('Ascended Blast')
                     elseif (check_azerites()) then
                     elseif (fiend_cd == 0 and boss_mode ~= 'Save_CDs') then

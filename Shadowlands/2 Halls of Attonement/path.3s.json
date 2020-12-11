@@ -211,9 +211,17 @@
     {
       "actions": [],
       "value": [
-        -2211.2,
-        5605.8,
-        4169.6
+        -2202.2,
+        5606.2,
+        4170.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -2222.4,
+        5610.6,
+        4170.0
       ]
     },
     {
@@ -251,9 +259,32 @@
     {
       "actions": [],
       "value": [
-        -2215.8,
-        5660.5,
-        4179.7
+        -2218.5,
+        5657.9,
+        4180.0
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 5,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "aleez_positions"
+        }
+      ],
+      "name": "Positions",
+      "value": [
+        -2218.5,
+        5657.9,
+        4180.0
       ]
     },
     {

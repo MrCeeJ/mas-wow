@@ -28,8 +28,15 @@ function vengeance(env, is_pulling)
     local ability = ''
 
     function defensives()
-        debug_msg(fales, 'checking Defensives')
+        debug_msg(false, 'checking Defensives')
         local result = false
+        if (my_hp < 50) then
+            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
+            if (healthstone_cd == 0) then
+                RunMacroText('/p eating Healthstone')
+                RunMacroText('/use Healthstone')
+            end
+        end
         if (my_hp < 60) then
             result = check_cast('Metamorphosis')
         end
@@ -41,10 +48,10 @@ function vengeance(env, is_pulling)
 
     function infernal_strike()
         ability = 'Infernal Strike'
-        debug_msg(fales, '. checking Infernal Strike')
+        debug_msg(false, '. checking Infernal Strike')
         if (is_pulling or (infernal_strike_charges == 1 and infernal_strike_cd < 2)) then
             -- Get distance to target, jump to 2 yards short
-            p_x, p_y, p_z = GetPositionFromTarget(1)
+            p_x, p_y, p_z = GetPositionFromTarget(0.7)
             return cast_at_target_location('Infernal Strike', px, py, pz)
         else
             return false
@@ -70,42 +77,42 @@ function vengeance(env, is_pulling)
     end
     function fiery_brand()
         ability = 'Fiery Brand'
-        debug_msg(fales, '. checking Fiery Brand')
+        debug_msg(false, '. checking Fiery Brand')
         return check_cast('Fiery Brand')
     end
 
     function fel_devastation()
         ability = 'Fel Devastation'
-        debug_msg(fales, '. checking Fel Devastation')
+        debug_msg(false, '. checking Fel Devastation')
         return check_cast('Fel Devastation')
     end
 
     function elysian_decree()
         ability = 'Elysian Decree'
-        debug_msg(fales, '. checking Elysian Decree')
+        debug_msg(false, '. checking Elysian Decree')
         return cast_at_target_position('Elysian Decree', 'target')
     end
 
     function sigil_of_flame()
         ability = 'Sigil Of Flame'
-        debug_msg(fales, '. checking Sigil Of Flame')
+        debug_msg(false, '. checking Sigil Of Flame')
         return cast_at_target_position('Sigil Of Flame', 'target')
     end
 
     function sigil_of_misery()
         ability = 'Sigil Of Misery'
-        debug_msg(fales, '. checking Sigil Of Misery')
+        debug_msg(false, '. checking Sigil Of Misery')
         return cast_at_target_position('Sigil Of Misery', 'target')
     end
 
     function sigil_of_silence()
         ability = 'Sigil Of Silence'
-        debug_msg(fales, '. checking Sigil Of Silence')
+        debug_msg(false, '. checking Sigil Of Silence')
         return cast_at_target_position('Sigil Of Silence', 'target')
     end
 
     function immolation_aura()
-        debug_msg(fales, '. checking Immolation Aura')
+        debug_msg(false, '. checking Immolation Aura')
         if (fury < 90) then
             return check_cast('Immolation Aura')
         else
@@ -115,7 +122,7 @@ function vengeance(env, is_pulling)
 
     function soul_cleave()
         ability = 'Soul Cleave'
-        debug_msg(fales, '. checking Soul Cleave :' .. fury)
+        debug_msg(false, '. checking Soul Cleave :' .. fury)
         if (fury > 30) then
             return check_cast('Soul Cleave')
         else
@@ -125,15 +132,18 @@ function vengeance(env, is_pulling)
 
     function shear()
         ability = 'Shear'
-        debug_msg(fales, '. checking Shear')
+        debug_msg(false, '. checking Shear')
         return check_cast('Shear')
     end
 
-    -- Throw Glaive (19)
-    -- spectral sight
+    function throw_glaive()
+        ability = 'Throw Glaive'
+        debug_msg(false, '. checking Throw Glaive')
+        return check_cast('Throw Glaive')
+    end
+
+    -- spectral sight ?
     -- torment
-    -- Sigil of Misery (21)
-    -- Sigil of Silence (39)
 
     function dps()
         if (UnitExists('target')) then
@@ -146,7 +156,8 @@ function vengeance(env, is_pulling)
                 sigil_of_flame() or
                 sigil_of_misery() or
                 sigil_of_silence() or
-                shear()
+                shear() or
+                throw_glaive()
         else
             result = false
             ability = ' Nothing - no target!'

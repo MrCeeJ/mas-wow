@@ -242,11 +242,13 @@ end
 GetPositionFromPosition = function(X, Y, Z, dist, angle)
     return math.cos(angle) * dist + X, math.sin(angle) * dist + Y, math.sin(0) * dist + Z
 end
+
 GetAnglesBetweenPositions = function(X1, Y1, Z1, X2, Y2, Z2)
     return math.atan2(Y2 - Y1, X2 - X1) % (math.pi * 2), math.atan(
         (Z1 - Z2) / math.sqrt(math.pow(X1 - X2, 2) + math.pow(Y1 - Y2, 2))
     ) % math.pi
 end
+
 GetDistanceBetweenPositions = function(X1, Y1, Z1, X2, Y2, Z2)
     return math.sqrt(math.pow(X2 - X1, 2) + math.pow(Y2 - Y1, 2) + math.pow(Z2 - Z1, 2))
 end
@@ -261,7 +263,7 @@ end
 GetPositionFromTarget = function(dist)
     local target_x, target_y, target_z = wmbapi.ObjectPosition('target')
     local player_x, player_y, player_z = wmbapi.ObjectPosition('player')
-    local angle = GetAnglesBetweenPositions(target_x, target_y, target_z, player_x, player_y, player_z)
+    local angle = GetAnglesBetweenPositions(player_x, player_y, player_z, target_x, target_y, target_z)
     return GetPositionFromPosition(target_x, target_y, target_z, dist, angle)
 end
 

@@ -263,7 +263,7 @@ end
 GetPositionFromTarget = function(dist)
     local target_x, target_y, target_z = wmbapi.ObjectPosition('target')
     local player_x, player_y, player_z = wmbapi.ObjectPosition('player')
-    local angle = GetAnglesBetweenPositions(player_x, player_y, player_z, target_x, target_y, target_z)
+    local angle = GetAnglesBetweenPositions(target_x, target_y, target_z, player_x, player_y, player_z )
     return GetPositionFromPosition(target_x, target_y, target_z, dist, angle)
 end
 

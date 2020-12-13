@@ -12,11 +12,7 @@ function fire(env)
 
     function healthstone()
         if (my_hp < 50) then
-            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
-            if (healthstone_cd == 0) then
-                RunMacroText('/p eating Healthstone')
-                RunMacroText('/use Healthstone')
-            end
+            RunMacroText('/use Healthstone')
         end
         return false
     end
@@ -105,7 +101,7 @@ function fire(env)
         ability = debug_msg(fales, '. checking for Hot Streak Flamestrike')
         local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
         if (hotstreak_duration > 0) then
-            return check_cast('Flamestrike')
+            return cast_at_target_position('Flamestrike', main_tank)
         else
             return false
         end
@@ -171,8 +167,8 @@ function fire(env)
     end
 
     function aoe()
-        local enemy_count = get_aoe_count()
-        debug_msg(true, 'Enemy aoe count : ' .. enemy_count)
+        local enemy_count = get_aoe_count(8)
+        debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
         if (enemy_count > 3) then
             return hot_flamestrike() or spend_phoenix()
         end

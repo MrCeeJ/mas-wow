@@ -146,6 +146,7 @@
     },
     {
       "actions": [],
+      "name": "ready for mirror",
       "value": [
         -2197.8,
         5676.2,
@@ -154,6 +155,7 @@
     },
     {
       "actions": [],
+      "name": "delete",
       "value": [
         -2192.8,
         5676.7,
@@ -170,6 +172,21 @@
     },
     {
       "actions": [],
+      "name": "sin",
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              167876
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
       "value": [
         -2209.9,
         5544.8,
@@ -178,6 +195,20 @@
     },
     {
       "actions": [],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              167876
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
       "value": [
         -2210.0,
         5554.4,
@@ -186,6 +217,20 @@
     },
     {
       "actions": [],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              167876
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
       "value": [
         -2210.4,
         5567.9,
@@ -194,6 +239,20 @@
     },
     {
       "actions": [],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              167876
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
       "value": [
         -2210.1,
         5578.5,
@@ -202,6 +261,21 @@
     },
     {
       "actions": [],
+      "name": "sin",
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              167876
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
       "value": [
         -2209.8,
         5589.4,

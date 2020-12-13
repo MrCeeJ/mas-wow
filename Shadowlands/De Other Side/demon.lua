@@ -31,11 +31,11 @@ function vengeance(env, is_pulling)
         debug_msg(false, 'checking Defensives')
         local result = false
         if (my_hp < 50) then
-            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
-            if (healthstone_cd == 0) then
-                RunMacroText('/p eating Healthstone')
-                RunMacroText('/use Healthstone')
-            end
+            -- local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
+            -- if (healthstone_cd == 0) then
+            --     RunMacroText('/p eating Healthstone')
+            RunMacroText('/use Healthstone')
+        -- end
         end
         if (my_hp < 60) then
             result = check_cast('Metamorphosis')
@@ -48,11 +48,17 @@ function vengeance(env, is_pulling)
 
     function infernal_strike()
         ability = 'Infernal Strike'
-        debug_msg(false, '. checking Infernal Strike')
+        debug_strike = false
+        debug_msg(debug_strike, '. checking Infernal Strike')
         if (is_pulling or (infernal_strike_charges == 1 and infernal_strike_cd < 2)) then
             -- Get distance to target, jump to 2 yards short
-            p_x, p_y, p_z = GetPositionFromTarget(0.7)
-            return cast_at_target_location('Infernal Strike', px, py, pz)
+            local tx, ty, tz = wmbapi.ObjectPosition('target')
+            local px, py, pz = wmbapi.ObjectPosition('player')
+            debug_msg(debug_strike, '. my location :' .. tx .. ',' .. ty .. ',' .. tz)
+            debug_msg(debug_strike, '. my target :' .. px .. ',' .. py .. ',' .. pz)
+            x, y, z = GetPositionFromTarget(0.7)
+            debug_msg(debug_strike, '. strike at :' .. x .. ',' .. y .. ',' .. z)
+            return cast_at_target_location('Infernal Strike', x, y, z)
         else
             return false
         end
@@ -166,7 +172,8 @@ function vengeance(env, is_pulling)
         return result
     end
 
-    return handle_interupts('Disrupt') or handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or
+    return handle_interupts('Disrupt') or handle_cc('Imprison') or handle_purges('Consume Magic') or
+        handle_purges('Arcane Torrent') or
         defensives() or
         dps()
 end

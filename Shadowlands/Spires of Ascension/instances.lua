@@ -61,7 +61,7 @@ get_bad_spells = function(env)
         -- ['326440'] = 'Sin Quake (Shard of Halkias)',
         ['322945'] = 'Heave Debris (Halkias)',
         -- ['338013'] = 'Anima Fountain (Anima Fountain)',
-        ['323126'] = 'Telekinetic Collision (Lord Chamberlain)',
+        -- ['323126'] = 'Telekinetic Collision (Lord Chamberlain)',
         -- spells
         ['323001'] = 'Glass Shards (Halkias)',
         -- ['324044'] = 'Refracted Sinlight (Halkias)',

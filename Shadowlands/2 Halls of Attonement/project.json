@@ -77,7 +77,7 @@
               "type": "and",
               "value": []
             },
-            "range": 20.0
+            "range": 40.0
           }
         ]
       },
@@ -124,7 +124,7 @@
             "type": "and",
             "value": []
           },
-          "name": "Clear to 3 - Inquisiotr Sigmar"
+          "name": "Clear to 3 - High Adjudicator Aleez"
         }
       ],
       "pve": {
@@ -174,14 +174,71 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Clear to 3 - Inquisiotr Sigmar",
+      "name": "Straight to 2 - Echelon",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Clear to 4 - High Adjudicator Aleez"
+          "name": "Clear to 3 - High Adjudicator Aleez"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Stairs",
+        "value": [
+          -2169.4,
+          5245.1,
+          4126.8
+        ]
+      },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "2s"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Clear to 3 - High Adjudicator Aleez",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Clear to 4 - Lord Chamberlain"
         }
       ],
       "pve": {
@@ -231,14 +288,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Clear to 4 - High Adjudicator Aleez",
+      "name": "Straight to 3 - High Adjudicator Aleez",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Straight to 4 - High Adjudicator Aleez"
+          "name": "Clear to 4 - Lord Chamberlain"
         }
       ],
       "pve": {
@@ -270,6 +327,63 @@
           4140.4
         ]
       },
+      "skin": {
+        "blacklist": [
+          164563
+        ],
+        "conditions": {
+          "type": "and",
+          "value": []
+        },
+        "range": 20.0
+      },
+      "start_distance": 20,
+      "value": [
+        "3s"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Clear to 4 - Lord Chamberlain",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Straight to 4 - Lord Chamberlain"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Dead Adjuicator",
+        "value": [
+          -2208.6,
+          5671.2,
+          4179.5
+        ]
+      },
       "skin": true,
       "start_distance": 20,
       "value": [
@@ -279,14 +393,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Straight to 4 - High Adjudicator Aleez",
+      "name": "Straight to 4 - Lord Chamberlain",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Straight to 4 - High Adjudicator Aleez"
+          "name": "Straight to 4 - Lord Chamberlain"
         }
       ],
       "pve": {

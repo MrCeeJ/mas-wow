@@ -159,6 +159,33 @@
                 env:execute_action('move', {-3285.6, -3420.0, 6632.9})
             end
         end,
+        oryphrion_positions = function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            debug_msg(true, 'my class is :' .. player_class)
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-187.8, -7562.3, 7397.0})
+            elseif player_class == 'PRIEST' then
+                env:execute_action('move', {-210.2, -7567.2, 7397.0})
+            elseif player_class == 'DRUID' then
+                env:execute_action('move', {-194.1, -7570.2, 7397.0})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-183.3, -7574.3, 7397.1})
+            elseif player_class == 'MAGE' then
+                env:execute_action('move', {-202.0, -7542.9, 7397.0})
+            end
+        end,
+        pull_oryphrion = function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            if player_class == 'PALADIN' then
+                print('Pulling Oryphrion')
+                RunMacroText('/tar Oryphrion')
+                RunMacroText('/cast Judgment')
+            elseif player_class == 'DEMONHUNTER' then
+                print('Pulling Oryphrion')
+                RunMacroText('/tar Oryphrion')
+                RunMacroText('/cast Throw Glaive')
+            end
+        end,
         pull_stitchflesh = function(env)
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' then
@@ -181,20 +208,52 @@
                 env:execute_action('move', {-3190.0, -3360.1, 6770.2})
             end
         end,
+        -- Halls of Atonement
+        halkias_positions = function(env)
+            debug_msg(true, 'boss positions ho!')
+            local player_class = env:evaluate_variable('myself.class')
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-2210.0, 5258.6, 4126.6})
+            elseif player_class == 'PRIEST' then
+                env:execute_action('move', {-2210.0, 5250.6, 4126.4})
+            elseif player_class == 'DRUID' then
+                env:execute_action('move', {-2195.5, 5244.5, 4126.6})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-2223.1, 5245.6, 4126.5})
+            elseif player_class == 'MAGE' then
+                env:execute_action('move', {-2215.3, 5237.7, 4126.6})
+            end
+        end,
         aleez_positions = function(env)
             local player_class = env:evaluate_variable('myself.class')
             debug_msg(true, 'my class is :' .. player_class)
             if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
-                env:execute_action('move', {-2211.7, 5667.8, 4179.5})
+                env:execute_action('move', {-2211.8, 5669.3, 4179.5})
             elseif player_class == 'PRIEST' then
                 debug_msg(true, 'moving to priest waypoint')
-                env:execute_action('move', {-2225.1, 5678.3, 4179.9})
+                env:execute_action('move', {-2195.8, 5679.9, 4179.8})
             elseif player_class == 'DRUID' then
-                env:execute_action('move', {-2221.5, 5661.3, 4180.0})
+                env:execute_action('move', {-2223.2, 5678.9, 4179.8})
             elseif player_class == 'WARLOCK' then
-                env:execute_action('move', {-2199.5, 5661.6, 4179.9})
+                env:execute_action('move', {-2200.8, 5664.5, 4179.7})
             elseif player_class == 'MAGE' then
-                env:execute_action('move', {-2201.1, 5688.8, 4179.9})
+                env:execute_action('move', {-2218.4, 5660.8, 4179.8})
+            end
+        end,
+        chamberlain_positions = function(env)
+            local player_class = env:evaluate_variable('myself.class')
+            debug_msg(true, 'my class is :' .. player_class)
+            if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
+                env:execute_action('move', {-2209.7, 5697.6, 4223.4})
+            elseif player_class == 'PRIEST' then
+                debug_msg(true, 'moving to priest waypoint')
+                env:execute_action('move', {-2202.4, 5693.6, 4223.4})
+            elseif player_class == 'DRUID' then
+                env:execute_action('move', {-2203.5, 5686.5, 4223.4})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-2216.5, 5694.2, 4223.4})
+            elseif player_class == 'MAGE' then
+                env:execute_action('move', {-2216.7, 5686.9, 4223.4})
             end
         end,
         mage_food = function(env)
@@ -327,16 +386,17 @@
             end
 
             function get_aoe_count(range)
-                range = range or 8
+                r = range or 8
                 if (UnitExists(main_tank)) then
-                    local distance = env:evaluate_variable('unit.main_tank.distance')
+                    local distance = env:evaluate_variable('unit.' .. main_tank .. '.distance')
                     if (distance < 30) then
                         -- TODO: add in range check for tank, or use self
+                        debug_msg(false, 'Tank range is :' .. distance)
                         local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
                         local x = math.floor(tank_x + 0.5)
                         local y = math.floor(tank_y + 0.5)
                         local z = math.floor(tank_z + 0.5)
-                        local args = 'npcs.attackable.range_' .. range .. '.center_' .. x .. ',' .. y .. ',' .. z
+                        local args = 'npcs.attackable.range_' .. r .. '.center_' .. x .. ',' .. y .. ',' .. z
                         local enemies = env:evaluate_variable(args)
                         if (enemies) then
                             return enemies
@@ -495,7 +555,7 @@
             end
 
             function handle_interupts(spell)
-                debug_interupts = true
+                debug_interupts = false
                 local _, kick_cd, _, _ = GetSpellCooldown(spell)
                 debug_msg(debug_interupts, '.. checking ' .. spell .. ' cd :' .. kick_cd)
 
@@ -515,26 +575,35 @@
                             debug_interupts,
                             '.. distance ' .. name .. ' target distance :' .. distance .. ' max range' .. maxRange
                         )
-                        if (distance <= maxRange) then
+                        if (distance <= maxRange or maxRange == 0) then
                             if (notInterruptible == false) then
                                 local end_time = endTimeMS / 1000
                                 local delay = end_time - game_time
                                 local _, global_cd, _, _ = GetSpellCooldown('61304')
                                 -- print("t :",game_time",   e_t :", end_time ",    d :", delay)
-                                -- debug_msg(true, "Interuptable spell found :" .. name .. " finishing in :" .. delay .. " (" .. endTimeMS .. " - " ..game_time .. ")")
-                                if (game_time + global_cd > end_time) then
+                                debug_msg(
+                                    debug_interupts,
+                                    'Spell :' .. name .. ' ends in :' .. delay .. ' (gcd: ' .. global_cd .. ')'
+                                )
+                                if (delay < 1.5) then -- TODO: update with real
                                     check_cast(spell)
                                     if (spell and name) then
                                         debug_msg(debug_interupts, '.. ' .. spell .. ' used to squish :' .. name)
                                     end
                                     return true
                                 end
+                            else
+                                debug_msg(debug_interupts, '.. ' .. name .. " can't be interupted")
                             end
                         end
                     else
                         debug_msg(debug_interupts, '.. Nothing to interrupt')
                     end
                 end
+                return false
+            end
+
+            function handle_cc(spell)
                 return false
             end
 
@@ -686,6 +755,7 @@
             end
 
             function check_fire()
+                debug_movement = true
                 debug_msg(debug_fire, 'Checking for fire..')
                 -- local _, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player') -- keeps moving if triggered?
                 if (standing_in_fire and not endTimeMS) then
@@ -991,14 +1061,6 @@
                  then
                     return true
                 end
-            elseif player_class == 'DRUID' then
-                -- ** DRUID ** --
-                local res_spell = 'Revive'
-                local heal_spell = 'Regrowth'
-                if (need_self_heal(heal_spell) or check_hybrid(env, res_spell, heal_spell)) then
-                    return true
-                end
-                RunMacroText('/cast [outdoors,noform:3, nomounted] Travel Form')
             elseif player_class == 'SHAMAN' then
                 -- ** SHAMAN ** --
                 local res_spell = 'Ancestral Spirit'
@@ -1013,6 +1075,8 @@
                  then
                     return true
                 end
+            elseif player_class == 'DRUID' then -- and player_spec =
+                return prepare_balance(env)
             elseif player_class == 'DEMONHUNTER' then -- and player_spec =
                 return prepare_vengeance(env)
             elseif player_class == 'WARLOCK' then -- and player_spec =

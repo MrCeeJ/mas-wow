@@ -31,11 +31,11 @@ function vengeance(env, is_pulling)
         debug_msg(false, 'checking Defensives')
         local result = false
         if (my_hp < 50) then
-            local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
-            if (healthstone_cd == 0) then
-                RunMacroText('/p eating Healthstone')
-                RunMacroText('/use Healthstone')
-            end
+            -- local _, healthstone_cd, _, _ = GetSpellCooldown('Healthstone')
+            -- if (healthstone_cd == 0) then
+            --     RunMacroText('/p eating Healthstone')
+            RunMacroText('/use Healthstone')
+        -- end
         end
         if (my_hp < 60) then
             result = check_cast('Metamorphosis')
@@ -166,7 +166,7 @@ function vengeance(env, is_pulling)
         return result
     end
 
-    return handle_interupts('Disrupt') or handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or
+    return handle_interupts('Disrupt') or handle_cc('Imprison') or handle_purges('Consume Magic') or handle_purges('Arcane Torrent') or
         defensives() or
         dps()
 end

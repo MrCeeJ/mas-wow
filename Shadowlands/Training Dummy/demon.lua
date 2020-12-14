@@ -35,6 +35,7 @@ function vengeance(env, is_pulling)
             -- if (healthstone_cd == 0) then
             --     RunMacroText('/p eating Healthstone')
             RunMacroText('/use Healthstone')
+            RunMacroText('/use Phial Of serenity')
         -- end
         end
         if (my_hp < 60) then
@@ -56,9 +57,14 @@ function vengeance(env, is_pulling)
             local px, py, pz = wmbapi.ObjectPosition('player')
             debug_msg(debug_strike, '. my location :' .. tx .. ',' .. ty .. ',' .. tz)
             debug_msg(debug_strike, '. my target :' .. px .. ',' .. py .. ',' .. pz)
-            x, y, z = GetPositionFromTarget(0.7)
-            debug_msg(debug_strike, '. strike at :' .. x .. ',' .. y .. ',' .. z)
-            return cast_at_target_location('Infernal Strike', x, y, z)
+            local distance = env:evaluate_variable('unit.target.distance')
+            if (distance < 5) then
+                return cast_at_target_location('Infernal Strike', px, py, pz)
+            elseif (distance < 30) then
+                x, y, z = GetPositionFromTarget(0.7)
+                debug_msg(debug_strike, '. strike at :' .. x .. ',' .. y .. ',' .. z)
+                return cast_at_target_location('Infernal Strike', x, y, z)
+            end
         else
             return false
         end

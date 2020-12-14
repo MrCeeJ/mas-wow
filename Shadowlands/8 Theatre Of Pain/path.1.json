@@ -1,0 +1,995 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Entrance",
+      "value": [
+        2676.7,
+        -2546.0,
+        3292.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2763.5,
+        -2546.6,
+        3259.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2781.9,
+        -2547.3,
+        3260.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2835.1,
+        -2545.9,
+        3259.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landed",
+      "value": [
+        2832.4,
+        -2546.2,
+        3117.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2796.3,
+        -2572.2,
+        3130.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2759.8,
+        -2599.9,
+        3124.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 2,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 168185,
+            "range": 10
+          }
+        }
+      ],
+      "name": "",
+      "value": [
+        2738.8,
+        -2615.1,
+        3123.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2767.5,
+        -2654.6,
+        3125.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2773.4,
+        -2662.6,
+        3120.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2784.8,
+        -2672.9,
+        3115.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2787.9,
+        -2682.9,
+        3115.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2772.1,
+        -2688.4,
+        3115.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2759.1,
+        -2697.0,
+        3115.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2725.5,
+        -2721.8,
+        3115.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2698.1,
+        -2738.1,
+        3115.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2683.3,
+        -2719.8,
+        3125.5
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2651.1,
+        -2679.1,
+        3140.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2673.7,
+        -2662.5,
+        3138.0
+      ]
+    },
+    {
+      "actions": [],
+      "pve": false,
+      "value": [
+        2700.6,
+        -2643.1,
+        3137.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2703.5,
+        -2640.8,
+        3138.0
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Edge",
+      "value": [
+        2707.1,
+        -2637.9,
+        3139.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2716.3,
+        -2631.9,
+        3124.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2748.5,
+        -2606.0,
+        3124.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2777.8,
+        -2584.0,
+        3130.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2821.5,
+        -2557.0,
+        3118.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 0.1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 364528,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Head to Gore",
+      "value": [
+        2847.2,
+        -2502.6,
+        3130.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2850.3,
+        -2496.1,
+        3129.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2860.3,
+        -2467.4,
+        3127.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2881.1,
+        -2399.0,
+        3127.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2892.6,
+        -2361.9,
+        3127.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2893.9,
+        -2357.3,
+        3127.4
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2908.5,
+        -2361.1,
+        3127.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2927.9,
+        -2364.9,
+        3130.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2953.9,
+        -2347.3,
+        3129.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2958.6,
+        -2314.9,
+        3114.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2925.9,
+        -2307.4,
+        3104.9
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2910.0,
+        -2325.1,
+        3104.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "",
+      "value": [
+        2882.5,
+        -2393.4,
+        3095.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        2863.6,
+        -2450.1,
+        3096.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2847.0,
+        -2439.0,
+        3096.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Hooks",
+      "value": [
+        2824.9,
+        -2429.9,
+        3096.8
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 0.1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 170584,
+            "range": 5
+          }
+        }
+      ],
+      "name": "Climb",
+      "value": [
+        2824.9,
+        -2429.9,
+        3096.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Dismount",
+      "value": [
+        2836.1,
+        -2435.6,
+        3129.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2846.9,
+        -2437.9,
+        3127.9
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2862.1,
+        -2452.3,
+        3126.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2851.8,
+        -2483.5,
+        3130.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2837.2,
+        -2526.8,
+        3118.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2835.5,
+        -2544.4,
+        3117.5
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2858.7,
+        -2546.2,
+        3119.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Head to KT",
+      "value": [
+        2863.0,
+        -2547.3,
+        3120.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2879.5,
+        -2546.9,
+        3130.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2920.6,
+        -2546.8,
+        3122.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2930.2,
+        -2546.2,
+        3122.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2940.8,
+        -2527.0,
+        3122.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2962.1,
+        -2499.4,
+        3122.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2987.9,
+        -2489.3,
+        3122.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "end of gauntlet",
+      "value": [
+        2990.1,
+        -2472.3,
+        3122.8
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2992.3,
+        -2426.3,
+        3112.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Left Orb",
+      "value": [
+        3011.3,
+        -2414.7,
+        3113.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Portal",
+      "value": [
+        3015.9,
+        -2415.4,
+        3113.4
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 162105,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        3015.9,
+        -2415.4,
+        3113.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "landed",
+      "value": [
+        3042.3,
+        -2359.6,
+        3123.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "portal",
+      "value": [
+        3056.6,
+        -2346.5,
+        3123.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 162105,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        3056.6,
+        -2346.5,
+        3123.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "landed",
+      "value": [
+        3099.8,
+        -2229.2,
+        3086.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        3100.0,
+        -2258.5,
+        3084.8
+      ]
+    },
+    {
+      "actions": [],
+      "name": "portal",
+      "value": [
+        3101.0,
+        -2284.2,
+        3086.1
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 162105,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        3101.0,
+        -2284.2,
+        3086.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "landed",
+      "value": [
+        3186.7,
+        -2334.5,
+        3052.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        3189.6,
+        -2362.9,
+        3051.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Portal",
+      "value": [
+        3193.7,
+        -2391.7,
+        3052.4
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 162105,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        3193.7,
+        -2391.7,
+        3052.4
+      ]
+    },
+    {
+      "actions": [],
+      "name": "landing",
+      "value": [
+        3143.6,
+        -2604.3,
+        3070.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        3145.9,
+        -2615.2,
+        3070.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "portal",
+      "value": [
+        3139.1,
+        -2620.2,
+        3070.7
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 162105,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        3139.1,
+        -2620.2,
+        3070.7
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        3098.1,
+        -2653.3,
+        3128.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "portal switch",
+      "value": [
+        3081.6,
+        -2637.1,
+        3127.1
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        3060.4,
+        -2616.0,
+        3137.0
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        3018.8,
+        -2576.4,
+        3137.2
+      ]
+    },
+    {
+      "actions": [],
+      "name": "KT",
+      "value": [
+        2990.0,
+        -2546.0,
+        3132.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "portal",
+      "value": [
+        2971.6,
+        -2545.8,
+        3132.3
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 162105,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        2971.6,
+        -2545.8,
+        3132.3
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Landing",
+      "value": [
+        2945.3,
+        -2559.4,
+        3122.3
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2927.0,
+        -2546.2,
+        3122.7
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2877.5,
+        -2546.0,
+        3130.1
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Head to Last Boss",
+      "value": [
+        2836.6,
+        -2545.9,
+        3117.6
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 169908,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        2836.6,
+        -2545.9,
+        3117.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "landing",
+      "value": [
+        2799.2,
+        -2546.3,
+        3260.6
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 5
+        }
+      ],
+      "name": "rp",
+      "value": [
+        2808.7,
+        -2546.3,
+        3260.2
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        2805.9,
+        -2547.2,
+        3260.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "__end",
+      "value": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    }
+  ]
+}

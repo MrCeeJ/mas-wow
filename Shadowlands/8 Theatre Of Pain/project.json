@@ -3,7 +3,7 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Clear to 1 - Kin-Tara",
+      "name": "Clear to 1 - Challengers",
       "next_groups": [
         {
           "conditions": {
@@ -20,7 +20,7 @@
               "type": "and",
               "value": []
             },
-            "range": 20.0
+            "range": 30.0
           }
         ]
       },
@@ -37,9 +37,9 @@
         "actions": [],
         "name": "Entrance",
         "value": [
-          -2209.5,
-          5027.1,
-          4140.4
+          2676.7,
+          -2546.0,
+          3292.9
         ]
       },
       "skin": {
@@ -149,11 +149,11 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "dead boss",
+        "name": "Stairs",
         "value": [
-          -1032.4,
-          -6628.1,
-          7134.5
+          -2169.4,
+          5245.1,
+          4126.8
         ]
       },
       "skin": {
@@ -263,11 +263,11 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Ven corpse",
+        "name": "Doorway",
         "value": [
-          -926.5,
-          -6881.4,
-          7183.0
+          -2209.5,
+          5498.3,
+          4170.3
         ]
       },
       "skin": {

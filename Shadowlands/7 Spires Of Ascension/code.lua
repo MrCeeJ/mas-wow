@@ -213,15 +213,15 @@
             debug_msg(true, 'boss positions ho!')
             local player_class = env:evaluate_variable('myself.class')
             if player_class == 'PALADIN' or player_class == 'DEMONHUNTER' then
-                env:execute_action('move', {-2210.0, 5258.6, 4126.6})
-            elseif player_class == 'PRIEST' then
-                env:execute_action('move', {-2210.0, 5250.6, 4126.4})
+                env:execute_action('move', {-2207.3, 5255.0, 4126.6})
             elseif player_class == 'DRUID' then
-                env:execute_action('move', {-2195.5, 5244.5, 4126.6})
-            elseif player_class == 'WARLOCK' then
-                env:execute_action('move', {-2223.1, 5245.6, 4126.5})
+                env:execute_action('move', {-2163.4, 5271.5, 4126.6})
             elseif player_class == 'MAGE' then
-                env:execute_action('move', {-2215.3, 5237.7, 4126.6})
+                env:execute_action('move', {-2198.7, 5254.1, 4126.6})
+            elseif player_class == 'WARLOCK' then
+                env:execute_action('move', {-2223.7, 5261.5, 4126.6})
+            elseif player_class == 'PRIEST' then
+                env:execute_action('move', {-2215.2, 5257.8, 4126.5})
             end
         end,
         aleez_positions = function(env)
@@ -755,6 +755,7 @@
             end
 
             function check_fire()
+                debug_movement = true
                 debug_msg(debug_fire, 'Checking for fire..')
                 -- local _, _, _, _, endTimeMS, _, _, _, _ = UnitCastingInfo('player') -- keeps moving if triggered?
                 if (standing_in_fire and not endTimeMS) then

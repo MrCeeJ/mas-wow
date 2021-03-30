@@ -49,6 +49,56 @@
       "value": [
         "1"
       ]
+    },
+    {
+      "harvests": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 40.0,
+          "whitelist": [
+            336690,
+            336691,
+            351469
+          ]
+        }
+      ],
+      "loot": true,
+      "name": "Levelling Route",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Levelling Route"
+        }
+      ],
+      "pve": {
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Random Location",
+        "value": [
+          -2306.5,
+          -4351.4,
+          6599.3
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "2"
+      ]
     }
   ],
   "scripts": [

@@ -1,0 +1,80 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "AoE",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "AoE"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              154583,
+              154580
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0,
+            "whitelist": [
+              160325
+            ]
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Random Location",
+        "value": [
+          -1749.4,
+          -5853.4,
+          6841.8
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "random"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

@@ -43,11 +43,7 @@ end
 
 function need_to_eat(env)
     local hungry = false
-    local thirsty = false
     local hp = env:evaluate_variable('myself.health')
-    local mana = UnitPower('player', 0)
-    local max_mana = UnitPowerMax('player', 0)
-    local mp = 100 * mana / max_mana
     if (hp < 90) then
         hungry = true
         local is_drinking = env:evaluate_variable('myself.buff.' .. food_buff)
@@ -55,8 +51,18 @@ function need_to_eat(env)
             RunMacroText('/use ' .. food_name)
             debug_msg(false, "Can't start, need to drink")
         end
-    elseif (max_mana > 0) then
-        if (mp < 90) then
+    end
+    return hungry
+end
+
+function need_to_drink(env, min_mana)
+    local thirsty = false
+    local mana = UnitPower('player', 0)
+    local max_mana = UnitPowerMax('player', 0)
+    local min_mp = min_mana or 90
+    local mp = 100 * mana / max_mana
+    if (max_mana > 0) then
+        if (mp < min_mp) then
             thirsty = true
             local is_drinking = env:evaluate_variable('myself.buff.' .. food_buff)
             if (is_drinking == -1) then
@@ -65,7 +71,7 @@ function need_to_eat(env)
             end
         end
     end
-    return thirsty or hungry
+    return thirsty
 end
 
 return {

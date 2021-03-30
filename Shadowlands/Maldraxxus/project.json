@@ -1,0 +1,86 @@
+{
+  "path_groups": [
+    {
+      "harvests": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 40.0,
+          "whitelist": [
+            351471,
+            336433,
+            336691,
+            351470,
+            336689
+          ]
+        }
+      ],
+      "loot": true,
+      "name": "Leather Grind",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Leather Grind"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 44.0,
+            "whitelist": [
+              162477,
+              171383,
+              162586,
+              162589
+            ]
+          }
+        ],
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Hilltop",
+        "value": [
+          2683.9,
+          -2080.1,
+          3304.6
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

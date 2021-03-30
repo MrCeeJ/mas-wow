@@ -80,13 +80,13 @@ function fire(env)
     end
 
     function meteor()
-        debug_msg(fales, '. checking for Meteor')
+        debug_msg(false, '. checking for Meteor')
         ability = 'Meteor'
         return cast_at_target_position('Meteor', main_tank)
     end
 
     function hot_pyro()
-        debug_msg(fales, '. checking for Hot Streak Pyroblast')
+        debug_msg(false, '. checking for Hot Streak Pyroblast')
         ability = 'Hot Streak - Pyroblast'
         local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
         if (hotstreak_duration > 0) then
@@ -98,7 +98,7 @@ function fire(env)
 
     function hot_flamestrike()
         ability = 'Hot Streak - Flamestrike'
-        ability = debug_msg(fales, '. checking for Hot Streak Flamestrike')
+        ability = debug_msg(false, '. checking for Hot Streak Flamestrike')
         local hotstreak_duration = env:evaluate_variable('myself.buff.48108')
         if (hotstreak_duration > 0) then
             return cast_at_target_position('Flamestrike', main_tank)
@@ -107,9 +107,21 @@ function fire(env)
         end
     end
 
+    function normal_flamestrike()
+        ability = 'Normal - Flamestrike'
+        local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
+        -- Only hard cast outside combustion
+        if (combustion_duration == -1) then
+            ability = debug_msg(false, '. checking for Normal Flamestrike')
+            return cast_at_target_position('Flamestrike', main_tank)
+        else
+            return false
+        end
+    end
+
     function heating_fire_blast()
         ability = 'Heating Up - Fire Blast'
-        debug_msg(fales, '. checking for Heating Up Fire Blast')
+        debug_msg(false, '. checking for Heating Up Fire Blast')
         local heating_up_duration = env:evaluate_variable('myself.buff.48107')
         if (heating_up_duration > 0) then
             return check_cast('Fire Blast')
@@ -120,7 +132,7 @@ function fire(env)
 
     function heating_phoenix()
         ability = 'Phoenix Flames'
-        debug_msg(fales, '. checking for Heating Up Phoenix Flames')
+        debug_msg(false, '. checking for Heating Up Phoenix Flames')
         local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
         local heating_up_duration = env:evaluate_variable('myself.buff.48107')
         if (combustion_duration > 0 and heating_up_duration > 0) then
@@ -129,14 +141,50 @@ function fire(env)
             return false
         end
     end
+    function ignite_phoenix()
+        local THREE_PHOENIX_TRIGGER = 50
+        local TWO_PHOENIX_TRIGGER = 100
+        local ONE_PHOENIX_TRIGGER = 200
+        local ignite_dps = 0
+        ability = 'Phoenix Flames'
+        local combustion_duration = env:evaluate_variable('myself.buff.Combustion')
+        if (combustion_duration == -1) then
+            debug_msg(false, '. checking for ignite Phoenix Flames')
+            local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
+            for i = 1, 40 do
+                local data = {UnitAura('target', i, 'HARMFUL')}
+                if (not data) then
+                    break
+                end
+                if (data[1] == 'Ignite') then
+                    ignite_dps = data[16]
+                    debug_msg(false, 'Ingite Dot : ' .. data[16])
+                end
+            end
+            if
+                ((ignite_dps > THREE_PHOENIX_TRIGGER and phoenix_charges == 3) or
+                    (ignite_dps > TWO_PHOENIX_TRIGGER and phoenix_charges == 2) or
+                    (ignite_dps > ONE_PHOENIX_TRIGGER and phoenix_charges == 1))
+             then
+                local result = check_cast('Phoenix Flames')
+                if (result) then
+                    debug_msg(true, 'Casting Ignite at : ' .. ignite_dps)
+                end
+                return result
+            end
+        end
+        return false
+    end
 
     function spend_phoenix()
         ability = 'Phoenix Flames'
-        debug_msg(fales, '. checking for Heating Up Phoenix Flames')
+        debug_msg(false, '. checking for wasted Phoenix Flames')
         local power_duration = env:evaluate_variable('myself.buff.Rune of Power')
         local phoenix_charges, _, _, phoenix_cd_duration, _ = GetSpellCharges('Phoenix Flames')
         local _, combustion_cd, _, _ = GetSpellCooldown('Combustion')
-        if (power_duration > 0 and phoenix_charges == 1 and phoenix_cd_duration < combustion_cd) then
+        if (phoenix_charges == 3) then
+            return check_cast('Phoenix Flames')
+        elseif (power_duration > 0 and phoenix_charges == 1 and phoenix_cd_duration < combustion_cd) then
             return check_cast('Phoenix Flames')
         else
             return false
@@ -149,7 +197,7 @@ function fire(env)
     end
 
     function defensives()
-        debug_msg(fales, 'checking Defensives')
+        debug_msg(false, 'checking Defensives')
         return healthstone() or invis() or ice_block() or barrier()
     end
 
@@ -169,8 +217,8 @@ function fire(env)
     function aoe()
         local enemy_count = get_aoe_count(8)
         debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
-        if (enemy_count > 3) then
-            return hot_flamestrike() or spend_phoenix()
+        if (enemy_count > 2) then
+            return hot_flamestrike() or ignite_phoenix() or spend_phoenix()
         end
         return false
     end

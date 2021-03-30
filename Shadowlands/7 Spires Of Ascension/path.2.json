@@ -45,6 +45,24 @@
       ]
     },
     {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "type": "wait",
+          "value": 2
+        }
+      ],
+      "name": "Slight delay",
+      "value": [
+        -902.0,
+        -6624.4,
+        7140.1
+      ]
+    },
+    {
       "actions": [],
       "name": "Edge",
       "value": [
@@ -116,30 +134,20 @@
       ]
     },
     {
-      "actions": [
-        {
-          "conditions": {
-            "type": "and",
-            "value": [
-              {
-                "operator": "<",
-                "value": 0.1,
-                "variable": "action.duration"
-              }
-            ]
-          },
-          "type": "interact",
-          "value": {
-            "id": 364528,
-            "range": 5
-          }
-        }
-      ],
-      "name": "Open",
+      "actions": [],
+      "name": "",
       "value": [
         -737.0,
         -6553.4,
         7126.6
+      ]
+    },
+    {
+      "actions": [],
+      "value": [
+        -738.0,
+        -6599.6,
+        7127.0
       ]
     },
     {

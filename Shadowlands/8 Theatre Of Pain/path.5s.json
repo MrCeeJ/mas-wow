@@ -1,0 +1,58 @@
+{
+  "value": [
+    {
+      "actions": [],
+      "name": "Head to Last Boss",
+      "value": [
+        2836.6,
+        -2545.9,
+        3117.6
+      ]
+    },
+    {
+      "actions": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": [
+              {
+                "operator": "<",
+                "value": 1,
+                "variable": "action.duration"
+              }
+            ]
+          },
+          "type": "interact",
+          "value": {
+            "id": 169908,
+            "range": 5
+          }
+        }
+      ],
+      "name": "interact",
+      "value": [
+        2836.6,
+        -2545.9,
+        3117.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "landed at top",
+      "value": [
+        2798.5,
+        -2546.5,
+        3260.6
+      ]
+    },
+    {
+      "actions": [],
+      "name": "Boss",
+      "value": [
+        2859.6,
+        -2545.5,
+        3260.6
+      ]
+    }
+  ]
+}

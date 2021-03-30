@@ -386,13 +386,17 @@
             end
 
             function get_aoe_count(range)
-                r = range or 8
-                if (UnitExists(main_tank)) then
-                    local distance = env:evaluate_variable('unit.' .. main_tank .. '.distance')
-                    if (distance < 30) then
+                local r = range or 8
+                local unit = main_tank
+                if (UnitExists(main_tank) ~= true) then
+                    unit = 'player'
+                end
+                if (UnitExists(unit)) then
+                    local distance = env:evaluate_variable('unit.' .. unit .. '.distance')
+                    if (distance < 40) then
                         -- TODO: add in range check for tank, or use self
                         debug_msg(false, 'Tank range is :' .. distance)
-                        local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(main_tank)
+                        local tank_x, tank_y, tank_z = wmbapi.ObjectPosition(unit)
                         local x = math.floor(tank_x + 0.5)
                         local y = math.floor(tank_y + 0.5)
                         local z = math.floor(tank_z + 0.5)
@@ -401,7 +405,11 @@
                         if (enemies) then
                             return enemies
                         end
+                    else
+                        debug_msg(false, 'Tank range is out of range!:' .. distance)
                     end
+                else
+                    debug_msg(true, 'neither Tank nor player exist:' .. tostring(distance))
                 end
                 return 0
             end
@@ -470,7 +478,68 @@
             -----------------------------------------------------------
             -------------------    Spell Casting    -------------------
             -----------------------------------------------------------
+
+            function cast_spell_on_player_above_hp(spell, player, hp_limit)
+                local debug_cop = false
+                debug_msg(debug_cop, 'Checking spell, player, hp :' .. spell .. ', ' .. player .. ', ' .. hp_limit)
+                local hp = env:evaluate_variable('unit.' .. player .. '.health')
+                if (hp == nil) then
+                    debug_msg(debug_cop, 'Warning, cast aborted as no player provided :' .. spell)
+                    return false
+                else
+                    debug_msg(debug_cop, 'Player hp found :' .. hp)
+                end
+                if (hp_limit == nil) then
+                    debug_msg(debug_cop, 'Warning, cast aborted as no threshold provided :' .. spell)
+                    return false
+                else
+                    debug_msg(debug_cop, 'hp limit found :' .. hp_limit)
+                end
+                if (hp == 0) then
+                    debug_msg(debug_cop, 'Warning, cast aborted as player is dead :' .. spell)
+                    return false
+                else
+                    debug_msg(debug_cop, 'Player has hp:' .. hp)
+                end
+                if (hp < hp_limit) then
+                    debug_msg(debug_cop, 'Casting spell: ' .. spell .. ' on player: ' .. player)
+                    return cast_spell_on_player(spell, player)
+                else
+                    debug_msg(debug_cop, 'Player hp over limit, aborting :' .. hp)
+                    return false
+                end
+            end
+
+            function cast_spell_on_player(spell, player)
+                local debug_cop = false
+                debug_msg(debug_cop, 'Checking spell on player:' .. spell .. ', ' .. player)
+                local spell_name, _, _, _, minRange, maxRange, spellId = GetSpellInfo(spell)
+                if (spell_name == nil) then
+                    debug_msg(debug_cop, "Warning, cast aborted as you don't know the spell :" .. spell)
+                    return false
+                end
+                local _, spell_cd, _ = GetSpellCooldown(spellId)
+                if (spell_cd ~= 0) then
+                    debug_msg(debug_cop, 'Warning, cast aborted as spell is currently on cooldown :' .. spell)
+                    return false
+                end
+                if (player == nil) then
+                    debug_msg(debug_cop, 'Warning, cast aborted as no target provided :' .. spell)
+                    return false
+                end
+                local distance = env:evaluate_variable('unit.' .. player .. '.distance')
+                if (distance > maxRange or distance < minRange) then
+                    debug_msg(debug_cop, 'Warning, cast aborted as target is too far :' .. spell)
+                    return false
+                end
+                -- TODO:? Change target and then use normal cast?
+                debug_msg(debug_cop, 'Casting - spell, player:' .. spell .. ', ' .. player)
+                RunMacroText('/cast [target=' .. player .. '] ' .. spell)
+                return true
+            end
+
             function check_cast(spell)
+                debug_spells = false
                 --name, rank, icon, castTime, minRange, maxRange, spellId = GetSpellInfo(spellId or "spellName"[, "spellRank"])
                 --start, duration, enabled, modRate = GetSpellCooldown("spellName" or spellID or slotID, "bookType")
                 if (debug_spells) then
@@ -492,7 +561,7 @@
                         print('Spell CD :', spell_cd, ' enabled :', enabled)
                     end
                     if (enabled == 0) then
-                        message = 'Warning, cast aborted as spell is already active :' .. spell0
+                        message = 'Warning, cast aborted as spell is already active :' .. spell
                     else
                         if (spell_cd ~= 0) then
                             message = 'Warning, cast aborted as spell is currently on cooldown :' .. spell
@@ -500,25 +569,23 @@
                             face = env:execute_action('face_target')
                             result = env:execute_action('cast', spellId)
                             if (debug_spells) then
-                                print('Facing result :', face)
-                            end
-                            if (debug_spells) then
-                                print('Spell cast :', spellId)
+                                debug_msg(debug_spells, 'Spell sttempt :', spell)
                             end
                             if (result) then
+                                if (debug_spells) then
+                                    debug_msg(debug_spells, 'Success (' .. spellId .. ')')
+                                end
                                 message = 'Spell cast succesfuly: ' .. spell
                             else
-                                message = 'Spell attempt failed: ' .. spell
+                                message = 'Failed: (' .. spellId .. ')'
                                 if (debug_spells) then
-                                    print('Spell failed :')
-                                    print('Target Distance :')
-                                    print('Target LoS :')
+                                    debug_msg(debug_spells, 'Failed :' .. spellId)
                                 end
                             end
                         end
                     end
                 end
-                debug_msg(false, message)
+                debug_msg(debug_spells, message)
                 return result
             end
 
@@ -608,23 +675,29 @@
             end
 
             function handle_purges(spell)
+                local debug_purges = true
                 local _, purge_cd, _, _ = GetSpellCooldown(spell)
                 local unit = 'target'
                 if (purge_cd == 0) then
                     for i = 1, 40 do
                         local name, _, _, _, type, _, _, _, stealable = UnitAura(unit, i) -- CANCELABLE ?
                         if (name) then
-                            if (type == 'MAGIC' and spell == 'Dispel Magic') then
+                            debug_msg(
+                                debug_purges,
+                                ' Purgable Found: ' ..
+                                    tostring(name) .. ' type :' .. tostring(type) .. ' spell: ' .. tostring(spell)
+                            )
+                            if (type == 12 and spell == 'Dispel Magic') then
                                 return check_cast(spell)
-                            elseif (type == 'MAGIC' and spell == 'Purge') then
+                            elseif (type == 12 and spell == 'Purge') then
                                 return check_cast(spell)
-                            elseif (type == 'MAGIC' and spell == 'Arcane Torrent') then
+                            elseif (type == 12 and spell == 'Arcane Torrent') then
                                 return check_cast(spell)
-                            elseif (type == 'MAGIC' and spell == 'Consume Magic') then
+                            elseif (type == 12 and spell == 'Consume Magic') then
                                 return check_cast(spell)
                             elseif (type == 'ENRAGE' and spell == 'Soothe') then
                                 return check_cast(spell)
-                            elseif (type == 'MAGIC' and stealable and spell == 'Spellsteal') then
+                            elseif (type == 12 and stealable and spell == 'Spellsteal') then
                                 RunMacroText('/p Stealing stuffs!')
                                 return check_cast(spell)
                             end
@@ -747,6 +820,7 @@
 
             function stop_moving()
                 debug_msg(debug_movement, 'Stopping movement')
+                RunMacroText('/p .. stoppig movement now, should be safe :)')
                 MoveForwardStop()
                 MoveBackwardStop()
                 StrafeRightStop()
@@ -872,7 +946,7 @@
 
             function check_hybrid(env, res_spell, heal_spell)
                 --return does_healer_need_mana(env) or need_to_eat(env) or is_anyone_dead(env)
-                return anyone_need_resing(env, res_spell) or still_resing(env, res_spell) or need_to_eat(env) or
+                return anyone_need_resing(env, res_spell) or need_to_eat(env) or still_resing(env, res_spell) or
                     check_heal(env, heal_spell) or
                     does_healer_need_mana(env)
                 --or need_mage_food(env)
@@ -999,7 +1073,7 @@
             function need_self_heal(spell)
                 local hp = env:evaluate_variable('myself.health')
                 local healing = false
-                if (hp < 60) then
+                if (hp < 80) then
                     healing = true
                     RunMacroText('/cast [@player] ' .. spell)
                     debug_msg(false, "Can't start, I need a heal")
@@ -1037,7 +1111,10 @@
                 -- local individual_spell = "Levitate"or anyone_need_individual_buff(env, individual_buff, individual_spell)
                 -- local individual_buff = "Levitate"
                 local heal_spell = 'Shadow Mend'
-                if (check_hybrid(env, res_spell, heal_spell) or anyone_need_party_buff(env, party_buff, party_spell)) then
+                if
+                    (need_to_drink(env) or check_hybrid(env, res_spell, heal_spell) or
+                        anyone_need_party_buff(env, party_buff, party_spell))
+                 then
                     return true
                 end
             elseif player_class == 'PALADIN' then
@@ -1055,9 +1132,9 @@
                 -- local individual_buff = "Slow Fall" --or anyone_need_individual_buff(env, individual_buff, individual_spell
                 local self_buff = 'Blazing Barrier'
                 if
-                    (do_i_need_buffing(env, self_buff) or does_healer_need_mana(env) or is_anyone_dead(env) or
-                        anyone_need_party_buff(env, party_buff, party_spell) or
-                        need_to_eat(env))
+                    (need_to_eat(env) or do_i_need_buffing(env, self_buff) or does_healer_need_mana(env) or
+                        is_anyone_dead(env) or
+                        anyone_need_party_buff(env, party_buff, party_spell))
                  then
                     return true
                 end

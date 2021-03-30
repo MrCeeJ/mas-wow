@@ -1,0 +1,69 @@
+{
+  "path_groups": [
+    {
+      "harvests": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 40.0,
+          "whitelist": [
+            351471,
+            336433,
+            336691
+          ]
+        }
+      ],
+      "loot": true,
+      "name": "Herb Route",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Herb Route"
+        }
+      ],
+      "pve": {
+        "defense": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "River Flight Path",
+        "value": [
+          -2950.5,
+          6680.7,
+          4033.3
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "1"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

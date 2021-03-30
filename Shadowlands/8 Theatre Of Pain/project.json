@@ -3,14 +3,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Clear to 1 - Challengers",
+      "name": "Clear to 1 - Challengers - full clear",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Clear to 2 - Ventunax"
+          "name": "Clear to 3 - Gorechop"
         }
       ],
       "pve": {
@@ -124,7 +124,7 @@
             "type": "and",
             "value": []
           },
-          "name": "Clear to 3 - Oryphrion"
+          "name": "Clear to 3 - Gorechop"
         }
       ],
       "pve": {
@@ -181,7 +181,7 @@
             "type": "and",
             "value": []
           },
-          "name": "Clear to 3 - Oryphrion"
+          "name": "Clear to 3 - Gorechop"
         }
       ],
       "pve": {
@@ -231,14 +231,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Clear to 3 - Oryphrion",
+      "name": "Clear to 3 - Gorechop",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Clear to 4 - Devos"
+          "name": "Clear to 4 - KT"
         }
       ],
       "pve": {
@@ -263,11 +263,11 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Doorway",
+        "name": "Landing Zone",
         "value": [
-          -2209.5,
-          5498.3,
-          4170.3
+          2832.4,
+          -2544.7,
+          3117.3
         ]
       },
       "skin": {
@@ -288,14 +288,14 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Straight to 3 - Oryphrion",
+      "name": "Straight to 3 - Gorechop",
       "next_groups": [
         {
           "conditions": {
             "type": "and",
             "value": []
           },
-          "name": "Clear to 4 - Devos"
+          "name": "Clear to 4 - KT"
         }
       ],
       "pve": {
@@ -345,7 +345,7 @@
     {
       "loot": true,
       "mount": 0.0,
-      "name": "Clear to 4 - Devos",
+      "name": "Clear to 4 - KT",
       "next_groups": [
         {
           "conditions": {
@@ -377,11 +377,11 @@
       },
       "rendezvous": {
         "actions": [],
-        "name": "Dead Adjuicator",
+        "name": "Spawn",
         "value": [
-          -2208.6,
-          5671.2,
-          4179.5
+          2839.9,
+          -2546.7,
+          3117.3
         ]
       },
       "skin": true,
@@ -436,6 +436,53 @@
       "start_distance": 20,
       "value": [
         "3"
+      ]
+    },
+    {
+      "loot": true,
+      "mount": 0.0,
+      "name": "Straight to 5 - Mordretha",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Straight to 5 - Mordretha"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 20.0
+          }
+        ]
+      },
+      "pvp": {
+        "attack": {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "range": 20.0
+        }
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Spawn",
+        "value": [
+          2832.4,
+          -2544.7,
+          3117.3
+        ]
+      },
+      "start_distance": 20,
+      "value": [
+        "5s"
       ]
     }
   ],

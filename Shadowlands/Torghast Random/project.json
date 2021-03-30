@@ -1,0 +1,58 @@
+{
+  "path_groups": [
+    {
+      "loot": true,
+      "name": "Random Location",
+      "next_groups": [
+        {
+          "conditions": {
+            "type": "and",
+            "value": []
+          },
+          "name": "Random Location"
+        }
+      ],
+      "pve": {
+        "attacks": [
+          {
+            "blacklist": [
+              151353
+            ],
+            "conditions": {
+              "type": "and",
+              "value": []
+            },
+            "range": 40.0
+          }
+        ]
+      },
+      "rendezvous": {
+        "actions": [],
+        "name": "Random Location",
+        "value": [
+          -3049.6, 6382.7, 4050.9
+        ]
+      },
+      "skin": true,
+      "start_distance": 20,
+      "value": [
+        "random"
+      ]
+    }
+  ],
+  "scripts": [
+    "utils",
+    "instances",
+    "paladin",
+    "priest",
+    "druid",
+    "shaman",
+    "mage",
+    "warrior",
+    "monk",
+    "warlock",
+    "hunter",
+    "demon",
+    "code"
+  ]
+}

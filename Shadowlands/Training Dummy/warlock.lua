@@ -312,8 +312,8 @@ function need_pet()
 end
 
 function prepare_demonology(env)
-    return need_to_finish_casting() or need_pet() or does_healer_need_mana(env) or is_anyone_dead(env) or
-        need_to_eat(env)
+    return need_to_eat(env) or need_to_finish_casting() or need_pet() or does_healer_need_mana(env) or
+        is_anyone_dead(env)
 end
 
 return {

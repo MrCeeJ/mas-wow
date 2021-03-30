@@ -1,217 +1,255 @@
 ﻿------------------------------------------------------------------------------------------------------------
----------------                                     Disc                                  ---------------
+---------------                         Disc                                            ---------------
 ------------------------------------------------------------------------------------------------------------
-function discipline(env)
-    local debug_priest = false
-    debug_msg(debug_priest, 'Priest code')
-    get_priority_target()
-    do_boss_mechanic()
-    if (UnitExists('target')) then
-        debug_msg(debug_priest, '.. have target')
+function discipline(env, is_pulling)
+    debug_rotation = true
+    debug_msg(true, '.. In Disc Code')
 
-        local healing = false
-        local _, penance_cd, _, _ = GetSpellCooldown('Penance')
-        local rapture_duration = env:evaluate_variable('myself.buff.Rapture')
+    local my_hp = env:evaluate_variable('myself.health')
+    local average_hp = my_hp
 
-        -- Dispell everyone
-        debug_msg(debug_priest, '.. checking dispells')
-        local dispelling = handle_new_debuffs_mpdc('Purify', false, 'Purify', false)
-        debug_msg(debug_priest, '.. dispelling :' .. tostring(dispelling))
-        debug_msg(debug_priest, '.. checking purges')
-        local purging = handle_purges('Dispel Magic')
-        if (dispelling == false and purging == false) then
-            debug_msg(debug_priest, '.. not dispelling')
-            -- Check for Desperate Prayer
-            local health_check = 60
-            local my_hp = env:evaluate_variable('myself.health')
-            local _, desperate_cd, _, _ = GetSpellCooldown('Desperate Prayer')
+    table.sort(
+        party,
+        function(a, b)
+            return env:evaluate_variable('unit.' .. a .. '.health') < env:evaluate_variable('unit.' .. b .. '.health')
+        end
+    )
+    -- local spikes_duration = env:evaluate_variable('myself.buff.Demon Spikes')
+    -- local infernal_strike_charges, _, _, infernal_strike_cd, _ = GetSpellCharges('Infernal Strike')
+    -- local _, fel_devastation_cd, _, _ = GetSpellCooldown('Fel Devastation')
 
-            if (my_hp < health_check and desperate_cd == 0) then
-                healing = true
-                RunMacroText('/cast [@player] Desperate Prayer')
-            else
-                -- Never slack on Schism or Solace
-                local _, schism_cd, _, _ = GetSpellCooldown('Schism')
-                local _, solace_cd, _, _ = GetSpellCooldown('Power Word: Solace')
-                local _, fiend_cd, _, _ = GetSpellCooldown('Shadowfiend')
-                -- Trinket spam
-                use_trinkets()
-                if (schism_cd == 0 and not moving) then
-                    check_cast('Schism')
-                elseif (fiend_cd == 0 and boss_mode ~= 'Save_CDs') then
-                    check_cast('Shadowfiend')
-                elseif (solace_cd == 0) then
-                    check_cast('Power Word: Solace')
-                end
-                debug_msg(debug_priest, 'Sorting on HP')
-                -- check HP
-                -- order_by_hp = function(player_1, player_2)
-                --     local p1_hp = env:evaluate_variable("unit." .. player_1 .. ".health")
-                --     local p2_hp = env:evaluate_variable("unit." .. player_2 .. ".health")
-                --     return p1 < p2
-                -- end
-                table.sort(
-                    party,
-                    function(a, b)
-                        return env:evaluate_variable('unit.' .. a .. '.health') <
-                            env:evaluate_variable('unit.' .. b .. '.health')
-                    end
-                )
+    function defensives()
+        debug_msg(false, 'checking Defensives')
+        local result = false
+        if (my_hp < 40) then
+            RunMacroText('/use Healthstone')
+        end
+        if (my_hp < 50) then
+            RunMacroText('/use Phial Of serenity')
+        end
+        if (my_hp < 60) then
+            result = check_cast('Fade')
+        end
+        if (result == false and my_hp < 95) then
+            result = check_cast('Desperate Prayer00.')
+        end
+        return result
+    end
 
-                debug_msg(debug_priest, 'Sorting finished')
-                debug_msg(debug_priest, '.. group healing')
-                -- If 3 or more people have taken damage and don't have Atonement cast Radiance (currently seems to double cast, same as druid empowerment)
-                local radiance_charges, _, _, radiance_cd_duration, _ = GetSpellCharges('Power Word: Radiance')
-                if (radiance_charges > 0 and radiance_cd_duration < 18 and not moving) then
-                    local sinners = 0
-                    for _, player_name in ipairs(party) do
-                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        local atonement_duration = env:evaluate_variable('unit.' .. player_name .. '.buff.atonement')
-                        if (target_hp > 0 and target_hp < 90 and atonement_duration < 3) then
-                            sinners = sinners + 1
-                        end
-                    end
-                    if (sinners > 2) then
-                        healing = true
-                        check_cast('Power Word: Radiance')
-                    end
-                end
-                if (healing == false) then
-                    -- If people have less than 40% hp, panic
-                    health_check = 40
-                    for _, player_name in ipairs(party) do
-                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
-                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        if (distance < 40 and target_hp > 0 and target_hp < health_check) then
-                            local weakened_soul_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
-                            local _, pain_suppression_cd, _, _ = GetSpellCooldown('Pain Suppression')
-                            local _, rapture_cd, _, _ = GetSpellCooldown('Rapture')
-                            local pain_suppression_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.buff.Pain Supression')
+    function barrier()
+        ability = 'Barrier'
+        debug_barrier = false
+        debug_msg(debug_barrier, '. checking Barrier')
+        local _, barrier_cd, _, _ = GetSpellCooldown('Power Word: Barrier')
+        if (barrier_cd == 0 and average_hp < 40) then
+            return cast_at_target_position('Power Word: Barrier', 'player')
+        -- local px, py, pz = wmbapi.ObjectPosition('player')
+        -- debug_msg(debug_barrier, '. my target :' .. px .. ',' .. py .. ',' .. pz)
+        end
+        return false
+    end
 
-                            if (rapture_duration > 0 or pain_suppression_duration > 0) then
-                                -- happy days, already on it
-                            elseif (rapture_cd == 0) then
-                                healing = true
-                                check_cast('Rapture')
-                            elseif (rapture_duration == -1 and pain_suppression_cd == 0) then -- Chuck them a super shield
-                                healing = true
-                                RunMacroText('/cast [target=' .. player_name .. '] Pain Suppression')
-                            end
-                        end
-                    end
-                end
-                debug_msg(debug_priest, '.. over 40% healing')
-                -- If people have 40-70% hp, help them out
-                health_check = 70
-                for _, player_name in ipairs(party) do
-                    if (healing == false) then
-                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
-                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        if (distance < 40 and target_hp > 0 and target_hp < health_check) then
-                            local weakened_soul_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.debuff.6788')
-                            local shield_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.buff.Power Word: Shield')
-                            if (shield_duration == -1 and (weakened_soul_duration == -1 or rapture_duration > 0)) then
-                                -- Chuck them a shield
-                                healing = true
-                                RunMacroText('/cast [target=' .. player_name .. '] Power Word: Shield')
-                            else
-                                if (penance_cd == 0) then
-                                    -- They have had a shield, can we top them off with Penance?
-                                    healing = true
-                                    RunMacroText('/cast [target=' .. player_name .. '] Penance')
-                                elseif (not moving) then
-                                    -- They have had a shield, and they are still below 80, give them a mend
-                                    healing = true
-                                    RunMacroText('/cast [target=' .. player_name .. ']Shadow Mend')
-                                end
-                            end
-                        end
-                    end
-                end
-                debug_msg(debug_priest, '.. over 70% healing')
+    function radiance()
+        local total_hp = 0
+        local count = 0
+        local attonements = 0
+        local injured = 0
+        for _, player_name in ipairs(party) do
+            local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
+            local atonement_duration = env:evaluate_variable('unit.' .. player_name .. '.buff.Atonement')
+            total_hp = total_hp + target_hp
+            count = count + 1
+            if (target_hp < 60) then
+                injured = injured + 1
+            elseif (target_hp < 90 and atonement_duration < 2) then
+                injured = injured + 1
+            end
 
-                -- If people have over 70% hp, just use Atonement
-                health_check = 100
-                for _, player_name in ipairs(party) do
-                    if (healing == false) then
-                        local target_hp = env:evaluate_variable('unit.' .. player_name .. '.health')
-                        local distance = env:evaluate_variable('unit.' .. player_name .. '.distance')
-                        if (distance < 40 and target_hp > 0 and target_hp < health_check) then
-                            local atonement_duration =
-                                env:evaluate_variable('unit.' .. player_name .. '.buff.Atonement')
-                            if (atonement_duration > 0) then
-                                -- Do nothing, they are have atonement
-                            else
-                                -- Chuck them a shield, they will be fine (If you have weakened soul you also have atonement, so always use a shieled)
-                                healing = true
-                                RunMacroText('/cast [target=' .. player_name .. '] Power Word: Shield')
-                            end
-                        end
-                    end
-                end
-                debug_msg(debug_priest, '.. priest go pewpew')
-                -- Do Damage
-                if (healing == false) then
-                    debug_msg(debug_priest, '.. checking cds')
-                    local swpain_duration = env:evaluate_variable('unit.target.debuff.589') -- TODO: Check all in combat targets
-                    local purge_duration = env:evaluate_variable('unit.target.debuff.204213')
-                    local target_health = env:evaluate_variable('unit.target.health')
-                    debug_msg(debug_priest, '.. target hp :' .. tostring(target_health))
-                    local _, boon_cd, _, _ = GetSpellCooldown('Boon of the Ascended')
-                    local _, schism_cd, _, _ = GetSpellCooldown('Schism')
-                    local _, solace_cd, _, _ = GetSpellCooldown('Power Word: Solace')
-                    local _, fiend_cd, _, _ = GetSpellCooldown('Shadowfiend')
-                    local _, death_cd, _, _ = GetSpellCooldown('Shadow Word: Death')
-                    local _, mind_blast_cd, _, _ = GetSpellCooldown('Mind Blast')
-                    local ascended_duration = env:evaluate_variable('myself.buff.Boon of the Ascended')
-                    local _, ascended_blast_cd, _, _ = GetSpellCooldown('325283')
-                    if (purge_duration > swpain_duration) then
-                        swpain_duration = purge_duration
-                    end
-
-                    local min_swd_hp = 40
-                    debug_msg(debug_priest, '.. casting')
-
-                    if (target_health > min_dot_hp and swpain_duration == -1) then
-                        debug_msg(debug_priest, '.. dot them up')
-                        check_cast('Shadow Word: Pain')
-                    elseif (schism_cd == 0 and not moving) then
-                        check_cast('Schism')
-                    elseif (boon_cd == 0 and not moving) then
-                        check_cast('Boon of the Ascended')
-                    elseif (ascended_duration > 0 and ascended_blast_cd == 0) then
-                        check_cast('Ascended Blast')
-                    elseif (check_azerites()) then
-                    elseif (fiend_cd == 0 and boss_mode ~= 'Save_CDs') then
-                        check_cast('Shadowfiend')
-                    elseif (solace_cd == 0) then
-                        check_cast('Power Word: Solace')
-                    elseif (boss_mode == 'AoE') then
-                        check_cast('Holy Nova')
-                    elseif (target_health < min_swd_hp and my_hp > 20 and death_cd == 0) then
-                        check_cast('Shadow Word: Death')
-                    elseif (mind_blast_cd == 0) then
-                        check_cast('Mind Blast')
-                    elseif (penance_cd == 0) then
-                        check_cast('Penance')
-                    elseif (not moving) then
-                        check_cast('Smite')
-                    end
-                    debug_msg(debug_priest, '.. finished priest casting code')
-                end
+            if (atonement_duration > 0) then
+                attonements = attonements + 1
             end
         end
-    else
-        debug_msg(debug_priest, ".. don't have target")
-        if (main_tank) then
-            RunMacroText('/assist ' .. main_tank)
+
+        if (injured > 2) then
+            return check_cast('Power Word: Radiance')
+        end
+        if ((total_hp / count) < 70) then
+            return check_cast('Power Word: Radiance')
+        end
+
+        return false
+    end
+
+    function pain_suppression()
+        ability = 'Pain Suppression'
+        return cast_spell_on_player_above_hp('Pain Suppression', party[1], 40)
+    end
+
+    function rapture()
+        ability = 'Rapture'
+        return cast_spell_on_player_above_hp('Rapture', party[1], 40)
+    end
+
+    function power_word_shield()
+        debug_msg(debug_rotation, '.. checking pw:s on ' .. party[1])
+        ability = 'Power Word: Sheld'
+        local weakened_soul_duration = env:evaluate_variable('unit.' .. party[1] .. '.debuff.6788')
+        if (weakened_soul_duration == -1) then
+            return cast_spell_on_player_above_hp('Power Word: Sheld', party[1], 70)
+        else
+            return false
         end
     end
+
+    function heal_penance()
+        debug_msg(debug_rotation, '.. checking penance on ' .. party[1])
+        return cast_spell_on_player_above_hp('Penance', party[1], 50)
+    end
+
+    function shadow_mend()
+        debug_msg(debug_rotation, '.. checking shadow mend on ' .. party[1])
+        ability = 'Shadow Mend'
+        return cast_spell_on_player_above_hp('Shadow Mend', party[1], 70)
+    end
+
+    function shadow_word_pain()
+        ability = 'Shadow Word: Pain'
+        local swpain_duration = env:evaluate_variable('unit.target.debuff.589')
+        local purge_duration = env:evaluate_variable('unit.target.debuff.204213')
+        if (purge_duration > swpain_duration) then
+            swpain_duration = purge_duration
+        end
+        if (swpain_duration < 2) then
+            return check_cast('Shadow Word: Pain')
+        end
+        return false
+    end
+
+    function schism()
+        ability = 'Schism'
+        return check_cast('Schism')
+    end
+
+    function smite()
+        ability = 'Smite'
+        return check_cast('Smite')
+    end
+
+    function ascended_boon()
+        ability = 'Boon of the Ascended'
+        local ascended_duration = env:evaluate_variable('myself.buff.Boon of the Ascended')
+        if (ascended_duration == -1) then
+            return check_cast('Boon of the Ascended')
+        else
+            return false
+        end
+    end
+
+    function ascended_blast()
+        ability = 'Ascended Blast'
+        local ascended_duration = env:evaluate_variable('myself.buff.Boon of the Ascended')
+        if (ascended_duration > 0) then
+            return check_cast('Ascended Blast') -- does it need to just be smite?
+        else
+            return false
+        end
+    end
+
+    function ascended_explosion()
+        ability = 'Ascended Nova'
+        local ascended_duration = env:evaluate_variable('myself.buff.Boon of the Ascended')
+        if (ascended_duration > 0) then
+            return check_cast('Ascended Nova') -- does it need to just be boon?
+        else
+            return false
+        end
+    end
+
+    function fiend()
+        ability = 'Shadowfiend'
+        return check_cast('Shadowfiend')
+    end
+
+    function solace()
+        debug_msg(debug_rotation, '.. Solace')
+        ability = 'Power Word: Solace'
+        return check_cast('Power Word: Solace')
+    end
+
+    function death()
+        debug_msg(debug_rotation, '.. Death')
+        ability = 'Shadow Word: Death'
+        local target_health = env:evaluate_variable('unit.target.health')
+        if (target_health < 40 and my_hp > 20) then
+            return check_cast('Shadow Word: Death')
+        else
+            return false
+        end
+    end
+
+    function mind_blast()
+        debug_msg(debug_rotation, '.. Mind Blast')
+        ability = 'Mind Blast'
+        return check_cast('Mind Blast')
+    end
+
+    function dps_penance()
+        ability = 'Penance'
+        return check_cast('Penance')
+    end
+
+    function dps()
+        debug_msg(debug_rotation, '.. dps')
+        if (UnitExists('target')) then
+            result =
+                shadow_word_pain() or schism() or ascended_boon() or ascended_blast() or fiend() or solace() or death() or
+                mind_blast() or
+                dps_penance() or
+                smite()
+        else
+            result = false
+            ability = ' Nothing - no target!'
+        end
+        debug_msg(debug_rotation and result, '. dps using :' .. tostring(ability))
+        return result
+    end
+
+    function heal()
+        debug_msg(debug_rotation, '.. heal')
+        return heal_penance() or shadow_mend() or power_word_shield()
+    end
+
+    function group_heal()
+        debug_msg(debug_rotation, '.. group heal')
+        return barrier() or radiance()
+    end
+
+    function emergency_heal()
+        debug_msg(debug_rotation, '.. emergency heal')
+        return pain_suppression() or rapture()
+    end
+
+    return handle_purges('Dispel Magic') or defensives() or emergency_heal() or group_heal() or heal() or dps()
 end
+
+function prepare_disc(env)
+    debug_msg(true, '.. In Disc prep')
+
+    local res_spell = 'Mass Resurrection' -- 37
+
+    local party_spell = 'Power Word: Fortitude'
+    --  -- local individual_spell = "Levitate"or anyone_need_individual_buff(env, individual_buff, individual_spell)
+    --  -- local individual_buff = "Levitate"
+    local heal_spell = 'Shadow Mend'
+    --  if
+    --      (need_to_drink(env) or check_hybrid(env, res_spell, heal_spell) or
+    --          anyone_need_party_buff(env, party_buff, party_spell))
+    --   then
+    --      return true
+    --  end
+    return need_to_finish_casting() or need_to_eat(env) or does_healer_need_mana(env) or is_anyone_dead(env)
+end
+
 return {
     variables = {},
     actions = {},

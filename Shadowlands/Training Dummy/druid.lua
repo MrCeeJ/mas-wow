@@ -9,6 +9,7 @@ function balance(env)
     do_boss_mechanic()
 
     local my_hp = env:evaluate_variable('myself.health')
+    local always_starfall = false
 
     function healthstone()
         if (my_hp < 50) then
@@ -82,13 +83,21 @@ function balance(env)
         return check_cast('Fury Of Elune')
     end
 
+    function convoke()
+        local convoke = GetSpellInfo('Convoke the Spirits')
+        if (convoke) then
+            return check_cast('Convoke the Spirits')
+        end
+    end
+
     function starfall()
         debug_msg(false, '. checking for Starfall')
         ability = 'Starfall'
         local starfall_duration = env:evaluate_variable('myself.buff.191034')
         if (starfall_duration < 3) then
+            debug_msg(true, '. Need! Starfall')
             local enemies = get_aoe_count(8)
-            if (enemies > 2) then
+            if (always_starfall or enemies > 2) then
                 return cast_at_target_position('Starfall', main_tank)
             end
         end
@@ -97,7 +106,12 @@ function balance(env)
 
     function starsurge()
         ability = 'Starsurge'
-        return check_cast('Starsurge')
+        local astral_power = UnitPower('player', 8)
+        if (always_starfall and astral_power < 50) then
+            return false
+        else
+            return check_cast('Starsurge')
+        end
     end
 
     function wrath()
@@ -170,26 +184,17 @@ function balance(env)
     end
 
     function filler()
-        return moonfire() or sunfire() or build_eclipse()
+        return build_eclipse()
     end
 
     function dps()
         if (UnitExists('target')) then
-            result = eclipse() or filler()
+            result = convoke() or starfall() or sunfire() or moonfire() or eclipse() or filler()
         else
             result = false
             ability = ' Nothing - no target!'
         end
         return result
-    end
-
-    function aoe()
-        local enemy_count = get_aoe_count(8)
-        debug_msg(false, 'Enemy aoe count : ' .. enemy_count)
-        if (enemy_count > 3) then
-            return starfall()
-        end
-        return false
     end
 
     function dispell()
@@ -202,9 +207,9 @@ function balance(env)
     end
 
     result =
-        moonkin() or handle_interupts('Solar Beam') or handle_purges('Soothe') or dispell() or defensives() or
+        moonfire() or moonkin() or handle_interupts('Solar Beam') or handle_purges('Soothe') or dispell() or
+        defensives() or
         cooldowns() or
-        aoe() or
         dps()
 
     debug_msg(debug_rotation and result, 'Casting :' .. tostring(ability))
@@ -213,7 +218,11 @@ end
 
 function check_soulbond(env)
     local spirits_duration = env:evaluate_variable('myself.buff.326967')
-    if (spirits_duration == -1) then
+    local lone_duration = env:evaluate_variable('myself.buff.338041')
+    local name, _, _, _, _, _, spellId = GetSpellInfo('Kindred Spirits')
+
+    if (spirits_duration == -1 and lone_duration == -1 and name) then
+        RunMacroText('/tar Ceejmoonkin')
         RunMacroText('/tar CeejDemon')
         RunMacroText('/tar CeejArcane')
         RunMacroText('/tar CeejWarlock')
@@ -223,14 +232,21 @@ function check_soulbond(env)
     return false
 end
 
+function travel(env)
+    RunMacroText('/cast [outdoors,noform:3, nomounted] Travel Form')
+    return false
+end
+
 function prepare_balance(env)
     local res_spell = 'Revive'
     local heal_spell = 'Regrowth'
-    -- RunMacroText('/cast [outdoors,noform:3, nomounted] Travel Form')
-    return need_to_finish_casting() or need_to_eat(env) or need_self_heal(heal_spell) or check_soulbond(env) or
+
+    return need_to_finish_casting() or need_self_heal(heal_spell) or need_to_eat(env) or need_to_drink(env, 40) or
+        check_soulbond(env) or
         check_hybrid(env, res_spell, heal_spell) or
         does_healer_need_mana(env) or
-        is_anyone_dead(env)
+        is_anyone_dead(env) or
+        travel()
 end
 
 return {
